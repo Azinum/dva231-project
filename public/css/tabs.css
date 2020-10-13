@@ -1,0 +1,59 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.tablayout {
+    height: 100%;
+}
+
+.tablayout .tabs {
+    float: left;
+    height: 100%;
+    width: 15%;
+    background: #505050;
+    filter: drop-shadow(0.5em 0.4em 0.4em #383838);
+}
+
+.tablayout .tabs .tab {
+    height: 2vw;
+    line-height: 2vw;
+    padding-left: 0.5vw;
+    box-sizing: border-box;
+    background: #383838;
+    transition: color, background 0.5s;
+    color: #aaaaaa;
+}
+
+.tablayout .tabs .tab.active {
+    background: #4d79ff;
+    color: white;
+}
+
+.tablayout .tabs .tab:hover {
+    background: #606060;
+    color: white;
+}
+
+.tablayout .tabs .tab.active:hover {
+    background: #668cff;
+}
+
+.tablayout .tabcontents {
+    float: right;
+    width: 85%;
+    padding-left: 1em;
+    box-sizing: border-box;
+    height: 100%;
+    background: #606060;
+}
+
+.tablayout .tabcontents .tabcontent {
+    display: none;
+}
+
+.tablayout .tabcontents .tabcontent.active {
+    display: block;
+}
