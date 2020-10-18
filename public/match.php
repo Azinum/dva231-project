@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
 
-<?php
-require_once("../layout/shadow.php");
-?>
-
-<!-- TODO(lucas): Replace header! -->
+<!-- TODO(lucas): Replace with a common header! -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Match Results</title>
 
 	<link href= "css/match.css" rel="stylesheet">
-	<link href= "css/shadow.css" rel="stylesheet">
 
 	<script src="js/match.js"></script>
-	<script src="js/shadow.js"></script>
 </head>
 
 <body>
+	<div class="match-search-overlay">
+		<div class="match-search-overlay-content">
+			<div class="closebox match-shadow-box" onclick="toggleOverlay()">X</div>
+			<form class="match-shadow-box">
+				<input type="text" oninput="searchOverlayUpdate();" placeholder="Search...">
+			</form>
+			<br><br>
+			<div class="match-shadow-box match-search-results">
+			</div>
+		</div>
+	</div>
 	<div class="match-content">
 		<h1>Match Result</h1>
 		<div class="line-wide"></div>
@@ -37,20 +42,19 @@ require_once("../layout/shadow.php");
 				<h2>Team 1 (you)</h2>
 				<!-- TODO(lucas): Add dropdown search menus -->
 				<div class="match-team-content">
-					<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg">
+					<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
 					<p>The Legitness Awesomely Very Good Team</p>
 				</div>
 			</div>
 			<div class="match-content-box match-shadow-box">
 				<h4>Participants:</h4>
 				<!-- TODO(lucas): Add dropdown search menus -->
-				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
 			</div>
-
 			<div class="line-wide"></div>
 
 			<div class="match-content-box match-shadow-box">
