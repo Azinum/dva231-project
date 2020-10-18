@@ -12,4 +12,8 @@ function trigger_tab(tabbutton, tabname) {
     //Enable tabname
     document.querySelector(".tablayout .tabcontents .tabcontent#"+tabname).classList.add("active");
     tabbutton.classList.add("active");
+
+    if (typeof update_shadows === "function") {
+        update_shadows();
+    }
 }
