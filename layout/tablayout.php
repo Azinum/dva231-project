@@ -22,7 +22,9 @@
     }
 
     function tabcontent_begin($tabnumber) {
-        ?><div class="tabcontent<?php echo ($tabnumber==0) ? " active" : ""; ?>" id="tab_<?php echo $tabnumber; ?>"><?php
+        ?>
+            <div class="tabcontent<?php echo ($tabnumber==0) ? " active" : ""; ?>" id="tab_<?php echo $tabnumber; ?>">
+        <?php
     }
 
     function tabcontent_end() {
