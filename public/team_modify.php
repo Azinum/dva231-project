@@ -27,14 +27,17 @@
                         tabcontent_begin(0);
                         ?>
                             <div class="teambio">
-                                <div class="profilepic">
-                                    <img src="/img/tmp_profile.jpg">
-                                </div>
                                 <form>
+                                    <div class="imgcontrols">
+                                        <div class="profilepic">
+                                            <img src="/img/tmp_profile.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="othercontrols">
+                                        <input type="text" placeholder="Name">
+                                        <textarea>Bio</textarea>
+                                    </div>
                                     <input type="file" placeholder="Profile picture">
-                                    <input type="text" placeholder="Name">
-                                    <textarea>
-                                    </textarea>
                                 </form>
                             </div>
                         <?php
@@ -42,9 +45,12 @@
 
                         tabcontent_begin(1);
                             
-                        teambox(["name" => "Good Team","imgurl" => "/img/tmp_profile.jpg"], false);
-                        teambox(["name" => "Good Team","imgurl" => "/img/tmp_profile.jpg"], false);
-                        teambox(["name" => "Good Team","imgurl" => "/img/tmp_profile.jpg"], false);
+                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
 
                         ?>
                             <?php shadow_start("addmembershadow"); ?>
