@@ -36,7 +36,10 @@ require_once("../layout/shadow.php");
 			<div class="match-content-box match-shadow-box">
 				<h2>Team 1 (you)</h2>
 				<!-- TODO(lucas): Add dropdown search menus -->
-				<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg">
+				<div class="match-team-content">
+					<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg">
+					<p>The Legitness Awesomely Very Good Team</p>
+				</div>
 			</div>
 			<div class="match-content-box match-shadow-box">
 				<h4>Participants:</h4>
@@ -52,7 +55,10 @@ require_once("../layout/shadow.php");
 
 			<div class="match-content-box match-shadow-box">
 				<h2>Team 2 (opponent)</h2>
-				<img class="match-team-img match-border basic-interactive" src="img/tmp_team2.jpeg">
+				<div class="match-team-content">
+					<img class="match-team-img match-border basic-interactive" src="img/tmp_team2.jpeg">
+					<p>The Bad Team</p>
+				</div>
 			</div>
 
 			<div class="match-content-box match-shadow-box">
@@ -68,26 +74,28 @@ require_once("../layout/shadow.php");
 
 			<h2>Result</h2>
 
-			<label>
-				<input type="radio" checked="checked" name="match_result">
-				<span class="checkmark"></span>
-				You won
-			</label>
-			<br>
+			<!-- TODO(lucas): Create fancy custom radio buttons -->
+			<div class="match-result">
+				<label>
+					<input type="radio" checked="checked" name="match_result">
+					<span class="checkmark"></span>
+					You won
+				</label>
+				<br>
 
-			<label>
-				<input type="radio" name="match_result">
-				<span class="checkmark"></span>
-				Tied
-			</label>
-			<br>
+				<label>
+					<input type="radio" name="match_result">
+					<span class="checkmark"></span>
+					Tied
+				</label>
+				<br>
 
-			<label>
-				<input type="radio" name="match_result">
-				<span class="checkmark"></span>
-				Opponent won
-			</label>
-			<br>
+				<label>
+					<input type="radio" name="match_result">
+					<span class="checkmark"></span>
+					Opponent won
+				</label>
+			</div>
 
 			<br>
 
