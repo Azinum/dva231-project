@@ -18,12 +18,14 @@ html, body {
 	background-color: #505050;
 	margin: 0 auto;
 	width: 80em;
+	min-height: 100%;
 	max-width: 100%;
 	box-shadow: 0.25em 0.25em 8px #303030;
 }
 
 .match-content h1, h2, h3, h4 {
-	/* margin: 0.45em;*/
+	margin: 0;
+	padding: 0.35em;
 }
 
 .match-border {
