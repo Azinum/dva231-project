@@ -11,33 +11,36 @@ html, body {
     flex-wrap: wrap;
     max-width: 70%;
     margin: 0 auto;
-    filter: drop-shadow(0 0.4em 0.4em #383838);
-    background: #383838;
+    background: #505050;
+    min-height: 100%;
+    justify-content: center;
 }
 
 .bioboxes {
-    width: 100%;
+    width: 95%;
     display: flex;
-    margin: 0 1vw;
-    filter: drop-shadow(0 0.4em 0.4em #303030);
-    background: #505050;
+    margin: 0 auto;
+    /*filter: drop-shadow(0 0.4em 0 #303030);*/
     padding-top: 1vw;
     margin-top: -1vw;
     border-radius: 1vw;
+    background: #383838;
+    position: relative;
+    z-index: 1;
+}
+
+.shadowbox {
+    margin-bottom: 1vw;
 }
 
 .profilebox {
     box-sizing:border-box;
     padding: 2vw;
     width: 50%;
-    height: 40vh;
     color: white;
 }
 
 .profilebox-tall {
-    background: #383838;
-    height: initial;
-    min-height: 60vh;
 }
 
 .profilebox .username, .profilebox .bio {
@@ -47,17 +50,10 @@ html, body {
     display: block;
 }
 
-.profilebox .statboxes {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-}
-
 .profilebox .statbox {
-    margin-right: 1vw;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    margin-bottom: 1vw;
 }
 
 .profilebox .statbox .val {
@@ -68,7 +64,7 @@ html, body {
 
 .profilebox .statbox .label {
     margin-right: 1vw;
-    font-size: 4rem;
+    font-size: 2rem;
     display: inline-block;
 }
 
@@ -78,6 +74,7 @@ html, body {
     font-weight: normal;
     font-size: 2rem;
     margin-bottom: 1vw;
+    height: 2rem;
 }
 
 .profilebox h4 {
@@ -97,29 +94,36 @@ html, body {
     object-fit: cover;
 }
 
-.matchbox {
+.matchbox { /*TODO: STUFF TO PUT IN COMMON CLASS?*/
     display: flex;
     justify-content: space-between;
-    background: #505050;
+    background: #383838;
     border-radius: 0.5vw;
-    filter: drop-shadow(0 0.4em 0.4em #303030);
+    /*filter: drop-shadow(0 0.4em 0 #303030);*/
     padding: 1vw;
-    margin-bottom: 1vw;
+    /*margin-bottom: 1vw;*/
+    transition: background 0.1s;
+    position: relative;
+    z-index: 2;
+}
+
+.matchbox:hover {
+    background: #454545;
 }
 
 .matchbox .versus {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 20%;
 }
 
 .matchbox .versus .marker {
     font-size: 2rem;
+    text-align: center;
 }
 
 .matchbox .versus .matchresult {
-    margin-bottom: 1vw;
-    margin-top: -1vw;
     text-align: center;
 }
 
@@ -131,12 +135,16 @@ html, body {
 .matchbox .team {
     display: flex;
     align-items: center;
+    max-width: 40%;
+    flex-grow: 1;
+}
+
+.matchbox .team:last-child {
+    justify-content: right;
 }
 
 .matchbox .team .label {
     font-size: 1.2rem;
-    width: 7vw;
-    overflow: hidden;
     display: block;
 }
 
@@ -152,12 +160,28 @@ html, body {
 .teambox {
     display: flex;
     justify-content: space-between;
-    background: #505050;
+    background: #383838;
     border-radius: 0.5vw;
-    filter: drop-shadow(0 0.4em 0.4em #303030);
+    /*filter: drop-shadow(0 0.4em 0 #303030);*/
+    box-sizing: border-box;
     padding: 1vw;
-    margin-bottom: 1vw;
+    /*margin-bottom: 1vw;*/
+    position: relative;
+    z-index:1;
     align-items: center;
+    transition: background 0.1s;
+}
+
+.teambox.active {
+    background: #4d79ff;
+}
+
+.teambox:hover {
+    background: #454545;
+}
+
+.teambox.active:hover {
+    background: #668cff;
 }
 
 .teambox .profilepic {
@@ -172,8 +196,6 @@ html, body {
 
 .teambox .profile .label {
     font-size: 1.2rem;
-    width: 12vw;
-    overflow: hidden;
     display: block;
     margin-left: 1vw;
 }
@@ -181,4 +203,132 @@ html, body {
 .teambox .stats {
     display: flex;
     flex-direction: column;
+}
+
+@media only screen and (max-width: 1200px) {
+    .profileboxes {
+        flex-direction: column;
+    }
+
+    .profilebox-tall {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .profilebox-tall h3, .profilebox-tall h4 {
+        width: 100%;
+    }
+
+    .teambox {
+        width: calc(50% - 3vw);
+        margin: 0.5vw;
+    }
+
+    .matchbox {
+    }
+
+    .bioboxes {
+        flex-direction:column;
+    }
+
+    .bioboxes .profilebox {
+        width: 100%;
+    }
+
+    .profilebox .statbox {
+        display: inline-block;
+        width: calc((100% - 4vw) / 3 );
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .teambox {
+        width: 100%;
+    }
+
+    .profilebox .statbox .label, .profilebox .statbox .val {
+        font-size: 1.5rem;
+    }
+    
+    .bioboxes .bio {
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .profilepic {
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .matchbox .profilepic, .teambox .profilepic {
+        width: 7vw;
+        height: 7vw;
+    }
+
+    .profilebox .statbox .label, .profilebox .statbox .val {
+        font-size: 1.3rem;
+    }
+
+    .bioboxes, .matchbox, .teambox, .shadow {
+        border-radius: 1.1vw;
+    }
+
+    .bioboxes .bio {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .profileboxes {
+        max-width: 90%;
+    }
+
+    .matchbox, .teambox {
+        padding: 2vw;
+    }
+
+    .matchbox .profilepic, .teambox .profilepic {
+        width: 10vw;
+        height: 10vw;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .profilepic {
+        width: 20vw;
+        height: 20vw;
+    }
+
+    .profilebox .statbox .label, .profilebox .statbox .val {
+        font-size: 0.95rem;
+    }
+
+    .matchbox .versus .marker {
+        font-size: 1.5rem;
+    }
+
+    .teambox .profile .label {
+        font-size: 1rem;
+    }
+
+    .teambox .stats {
+        font-size: 0.8rem;
+    }
+
+    .bioboxes, .matchbox, .teambox, .shadow {
+        border-radius: 2vw;
+    }
+
+    .bioboxes .bio {
+        font-size: 0.7rem;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .profilebox .statbox .label, .profilebox .statbox .val {
+        font-size: 0.8rem;
+    }
 }

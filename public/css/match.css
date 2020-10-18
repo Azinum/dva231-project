@@ -1,0 +1,91 @@
+/* match.css */
+
+html, body {
+	background-color: #606060;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	color: white;
+}
+
+/* NOTE(lucas): Standard styling for various elements.
+ * TODO(lucas): Move these to a central place (main.css) */
+
+
+/* NOTE(lucas): Styles specific to the match page */
+
+/* TODO(lucas): Mobileify everything! */
+
+.match-content {
+	background-color: #505050;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 80%;
+	border-radius: 5pt;
+	filter: drop-shadow(0.3em 0.3em 0.1em #484848);
+}
+
+.match-content h1, h2, h3, h4 {
+	margin: 0.45em;
+}
+
+.match-border {
+	border: 1px solid #000000;
+}
+
+.match-team-img {
+	margin: 0.5%;
+	width: 15em;
+	max-width: 80%;
+	height: auto;
+}
+
+.match-submit {
+	padding: 0.5em;
+	border-radius: 0.3em;
+	color: white;
+	border: 1px solid black;
+}
+
+.match-submit:hover {
+	border: 1px solid white;
+	cursor: pointer;
+}
+
+.match-select-player input, select {
+	border: 1px solid black;
+	padding: 0.7em;
+	margin: 0.5%;
+}
+
+.match-player-img {
+	border: 1px solid black;
+	min-width: 4em;
+	width: 8%;
+	margin: 0.1%;
+}
+
+/* TODO(lucas): Move this! */
+.button-submit {
+	background-color: #4d79ff;
+	color: white;
+	margin: 0.5%;
+	padding: 1em 1.5em 1.0em 1.5em;
+}
+
+.button-submit:active {
+	filter: brightness(110%);
+}
+
+.line-wide {
+	width: 100%;
+	height: 1px;
+	background-color: black;
+}
+
+/* NOTE(lucas): We probably want to have this on many places */
+.basic-interactive:hover {
+	border: 1px solid white;
+}

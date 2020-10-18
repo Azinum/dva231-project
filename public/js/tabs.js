@@ -1,5 +1,6 @@
 function trigger_tab(tabbutton, tabname) {
     //Disable all tags
+    //TODO: just fucking add ".active" to the query selector you dumbass
     document.querySelectorAll(".tablayout .tabcontents .tabcontent").forEach(function(content){
         content.classList.remove("active");
     });
