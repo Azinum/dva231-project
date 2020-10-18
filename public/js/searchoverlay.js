@@ -17,7 +17,7 @@ function searchoverlay_toggle() {
     }
 }
 
-function searchoverlay_update() {
+function searchoverlay_update() {   // just smack in some test results for now
     document.querySelector(".searchoverlay .results").innerHTML += `
         <dir class="shadowbox">
             <div class="teambox shadowparent" onclick="teambox_selected(this, 'Good Team');">
