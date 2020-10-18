@@ -13,3 +13,8 @@
 .shadowbox {
     width: 100%;
 }
+
+.shadowparent {
+    position: relative;
+    z-index: 1;
+}
