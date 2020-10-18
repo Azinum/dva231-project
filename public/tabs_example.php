@@ -5,6 +5,7 @@
 <html>
     <head>
         <title>Tablayout example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php tablayout_headtags(); // <- Adds the javascript and css for the tabs ?>
     </head>
     <body>

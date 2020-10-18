@@ -2,7 +2,8 @@
 
     function tablayout_headtags() {
         ?><link rel="stylesheet" type="text/css" href="/css/tabs.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/shadow.css">
+        <script src="/js/shadow.js"></script>
         <script src="/js/tabs.js"></script><?php
     }
 
