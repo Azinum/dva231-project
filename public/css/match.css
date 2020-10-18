@@ -10,10 +10,6 @@ html, body {
 	color: white;
 }
 
-/* NOTE(lucas): Standard styling for various elements.
- * TODO(lucas): Move these to a central place (main.css) */
-
-
 /* NOTE(lucas): Styles specific to the match page */
 
 /* TODO(lucas): Mobileify everything! */
@@ -23,11 +19,11 @@ html, body {
 	margin: 0 auto;
 	width: 80em;
 	max-width: 100%;
-	filter: drop-shadow(0.3em 0.3em 0.1em #484848);
+	box-shadow: 0.25em 0.25em 8px #303030;
 }
 
 .match-content h1, h2, h3, h4 {
-	margin: 0.45em;
+	/* margin: 0.45em;*/
 }
 
 .match-border {
