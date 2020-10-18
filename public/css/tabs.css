@@ -48,13 +48,16 @@ html, body {
 .tablayout .tabcontents {
     float: right;
     width: 85%;
-    padding: 1vw;
+    padding-top: 0.5vw;
+    padding-left: 0.5vw;
     box-sizing: border-box;
     height: 100%;
-    background: #505050;
+    background: #303030;
+    color: white;
+    overflow-y: scroll;
 }
 
-.tablayout .tabcontents::before {
+/*.tablayout .tabcontents::before {
     content: "";
     background: #303030;
     position: relative;
@@ -76,10 +79,14 @@ html, body {
     float: left;
     top: calc(-100% - 3vw);
     left: -1vw;
-}
+}*/
 
 .tablayout .tabcontents .tabcontent {
     display: none;
+    background: #505050;
+    min-height: 100%;
+    padding: 1vw;
+    box-sizing: border-box;
 }
 
 .tablayout .tabcontents .tabcontent.active {
