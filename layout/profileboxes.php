@@ -66,20 +66,22 @@
             "won" => <num. won matches>
         ]
     */
-    function teambox($box) {
+    function teambox($box, $stats = true, $kickbutton = false) {
         shadow_start();
         ?>
-                <div class="teambox" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
+                <div class="teambox shadowparent" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
                     <div class="profile">
                         <div class="profilepic">
                             <img src="<?php echo $box["imgurl"]; ?>">
                         </div>
                         <span class="label"><?php echo $box["name"]; ?></span>
                     </div>
-                    <div class="stats">
-                        <span>Participated: <?php echo $box["part"]; ?></span>
-                        <span>Won: <?php echo $box["won"]; ?></span>
-                    </div>
+                    <?php if ($stats) { ?>
+                        <div class="stats">
+                            <span>Participated: <?php echo $box["part"]; ?></span>
+                            <span>Won: <?php echo $box["won"]; ?></span>
+                        </div>
+                    <?php } ?>
                 </div>
         <?php
         shadow_end();

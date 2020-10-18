@@ -16,7 +16,7 @@
         <script src="/js/shadow.js"></script>
     </head>
     <body>
-        <div class="profileboxes">
+        <div class="profileboxes midbar">
             <?php shadow_start(); ?>
                 <div class="bioboxes">
                     <div class="profilebox">

@@ -15,7 +15,7 @@
         <script src="/js/shadow.js"></script>
     </head>
     <body>
-        <div class="profileboxes">
+        <div class="profileboxes midbar">
             <div class="shadowbox">
                 <div class="bioboxes">
                     <div class="profilebox">

@@ -1,0 +1,33 @@
+.tabcontainer {
+    background: #383838;
+    border-radius: 0.5vw;
+    padding: 1vw;
+    height:calc(100vh - 2vw);
+}
+
+.tablayout .tabs {
+    background: #383838;
+}
+
+.addmember {
+    background: #209020;
+    padding: 1vw;
+    display: block;
+    border-radius: 0.5vw;
+    width: 2vw;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: background 0.1s;
+}
+
+.addmembershadow .shadow {
+    background: #005000;
+}
+
+.addmember:hover {
+    background: #30a030;
+}
+
+.addmember img {
+    width: 2vw;
+}

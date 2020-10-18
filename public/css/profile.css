@@ -6,14 +6,20 @@ html, body {
     background: #606060;
 }
 
-.profileboxes {
-    display: flex;
-    flex-wrap: wrap;
+.midbar {
     max-width: 70%;
     margin: 0 auto;
     background: #505050;
     min-height: 100%;
+    padding: 1vw;
+    box-sizing: border-box;
+}
+
+.profileboxes {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    padding: 0;
 }
 
 .bioboxes {
