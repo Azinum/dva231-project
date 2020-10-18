@@ -106,6 +106,7 @@ html, body {
     transition: background 0.1s;
     position: relative;
     z-index: 2;
+    flex-wrap: wrap;
 }
 
 .matchbox:hover {
@@ -140,8 +141,39 @@ html, body {
     flex-grow: 1;
 }
 
-.matchbox .team:last-child {
+.matchbox .team.team2 {
     justify-content: right;
+}
+
+.matchbox .editbutton {
+    width: 100%;
+    height: 3vw;
+    padding-bottom: 0.5vw;
+}
+
+.matchbox .editbutton .shadow {
+    background: #005000;
+}
+
+.matchbox .editbutton a {
+    background: #209020;
+    padding: 1vw;
+    border-radius: 0.5vw;
+    display: block;
+    text-decoration: none;
+    color: white;
+    margin: 0 auto;
+    width: 2vw;
+    transition: background 0.1s;
+}
+
+.matchbox .editbutton a img {
+    width: 2vw;
+    display: block;
+}
+
+.matchbox .editbutton a:hover {
+    background: #30a030;
 }
 
 .matchbox .team .label {
@@ -215,6 +247,10 @@ html, body {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+    }
+
+    .profilebox-tall:nth-child(2n) {
+        border-right: none;
     }
 
     .profilebox-tall.members .shadowbox {

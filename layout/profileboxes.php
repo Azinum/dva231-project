@@ -20,7 +20,7 @@
             "won" => <true or false dep. on who won>
         ]
     */
-    function matchbox($box) {
+    function matchbox($box, $editbutton = false) {
         shadow_start();
         ?>
                 <div class="matchbox">
@@ -38,12 +38,21 @@
                             VS
                         </span>
                     </div>
-                    <div class="team">
+                    <div class="team team2">
                         <span class="label"><?php echo $box["rteam"]["name"]; ?></span>
                         <div class="profilepic">
                             <img src="<?php echo $box["rteam"]["imgurl"]; ?>">
                         </div>
                     </div>
+                    <?php if ($editbutton) { ?>
+                        <div class="editbutton">
+                            <?php shadow_start(); ?>
+                            <a class="shadowparent" href="/match.php">
+                                <img src="/img/arrow.svg">
+                            </a>
+                            <?php shadow_end(); ?>
+                        </div>
+                    <?php } ?>
                 </div>
         <?php
         shadow_end();
