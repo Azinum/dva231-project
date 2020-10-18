@@ -1,0 +1,74 @@
+.searchoverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000aa;
+    color: white;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.05s;
+    padding-top: 2vw;
+}
+
+.searchoverlay.active {
+    display: block;
+}
+
+.searchoverlay.shown {
+    opacity: 1;
+}
+
+.searchoverlay form {
+    background: #505050;
+    padding: 1vw;
+    border-radius: 0.5vw;
+    width: 50%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.searchoverlay form input {
+    width: calc(100% - 1vw);
+}
+
+.searchoverlay .closeboxcontainer {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.searchoverlay .closeboxcontainer .shadow {
+    height: 2.5vw;
+    margin-top: -2vw;
+    background: #500000;
+}
+
+.searchoverlay .closebox {
+    background: #d02020;
+    border-radius: 0.5vw;
+    width: 2vw;
+    height: 2vw;
+    text-align: center;
+    line-height: 2vw;
+    cursor: pointer;
+    margin-left: 100%;
+    transition: background 0.1s;
+}
+
+.searchoverlay .closebox:hover {
+    background: #f04040;
+}
+
+.searchoverlay .results {
+	width: 50%;
+	margin: 0 auto;
+	overflow-y: scroll;
+    max-height: 70%;
+}
+
+.searchoverlay .results .shadowbox {
+	padding: 0;
+    width:calc(100% - 1vw);
+}
