@@ -2,7 +2,7 @@
     background: #383838;
     border-radius: 0.5vw;
     padding: 1vw;
-    height:calc(100vh - 2vw);
+    height:calc(100vh - 6vw);
 }
 
 .tablayout .tabs {
@@ -14,7 +14,7 @@
     padding: 1vw;
     display: block;
     border-radius: 0.5vw;
-    width: 2vw;
+    width: 3vw;
     cursor: pointer;
     margin: 0 auto;
     transition: background 0.1s;
@@ -29,5 +29,39 @@
 }
 
 .addmember img {
-    width: 2vw;
+    width: 100%;
+    display: block;
+}
+
+.teambio form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.teambio form input[type="file"] {
+    width: 100%;
+}
+
+.teambio form .othercontrols {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.teambio form .imgcontrols {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+}
+
+.teambio form .othercontrols textarea {
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .addmember {
+        width: 6vw;
+        border-radius: 1.1vw;
+    }
 }

@@ -47,9 +47,9 @@
                     <?php if ($editbutton) { ?>
                         <div class="editbutton">
                             <?php shadow_start(); ?>
-                            <a class="shadowparent" href="/match.php">
-                                <img src="/img/arrow.svg">
-                            </a>
+                                <a class="shadowparent" href="/match.php">
+                                    <img src="/img/arrow.svg">
+                                </a>
                             <?php shadow_end(); ?>
                         </div>
                     <?php } ?>
@@ -80,6 +80,15 @@
                         <div class="stats">
                             <span>Participated: <?php echo $box["part"]; ?></span>
                             <span>Won: <?php echo $box["won"]; ?></span>
+                        </div>
+                    <?php } ?>
+                    <?php if ($kickbutton) { ?>
+                        <div class="kickbutton">
+                            <?php shadow_start(); ?>
+                                <a class="shadowparent">
+                                    Kick
+                                </a>
+                            <?php shadow_end(); ?>
                         </div>
                     <?php } ?>
                 </div>
