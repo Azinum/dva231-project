@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 
+<?php
+require_once("../layout/shadow.php");
+?>
+
 <!-- TODO(lucas): Replace header! -->
 <head>
     <meta charset="utf-8">
@@ -8,12 +12,14 @@
 	<title>Match Results</title>
 
 	<link href= "css/match.css" rel="stylesheet">
+	<link href= "css/shadow.css" rel="stylesheet">
 
 	<script src="js/match.js"></script>
+	<script src="js/shadow.js"></script>
 </head>
 
 <body>
-	<div class="match-content match-border">
+	<div class="match-content">
 		<h1>Match Result</h1>
 		<div class="line-wide"></div>
 
@@ -27,33 +33,36 @@
 			4) Complete
 		-->
 		<form>
-			<h2>Team 1 (you)</h2>
-			<!-- TODO(lucas): Add dropdown search menus -->
-			<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg">
-
-			<h4>Participants:</h4>
-			<!-- TODO(lucas): Add dropdown search menus -->
-			<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
-
-			<br>
+			<div class="match-content-box match-shadow-box">
+				<h2>Team 1 (you)</h2>
+				<!-- TODO(lucas): Add dropdown search menus -->
+				<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg">
+			</div>
+			<div class="match-content-box match-shadow-box">
+				<h4>Participants:</h4>
+				<!-- TODO(lucas): Add dropdown search menus -->
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team.jpeg">
+			</div>
 
 			<div class="line-wide"></div>
 
-			<h2>Team 2 (opponent)</h2>
-			<img class="match-team-img match-border basic-interactive" src="img/tmp_team2.jpeg">
+			<div class="match-content-box match-shadow-box">
+				<h2>Team 2 (opponent)</h2>
+				<img class="match-team-img match-border basic-interactive" src="img/tmp_team2.jpeg">
+			</div>
 
-			<h4>Participants:</h4>
-			<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
-			<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
-
-			<br>
+			<div class="match-content-box match-shadow-box">
+				<h4>Participants:</h4>
+				<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
+				<img class="match-player-img basic-interactive" src="img/tmp_team2.jpeg">
+			</div>
 
 			<div class="line-wide"></div>
 
