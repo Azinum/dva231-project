@@ -40,7 +40,8 @@ html, body {
     color: white;
 }
 
-.profilebox-tall {
+.profilebox-tall:nth-child(2n) {
+    border-right: 3px #383838 solid;
 }
 
 .profilebox .username, .profilebox .bio {
@@ -216,12 +217,15 @@ html, body {
         flex-wrap: wrap;
     }
 
+    .profilebox-tall.members .shadowbox {
+        width: calc(50%);
+    }
+
     .profilebox-tall h3, .profilebox-tall h4 {
         width: 100%;
     }
 
     .teambox {
-        width: calc(50% - 3vw);
         margin: 0.5vw;
     }
 
@@ -247,6 +251,11 @@ html, body {
     .teambox {
         width: 100%;
     }
+
+    .profilebox-tall.members .shadowbox {
+        width: 100%;
+    }
+
 
     .profilebox .statbox .label, .profilebox .statbox .val {
         font-size: 1.5rem;
@@ -324,6 +333,14 @@ html, body {
 
     .bioboxes .bio {
         font-size: 0.7rem;
+    }
+
+    .profilebox h4 {
+        font-size: 1rem;
+    }
+
+    .profilebox h3 {
+        font-size: 1.5rem;
     }
 }
 

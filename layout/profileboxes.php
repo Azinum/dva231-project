@@ -1,4 +1,5 @@
 <?php
+    require_once("../layout/shadow.php");
 
     function profileboxes_headtags() {
         ?>
@@ -20,8 +21,8 @@
         ]
     */
     function matchbox($box) {
+        shadow_start();
         ?>
-            <div class="shadowbox">
                 <div class="matchbox">
                     <div class="team">
                         <div class="profilepic">
@@ -44,9 +45,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow"></div>
-            </div>
         <?php
+        shadow_end();
     }
 
     /* Teambox format:
@@ -58,8 +58,8 @@
         ]
     */
     function teambox($box) {
+        shadow_start();
         ?>
-            <div class="shadowbox">
                 <div class="teambox" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
                     <div class="profile">
                         <div class="profilepic">
@@ -72,9 +72,8 @@
                         <span>Won: <?php echo $box["won"]; ?></span>
                     </div>
                 </div>
-                <div class="shadow"></div>
-            </div>
         <?php
+        shadow_end();
     }
 
 ?>
