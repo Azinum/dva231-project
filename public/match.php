@@ -43,7 +43,6 @@
 				<!-- TODO(lucas): Add dropdown search menus -->
 				<div class="match-team-content">
 					<img class="match-team-img match-border basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
-					<p>The Legitness Awesomely Very Good Team</p>
 				</div>
 			</div>
 			<div class="match-content-box match-shadow-box">
@@ -61,7 +60,6 @@
 				<h2>Team 2 (opponent)</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-border basic-interactive" src="img/tmp_team2.jpeg">
-					<p>The Bad Team</p>
 				</div>
 			</div>
 

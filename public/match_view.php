@@ -18,10 +18,9 @@
 		<div class="line-wide"></div>
 		<form>
 			<div class="match-content-box match-shadow-box">
-				<h2>Team 1 (you)</h2>
+				<h2>Team 1</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-border" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
-					<p>The Legitness Awesomely Very Good Team</p>
 				</div>
 			</div>
 			<div class="match-content-box match-shadow-box">
@@ -35,10 +34,9 @@
 			<div class="line-wide"></div>
 
 			<div class="match-content-box match-shadow-box">
-				<h2>Team 2 (opponent)</h2>
+				<h2>Team 2</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-border" src="img/tmp_team2.jpeg">
-					<p>The Bad Team</p>
 				</div>
 			</div>
 
@@ -60,7 +58,7 @@
 				<label>
 					<input readonly type="radio" checked="checked" name="match_result">
 					<span class="checkmark"></span>
-					You won
+					Team 1 won
 				</label>
 				<br>
 
@@ -74,7 +72,7 @@
 				<label>
 					<input readonly disabled type="radio" name="match_result">
 					<span class="checkmark"></span>
-					Opponent won
+					Team 2 won
 				</label>
 			</div>
 

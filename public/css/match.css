@@ -1,9 +1,9 @@
 /* match.css */
 
 html, body {
-	background: url("/img/quake.jpeg");
+	/* background: url("/img/quake.jpeg");
 	background-size: cover;
-	background-attachment: fixed;
+	background-attachment: fixed; */
 	background-color: #606060;
 
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -17,12 +17,12 @@ html, body {
 /* NOTE(lucas): Styles specific to the match page */
 
 .match-content {
-	background-color: #50505088;
+	background-color: #505050;
 	margin: 0 auto;
 	width: 80em;
 	min-height: 100%;
 	max-width: 100%;
-	/* box-shadow: 0.25em 0.25em 8px #303030; */
+	box-shadow: 0.25em 0.25em 8px #303030;
 }
 
 .match-content h1, h2, h3, h4, p {
