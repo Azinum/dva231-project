@@ -26,7 +26,6 @@
 			</div>
 			<div class="match-content-box match-shadow-box">
 				<h4>Participants:</h4>
-				<!-- TODO(lucas): Add dropdown search menus -->
 				<img class="match-player-img" src="img/tmp_team.jpeg">
 				<img class="match-player-img" src="img/tmp_team.jpeg">
 				<img class="match-player-img" src="img/tmp_team.jpeg">
