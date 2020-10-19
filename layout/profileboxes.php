@@ -1,4 +1,5 @@
 <?php
+    require_once("../layout/shadow.php");
 
     function profileboxes_headtags() {
         ?>
@@ -19,9 +20,9 @@
             "won" => <true or false dep. on who won>
         ]
     */
-    function matchbox($box) {
+    function matchbox($box, $editbutton = false) {
+        shadow_start();
         ?>
-            <div class="shadowbox">
                 <div class="matchbox">
                     <div class="team">
                         <div class="profilepic">
@@ -37,16 +38,24 @@
                             VS
                         </span>
                     </div>
-                    <div class="team">
+                    <div class="team team2">
                         <span class="label"><?php echo $box["rteam"]["name"]; ?></span>
                         <div class="profilepic">
                             <img src="<?php echo $box["rteam"]["imgurl"]; ?>">
                         </div>
                     </div>
+                    <?php if ($editbutton) { ?>
+                        <div class="editbutton">
+                            <?php shadow_start(); ?>
+                                <a class="shadowparent" href="/match.php">
+                                    <img src="/img/arrow.svg">
+                                </a>
+                            <?php shadow_end(); ?>
+                        </div>
+                    <?php } ?>
                 </div>
-                <div class="shadow"></div>
-            </div>
         <?php
+        shadow_end();
     }
 
     /* Teambox format:
@@ -57,24 +66,34 @@
             "won" => <num. won matches>
         ]
     */
-    function teambox($box) {
+    function teambox($box, $stats = true, $kickbutton = false) {
+        shadow_start();
         ?>
-            <div class="shadowbox">
-                <div class="teambox" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
+                <div class="teambox shadowparent" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
                     <div class="profile">
                         <div class="profilepic">
                             <img src="<?php echo $box["imgurl"]; ?>">
                         </div>
                         <span class="label"><?php echo $box["name"]; ?></span>
                     </div>
-                    <div class="stats">
-                        <span>Participated: <?php echo $box["part"]; ?></span>
-                        <span>Won: <?php echo $box["won"]; ?></span>
-                    </div>
+                    <?php if ($stats) { ?>
+                        <div class="stats">
+                            <span>Participated: <?php echo $box["part"]; ?></span>
+                            <span>Won: <?php echo $box["won"]; ?></span>
+                        </div>
+                    <?php } ?>
+                    <?php if ($kickbutton) { ?>
+                        <div class="kickbutton">
+                            <?php shadow_start(); ?>
+                                <a class="shadowparent">
+                                    Kick
+                                </a>
+                            <?php shadow_end(); ?>
+                        </div>
+                    <?php } ?>
                 </div>
-                <div class="shadow"></div>
-            </div>
         <?php
+        shadow_end();
     }
 
 ?>

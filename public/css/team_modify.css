@@ -1,0 +1,107 @@
+.tabcontainer {
+    background: #383838;
+    border-radius: 0.5vw;
+    padding: 1vw;
+    height:calc(100vh - 6vw);
+}
+
+.tablayout .tabs {
+    background: #383838;
+}
+
+.addmember {
+    background: #209020;
+    padding: 1vw;
+    display: block;
+    border-radius: 0.5vw;
+    width: 3vw;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: background 0.1s;
+}
+
+.addmembershadow .shadow {
+    background: #005000;
+}
+
+.addmember:hover {
+    background: #30a030;
+}
+
+.addmember img {
+    width: 100%;
+    display: block;
+}
+
+.teambio form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.teambio form input[type="file"] {
+    width: 100%;
+}
+.teambio form input[type="text"] {
+    width: 100%;
+    border-radius: 0.5vw;
+    border: 0;
+    box-sizing: border-box;
+    padding-left: 1vw;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    background-color: #383838;
+    color: white;
+    border: 0.1em solid transparent;
+    transition: border 0.1s;
+}
+
+.teambio form input[type="text"]:hover {
+    border: 0.1em solid #4d79ff;
+}
+
+.teambio form input[type="text"]:focus {
+    border: 0.1em solid #4d79ff;
+}
+
+.teambio form .othercontrols {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.teambio form .imgcontrols {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+}
+
+.teambio form .othercontrols textarea {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.5vw;
+    border: 0;
+    box-sizing: border-box;
+    padding-left: 1vw;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    background-color: #383838;
+    color: white;
+    border: 0.1em solid transparent;
+    transition: border 0.1s;
+}
+
+.teambio form .othercontrols textarea:hover {
+    border: 0.1em solid #4d79ff;
+}
+
+.teambio form .othercontrols textarea:focus {
+    border: 0.1em solid #4d79ff;
+}
+
+@media only screen and (max-width: 600px) {
+    .addmember {
+        width: 6vw;
+        border-radius: 1.1vw;
+    }
+}
