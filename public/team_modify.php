@@ -41,6 +41,13 @@
                                     </div>
                                     <input type="file" placeholder="Profile picture">
                                 </form>
+                                <div class="kickbutton deletebutton">
+                                    <?php shadow_start(); ?>
+                                        <a class="shadowparent">
+                                            Delete Team
+                                        </a>
+                                    <?php shadow_end(); ?>
+                                </div>
                             </div>
                         <?php
                         tabcontent_end();
