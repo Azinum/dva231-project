@@ -46,7 +46,11 @@ html, body {
     color: white;
 }
 
-.profilebox-tall:nth-child(2n) {
+.profilebox-wide {
+    width: 100%;
+}
+
+.profilebox-separator{
     border-right: 3px #383838 solid;
 }
 
@@ -244,17 +248,17 @@ html, body {
     flex-direction: column;
 }
 
-.teambox .kickbutton {
+.kickbutton {
     height: 3vw;
 }
 
-.teambox .kickbutton .shadow {
+.kickbutton .shadow {
     background: #500000;
     height: 3vw;
     margin-top: -2.5vw;
 }
 
-.teambox .kickbutton a {
+.kickbutton a {
     background: #d02020;
     /*padding: 1vw;*/
     border-radius: 0.5vw;
@@ -269,10 +273,38 @@ html, body {
     transition: background 0.1s;
 }
 
-.teambox .kickbutton a:hover {
+.kickbutton a:hover {
     background: #f04040;
 }
 
+.teambox .acceptbutton {
+    height: 3vw;
+}
+
+.teambox .acceptbutton .shadow {
+    background: #005000;
+    height: 3vw;
+    margin-top: -2.5vw;
+}
+
+.teambox .acceptbutton a {
+    background: #209020;
+    /*padding: 1vw;*/
+    border-radius: 0.5vw;
+    display: block;
+    text-decoration: none;
+    color: white;
+    margin: 0 auto;
+    width: 7vw;
+    height: 3vw;
+    line-height: 3vw;
+    text-align: center;
+    transition: background 0.1s;
+}
+
+.teambox .acceptbutton a:hover {
+    background: #30a030;
+}
 
 @media only screen and (max-width: 1200px) {
     .profileboxes {

@@ -42,7 +42,7 @@
                     </div>
                 </div>
             <?php shadow_end(); ?>
-            <div class="profilebox profilebox-tall members">
+            <div class="profilebox profilebox-tall members profilebox-separator">
                 <h3>Members:</h3>
                 <h4>x members</h4>
                 <?php
