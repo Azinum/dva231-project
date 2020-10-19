@@ -15,7 +15,7 @@ body {
     text-align: center;
     margin: auto;
     margin-top: 5em;
-    filter: drop-shadow(0.5em 0.4em 0.4em #383838);
+    box-shadow: 0.5em 0.4em 0.4em #383838;
     overflow: auto;
 }
 
@@ -31,7 +31,7 @@ body {
     outline: none;
     border: 0.1em solid transparent;
     transition: 0.25s;
-    filter: drop-shadow(0.5em 0.4em 0.4em #383838);
+    box-shadow:0.5em 0.4em 0.4em #383838;
 }
 
 #searchbar:hover {

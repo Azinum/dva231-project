@@ -80,7 +80,7 @@ input[type=password]:focus {
     text-align: center;
     margin: auto;
     margin-top: 10%;
-    filter: drop-shadow(0.5em 0.4em 0.4em #383838);
+    box-shadow: 0.5em 0.4em 0.4em #383838;
 }
 
 table {
@@ -99,6 +99,6 @@ table {
     text-align: center;
     margin: auto;
     margin-top: 35%;
-    filter: drop-shadow(0.5em 0.4em 0.4em #383838);
+    box-shadow: 0.5em 0.4em 0.4em #383838;
 }
 }
