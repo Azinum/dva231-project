@@ -66,7 +66,7 @@
             "won" => <num. won matches>
         ]
     */
-    function teambox($box, $stats = true, $kickbutton = false) {
+    function teambox($box, $stats = true, $kickbutton = false, $leavebutton = false, $invitecontrols = false) {
         shadow_start();
         ?>
                 <div class="teambox shadowparent" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
@@ -87,6 +87,31 @@
                             <?php shadow_start(); ?>
                                 <a class="shadowparent">
                                     Kick
+                                </a>
+                            <?php shadow_end(); ?>
+                        </div>
+                    <?php } ?>
+                    <?php if ($leavebutton) { ?>
+                        <div class="kickbutton">
+                            <?php shadow_start(); ?>
+                                <a class="shadowparent">
+                                    Leave
+                                </a>
+                            <?php shadow_end(); ?>
+                        </div>
+                    <?php } ?>
+                    <?php if ($invitecontrols) { ?>
+                        <div class="acceptbutton">
+                            <?php shadow_start(); ?>
+                                <a class="shadowparent">
+                                    Accept
+                                </a>
+                            <?php shadow_end(); ?>
+                        </div>
+                        <div class="kickbutton">
+                            <?php shadow_start(); ?>
+                                <a class="shadowparent">
+                                    Reject
                                 </a>
                             <?php shadow_end(); ?>
                         </div>

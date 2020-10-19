@@ -1,30 +1,69 @@
 ﻿body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: black;
+    padding-top:4vw;
 }
 
 .navBar {
+    z-index:99;
+    box-shadow: 0 0.5vw #303030;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     overflow: hidden;
     background-color: #333;
     margin-left: auto;
     margin-right: auto;
     text-align:center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 4vw;
+    line-height: 4vw;
 }
 
-.navBar a {
-    color: #ff0000;
+.navBar a, .dropdown, .dropbtn {
+    color: white;
     text-align: center;
+    vertical-align: middle;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 1.5em;
+    padding-bottom: 100em;
 }
 
-.navBar a:hover {
+.navBar a:hover, .navProfileDropdown:hover, .logout {
     background-color: #888;
-    color: white;
+    color: #000000;
 }
 
 .navImage{
-    width:1em;
-    height:1em;
+    width:1.5em;
+    height:1.5em;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

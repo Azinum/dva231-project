@@ -1,6 +1,7 @@
 body{
     background-color: #606060;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
 }
 
 input[type=text] {

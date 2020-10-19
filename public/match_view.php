@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <?php include("navbarexample.php"); ?>
 	<div class="match-content">
 		<h1>Match Result</h1>
 		<div class="line-wide"></div>

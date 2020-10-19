@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <?php include("navbarexample.php"); ?>
 	<div class="match-search-overlay">
 		<div class="match-search-overlay-content">
 			<div class="closebox match-shadow-box" onclick="toggleOverlay()">X</div>

@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <?php include("navbarexample.php"); ?>
     <table id="layout">
         <!-- Ändra när header finns -->
         <tr>

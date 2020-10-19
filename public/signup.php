@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <?php include("navbarexample.php"); ?>
     <div id="bbox">
         <h2>Sign up</h2>
         <table>

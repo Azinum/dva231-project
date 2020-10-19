@@ -16,6 +16,7 @@
         <?php searchoverlay_headtags(); ?>
     </head>
     <body>
+        <?php include("navbarexample.php"); ?>
         <?php searchoverlay(); ?>
         <div class="midbar">
             <?php shadow_start(); ?>
