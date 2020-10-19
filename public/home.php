@@ -32,6 +32,8 @@
                                     <div class="popup">
                                         <!-- Här är rutan som poppar upp, det finns flera olika sätt att hantera detta. Just nu finns elementet alltid där, men opacitet sätts till 0. Kommentera bort opacity -->
                                         <a> Info </a>
+                                        <br>
+                                        <a class="linktext" href="profile_public.php"> See more... </a>
                                     </div>
                                     <table>
                                         <tr>
@@ -64,6 +66,8 @@
                                 <div class="result">
                                     <div class="popup">
                                         <a> Info </a>
+                                        <br>
+                                        <a class="linktext" href="profile_public.php"> See more... </a>
                                     </div>
                                     <table>
                                         <tr>
@@ -94,6 +98,7 @@
             </td>
         </tr>
     </table>
-
+    <!-- <div class="bg"></div> -->
 </body>
+
 </html>

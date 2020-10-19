@@ -86,7 +86,7 @@ table {
     margin-right:auto;
 }
 
-@media screen and (max-width:640px) {
+@media screen and (max-width:730px) {
     #bbox {
     background-color: #505050;
     color: white;
