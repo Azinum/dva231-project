@@ -1,3 +1,7 @@
+<?php
+    require_once("../layout/profileboxes.php");
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -6,6 +10,8 @@
     <title>Scoreboard: Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/profile_box.css">
 </head>
 
 <body>
@@ -21,7 +27,7 @@
         </tr>
         <tr>
             <td>
-                <div id="bbox">
+                <div id="back-box" class="ui-box shadow">
                     <h2>Ranks</h2>
                     <table>
                         <!-- Scoreboard table -->
@@ -64,33 +70,24 @@
                         <tr>
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
                             <td>
-                                <div class="result">
-                                    <div class="popup">
-                                        <a> Info </a>
-                                        <br>
-                                        <a class="linktext" href="profile_public.php"> See more... </a>
-                                    </div>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div class="itemPlacement"><a class="placement"> 9000. </a></div>
-                                            </td>
-                                            <td> <img class="teamimg" src="/img/teamico.png"></td>
-                                            <td>
-                                                <div class="itemName"> <a class="linktext" href="http://www.google.com">2nrdXuWOMHcFqMYzVDAFmZeQWeagZYugEuEA8cPN1G19q4TTXq</a> </div>
-                                            </td>
-                                            <td>
-                                                <div class="itemWL"> <a> W: 9999 | T: 9999 | L: 9999 </a> </div>
-                                            </td>
-                                            <td>
-                                                <div class="itemWLMobile"><a> W/T/L<br>9999/9999/9999 </a></div>
-                                            </td>
-                                            <td>
-                                                <div class="itemELO"> <a> E: 400 </a></div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                <?php
+                                    profile_box_member([
+                                    "name"=>"2nrdXuWOMHcFqMYzVDAFmZeQWeagZYugEuEA8cPN1G19q4TTXq",
+                                    "img_url"=>"/img/teamico.png",
+                                    "img_small"=> true,
+
+                                    "show_stats"=>true,
+                                    "stats_short"=> true,
+                                    "stats"=>["won"=> 9999, "lost"=> 9999, "part"=>19998],
+                                    "show_rank"=> true,
+                                    "rank"=> 9999,
+                                    "show_score"=> true,
+                                    "score"=> 400,
+                                    "buttons" => [
+                                        "kick"=> false
+                                    ]
+                                    ]);
+                                    ?>
                             </td>
                         </tr>
 
