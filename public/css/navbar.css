@@ -9,8 +9,6 @@ body {
 .navbar {
     z-index:99;
     box-shadow: 0 0.5vw var(--grey0);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    overflow: hidden;
     background-color: var(--grey0);
     margin-left: auto;
     margin-right: auto;
@@ -23,11 +21,11 @@ body {
 }
 
 .navbar a, .navbar dropdown{
-    color: white;
     text-align: center;
     vertical-align: middle;
     padding: 2vw 2vw;
     text-decoration: none;
+		width: 100%;
     font-size: 2vw;
 }
 
@@ -37,7 +35,7 @@ body {
 }
 
 .navbar a:hover{
-	background-color: var(--grey3);
+	background-color: var(--grey2);
 }
 
 .dropdown {
@@ -52,14 +50,14 @@ body {
 .dropdown-content {
 	display: none;
 	position: absolute;
+	width: 100%;
 	background-color: var(--grey0);
 	z-index: 999;
 }
 
 .dropdown-content a {
-    color: white;
     padding: 0.5vw 1.5vw;
-		width:inherit;
+		width: 100%;
     text-decoration: none;
     display: block;
     text-align: left;
