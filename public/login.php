@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php include("navbarexample.php"); ?>
+    <?php include("navbar_final.php"); ?>
     <div id="back-box" class=" ui-box shadow">
         <h2>Sign in</h2>
         <table>
