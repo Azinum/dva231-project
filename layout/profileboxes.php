@@ -21,42 +21,40 @@
         ]
     */
     function matchbox($box, $editbutton = false) {
-        //shadow_start();
         ?>
-                <div class="matchbox shadow ui-box">
-                    <div class="team team1">
-                        <div class="profilepic">
-                            <img src="<?php echo $box["lteam"]["imgurl"]; ?>">
-                        </div>
-                        <span class="label"><?php echo $box["lteam"]["name"]; ?></span>
+            <div class="matchbox shadow ui-box">
+                <div class="team team1">
+                    <div class="profilepic">
+                        <img src="<?php echo $box["lteam"]["imgurl"]; ?>">
                     </div>
-                    <div class="versus">
-                        <span class="matchresult">
-                            <?php echo $box["won"] ? "W" : "L" ?>
-                        </span>
-                        <span class="marker">
-                            VS
-                        </span>
-                    </div>
-                    <div class="team team2">
-                        <span class="label"><?php echo $box["rteam"]["name"]; ?></span>
-                        <div class="profilepic">
-                            <img src="<?php echo $box["rteam"]["imgurl"]; ?>">
-                        </div>
-                    </div>
-                    <?php if ($editbutton) { ?>
-                        <div class="editbutton">
-                            <a class="button button-image button-accept" href="/match.php">
-                                <img src="/img/arrow.svg">
-                            </a>
-                        </div>
-                    <?php } ?>
+                    <span class="label"><?php echo $box["lteam"]["name"]; ?></span>
                 </div>
+                <div class="versus">
+                    <span class="matchresult">
+                        <?php echo $box["won"] ? "W" : "L" ?>
+                    </span>
+                    <span class="marker">
+                        VS
+                    </span>
+                </div>
+                <div class="team team2">
+                    <span class="label"><?php echo $box["rteam"]["name"]; ?></span>
+                    <div class="profilepic">
+                        <img src="<?php echo $box["rteam"]["imgurl"]; ?>">
+                    </div>
+                </div>
+                <?php if ($editbutton) { ?>
+                    <div class="editbutton">
+                        <a class="button button-image button-accept" href="/match.php">
+                            <img src="/img/arrow.svg">
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
         <?php
-        //shadow_end();
     }
 
-    /* Teambox format:
+    /*  Teambox format:
         [
             "name" => <team name>,
             "imgurl" => <url to team image>,
@@ -65,58 +63,120 @@
         ]
     */
     function teambox($box, $stats = true, $kickbutton = false, $leavebutton = false, $invitecontrols = false) {
-        shadow_start();
         ?>
-                <div class="teambox shadowparent" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
-                    <div class="profile">
-                        <div class="profilepic">
-                            <img src="<?php echo $box["imgurl"]; ?>">
-                        </div>
-                        <span class="label"><?php echo $box["name"]; ?></span>
+            <div class="teambox ui-box shadow" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
+                <div class="profile">
+                    <div class="profilepic">
+                        <img src="<?php echo $box["imgurl"]; ?>">
                     </div>
-                    <?php if ($stats) { ?>
-                        <div class="stats">
-                            <span>Participated: <?php echo $box["part"]; ?></span>
-                            <span>Won: <?php echo $box["won"]; ?></span>
-                        </div>
-                    <?php } ?>
-                    <?php if ($kickbutton) { ?>
-                        <div class="kickbutton">
-                            <?php shadow_start(); ?>
-                                <a class="shadowparent">
-                                    Kick
-                                </a>
-                            <?php shadow_end(); ?>
-                        </div>
-                    <?php } ?>
-                    <?php if ($leavebutton) { ?>
-                        <div class="kickbutton">
-                            <?php shadow_start(); ?>
-                                <a class="shadowparent">
-                                    Leave
-                                </a>
-                            <?php shadow_end(); ?>
-                        </div>
-                    <?php } ?>
-                    <?php if ($invitecontrols) { ?>
-                        <div class="acceptbutton">
-                            <?php shadow_start(); ?>
-                                <a class="shadowparent">
-                                    Accept
-                                </a>
-                            <?php shadow_end(); ?>
-                        </div>
-                        <div class="kickbutton">
-                            <?php shadow_start(); ?>
-                                <a class="shadowparent">
-                                    Reject
-                                </a>
-                            <?php shadow_end(); ?>
-                        </div>
-                    <?php } ?>
+                    <span class="label"><?php echo $box["name"]; ?></span>
                 </div>
+                <?php if ($stats) { ?>
+                    <div class="stats">
+                        <span>Participated: <?php echo $box["part"]; ?></span>
+                        <span>Won: <?php echo $box["won"]; ?></span>
+                    </div>
+                <?php } ?>
+                <?php if ($kickbutton) { ?>
+                    <div class="button button-deny">
+                        Kick
+                    </div>
+                <?php } ?>
+                <?php if ($leavebutton) { ?>
+                    <div class="kickbutton">
+                        <div class="button button-deny">
+                            Leave
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if ($invitecontrols) { ?>
+                    <div class="acceptbutton">
+                        <div class="button button-accept">
+                            Accept
+                        </div>
+                    </div>
+                    <div class="kickbutton">
+                        <div class="button button-deny">
+                            Reject
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
         <?php
-        shadow_end();
+    }
+
+    /*  Box format:
+        [
+            "name" => <member name>,
+            "img_url" => <url to prof. image>,
+
+            "show_stats" => <boolean>,
+            "stats_short" => <boolean>,
+            "stats" => [
+                "part" => <num. participated matches>,
+                "won" => <num. won matches>,
+                "lost" => <num. lost matches>
+            ],
+
+            "show_rank" => <boolean>,
+            "rank" => <number>,
+
+            "show_score" => <boolean>,
+            "score" => <number>,
+
+            "buttons" => [
+                "kick" => <boolean>
+            ]
+        ]
+    */
+    function profile_box_member($box) {
+        ?>
+            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
+                <div class="profile">
+                    <?php if ($box["show_rank"]) { ?>
+                        <div class="rank">
+                            <?php echo $box["rank"]. "."; ?>
+                        </div>
+                    <?php } ?>
+                    <div class="profilepic">
+                        <img src="<?php echo $box["img_url"]; ?>">
+                    </div>
+                    <span class="label"><?php echo $box["name"]; ?></span>
+                </div>
+                <?php if ($box["show_stats"]) { ?>
+                    <div class="stats <?php echo $box["stats_short"] ? "stats-short" : ""; ?>">
+                        <span>
+                            <?php
+                                echo $box["stats_short"] ? "P:" : "Participated:";
+                                echo $box["stats"]["part"];
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                                echo $box["stats_short"] ? "W:" : "Won:";
+                                echo $box["stats"]["won"];
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                                echo $box["stats_short"] ? "L:" : "Lost:";
+                                echo $box["stats"]["lost"];
+                            ?>
+                        </span>
+                    </div>
+                <?php } ?>
+                <?php if ($box["show_score"]) { ?>
+                    <div class="score">
+                        E: <?php echo $box["score"]; ?>
+                    </div>
+                <?php } ?>
+                <?php if ($box["buttons"]["kick"]) { ?>
+                    <div class="button button-deny">
+                        Kick
+                    </div>
+                <?php } ?>
+            </div>
+        <?php
     }
 
 ?>

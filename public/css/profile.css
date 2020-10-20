@@ -174,12 +174,8 @@ html, body {
 .teambox {
     display: flex;
     justify-content: space-between;
-    background: #383838;
-    border-radius: 0.5vw;
-    /*filter: drop-shadow(0 0.4em 0 #303030);*/
     box-sizing: border-box;
-    padding: 1vw;
-    /*margin-bottom: 1vw;*/
+    margin-bottom: 1.5vw;
     position: relative;
     z-index:1;
     align-items: center;

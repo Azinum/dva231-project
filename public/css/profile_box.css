@@ -1,0 +1,103 @@
+.profile-box {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: 1.5vw;
+    position: relative;
+    z-index:1;
+    align-items: center;
+    transition: background 0.1s;
+}
+
+.profile-box.active {
+    background: #4d79ff;
+}
+
+.profile-box:hover {
+    background: #454545;
+}
+
+.profile-box.active:hover {
+    background: #668cff;
+}
+
+.profile-box .profilepic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-box .profilepic {
+    width: 5vw;
+    height: 5vw;
+    float: left;
+}
+
+.profile-box .profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-box .profile .rank {
+    font-size: 1.25rem;
+    width: 5.5vw;
+}
+
+.profile-box .profile .label {
+    font-size: 1.2rem;
+    display: block;
+    margin-left: 1vw;
+}
+
+.profile-box .stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-box .score {
+    font-size: 1.25rem;
+}
+
+.profile-box .stats.stats-short {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile-box .stats.stats-short span {
+    padding: 0 1.5vw;
+}
+
+@media only screen and (max-width: 1100px) {
+    .profile-box {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .profile-box .profilepic {
+        width: 7vw;
+        height: 7vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .profile-box .profilepic {
+        width: 10vw;
+        height: 10vw;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .profile-box .profilepic {
+        width: 20vw;
+        height: 20vw;
+    }
+
+    .profile-box .profile .label {
+        font-size: 1rem;
+    }
+
+    .profile-box .stats {
+        font-size: 0.8rem;
+    }
+}
