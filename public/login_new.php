@@ -11,7 +11,7 @@
 
 <body>
     <?php include("navbarexample.php"); ?>
-    <div class="back-box ui-box shadow">
+    <div id="back-box" class=" ui-box shadow">
         <h2>Sign in</h2>
         <table>
             <form method="post">

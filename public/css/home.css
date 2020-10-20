@@ -19,17 +19,13 @@ body {
     z-index: -1;
 }
 
-#bbox {
-    background-color: #505050;
-    color: white;
+#back-box {
     width: 42em;
     height: 28em;
-    border-radius: 1em;
-    padding: 1em;
     text-align: center;
     margin: auto;
     margin-top: 5em;
-	box-shadow: 0px 0.7em #303030;
+    background: var(--grey2)!important;
     overflow: auto;
 }
 
@@ -46,18 +42,6 @@ body {
     border: 0.1em solid transparent;
     transition: 0.25s;
 	box-shadow: 0px 0.7em #303030;
-}
-
-#searchbar:hover {
-    outline: none;
-    border: 0.1em solid #4d79ff;
-    transition: 0.5s
-}
-
-#searchbar:focus {
-    outline: none;
-    border: 0.1em solid #4d79ff;
-    transition: 0.5s
 }
 
 table {

@@ -1,0 +1,39 @@
+.flex-Con {
+    height: 2em;
+    width:17em;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+
+    border-radius: 0.3em;
+    background-color: #383838;
+}
+
+
+#item1 {
+    order: 1;
+}
+
+#item2 {
+    order: 2;
+}
+
+#item3 {
+    order: 3;
+    width: 13em;
+}
+
+#item4 {
+    order: 4;
+    width: 15em;
+}
+
+#item5 {
+    order: 5;  
+    width: 4em;  
+}
+
+#item6 {
+    order: 6;
+}

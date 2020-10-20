@@ -6,7 +6,7 @@ body{
     margin: 0;
 }
 
-.back-box {
+#back-box {
     width: 18em;
     height: 16em;
     text-align: center;
