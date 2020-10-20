@@ -1,0 +1,149 @@
+/* common.css */
+
+@import "color.css";
+
+body, html {
+    background: var(--grey3);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.ui-box {
+    background: var(--grey1);
+    border-radius: 0.5vw;
+    padding: 1vw;
+}
+
+.shadow {
+    box-shadow: 0 0.7em var(--grey0);
+}
+
+.text-input-field {
+    padding: 0.5em;
+    border-radius: 0.5vw;
+    border: 0.1em solid transparent;
+    background: var(--grey1);
+    transition: background 0.25s;
+    color: white;
+}
+
+.text-input-field:hover, .text-input-field:focus {
+    border: 0.1em solid var(--blue1);
+}
+
+a {
+    text-decoration: underline;
+    color: white;
+}
+
+.button {
+    border-radius: 0.5vw;
+    display: inline-block;
+    line-height: 3vw;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    font-size: 1rem;
+    padding: 0.35rem 1rem;
+    text-align: center;
+    transition: filter 0.1s;
+    margin-bottom: 0.7em;
+}
+
+.button:hover {
+    filter: brightness(115%);
+    cursor: pointer;
+}
+
+.button-image {
+    padding: 1vw;
+}
+
+.button-image img {
+    height: 1.5rem;
+    display: block;
+}
+
+.button-submit {
+    box-shadow: 0 0.7em var(--blue0);
+    background: var(--blue1);
+}
+
+.button-accept {
+    box-shadow: 0 0.7em var(--green0);
+    background: var(--green1);
+}
+
+.button-deny {
+    box-shadow: 0 0.7em var(--red0);
+    background: var(--red1);
+}
+
+.content-column {
+    width: 75rem;
+    max-width: 100%;
+    min-height: 100%;
+    background: var(--grey2);
+    box-shadow: 0.25em 0.25em 8px var(--grey0);
+    margin: 0 auto;
+    padding: 1vw;
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+}
+
+.flex-layout-section {
+    box-sizing: border-box;
+    padding: 2vw;
+    width: 50%;
+}
+
+.flex-layout-section h3, .flex-layout-section h4 {
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 1vw;
+    height: 2rem;
+}
+
+.flex-layout-section h3 {
+    font-size: 2rem;
+}
+
+.flex-layout-section h4 {
+    font-size: 1rem;
+}
+
+.flex-layout-section-wide {
+    width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-layout-section {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .flex-layout-section h3 {
+        font-size: 1.5rem;
+    }
+
+    .flex-layout-section h3, .flex-layout-section h4 {
+        margin-top: 0.5vw;
+    }
+
+}

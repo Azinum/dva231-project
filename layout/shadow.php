@@ -7,7 +7,7 @@
 
     function shadow_end() {
         ?>
-            <div class="shadow"></div>
+            <div class="oldshadow"></div>
         </div>
         <?php
     }

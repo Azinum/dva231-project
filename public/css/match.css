@@ -19,7 +19,7 @@ html, body {
 .match-content {
 	background-color: #505050;
 	margin: 0 auto;
-	width: 80em;
+	width: 70vw;
 	min-height: 100%;
 	max-width: 100%;
 	box-shadow: 0.25em 0.25em 8px #303030;

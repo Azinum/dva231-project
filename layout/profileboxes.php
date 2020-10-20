@@ -21,10 +21,10 @@
         ]
     */
     function matchbox($box, $editbutton = false) {
-        shadow_start();
+        //shadow_start();
         ?>
-                <div class="matchbox">
-                    <div class="team">
+                <div class="matchbox shadow ui-box">
+                    <div class="team team1">
                         <div class="profilepic">
                             <img src="<?php echo $box["lteam"]["imgurl"]; ?>">
                         </div>
@@ -46,16 +46,14 @@
                     </div>
                     <?php if ($editbutton) { ?>
                         <div class="editbutton">
-                            <?php shadow_start(); ?>
-                                <a class="shadowparent" href="/match.php">
-                                    <img src="/img/arrow.svg">
-                                </a>
-                            <?php shadow_end(); ?>
+                            <a class="button button-image button-accept" href="/match.php">
+                                <img src="/img/arrow.svg">
+                            </a>
                         </div>
                     <?php } ?>
                 </div>
         <?php
-        shadow_end();
+        //shadow_end();
     }
 
     /* Teambox format:
