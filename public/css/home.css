@@ -20,7 +20,7 @@ body {
 }
 
 #back-box {
-    width: 42em;
+    width: 68em;
     height: 28em;
     text-align: center;
     margin: auto;
@@ -30,6 +30,11 @@ body {
 }
 
 #searchbar {
+    width: 42em;
+    height: 2em;
+}
+
+#asearchbar {
     padding: 0.5em;
     border-radius: 0.3em;
     border: none;
@@ -55,82 +60,27 @@ table {
 
 }
 
-.teamimg {
-    width: 2em;
-    height: 2em;
-}
 
-.result {
-    border-radius: 0.3em;
-    background-color: #383838;
-    color: white;
-    height: 2em;
-    width: 100%;
-    display: table;
-    position: relative;
+@media screen and (max-width:1150px) {
 
-}
+    #layout {
+        border-spacing: 2em;
+        width: 2em;
+    }
 
-.linktext {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
+    #back-box {
+        width: 46em;
+        height: 15em;
 
-}
-
-.placement {
-    font-size: 1.6em;
-}
-
-.itemName {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 13em;
-}
-
-.itemWL {
-    width: 15em;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.itemELO {
-    width: 4em;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.itemPlacement {
-    width: 5em;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+    }
 
 
-.result:hover>.popup {
-    background-color: #4d79ff;
-    display: block;
-    opacity: 1;
-    transition: 0.25s;
 
-}
+    #searchbar {
+        width: 24em;
+        height: 2em;
+    }
 
-.popup {
-    border-radius: 0.3em;
-    background-color: white;
-    color: white;
-    height: 100%;
-    width: 100%;
-    z-index: 300;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: 0.25s;
-    opacity: 0;
-}
-
-.itemWLMobile {
-    display: none;
 }
 
 @media screen and (max-width:750px) {
@@ -140,82 +90,18 @@ table {
         width: 2em;
     }
 
-    #bbox {
-        background-color: #505050;
-        color: white;
-        width: 24em;
+    #back-box {
+        width: 36em;
         height: 15em;
-        border-radius: 2em;
-        padding: 1em;
-        text-align: center;
-        margin: auto;
-        margin-top: 5em;
-        box-shadow: 0px 0.7em #303030;
+
     }
 
-    .placement {
-        font-size: 1.6em;
-    }
 
 
     #searchbar {
-        padding: 0.5em;
-        border-radius: 0.3em;
-        border: none;
-        margin-bottom: 0.3em;
-        background-color: #383838;
-        color: white;
         width: 24em;
         height: 2em;
-        outline: none;
-        border: 0.1em solid transparent;
-        transition: 0.5s;
     }
 
-    .result {
-        border-radius: 0.3em;
-        background-color: #383838;
-        color: white;
-        height: 2em;
-        width: 100%;
-        display: table;
-        position: relative;
-        font-size: smaller;
-    }
-
-    .itemName {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        width: 7em;
-    }
-
-    .itemWL {
-        width: 9em;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        display: none;
-    }
-
-    .itemWLMobile {
-        width: 9em;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        display: block;
-    }
-
-    .itemELO {
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-    .itemPlacement {
-        width: 2.3em;
-        text-overflow: clip '.';
-        overflow: hidden;
-    }
-
-    .placement {
-        font-size: 1.1em;
-        position: relative;
-    }
 }
+

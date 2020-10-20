@@ -21,7 +21,7 @@
         <tr>
             <td>
                 <form method="get">
-                    <input id="searchbar" type="text" name="search" placeholder="Search here...">
+                    <input id="searchbar" class="text-input-field" type="text" name="search" placeholder="Search here...">
                 </form>
             </td>
         </tr>
@@ -35,35 +35,24 @@
                             <!--Php funktion ska spotta ut sig hela tr för varje entry i teamdb, med information som matchar -->
                             <td>
 
-                                <div class="result">
-                                    <div class="popup">
-                                        <!-- Här är rutan som poppar upp, det finns flera olika sätt att hantera detta. Just nu finns elementet alltid där, men opacitet sätts till 0. Kommentera bort opacity -->
-                                        <a> Info </a>
-                                        <br>
-                                        <a class="linktext" href="profile_public.php"> See more... </a>
-                                    </div>
-                                    <table>
-                                        <tr>
-                                            <!-- Inte den snyggaste lösningen med klasserna, overflow och längd på värden skapade problem.-->
-                                            <td>
-                                                <div class="itemPlacement"><a class="placement"> 1. </a></div>
-                                            </td>
-                                            <td><img class="teamimg" src="/img/teamico.png"></td> <!-- Tvinga 32x32 på användarbilder? -->
-                                            <td>
-                                                <div class="itemName"><a class="linktext" href="http://www.google.com">Teamname</a></div>
-                                            </td>
-                                            <td>
-                                                <div class="itemWL"><a> W: 13 | T: 3 | L: 7 </a></div>
-                                            </td>
-                                            <td>
-                                                <div class="itemWLMobile"><a> W/T/L<br>13/3/7 </a></div>
-                                            </td>
-                                            <td>
-                                                <div class="itemELO"><a> E: 9001 </a></div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                            <?php
+                                    profile_box_member([
+                                    "name"=>"Teamname",
+                                    "img_url"=>"/img/teamico.png",
+                                    "img_small"=> true,
+
+                                    "show_stats"=>true,
+                                    "stats_short"=> true,
+                                    "stats"=>["won"=> 13, "lost"=> 3, "part"=>7],
+                                    "show_rank"=> true,
+                                    "rank"=> 1,
+                                    "show_score"=> true,
+                                    "score"=> 9001,
+                                    "buttons" => [
+                                        "kick"=> false
+                                    ]
+                                    ]);
+                                    ?>
 
                             </td>
                         </tr>
