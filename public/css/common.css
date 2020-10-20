@@ -20,6 +20,7 @@ body, html {
 
 .shadow {
     box-shadow: 0 0.7em var(--grey0);
+    margin-bottom: 0.7em;
 }
 
 .text-input-field {
