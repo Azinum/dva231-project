@@ -16,21 +16,12 @@ html, body {
 
 /* NOTE(lucas): Styles specific to the match page */
 
-.match-content {
-	background-color: #505050;
-	margin: 0 auto;
-	width: 70vw;
-	min-height: 100%;
-	max-width: 100%;
-	box-shadow: 0.25em 0.25em 8px #303030;
-}
-
-.match-content h1, h2, h3, h4, p {
+.content-column h1, h2, h3, h4, p {
 	margin: 0;
 	padding: 0.35em;
 }
 
-.match-border {
+.match-box {
 	border: 1px solid #000000;
 }
 
@@ -46,41 +37,14 @@ html, body {
 	height: auto;
 }
 
-.match-submit {
-	padding: 0.5em;
-	border-radius: 0.3em;
-	color: white;
-	border: 1px solid #3d59ff;
-}
-
-.match-submit:hover {
-	border: 1px solid white;
-	cursor: pointer;
-}
-
-.match-select-player input, select {
-	border: 1px solid black;
-	padding: 0.7em;
-	margin: 0.5%;
-}
-
 .match-player-img {
-	border: 1px solid black;
 	min-width: 4em;
 	width: 8%;
 	margin: 0.1%;
 }
 
-.match-team-players {
-	background: #383838;
-	padding: 0.5vw;
-	margin: 0.7vw;
-	border-radius: 0.5vw;
-}
-
 .match-content-box {
-	/* display: inline-block; */
-	background: #383838;
+	background: var(--grey1);
 
 	padding: 1vw;
 
@@ -97,14 +61,6 @@ html, body {
 
 .match-result {
 	padding: 0.35em;
-}
-
-/* TODO(lucas): Move this! */
-.button-submit {
-	background-color: #4d79ff;
-	color: white;
-	margin: 0.5%;
-	padding: 1em 1.5em 1.0em 1.5em;
 }
 
 .button-submit:active {
@@ -145,23 +101,19 @@ html, body {
 
 .match-search-overlay-content {
 	text-align: center;
-	margin: 2vw auto;
-	max-width: 100%;
-	width: 50%;
+	margin: 2.5vw auto;
+	max-width: 80%;
+	width: 50em;
 }
 
 .match-search-overlay form {
 	padding: 1vw;
-	background: #505050;
+	background: var(--grey2);
 	border-radius: 0.5vw;
 }
 
-.match-search-overlay input {
-	width: 95%;
-}
-
 .match-search-results {
-	background: #505050;
+	background: var(--grey2);
 	border-radius: 0.5vw;
 }
 
@@ -169,8 +121,9 @@ html, body {
 	background-color: #d02020;
 	border-radius: 0.3em;
 	width: 2vw;
-	height: 2vh;
+	height: 1vw;
 	min-width: 1.5em;
+	min-height: 1.5em;
 	margin: 1%;
 	margin-left: 100%;
 	padding: 0.35em;
@@ -181,4 +134,9 @@ html, body {
 .match-search-overlay .closebox:hover {
 	filter: brightness(115%);
 	cursor: pointer;
+}
+
+.match-search-overlay input {
+	width: 95%;
+	box-sizing: border-box;
 }
