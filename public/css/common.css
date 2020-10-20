@@ -41,6 +41,7 @@ a {
 }
 
 .button {
+    border: none;
     border-radius: 0.5vw;
     display: inline-block;
     line-height: 3vw;
@@ -51,6 +52,7 @@ a {
     text-align: center;
     transition: filter 0.1s;
     margin-bottom: 0.7em;
+    color: white;
 }
 
 .button:hover {
