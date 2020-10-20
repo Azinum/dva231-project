@@ -52,6 +52,10 @@
     font-size: 1.2rem;
     display: block;
     margin-left: 1vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 15vw;
+    white-space: nowrap;
 }
 
 .profile-box .stats {
