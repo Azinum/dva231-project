@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<!-- TODO(lucas): Replace with a common header! -->
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Match Results</title>
-
-	<link href= "css/common.css" rel="stylesheet">
-	<link href= "css/match.css" rel="stylesheet">
-
-	<script src="js/match.js"></script>
-</head>
-
-<body>
+<?php require_once("header.php"); ?>
+<?php page_begin("Match Results"); ?>
     <?php include("navbarexample.php"); ?>
 	<div class="match-search-overlay">
 		<div class="match-search-overlay-content">
@@ -103,4 +89,4 @@
 			<input value="SUBMIT" type="submit" class="button button-submit"></input>
 		</form>
 	</div>
-</body>
+<?php page_end(); ?>
