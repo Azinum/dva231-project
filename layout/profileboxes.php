@@ -107,8 +107,66 @@
 
     /*  Box format:
         [
+            "name" => <team name>,
+            "img_url" => <url to prof. image>,
+            
+            "show_stats" => <boolean>,
+            "stats" => [
+                "part" => <num. participated matches>,
+                "won" => <num. won matches>,
+                "lost" => <num. lost matches>
+            ],
+
+            "buttons" => [
+                "leave" => <boolean>,
+                "invite_controls" => <boolean>
+            ]
+        ]
+    */
+    function profile_box_team($box) {
+        ?>
+            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
+                <div class="profile">
+                    <div class="profilepic">
+                        <img src="<?php echo $box["imgurl"]; ?>">
+                    </div>
+                    <span class="label"><?php echo $box["name"]; ?></span>
+                </div>
+                <?php if ($box["stats"]) { ?>
+                    <div class="stats">
+                        <span>Participated: <?php echo $box["part"]; ?></span>
+                        <span>Won: <?php echo $box["won"]; ?></span>
+                        <span>Lost: <?php echo $box["lost"]; ?></span>
+                    </div>
+                <?php } ?>
+                <?php if ($box["buttons"]["leave"]) { ?>
+                    <div class="kickbutton">
+                        <div class="button button-deny">
+                            Leave
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if ($box["buttons"]["invite_controls"]) { ?>
+                    <div class="acceptbutton">
+                        <div class="button button-accept">
+                            Accept
+                        </div>
+                    </div>
+                    <div class="kickbutton">
+                        <div class="button button-deny">
+                            Reject
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php
+    }
+
+    /*  Box format:
+        [
             "name" => <member name>,
             "img_url" => <url to prof. image>,
+            "img_small" => <boolean>,
 
             "show_stats" => <boolean>,
             "stats_short" => <boolean>,
@@ -138,7 +196,7 @@
                             <?php echo $box["rank"]. "."; ?>
                         </div>
                     <?php } ?>
-                    <div class="profilepic">
+                    <div class="profilepic <?php echo $box["img_small"] ? "profilepic-small" : ""; ?>">
                         <img src="<?php echo $box["img_url"]; ?>">
                     </div>
                     <span class="label"><?php echo $box["name"]; ?></span>
