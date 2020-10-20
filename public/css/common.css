@@ -27,7 +27,7 @@ body, html {
     border-radius: 0.5vw;
     border: 0.1em solid transparent;
     background: var(--grey1);
-    transition: background 0.25s;
+    transition: border 0.25s;
     color: white;
 }
 
@@ -44,7 +44,7 @@ a {
     border: none;
     border-radius: 0.5vw;
     display: inline-block;
-    line-height: 3vw;
+    line-height: 2vw;
     min-width: 1.5rem;
     min-height: 1.5rem;
     font-size: 1rem;
@@ -132,6 +132,10 @@ a {
 @media only screen and (max-width: 1200px) {
     .flex-container {
         flex-direction: column;
+    }
+
+    .button {
+        line-height: 1.5rem;
     }
 
     .flex-layout-section {
