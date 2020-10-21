@@ -118,7 +118,7 @@
 
                     ?>
                     <div class="add-member">
-                        <div class="button button-image button-accept" onclick="searchoverlay_toggle();">
+                        <div class="button button-image button-accept" onclick="select_player(this);">
                             <img src="/img/plus.svg">
                         </div>
                     </div>

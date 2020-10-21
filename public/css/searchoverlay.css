@@ -8,17 +8,11 @@
     background: #000000aa;
     color: white;
     z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.05s;
     padding-top: 2vw;
 }
 
 .searchoverlay.active {
     display: block;
-}
-
-.searchoverlay.shown {
-    opacity: 1;
 }
 
 .searchoverlay form {
