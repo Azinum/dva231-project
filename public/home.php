@@ -84,12 +84,15 @@ require_once("../layout/dbfunctions.php");
                             $info = get_specteaminfo("TeamName");
                             $info["img_small"] = true;
                             $info["show_stats"] = true;
-                            $info["show_score"] = false;
+                            $info["show_score"] = false; //Ändra när ELO i DB är fixat
                             $info["stats_short"] = true;
                             $info["show_rank"] = true;
                             $info["img_small"] = [
                                     "leave" => false,
                                     "invite_controls" => false
+                            ];
+                            $info["buttons"] = [
+                                "kick"=> false
                             ];
                             profile_box_member ($info);
                             ?>
