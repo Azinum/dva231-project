@@ -33,7 +33,7 @@ require_once("../layout/dbconnection.php");
                     <div class="flextable">
                         <!-- Table begin -->
 
-                        <div>
+                        <div class="flex-row">
                             <!-- Table row 1 begin -->
                             <!--Php funktion ska spotta ut sig hela tr för varje entry i teamdb, med information som matchar -->
 
@@ -56,7 +56,7 @@ require_once("../layout/dbconnection.php");
                             ]);
                             ?>
                         </div> <!-- Table row 1 end -->
-                        <div>
+                        <div class="flex-row">
                             <!-- Table row 2 begin -->
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
                             <?php
@@ -78,7 +78,7 @@ require_once("../layout/dbconnection.php");
                             ]);
                             ?>
                         </div> <!-- Table row 2 begin -->
-                        <div>
+                        <div  class="flex-row">
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
                             <?php get_specteaminfo('TeamName') ?>
                         </div>

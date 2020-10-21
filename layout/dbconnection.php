@@ -4,7 +4,7 @@
     //Get specified team's info
     function get_specteaminfo ($name) {
 
-        $link = mysqli_connect("138.197.179.196:3306","scoreboard_account", "gimme them scorez yoo");
+        $link = new mysqli("138.197.179.196:3306","scoreboard_account", "gimme them scorez yoo", "scoreboard_db");
 
         if (mysqli_connect_errno()) {
             printf("Connect failed: %s\n", mysqli_connect_error());
@@ -12,21 +12,8 @@
         }
 
         
-         $search = 'TeamName';
-        //  $query = "SELECT TeamName, TeamRanking, TeamImage FROM Team WHERE TeamName = '$search'";
-         $query = "SELECT TeamName, TeamRanking, TeamImage FROM Team WHERE TeamName = 'TeamName'";
-
-         echo "connection up";
-         echo "search: $search";
-         echo "$query";
-
-        //  if (!(mysqli_query($link, $query))) { //Någonting är fel med $link? $result blir en bool (false)
-        //      echo "AAAAAAAAAAA NOOOOOOOOOOOOO";
-        //     }
-
-
+          $query = "SELECT TeamName, TeamRanking, TeamImage FROM Team WHERE TeamName = '$name'";
             if ($result = mysqli_query($link, $query)){
-                echo "Result passed AAAAAAAA";
                 $resArray = mysqli_fetch_assoc($result);
 
 
@@ -51,9 +38,6 @@
                  echo "$test";
 
             }
-
-
-
 
     }
 
