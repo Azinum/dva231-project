@@ -2,6 +2,7 @@
 
 var searchOverlay = false;
 
+/*
 const TargetType = {
 	SELECT_TEAM : 0,
 	SELECT_PLAYER : 1,
@@ -58,6 +59,18 @@ function searchResultsUpdate() {
 
 }
 
+*/
+
+const TargetType = {
+	TARGET_PLAYER : 0,
+	TARGET_TEAM : 1
+}
+
+var teams = [
+	{},
+	{}
+];
+
 function toggleOverlay() {
 	searchOverlay = !searchOverlay;
 
@@ -75,7 +88,41 @@ function searchOverlayUpdate() {
 
 }
 
-function start() {
+function selectPlayer(elem) {
+	doSearch(TargetType.TARGET_PLAYER, (e) => {
+		elem.src = e.detail.img;
+	});
+}
+
+function selectTeam(elem) {
+	doSearch(TargetType.TARGET_TEAM, (e) => {
+		elem.src = e.detail.img;
+	});
+}
+
+function doSearch(target, callback) {
+	toggleOverlay();
+	if (target == TargetType.TARGET_PLAYER) {
+		document.addEventListener("searchDone", callback);
+	}
+	else if (target == TargetType.TARGET_TEAM) {
+		document.addEventListener("searchDone", callback);
+	}
+}
+
+function onClick(img, name) {
+	toggleOverlay();
+	document.dispatchEvent(
+		new CustomEvent(
+			"searchDone",
+			{
+				detail: {
+					img: img,
+					name: name
+				}
+			}
+		)
+	);
 }
 
 ((func) => {
@@ -85,4 +132,6 @@ function start() {
 	else {
 		document.addEventListener("DOMContentLoaded", func);
 	}
-})(start);
+})(() => {
+
+});
