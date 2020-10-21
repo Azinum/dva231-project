@@ -46,34 +46,17 @@
                     <h3>Teams:</h3>
                     <h4>Member of x teams</h4>
                     <?php
-                        //teambox(["name" => "Good Team","imgurl" => "/img/tmp_profile.jpg","part" => "21","won" => "21"]);
                         profile_box_team([
-                            "name" => "Good Team",
-                            "img_url" => "/img/tmp_profile.jpg",
-                            "show_stats" => true,
-                            "stats" => [
-                                "part" => 21,
-                                "won" => 21,
-                                "lost" => 0
-                            ]
-                        ]);
-
-                        profile_box_member([
-                            "name" => "Hejsan! Jag äro en member",
-                            "img_url" => "/img/teamico.png",
-                            "img_small" => true,
-
-                            "show_stats" => true,
-                            "stats_short" => true,
-                            "stats" => ["won" => 22, "lost" => 3, "part" => 12],
-
-                            "show_rank" => true,
-                            "rank" => 1,
-                            "show_score" => true,
-                            "score" => 90001,
-                            "buttons" => [
-                                "kick" => false
-                            ]
+                                "name" => "Good Team",
+                                "img_url" => "/img/tmp_profile.jpg",
+                                "stats" => [
+                                    "part" => 21,
+                                    "won" => 21,
+                                    "lost" => 0
+                                ]
+                            ],[
+                                "show_stats" => true,
+                                "buttons" => [ "leave" => false, "invite_controls" => false ]
                         ]);
                     ?>
                 </div>

@@ -46,54 +46,20 @@
                     <h3>Members:</h3>
                     <h4>x members</h4>
                     <?php
-                        //teambox(["name" => "Good Guy","imgurl" => "/img/tmp_profile.jpg","part" => "21","won" => "21"]);
                         profile_box_member([
-                            "name" => "Good Guy",
-                            "img_url" => "/img/tmp_profile.jpg",
-                            "img_small" => false,
-                            "show_stats" => true,
-                            "stats_short" => false,
-                            "stats" => [
-                                "won" => 21,
-                                "part" => 22,
-                                "lost" => 1
-                            ],
-                            "show_score" => false,
-                            "buttons" => [
-                                "kick" => false
-                            ]
-                        ]);
-                        profile_box_member([
-                            "name" => "Good Guy",
-                            "img_url" => "/img/tmp_profile.jpg",
-                            "img_small" => false,
-                            "show_stats" => true,
-                            "stats_short" => false,
-                            "stats" => [
-                                "won" => 21,
-                                "part" => 22,
-                                "lost" => 1
-                            ],
-                            "show_score" => false,
-                            "buttons" => [
-                                "kick" => false
-                            ]
-                        ]);
-                        profile_box_member([
-                            "name" => "Good Guy",
-                            "img_url" => "/img/tmp_profile.jpg",
-                            "img_small" => false,
-                            "show_stats" => true,
-                            "stats_short" => false,
-                            "stats" => [
-                                "won" => 21,
-                                "part" => 22,
-                                "lost" => 1
-                            ],
-                            "show_score" => false,
-                            "buttons" => [
-                                "kick" => false
-                            ]
+                                "name" => "Good Guy",
+                                "img_url" => "/img/tmp_profile.jpg",
+                                "stats" => [
+                                    "won" => 21,
+                                    "part" => 22,
+                                    "lost" => 1
+                                ],
+                            ],[
+                                "img_small" => false,
+                                "show_stats" => true,
+                                "stats_short" => false,
+                                "show_score" => false,
+                                "buttons" => [ "kick" => false ]
                         ]);
                     ?>
                 </div>
