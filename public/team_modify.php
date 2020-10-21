@@ -13,69 +13,122 @@
         <?php tablayout_headtags(); ?>
         <link rel="stylesheet" type="text/css" href="/css/profile.css">
         <link rel="stylesheet" type="text/css" href="/css/team_modify.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/css/profile_box.css">
         <?php searchoverlay_headtags(); ?>
     </head>
     <body>
         <?php include("navbarexample.php"); ?>
         <?php searchoverlay(); ?>
-        <div class="midbar">
-            <?php shadow_start(); ?>
-                <div class="shadowparent tabcontainer">
-                    <?php
-                        tablayout_begin([
-                            0 => "Bio",
-                            1 => "Members"
-                        ]);
+        <div class="content-column">
+            <div class="shadow tab-container">
+                <?php
+                    tablayout_begin([
+                        0 => "Bio",
+                        1 => "Members"
+                    ]);
 
-                        tabcontent_begin(0);
-                        ?>
-                            <div class="teambio">
-                                <form>
-                                    <div class="imgcontrols">
-                                        <div class="profilepic">
-                                            <img src="/img/tmp_profile.jpg">
-                                        </div>
-                                    </div>
-                                    <div class="othercontrols">
-                                        <input type="text" placeholder="Name">
-                                        <textarea>Bio</textarea>
+                    tabcontent_begin(0);
+                    ?>
+                        <div class="team-bio flex-layout-section-wide flex-layout-section">
+                            <h3>Team Profile:</h3>
+                            <form>
+                                <div class="img-controls shadow ui-box">
+                                    <div class="profilepic">
+                                        <img src="/img/tmp_profile.jpg">
                                     </div>
                                     <input type="file" placeholder="Profile picture">
-                                </form>
-                                <div class="kickbutton deletebutton">
-                                    <?php shadow_start(); ?>
-                                        <a class="shadowparent">
-                                            Delete Team
-                                        </a>
-                                    <?php shadow_end(); ?>
+                                </div>
+                                <div class="other-controls">
+                                    <input class="text-input-field shadow" type="text" placeholder="Name">
+                                    <textarea class="text-input-field shadow" >Bio</textarea>
+                                </div>
+                                <div class="button-container">
+                                    <input type="submit" class="button button-submit" value="Apply">
+                                </div>
+                            </form>
+                            <div class="button-container">
+                                <div class="button button-deny">
+                                    Delete Team
                                 </div>
                             </div>
-                        <?php
-                        tabcontent_end();
+                        </div>
+                    <?php
+                    tabcontent_end();
 
-                        tabcontent_begin(1);
-                            
-                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
-                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
-                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
-                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
-                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
-                        teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                    tabcontent_begin(1);
+                        
+                    //teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
+                    profile_box_member([
+                        "name" => "this is a member",
+                        "img_url" => "/img/tmp_profile.jpg",
+                        "img_small" => false,
 
-                        ?>
-                            <?php shadow_start("addmembershadow"); ?>
-                            <div class="addmember shadowparent" onclick="searchoverlay_toggle();">
-                                <img src="/img/plus.svg">
-                            </div>
-                            <?php shadow_end(); ?>
-                        <?php
+                        "show_stats" => false,
 
-                        tabcontent_end();
+                        "show_rank" => false,
+                        "show_score" => false,
 
-                        tablayout_end();
+                        "buttons" => [
+                            "kick" => true
+                        ]
+                    ]);
+                    profile_box_member([
+                        "name" => "this is a member",
+                        "img_url" => "/img/tmp_profile.jpg",
+                        "img_small" => false,
+
+                        "show_stats" => false,
+
+                        "show_rank" => false,
+                        "show_score" => false,
+
+                        "buttons" => [
+                            "kick" => true
+                        ]
+                    ]);
+                    profile_box_member([
+                        "name" => "this is a member",
+                        "img_url" => "/img/tmp_profile.jpg",
+                        "img_small" => false,
+
+                        "show_stats" => false,
+
+                        "show_rank" => false,
+                        "show_score" => false,
+
+                        "buttons" => [
+                            "kick" => true
+                        ]
+                    ]);
+                    profile_box_member([
+                        "name" => "this is a member",
+                        "img_url" => "/img/tmp_profile.jpg",
+                        "img_small" => false,
+
+                        "show_stats" => false,
+
+                        "show_rank" => false,
+                        "show_score" => false,
+
+                        "buttons" => [
+                            "kick" => true
+                        ]
+                    ]);
+
                     ?>
-                </div>
-            <?php shadow_end(); ?>
+                    <div class="add-member">
+                        <div class="button button-image button-accept" onclick="searchoverlay_toggle();">
+                            <img src="/img/plus.svg">
+                        </div>
+                    </div>
+                    <?php
+
+                    tabcontent_end();
+
+                    tablayout_end();
+                ?>
+            </div>
         </div>
     </body>
 </html>

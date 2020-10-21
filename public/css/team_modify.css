@@ -1,4 +1,4 @@
-.tabcontainer {
+.tab-container {
     background: #383838;
     border-radius: 0.5vw;
     padding: 1vw;
@@ -9,133 +9,54 @@
     background: #383838;
 }
 
-.addmember {
-    background: #209020;
-    padding: 1vw;
-    display: block;
-    border-radius: 0.5vw;
-    width: 3vw;
-    cursor: pointer;
-    margin: 0 auto;
-    transition: background 0.1s;
-}
-
-.addmembershadow .shadow {
-    background: #005000;
-}
-
-.addmember:hover {
-    background: #30a030;
-}
-
-.addmember img {
+.add-member {
     width: 100%;
-    display: block;
+    margin-top: 1vw;
+    text-align: center;
 }
 
-.teambio form {
+.team-bio form {
     display: flex;
     flex-wrap: wrap;
 }
 
-.teambio form input[type="file"] {
+.team-bio form input, .team-bio form textarea {
     width: 100%;
-}
-
-.teambio form label {
-    width: 100%;
-}
-
-.teambio form input[type="text"], .teambio form input[type="password"] {
-    width: 100%;
-    border-radius: 0.5vw;
-    border: 0;
     box-sizing: border-box;
-    padding-left: 1vw;
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
-    background-color: #383838;
-    color: white;
-    border: 0.1em solid transparent;
-    transition: border 0.1s;
-    margin-bottom: 0.1vw;
+    margin-top: 0.5vw;
 }
 
-.teambio form input[type="text"]:hover, .teambio form input[type="password"]:hover {
-    border: 0.1em solid #4d79ff;
+.team-bio form input[type=submit] {
+    width: initial;
 }
 
-.teambio form input[type="text"]:focus, .teambio form input[type="password"]:focus {
-    border: 0.1em solid #4d79ff;
+.team-bio form label {
+    width: 100%;
 }
 
-.teambio form .othercontrols {
+.team-bio form .other-controls {
     display: flex;
     flex-direction: column;
     width: 75%;
+    box-sizing: border-box;
+    padding: 0 1vw;
 }
 
-.teambio form .imgcontrols {
+.team-bio form .img-controls {
     display: flex;
     flex-direction: column;
     width: 25%;
     height: 100%;
+    box-sizing: border-box;
 }
 
-.teambio form .othercontrols textarea {
+.team-bio form .img-controls .profilepic {
+    width: 100%;
     height: 100%;
-    width: 100%;
-    border-radius: 0.5vw;
-    border: 0;
-    box-sizing: border-box;
-    padding-left: 1vw;
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
-    background-color: #383838;
-    color: white;
-    border: 0.1em solid transparent;
-    transition: border 0.1s;
 }
 
-.teambio form .othercontrols textarea:hover {
-    border: 0.1em solid #4d79ff;
-}
-
-.teambio form .othercontrols textarea:focus {
-    border: 0.1em solid #4d79ff;
-}
-
-.profilebox form {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1vw;
-    margin-bottom: 1vw;
-    border-radius: 0.5vw;
-    background: #383838;
-}
-
-.profilebox form .imgcontrols, .profilebox form .othercontrols {
-    width: 100%;
-}
-
-.deletebutton {
+.button-container {
     margin-top: 2vw;
-}
-
-.deletebutton a {
-    width: 25%;
-}
-
-
-@media only screen and (max-width: 900px) {
-    .deletebutton a {
-        font-size: 0.7rem;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .addmember {
-        width: 6vw;
-        border-radius: 1.1vw;
-    }
+    width: 100%;
+    text-align: center;
 }
