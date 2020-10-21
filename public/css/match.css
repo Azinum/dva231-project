@@ -140,7 +140,8 @@ html, body {
 }
 
 .match-search-item img {
-	width: auto;
+	object-fit: cover;
+	width: 4em;
 	height: 4em;
 	margin: 1em;
 }

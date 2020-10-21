@@ -14,13 +14,11 @@ const Teams = {
 
 var Team = function(teamName) {
 	this.teamName = teamName;
-	this.img = "img/tmp_team.jpeg";
 	this.teamMembers = [];
 }
 
 var TeamMember = function(name) {
 	this.name = name;
-	this.img = "img/tmp_profile.jpg";
 }
 
 var teams = [
@@ -43,8 +41,12 @@ function selectTarget(elem, team, targetType) {
 function setTarget(imageSource) {
 	if (!target)
 		return;
-	target.team.img = imageSource;
-	let e = target.elem.src = imageSource;
+	if (target.targetType == TargetType.SELECT_TEAM) {
+		target.elem.src = imageSource;
+	}
+	else if (target.targetType == TargetType.SELECT_PLAYER) {
+		target.elem.src = imageSource;
+	}
 }
 
 function toggleOverlay() {

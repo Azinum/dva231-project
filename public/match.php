@@ -8,7 +8,6 @@
 				<input class="text-input-field" type="text" oninput="searchOverlayUpdate();" placeholder="Search...">
 			</form>
 			<br>
-			<!-- TODO(lucas): Fix team and participants image aspect ratios to be 1:1 -->
 			<div class="match-search-results">
 				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_team.jpeg');">
 					<img src="img/tmp_team.jpeg">Team One
