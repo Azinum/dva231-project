@@ -7,6 +7,7 @@
     z-index:1;
     align-items: center;
     transition: background 0.1s;
+    text-align: left;
 }
 
 .profile-box.active {
@@ -45,17 +46,17 @@
 
 .profile-box .profile .rank {
     font-size: 1.25rem;
-    width: 5.5vw;
+    width: 5vw;
+    max-width: 6rem;
 }
 
-.profile-box .profile .label {
+.profile-box .label {
     font-size: 1.2rem;
-    display: block;
     margin-left: 1vw;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 12vw;
     white-space: nowrap;
+    flex-grow: 1;
 }
 
 .profile-box .stats {
@@ -73,7 +74,7 @@
 }
 
 .profile-box .stats.stats-short span {
-    padding: 0 1.5vw;
+    padding: 0 1rem;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -98,11 +99,11 @@
 
 @media only screen and (max-width: 450px) {
     .profile-box .profilepic {
-        width: 20vw;
-        height: 20vw;
+        width: 13vw;
+        height: 13vw;
     }
 
-    .profile-box .profile .label {
+    .profile-box .label {
         font-size: 1rem;
     }
 
