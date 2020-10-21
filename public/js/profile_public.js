@@ -1,5 +1,5 @@
 function teambox_selected(element, teamname) {
-    document.querySelectorAll(".teambox.active").forEach(function(teambox) {
+    document.querySelectorAll(".profile-box.active").forEach(function(teambox) {
         teambox.classList.remove("active");
     });
     if (element !== null) {
