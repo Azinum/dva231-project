@@ -3,51 +3,14 @@
 var searchOverlay = false;
 
 const TargetType = {
-	SELECT_TEAM : 0,
-	SELECT_PLAYER : 1,
-};
-
-const Teams = {
-	TEAM1 : 0,	// NOTE(lucas): Team 1 is always your team when modifying match results.
-	TEAM2 : 1,
-};
-
-var Team = function(teamName) {
-	this.teamName = teamName;
-	this.teamMembers = [];
-}
-
-var TeamMember = function(name) {
-	this.name = name;
+	TARGET_PLAYER : 0,
+	TARGET_TEAM : 1
 }
 
 var teams = [
-	new Team("Team 1"),
-	new Team("Team 2")
+	{},
+	{}
 ];
-
-var target = {
-	elem : null,
-	team : null,
-	targetType : -1,
-}
-
-function selectTarget(elem, team, targetType) {
-	target.elem = elem;
-	target.team = team;
-	target.targetType = targetType;	// NOTE(lucas): Are we selecting a team or team player?
-}
-
-function setTarget(imageSource) {
-	if (!target)
-		return;
-	if (target.targetType == TargetType.SELECT_TEAM) {
-		target.elem.src = imageSource;
-	}
-	else if (target.targetType == TargetType.SELECT_PLAYER) {
-		target.elem.src = imageSource;
-	}
-}
 
 function toggleOverlay() {
 	searchOverlay = !searchOverlay;
@@ -62,11 +25,47 @@ function toggleOverlay() {
 	}
 }
 
-function searchOverlayUpdate() {
+var onClickEvent = () => {};
 
+function searchOverlayUpdate() {
+	document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
+		<div class="match-search-item shadow" onclick="onClick('img/tmp_team.jpeg', 'Team Onozze')">
+			<img src="img/tmp_team.jpeg">
+			<p>Team Onozze</p>
+		</div>
+	`;
 }
 
-function start() {
+function selectPlayer(elem) {
+	doSearch(TargetType.TARGET_PLAYER, (e) => {
+		elem.src = e.data.img;
+	});
+}
+
+function selectTeam(elem) {
+	doSearch(TargetType.TARGET_TEAM, (e) => {
+		elem.src = e.data.img;
+	});
+}
+
+function doSearch(target, callback) {
+	toggleOverlay();
+	if (target == TargetType.TARGET_PLAYER) {
+		onClickEvent = callback;
+	}
+	else if (target == TargetType.TARGET_TEAM) {
+		onClickEvent = callback;
+	}
+}
+
+function onClick(img, name) {
+	toggleOverlay();
+	onClickEvent({
+		data: {
+			img: img,
+			name: name
+		}
+	});
 }
 
 ((func) => {
@@ -76,4 +75,6 @@ function start() {
 	else {
 		document.addEventListener("DOMContentLoaded", func);
 	}
-})(start);
+})(() => {
+
+});

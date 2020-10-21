@@ -1,5 +1,4 @@
 <?php
-    require_once("../layout/shadow.php");
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
@@ -58,67 +57,20 @@
 
                     tabcontent_begin(1);
                         
-                    //teambox(["name" => "Good Member","imgurl" => "/img/tmp_profile.jpg"], false, true);
                     profile_box_member([
-                        "name" => "this is a member",
-                        "img_url" => "/img/tmp_profile.jpg",
-                        "img_small" => false,
-
-                        "show_stats" => false,
-
-                        "show_rank" => false,
-                        "show_score" => false,
-
-                        "buttons" => [
-                            "kick" => true
-                        ]
-                    ]);
-                    profile_box_member([
-                        "name" => "this is a member",
-                        "img_url" => "/img/tmp_profile.jpg",
-                        "img_small" => false,
-
-                        "show_stats" => false,
-
-                        "show_rank" => false,
-                        "show_score" => false,
-
-                        "buttons" => [
-                            "kick" => true
-                        ]
-                    ]);
-                    profile_box_member([
-                        "name" => "this is a member",
-                        "img_url" => "/img/tmp_profile.jpg",
-                        "img_small" => false,
-
-                        "show_stats" => false,
-
-                        "show_rank" => false,
-                        "show_score" => false,
-
-                        "buttons" => [
-                            "kick" => true
-                        ]
-                    ]);
-                    profile_box_member([
-                        "name" => "this is a member",
-                        "img_url" => "/img/tmp_profile.jpg",
-                        "img_small" => false,
-
-                        "show_stats" => false,
-
-                        "show_rank" => false,
-                        "show_score" => false,
-
-                        "buttons" => [
-                            "kick" => true
-                        ]
+                            "name" => "this is a member",
+                            "img_url" => "/img/tmp_profile.jpg",
+                        ],[
+                            "img_small" => false,
+                            "show_stats" => false,
+                            "show_rank" => false,
+                            "show_score" => false,
+                            "buttons" => [ "kick" => true ]
                     ]);
 
                     ?>
                     <div class="add-member">
-                        <div class="button button-image button-accept" onclick="searchoverlay_toggle();">
+                        <div class="button button-image button-accept" onclick="select_player(this);">
                             <img src="/img/plus.svg">
                         </div>
                     </div>
