@@ -73,7 +73,7 @@
                 </div>
                 <?php if ($stats) { ?>
                     <div class="stats">
-                        <span>Participated: <?php echo $box["part"]; ?></span>
+                        <span>Partaken: <?php echo $box["part"]; ?></span>
                         <span>Won: <?php echo $box["won"]; ?></span>
                     </div>
                 <?php } ?>
@@ -109,6 +109,7 @@
         [
             "name" => <team name>,
             "img_url" => <url to prof. image>,
+            "img_small" => <boolean>,
             
             "show_stats" => <boolean>,
             "stats" => [
@@ -127,35 +128,29 @@
         ?>
             <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
                 <div class="profile">
-                    <div class="profilepic">
-                        <img src="<?php echo $box["imgurl"]; ?>">
+                    <div class="profilepic <?php echo $box["img_small"] ? "profilepic-small" : ""; ?>">
+                        <img src="<?php echo $box["img_url"]; ?>">
                     </div>
-                    <span class="label"><?php echo $box["name"]; ?></span>
                 </div>
-                <?php if ($box["stats"]) { ?>
+                <span class="label"><?php echo $box["name"]; ?></span>
+                <?php if ($box["show_stats"]) { ?>
                     <div class="stats">
-                        <span>Participated: <?php echo $box["part"]; ?></span>
-                        <span>Won: <?php echo $box["won"]; ?></span>
-                        <span>Lost: <?php echo $box["lost"]; ?></span>
+                        <span>Partaken: <?php echo $box["stats"]["part"]; ?></span>
+                        <span>Won: <?php echo $box["stats"]["won"]; ?></span>
+                        <span>Lost: <?php echo $box["stats"]["lost"]; ?></span>
                     </div>
                 <?php } ?>
                 <?php if ($box["buttons"]["leave"]) { ?>
-                    <div class="kickbutton">
-                        <div class="button button-deny">
-                            Leave
-                        </div>
+                    <div class="button button-deny">
+                        Leave
                     </div>
                 <?php } ?>
                 <?php if ($box["buttons"]["invite_controls"]) { ?>
-                    <div class="acceptbutton">
-                        <div class="button button-accept">
-                            Accept
-                        </div>
+                    <div class="button button-accept">
+                        Accept
                     </div>
-                    <div class="kickbutton">
-                        <div class="button button-deny">
-                            Reject
-                        </div>
+                    <div class="button button-deny">
+                        Reject
                     </div>
                 <?php } ?>
             </div>
@@ -199,25 +194,25 @@
                     <div class="profilepic <?php echo $box["img_small"] ? "profilepic-small" : ""; ?>">
                         <img src="<?php echo $box["img_url"]; ?>">
                     </div>
-                    <span class="label"><?php echo $box["name"]; ?></span>
                 </div>
+                <span class="label"><?php echo $box["name"]; ?></span>
                 <?php if ($box["show_stats"]) { ?>
                     <div class="stats <?php echo $box["stats_short"] ? "stats-short" : ""; ?>">
                         <span>
                             <?php
-                                echo $box["stats_short"] ? "P:" : "Participated:";
+                                echo $box["stats_short"] ? "P:" : "Partaken: ";
                                 echo $box["stats"]["part"];
                             ?>
                         </span>
                         <span>
                             <?php
-                                echo $box["stats_short"] ? "W:" : "Won:";
+                                echo $box["stats_short"] ? "W:" : "Won: ";
                                 echo $box["stats"]["won"];
                             ?>
                         </span>
                         <span>
                             <?php
-                                echo $box["stats_short"] ? "L:" : "Lost:";
+                                echo $box["stats_short"] ? "L:" : "Lost: ";
                                 echo $box["stats"]["lost"];
                             ?>
                         </span>
