@@ -7,8 +7,18 @@
 			<form class="match-shadow-box">
 				<input class="text-input-field" type="text" oninput="searchOverlayUpdate();" placeholder="Search...">
 			</form>
-			<br><br>
-			<div class="match-shadow-box match-search-results"></div>
+			<br>
+			<div class="match-search-results">
+				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_team.jpeg');">
+					<img src="img/tmp_team.jpeg">Team One
+				</div>
+				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_profile.jpg');">
+					<img src="img/tmp_profile.jpg">Team Too
+				</div>
+				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_team2.jpeg');">
+					<img src="img/tmp_team2.jpeg">COOL TEAM 1
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="content-column">
@@ -21,42 +31,45 @@
 				* This state is not to be stored on the database.
 				* All other states will be stored.
 			2) Under revision: Either this could be directly after one team created and sent the match results to the other team, or it could be when the other team sent it back.
-			3) Uncomplete: The other team saw an error in the match results, so they sent it back with edited results. The state is now back to #2.
+			3) Uncomplete: The other team saw an error in the match results, so they sent it back with edited results. The state will then go back to #2.
 			4) Complete
 		-->
 		<form>
 			<div class="match-content-box shadow">
 				<h2>Team 1 (you)</h2>
 				<div class="match-team-content">
-					<img class="match-team-img match-box basic-interactive" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
+					<img class="match-team-img match-box basic-interactive" src="img/tmp_team.jpeg" onclick="selectTarget(this, Teams.TEAM1, TargetType.SELECT_TEAM); toggleOverlay();">
 				</div>
 			</div>
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay();">
+				<div class="match-participants">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay(); selectTarget(this, Teams.TEAM1, TargetType.SELECT_PLAYER);">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay(); selectTarget(this, Teams.TEAM1, TargetType.SELECT_PLAYER);">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay(); selectTarget(this, Teams.TEAM1, TargetType.SELECT_PLAYER);">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay(); selectTarget(this, Teams.TEAM1, TargetType.SELECT_PLAYER);">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="toggleOverlay(); selectTarget(this, Teams.TEAM1, TargetType.SELECT_PLAYER);">
+				</div>
 			</div>
 			<div class="line-wide"></div>
 
 			<div class="match-content-box shadow">
 				<h2>Team 2 (opponent)</h2>
 				<div class="match-team-content">
-					<img class="match-team-img match-box basic-interactive" src="img/tmp_team2.jpeg">
+					<img class="match-team-img match-box basic-interactive" src="img/tmp_team2.jpeg" onclick="selectTarget(this, Teams.TEAM2, TargetType.SELECT_TEAM); toggleOverlay();">
 				</div>
 			</div>
 
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg">
-				<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg">
+				<div class="match-participants">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectTarget(this, Teams.TEAM2, TargetType.SELECT_TEAM); toggleOverlay();">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectTarget(this, Teams.TEAM2, TargetType.SELECT_TEAM); toggleOverlay();">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectTarget(this, Teams.TEAM2, TargetType.SELECT_TEAM); toggleOverlay();">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectTarget(this, Teams.TEAM2, TargetType.SELECT_TEAM); toggleOverlay();">
+					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectTarget(this, Teams.TEAM2, TargetType.SELECT_TEAM); toggleOverlay();">
+				</div>
 			</div>
-
 			<div class="line-wide"></div>
 
 			<h2>Result</h2>
