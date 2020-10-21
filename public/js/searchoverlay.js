@@ -9,7 +9,7 @@ var teams = {
     {}
 }
 
-function select_player(elem, team_index) {
+function select_player(elem/*, team_index*/) {
     do_search(topics.player, (e) => {
         elem.innerHTML = e.detail.name + "<img src="+e.detail.img_url+">";
         //Pseudo team-add tjofräs
