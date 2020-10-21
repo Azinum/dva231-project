@@ -1,5 +1,4 @@
 <?php
-    require_once("../layout/shadow.php");
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");

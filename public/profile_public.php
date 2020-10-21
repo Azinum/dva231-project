@@ -13,7 +13,6 @@
             profileboxes_headtags();
         ?>
         <script src="/js/profile_public.js"></script>
-        <script src="/js/shadow.js"></script>
     </head>
     <body>
         <?php include("navbarexample.php"); ?>

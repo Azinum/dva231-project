@@ -2,8 +2,6 @@
 
     function tablayout_headtags() {
         ?><link rel="stylesheet" type="text/css" href="/css/tabs.css">
-        <link rel="stylesheet" href="css/shadow.css">
-        <script src="/js/shadow.js"></script>
         <script src="/js/tabs.js"></script><?php
     }
 
