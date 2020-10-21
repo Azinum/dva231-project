@@ -1,6 +1,6 @@
 <?php
-    require_once("../layout/profileboxes.php");
-    require_once("../layout/dbconnection.php");
+require_once("../layout/profileboxes.php");
+require_once("../layout/dbconnection.php");
 ?>
 
 <!DOCTYPE html>
@@ -30,64 +30,60 @@
             <td>
                 <div id="back-box" class="ui-box shadow">
                     <h2>Ranks</h2>
-                    <table>
-                        <!-- Scoreboard table -->
-                        <tr>
+                    <div class="flextable">
+                        <!-- Table begin -->
+
+                        <div>
+                            <!-- Table row 1 begin -->
                             <!--Php funktion ska spotta ut sig hela tr för varje entry i teamdb, med information som matchar -->
-                            <td>
 
                             <?php
-                                    profile_box_member([
-                                    "name"=>"Teamname",
-                                    "img_url"=>"/img/teamico.png",
-                                    "img_small"=> true,
+                            profile_box_member([
+                                "name" => "Teamname",
+                                "img_url" => "/img/teamico.png",
+                                "img_small" => true,
 
-                                    "show_stats"=>true,
-                                    "stats_short"=> true,
-                                    "stats"=>["won"=> 13, "lost"=> 3, "part"=>7],
-                                    "show_rank"=> true,
-                                    "rank"=> 1,
-                                    "show_score"=> true,
-                                    "score"=> 9001,
-                                    "buttons" => [
-                                        "kick"=> false
-                                    ]
-                                    ]);
-                                    ?>
-
-                            </td>
-                        </tr>
-                        <tr>
+                                "show_stats" => true,
+                                "stats_short" => true,
+                                "stats" => ["won" => 13, "lost" => 3, "part" => 7],
+                                "show_rank" => true,
+                                "rank" => 1,
+                                "show_score" => true,
+                                "score" => 9001,
+                                "buttons" => [
+                                    "kick" => false
+                                ]
+                            ]);
+                            ?>
+                        </div> <!-- Table row 1 end -->
+                        <div>
+                            <!-- Table row 2 begin -->
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
-                            <td>
-                                <?php
-                                    profile_box_member([
-                                    "name"=>"2nrdXuWOMHcFqMYzVDAFmZeQWeagZYugEuEA8cPN1G19q4TTXq",
-                                    "img_url"=>"/img/teamico.png",
-                                    "img_small"=> true,
+                            <?php
+                            profile_box_member([
+                                "name" => "2nrdXuWOMHcFqMYzVDAFmZeQWeagZYugEuEA8cPN1G19q4TTXq",
+                                "img_url" => "/img/teamico.png",
+                                "img_small" => true,
 
-                                    "show_stats"=>true,
-                                    "stats_short"=> true,
-                                    "stats"=>["won"=> 9999, "lost"=> 9999, "part"=>19998],
-                                    "show_rank"=> true,
-                                    "rank"=> 9999,
-                                    "show_score"=> true,
-                                    "score"=> 400,
-                                    "buttons" => [
-                                        "kick"=> false
-                                    ]
-                                    ]);
-                                    ?>
-                            </td>
-                        </tr>
-                        <tr>
+                                "show_stats" => true,
+                                "stats_short" => true,
+                                "stats" => ["won" => 9999, "lost" => 9999, "part" => 19998],
+                                "show_rank" => true,
+                                "rank" => 9999,
+                                "show_score" => true,
+                                "score" => 400,
+                                "buttons" => [
+                                    "kick" => false
+                                ]
+                            ]);
+                            ?>
+                        </div> <!-- Table row 2 begin -->
+                        <div>
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
-                            <td>
-                                <?php get_specteaminfo('TeamName') ?>
-                            </td>
-                        </tr>
+                            <?php get_specteaminfo('TeamName') ?>
+                        </div>
 
-                    </table>
+                    </div> <!-- Table end -->
                 </div>
             </td>
         </tr>

@@ -11,36 +11,48 @@
             exit();
         }
 
+        
+         $search = 'TeamName';
+        //  $query = "SELECT TeamName, TeamRanking, TeamImage FROM Team WHERE TeamName = '$search'";
+         $query = "SELECT TeamName, TeamRanking, TeamImage FROM Team WHERE TeamName = 'TeamName'";
 
-         $search = "'%". $name . "%'";
-         $query = "SELECT TeamName, TeamRanking, TeamImage FROM Team WHERE TeamName = '$name'";
+         echo "connection up";
+         echo "search: $search";
+         echo "$query";
 
-         $result = mysqli_query($link, $query);
+        //  if (!(mysqli_query($link, $query))) { //Någonting är fel med $link? $result blir en bool (false)
+        //      echo "AAAAAAAAAAA NOOOOOOOOOOOOO";
+        //     }
 
-         if (!(mysqli_query($link, $query))) { //Någonting är fel med $link? $result blir en bool (false)
-             echo "AAAAAAAAAAA NOOOOOOOOOOOOO";
+
+            if ($result = mysqli_query($link, $query)){
+                echo "Result passed AAAAAAAA";
+                $resArray = mysqli_fetch_assoc($result);
+
+
+
+                $test = profile_box_member([
+                    "name"=>$resArray['TeamName'],
+                    "img_url"=>$resArray['TeamImage'],
+                    "img_small"=> true,
+        
+                    "show_stats"=>true,
+                    "stats_short"=> true,
+                    "stats"=>["won"=> 13, "lost"=> 3, "part"=>7],
+                    "show_rank"=> true,
+                    "rank"=> $resArray['TeamRanking'],
+                    "show_score"=> true,
+                    "score"=> 9001,
+                    "buttons" => [
+                        "kick"=> false
+                    ]
+                    ]);
+        
+                 echo "$test";
+
             }
 
-         $resArray = mysqli_fetch_assoc($result); 
 
-            $test = profile_box_member([
-            "name"=>$resArray['TeamName'],
-            "img_url"=>$resArray['TeamImage'],
-            "img_small"=> true,
-
-            "show_stats"=>true,
-            "stats_short"=> true,
-            "stats"=>["won"=> 13, "lost"=> 3, "part"=>7],
-            "show_rank"=> true,
-            "rank"=> $resArray['TeamRanking'],
-            "show_score"=> true,
-            "score"=> 9001,
-            "buttons" => [
-                "kick"=> false
-            ]
-            ]);
-
-         echo "$test";
 
 
     }
