@@ -1,6 +1,4 @@
 <?php
-    require_once("../layout/shadow.php");
-
     function searchoverlay_headtags() { // run in head to include scripts and css
         ?>
             <link rel="stylesheet" type="text/css" href="/css/searchoverlay.css">

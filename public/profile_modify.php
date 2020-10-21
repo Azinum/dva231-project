@@ -57,16 +57,13 @@
                             <div class="flex-layout-section flex-layout-section-wide">
                                 <h3>Team invites:</h3>
                                 <?php
-                                    //teambox(["name" => "Good Team3","imgurl" => "/img/tmp_profile.jpg"], false, false, false, true);
                                     profile_box_team([
-                                        "name" => "Good Team3",
-                                        "img_url" => "/img/tmp_profile.jpg",
-                                        "img_smal" => false,
-                                        "show_stats" => false,
-                                        "buttons" => [
-                                            "leave" => false,
-                                            "invite_controls" => true
-                                        ]
+                                            "name" => "Good Team3",
+                                            "img_url" => "/img/tmp_profile.jpg",
+                                        ],[
+                                            "img_smal" => false,
+                                            "show_stats" => false,
+                                            "buttons" => [ "leave" => false, "invite_controls" => true ]
                                     ]);
                                 ?>
                                 <!--<h4>No invites at this time</h4>-->
@@ -74,17 +71,13 @@
                             <div class="flex-layout-section flex-layout-section-wide">
                                 <h3>Current Teams:</h3>
                                 <?php
-                                    //teambox(["name" => "Good Team2","imgurl" => "/img/tmp_profile.jpg"], false, false, true);
-                                    //teambox(["name" => "Good Team1","imgurl" => "/img/tmp_profile.jpg"], false, false, true);
                                     profile_box_team([
-                                        "name" => "Good Team 2",
-                                        "img_url" => "/img/tmp_profile.jpg",
-                                        "img_small" => true,
-                                        "show_stats" => false,
-                                        "buttons" => [
-                                            "leave" => true,
-                                            "invite_controls" => false
-                                        ]
+                                            "name" => "Good Team3",
+                                            "img_url" => "/img/tmp_profile.jpg",
+                                        ],[
+                                            "img_smal" => false,
+                                            "show_stats" => false,
+                                            "buttons" => [ "leave" => true, "invite_controls" => false ]
                                     ]);
                                 ?>
                             </div>
