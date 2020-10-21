@@ -8,7 +8,7 @@
 				<input class="text-input-field" type="text" oninput="searchOverlayUpdate();" placeholder="Search...">
 			</form>
 			<br>
-			<-- TODO(lucas): Fix team and participants image aspect ratios to be 1:1 -->
+			<!-- TODO(lucas): Fix team and participants image aspect ratios to be 1:1 -->
 			<div class="match-search-results">
 				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_team.jpeg');">
 					<img src="img/tmp_team.jpeg">Team One
@@ -32,7 +32,7 @@
 				* This state is not to be stored on the database.
 				* All other states will be stored.
 			2) Under revision: Either this could be directly after one team created and sent the match results to the other team, or it could be when the other team sent it back.
-			3) Uncomplete: The other team saw an error in the match results, so they sent it back with edited results. The state will the go back to #2.
+			3) Uncomplete: The other team saw an error in the match results, so they sent it back with edited results. The state will then go back to #2.
 			4) Complete
 		-->
 		<form>
