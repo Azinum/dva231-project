@@ -1,5 +1,6 @@
 <?php
     require_once("../layout/profileboxes.php");
+    require_once("../layout/dbconnection.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-    <?php include("navbarexample.php"); ?>
+    <?php include("navbar_final.php"); ?>
     <table id="layout">
         <!-- Ändra när header finns -->
         <tr>
@@ -77,6 +78,12 @@
                                     ]
                                     ]);
                                     ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
+                            <td>
+                                <?php get_specteaminfo('TeamName') ?>
                             </td>
                         </tr>
 
