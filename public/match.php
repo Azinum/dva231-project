@@ -9,14 +9,17 @@
 			</form>
 			<br>
 			<div class="match-search-results">
-				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_team.jpeg');">
-					<img src="img/tmp_team.jpeg">Team One
+				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget(this);">
+					<img src="img/tmp_team.jpeg">
+					<p>Team One</p>
 				</div>
-				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_profile.jpg');">
-					<img src="img/tmp_profile.jpg">Team Too
+				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget(this);">
+					<img src="img/tmp_profile.jpg">
+					<p>Team Too</p>
 				</div>
-				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget('img/tmp_team2.jpeg');">
-					<img src="img/tmp_team2.jpeg">COOL TEAM 1
+				<div class="match-search-item shadow" onclick="toggleOverlay(); setTarget(this);">
+					<img src="img/tmp_team2.jpeg">
+					<p>Team Tree</p>
 				</div>
 			</div>
 		</div>

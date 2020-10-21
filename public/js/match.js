@@ -38,15 +38,24 @@ function selectTarget(elem, team, targetType) {
 	target.targetType = targetType;	// NOTE(lucas): Are we selecting a team or team player?
 }
 
-function setTarget(imageSource) {
-	if (!target)
+function setTarget(elem) {
+	if (!target) {
 		return;
+	}
+	let img = elem.querySelector("img");
+	let name = elem.querySelector("p");
+	target.elem.src = img.src;
+
 	if (target.targetType == TargetType.SELECT_TEAM) {
-		target.elem.src = imageSource;
+		target.team.teamName = name.innerText;
 	}
 	else if (target.targetType == TargetType.SELECT_PLAYER) {
-		target.elem.src = imageSource;
+		// target.team.teamName = name.innerText;
 	}
+}
+
+function searchResultsUpdate() {
+
 }
 
 function toggleOverlay() {
