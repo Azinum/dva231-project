@@ -28,7 +28,12 @@ function toggleOverlay() {
 var onClickEvent = () => {};
 
 function searchOverlayUpdate() {
-
+	document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
+		<div class="match-search-item shadow" onclick="onClick('img/tmp_team.jpeg', 'Team Onozze')">
+			<img src="img/tmp_team.jpeg">
+			<p>Team Onozze</p>
+		</div>
+	`;
 }
 
 function selectPlayer(elem) {
