@@ -6,6 +6,10 @@ html, body {
     background: #606060;
 }
 
+.flex-layout-section .profile-box, .flex-layout-section .matchbox{
+    margin-top: 1.5rem;
+}
+
 .midbar {
     max-width: 70%;
     margin: 0 auto;

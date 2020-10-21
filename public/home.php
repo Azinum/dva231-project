@@ -1,6 +1,6 @@
 <?php
 require_once("../layout/profileboxes.php");
-require_once("../layout/dbconnection.php");
+require_once("../layout/dbfunctions.php");
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +80,19 @@ require_once("../layout/dbconnection.php");
                         </div> <!-- Table row 2 begin -->
                         <div  class="flex-row">
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
-                            <?php get_specteaminfo('TeamName') ?>
+                            <?php
+                            $info = get_specteaminfo("TeamName");
+                            $info["img_small"] = true;
+                            $info["show_stats"] = true;
+                            $info["show_score"] = false;
+                            $info["stats_short"] = true;
+                            $info["show_rank"] = true;
+                            $info["img_small"] = [
+                                    "leave" => false,
+                                    "invite_controls" => false
+                            ];
+                            profile_box_member ($info);
+                            ?>
                         </div>
 
                     </div> <!-- Table end -->

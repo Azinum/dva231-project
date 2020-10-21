@@ -11,15 +11,11 @@
     function searchoverlay() {  // run at top of body to include the html
         ?>
             <div class="searchoverlay">
-                <?php shadow_start("closeboxcontainer"); ?>
-                    <div class="closebox shadowparent" onclick="searchoverlay_toggle();">x</div>
-                <?php shadow_end(); ?>
+                <div class="button button-deny" onclick="searchoverlay_toggle();">x</div>
 
-                <?php shadow_start(); ?>
-                    <form class="shadowparent">
-                        <input type="text" oninput="searchoverlay_update();" placeholder="Search...">
-                    </form>
-                <?php shadow_end(); ?>
+                <form class="shadow">
+                    <input class="shadow" type="text" oninput="searchoverlay_update();" placeholder="Search...">
+                </form>
 
                 <div class="results">
                 </div>
