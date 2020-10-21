@@ -26,12 +26,12 @@ body {
 
 #back-box {
     width: 68em;
-    height: 28em;
+
     text-align: center;
     margin: auto;
     margin-top: 5em;
     background: var(--grey2)!important;
-    overflow: auto;
+
 }
 
 #searchbar {
