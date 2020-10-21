@@ -4,10 +4,10 @@ const topics = {
     team: 1
 };
 
-var teams = {
+/*var teams = {
     {},
     {}
-};
+};*/
 
 function select_player(elem) {
     do_search(topics.player, (e) => {
