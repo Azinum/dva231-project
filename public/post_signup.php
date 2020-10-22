@@ -17,6 +17,8 @@ require_once("../dbfunctions/register_user.php");
     <div class="ui-box shadow" id="back-box">
         <h2>Sign up</h2>
         <?php register_user() ?>
+
+        <!-- Back to sign up page button? -->
     </div>
 </body>
 
