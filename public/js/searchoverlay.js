@@ -3,17 +3,17 @@ var searchoverlay = false;
 var onClickEvent = () => {};
 var ajaxFetcher = () => {};
 
-function selectPlayer(elem) {
+function selectPlayer(elem, team) {
 	doSearch(
         (selection) => {
             elem.innerHTML += `
-                <div class="profile-box ui-box shadow" onclick="teambox_selected(this, 'this is a member');">
+                <div class="profile-box ui-box shadow">
                     <div class="profile">
                         <div class="profilepic">
-                            <img src="`+selection.data.img+`">
+                            <img src="`+selection.img+`">
                         </div>
                     </div>
-                    <span class="label">`+selection.data.name+`</span>
+                    <span class="label">`+selection.name+`</span>
                     <div class="button button-deny">
                         Kick
                     </div>
@@ -27,7 +27,14 @@ function selectPlayer(elem) {
                     document.querySelector(".searchoverlay .results").innerHTML = "";
                     json.forEach((item) => {
                         document.querySelector(".searchoverlay .results").innerHTML += `
-                            <h3>`+item.name+`</h3>
+                            <div class="profile-box ui-box shadow" onclick="onClick({name: '`+item.name+`', id: '`+item.id+`', img: '`+item.img_url+`'});">
+                                <div class="profile">
+                                    <div class="profilepic">
+                                        <img src="`+item.img_url+`">
+                                    </div>
+                                </div>
+                                <span class="label">`+item.name+`</span>
+                            </div>
                         `;
                     });
                 });
@@ -41,14 +48,9 @@ function doSearch(clickCallback, ajaxCallback) {
     ajaxFetcher = ajaxCallback;
 }
 
-function onClick(img, name) {
+function onClick(data) {
     searchoverlayToggle();
-	onClickEvent({
-		data: {
-			img: img,
-			name: name
-		}
-	});
+	onClickEvent(data);
 }
 
 function searchoverlayToggle() {
