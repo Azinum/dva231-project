@@ -45,6 +45,7 @@ function toggleOverlay() {
 }
 
 var onClickEvent = () => {};
+var onSearchEvent = () => {};
 
 function errorMessage(message) {
 	popupOverlay = true;
@@ -58,7 +59,7 @@ function searchOverlayUpdate() {
 	let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
 
 	document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
-		<div class="match-search-item shadow" onclick="onClick('img/tmp_team.jpeg', 'Team Onozze')">
+		<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team.jpeg', name: 'Team Onozze'})">
 			<img src="img/tmp_team.jpeg">
 			<p>Team Onozze</p>
 		</div>
@@ -66,45 +67,58 @@ function searchOverlayUpdate() {
 }
 
 function selectPlayer(elem, team) {
-	console.log(teams);
 	if (!teams[team]) {
 		errorMessage("You must first select a team!");
 		return;
 	}
-	doSearch(TargetType.TARGET_PLAYER, team, (e) => {
-		elem.src = e.data.img;
-	});
+	doSearch(
+		(e) => {
+			elem.src = e.img;
+		},
+		() => {
+			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
+
+			document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
+				<div class="match-search-item shadow" onclick="onClick({img: 'img/default_profile_image.svg', name: 'xDragonSlayer72'})">
+					<img src="img/default_profile_image.svg">
+					<p>xDragonSlayer72</p>
+				</div>
+			`;
+		}
+	);
 }
 
 function selectTeam(elem, team) {
-	doSearch(TargetType.TARGET_TEAM, team, (e) => {
-		elem.src = e.data.img;
-		if (!teams[team]) {
-			teams[team] = new Team();
+	doSearch(
+		(e) => {
+			elem.src = e.img;
+			if (!teams[team]) {
+				teams[team] = new Team();
+			}
+			teams[team].name = e.name;
+		},
+		() => {
+			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
+
+			document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
+				<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team2.jpeg', name: 'Good Team'})">
+					<img src="img/tmp_team2.jpeg">
+					<p>Good Team</p>
+				</div>
+			`;
 		}
-		teams[team].name = e.data.name;
-		console.log(teams);
-	});
+	);
 }
 
-function doSearch(target, team, callback) {
+function doSearch(clickCallback, searchCallback) {
 	toggleOverlay();
-	if (target == TargetType.TARGET_PLAYER) {
-		onClickEvent = callback;
-	}
-	else if (target == TargetType.TARGET_TEAM) {
-		onClickEvent = callback;
-	}
+	onClickEvent = clickCallback;
+	onSearchEvent = searchCallback;
 }
 
-function onClick(img, name) {
+function onClick(data) {
 	toggleOverlay();
-	onClickEvent({
-		data: {
-			img: img,
-			name: name
-		}
-	});
+	onClickEvent(data);
 }
 
 ((func) => {
