@@ -5,9 +5,9 @@
         require_once("../layout/profileboxes.php");
 
         $Teamquery = "SELECT * FROM Team WHERE TeamName = '$name'";
-        $Winsquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.$name.' where (Team1='.$name.' AND Result="Team1Win") OR (Team2='.$name.' AND Result="Team2Win");';
-        $Lossesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.$name.' where (Team2='.$name.' AND Result="Team1Win") OR (Team1='.$name.' AND Result="Team2Win");';
-        $Matchesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.$name.';';
+        $Winsquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.$name.' where (Team1='.$name.' AND Result="Team1Win" AND IsVerified = true) OR (Team2='.$name.' AND Result="Team2Win" AND IsVerified = true);';
+        $Lossesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.$name.' where (Team2='.$name.' AND Result="Team1Win" AND IsVerified = true) OR (Team1='.$name.' AND Result="Team2Win" AND IsVerified = true);';
+        $Matchesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.$name.' WHERE IsVerified = true;';
         if ($result = mysqli_query($link, $Teamquery)){
 
 
