@@ -20,4 +20,22 @@
         return $return;
     }
 
+	// NOTE(lucas): Searches for all teams.
+	function search_teams($link, $query_string) {
+		$query = 'SELECT * FROM Team WHERE TeamName LIKE "%' . mysqli_real_escape_string($link, $query_string) . '%";';
+		$final_result = [];
+		if ($result = mysqli_query($link, $query)) {
+			while ($res_array = mysqli_fetch_assoc($result)) {
+				if (!$res_array['IsBanned']) {
+					array_push($final_result, [
+						"name" => $res_array['TeamName'],
+						"img_url" => $res_array['TeamImage'],
+						"bio" => $res_array['Bio'],
+						"team_ranking" => $res_array['TeamRanking']
+					]);
+				}
+			}
+		}
+		return $final_result;
+	}
 ?>
