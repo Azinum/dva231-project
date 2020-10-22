@@ -23,9 +23,9 @@
             <div class="matchbox shadow ui-box">
                 <div class="team team1">
                     <div class="profilepic">
-                        <img src="<?php echo $box["lteam"]["imgurl"]; ?>">
+                        <img src="<?php echo htmlspecialchars($box["lteam"]["imgurl"]); ?>">
                     </div>
-                    <span class="label"><?php echo $box["lteam"]["name"]; ?></span>
+                    <span class="label"><?php echo htmlspecialchars($box["lteam"]["name"]); ?></span>
                 </div>
                 <div class="versus">
                     <span class="matchresult">
@@ -36,9 +36,9 @@
                     </span>
                 </div>
                 <div class="team team2">
-                    <span class="label"><?php echo $box["rteam"]["name"]; ?></span>
+                    <span class="label"><?php echo htmlspecialchars($box["rteam"]["name"]); ?></span>
                     <div class="profilepic">
-                        <img src="<?php echo $box["rteam"]["imgurl"]; ?>">
+                        <img src="<?php echo htmlspecialchars($box["rteam"]["imgurl"]); ?>">
                     </div>
                 </div>
                 <?php if ($editbutton) { ?>
@@ -51,57 +51,6 @@
             </div>
         <?php
     }
-
-    /*  Teambox format:
-        [
-            "name" => <team name>,
-            "imgurl" => <url to team image>,
-            "part" => <num. participated matches>,
-            "won" => <num. won matches>
-        ]
-    */
-    /*function teambox($box, $stats = true, $kickbutton = false, $leavebutton = false, $invitecontrols = false) {
-        ?>
-            <div class="teambox ui-box shadow" onclick="teambox_selected(this, '<?php echo $box["name"]; ?>');">
-                <div class="profile">
-                    <div class="profilepic">
-                        <img src="<?php echo $box["imgurl"]; ?>">
-                    </div>
-                    <span class="label"><?php echo $box["name"]; ?></span>
-                </div>
-                <?php if ($stats) { ?>
-                    <div class="stats">
-                        <span>Partaken: <?php echo $box["part"]; ?></span>
-                        <span>Won: <?php echo $box["won"]; ?></span>
-                    </div>
-                <?php } ?>
-                <?php if ($kickbutton) { ?>
-                    <div class="button button-deny">
-                        Kick
-                    </div>
-                <?php } ?>
-                <?php if ($leavebutton) { ?>
-                    <div class="kickbutton">
-                        <div class="button button-deny">
-                            Leave
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if ($invitecontrols) { ?>
-                    <div class="acceptbutton">
-                        <div class="button button-accept">
-                            Accept
-                        </div>
-                    </div>
-                    <div class="kickbutton">
-                        <div class="button button-deny">
-                            Reject
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-        <?php
-    }*/
 
     /*  Data format:
         [
@@ -126,18 +75,18 @@
     */
     function profile_box_team($data, $layout) {
         ?>
-            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo $data["name"]; ?>');">
+            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo htmlspecialchars($data["name"]); ?>');">
                 <div class="profile">
                     <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
-                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : $data["img_url"]; ?>">
+                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
                     </div>
                 </div>
-                <span class="label"><?php echo $data["name"]; ?></span>
+                <span class="label"><?php echo htmlspecialchars($data["name"]); ?></span>
                 <?php if ($layout["show_stats"]) { ?>
                     <div class="stats">
-                        <span>Partaken: <?php echo $data["stats"]["part"]; ?></span>
-                        <span>Won: <?php echo $data["stats"]["won"]; ?></span>
-                        <span>Lost: <?php echo $data["stats"]["lost"]; ?></span>
+                        <span>Partaken: <?php echo htmlspecialchars($data["stats"]["part"]); ?></span>
+                        <span>Won: <?php echo htmlspecialchars($data["stats"]["won"]); ?></span>
+                        <span>Lost: <?php echo htmlspecialchars($data["stats"]["lost"]); ?></span>
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["leave"]) { ?>
@@ -186,43 +135,43 @@
 
     function profile_box_member($data, $layout) {
         ?>
-            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo $data["name"]; ?>');">
+            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo htmlspecialchars($data["name"]); ?>');">
                 <div class="profile">
                     <?php if ($layout["show_rank"]) { ?>
                         <div class="rank">
-                            <?php echo $data["rank"]. "."; ?>
+                            <?php echo htmlspecialchars($data["rank"]). "."; ?>
                         </div>
                     <?php } ?>
                     <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
-                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : $data["img_url"]; ?>">
+                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
                     </div>
                 </div>
-                <span class="label"><?php echo $data["name"]; ?></span>
+                <span class="label"><?php echo htmlspecialchars($data["name"]); ?></span>
                 <?php if ($layout["show_stats"]) { ?>
                     <div class="stats <?php echo $layout["stats_short"] ? "stats-short" : ""; ?>">
                         <span>
                             <?php
                                 echo $layout["stats_short"] ? "P:" : "Partaken: ";
-                                echo $data["stats"]["part"];
+                                echo htmlspecialchars($data["stats"]["part"]);
                             ?>
                         </span>
                         <span>
                             <?php
                                 echo $layout["stats_short"] ? "W:" : "Won: ";
-                                echo $data["stats"]["won"];
+                                echo htmlspecialchars($data["stats"]["won"]);
                             ?>
                         </span>
                         <span>
                             <?php
                                 echo $layout["stats_short"] ? "L:" : "Lost: ";
-                                echo $data["stats"]["lost"];
+                                echo htmlspecialchars($data["stats"]["lost"]);
                             ?>
                         </span>
                     </div>
                 <?php } ?>
                 <?php if ($layout["show_score"]) { ?>
                     <div class="score">
-                        E: <?php echo $data["score"]; ?>
+                        E: <?php echo htmlspecialchars($data["score"]); ?>
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["kick"]) { ?>

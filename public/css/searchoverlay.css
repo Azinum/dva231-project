@@ -59,3 +59,7 @@
 	overflow-y: scroll;
     max-height: 70%;
 }
+
+.searchoverlay .results .ui-box:hover {
+    cursor: pointer;
+}

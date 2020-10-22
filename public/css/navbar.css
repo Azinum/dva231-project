@@ -21,7 +21,6 @@ body {
 
 .navbar a, .navbar dropdown{
     text-align: center;
-    vertical-align: middle;
     padding: 0.75vw 2vw;
     text-decoration: none;
 		width: 100%;
@@ -57,8 +56,13 @@ body {
 	z-index: 999;
 }
 
+.dropdown-content span{
+	width: 100%;
+	height:100%;
+	line-height: 2vw;
+}
+
 .dropdown-content a {
-    display: block;
-    text-align: center;
-		z-index: 1000;
+	display: block;
+	z-index: 1000;
 }
