@@ -21,7 +21,7 @@ function selectPlayer(elem, team) {
             `;
 	    },
         (searchString) => {
-            fetch("/search_user.php?" + new URLSearchParams({"q":searchString}))
+            fetch("/ajax/search_user.php?" + new URLSearchParams({"q":searchString}))
                 .then((response) => response.json())
                 .then((json) => {
                     document.querySelector(".searchoverlay .results").innerHTML = "";
