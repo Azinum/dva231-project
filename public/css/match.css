@@ -76,7 +76,6 @@ html, body {
 	background-color: #383838;
 }
 
-/* NOTE(lucas): We probably want to have this on many places */
 .basic-interactive:hover {
 	border: 1px solid white;
 }
@@ -168,4 +167,16 @@ html, body {
 .match-search-overlay input {
 	width: 95%;
 	box-sizing: border-box;
+}
+
+.overlay-popup {
+	display: block;
+}
+
+.match-search {
+	display: block;
+}
+
+.hidden {
+	display: none;
 }
