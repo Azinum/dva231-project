@@ -4,7 +4,7 @@
     require_once("../layout/searchoverlay.php");
     require_once("../dbfunctions/dbconnection.php");
 
-	if (!isset($_GET["team"])) {
+	if (!isset($_GET["team"])) { //TODO: does team exist?
 		header("Location: /home.php");
 		die();
 	}
@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="add-member">
-                        <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'));">
+                        <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'), '<?php echo $_GET["team"]; ?>');">
                             <img src="/img/plus.svg">
                         </div>
                     </div>
