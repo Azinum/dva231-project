@@ -9,6 +9,12 @@
     color: white;
     z-index: 9999;
     padding-top: 2vw;
+    text-align: center;
+}
+
+.searchoverlay .button-deny {
+    margin-left: calc(50% - 4rem);
+    margin-bottom: 1rem;
 }
 
 .searchoverlay.active {
@@ -46,41 +52,10 @@
     border: 0.1em solid #4d79ff;
 }
 
-.searchoverlay .closeboxcontainer {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.searchoverlay .closeboxcontainer .shadow {
-    height: 2.5vw;
-    margin-top: -2vw;
-    background: #500000;
-}
-
-.searchoverlay .closebox {
-    background: #d02020;
-    border-radius: 0.5vw;
-    width: 2vw;
-    height: 2vw;
-    text-align: center;
-    line-height: 2vw;
-    cursor: pointer;
-    margin-left: 100%;
-    transition: background 0.1s;
-}
-
-.searchoverlay .closebox:hover {
-    background: #f04040;
-}
-
 .searchoverlay .results {
 	width: 50%;
 	margin: 0 auto;
+    margin-top: 2rem;
 	overflow-y: scroll;
     max-height: 70%;
-}
-
-.searchoverlay .results .shadowbox {
-	padding: 0;
-    width:calc(100% - 1vw);
 }

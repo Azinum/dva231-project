@@ -68,7 +68,7 @@
                     <div class="member-list">
                         <?php
 
-                        require_once("../dbfunctions/get_team_members.php");
+                        require_once("../dbfunctions/team_members.php");
 						$members = get_team_members($link, $_GET["team"]);
 
 						forEach($members as $member) {

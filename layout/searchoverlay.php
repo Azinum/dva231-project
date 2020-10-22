@@ -12,7 +12,7 @@
                 <div class="button button-deny" onclick="searchoverlayToggle();">x</div>
 
                 <form class="shadow">
-                    <input class="shadow" type="text" oninput="searchoverlayUpdate();" placeholder="Search...">
+                    <input class="shadow" type="text" oninput="searchoverlayUpdate(this);" placeholder="Search...">
                 </form>
 
                 <div class="results">
