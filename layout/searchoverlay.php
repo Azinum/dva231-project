@@ -9,10 +9,10 @@
     function searchoverlay() {  // run at top of body to include the html
         ?>
             <div class="searchoverlay">
-                <div class="button button-deny" onclick="searchoverlay_toggle();">x</div>
+                <div class="button button-deny" onclick="searchoverlayToggle();">x</div>
 
                 <form class="shadow">
-                    <input class="shadow" type="text" oninput="searchoverlay_update();" placeholder="Search...">
+                    <input class="shadow" type="text" oninput="searchoverlayUpdate();" placeholder="Search...">
                 </form>
 
                 <div class="results">

@@ -5,6 +5,10 @@
     height:calc(100vh - 6vw);
 }
 
+.tabcontent .profile-box {
+    margin-bottom: 1.5rem;
+}
+
 .tablayout .tabs {
     background: #383838;
 }

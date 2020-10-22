@@ -57,6 +57,10 @@
 
                     tabcontent_begin(1);
                         
+                    ?>
+                    <div class="member-list">
+                    <?php
+
                     profile_box_member([
                             "name" => "this is a member",
                             "img_url" => "/img/tmp_profile.jpg",
@@ -69,11 +73,14 @@
                     ]);
 
                     ?>
+                    </div>
+
                     <div class="add-member">
-                        <div class="button button-image button-accept" onclick="select_player(this);">
+                        <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'));">
                             <img src="/img/plus.svg">
                         </div>
                     </div>
+
                     <?php
 
                     tabcontent_end();

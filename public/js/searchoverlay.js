@@ -1,47 +1,50 @@
 var searchoverlay = false;
-const topics = {
-    player: 0,
-    team: 1
-};
 
-/*var teams = {
-    {},
-    {}
-};*/
-
-function select_player(elem) {
-    do_search(topics.player, (e) => {
-        elem.innerHTML = e.detail.name + "<img src="+e.detail.img_url+">";
-        //Pseudo team-add tjofräs
-        //teams[team_index] += {e.detail.name, e.detail.img_url};
-    });
+const TargetType = {
+	TARGET_PLAYER : 0,
+	TARGET_TEAM : 1
 }
 
-function do_search(topic, callback) {
-    if (topic == topics.player) {
-        searchoverlay_toggle();
-        document.addEventListener("search_done", callback);
-    } else if (topic == topics.team) {
-    }
+var onClickEvent = () => {};
+
+function selectPlayer(elem) {
+	doSearch(TargetType.TARGET_PLAYER, (e) => {
+        elem.innerHTML += `
+            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, 'this is a member');">
+                <div class="profile">
+                    <div class="profilepic">
+                        <img src="`+e.data.img+`">
+                    </div>
+                </div>
+                <span class="label">`+e.data.name+`</span>
+                <div class="button button-deny">
+                    Kick
+                </div>
+            </div>
+        `;
+	});
 }
 
-function result_click(img_url, name) {
-    searchoverlay_toggle();
-    document.dispatchEvent(
-        new CustomEvent(
-            "search_done",
-            {
-                bubbles: true,
-                detail: {
-                    img_url: img_url,
-                    name: name
-                }
-            }
-        )
-    );
+function doSearch(target, callback) {
+    searchoverlayToggle();
+	if (target == TargetType.TARGET_PLAYER) {
+		onClickEvent = callback;
+	} else if (target == TargetType.TARGET_TEAM) {
+		onClickEvent = callback;
+	}
 }
 
-function searchoverlay_toggle() {
+function onClick(img, name) {
+    searchoverlayToggle();
+	onClickEvent({
+		data: {
+			img: img,
+			name: name
+		}
+	});
+}
+
+function searchoverlayToggle() {
     searchoverlay = !searchoverlay;
 
     if (searchoverlay) {
@@ -51,9 +54,9 @@ function searchoverlay_toggle() {
     }
 }
 
-function searchoverlay_update() {   // just smack in some test results for now
+function searchoverlayUpdate() {   // just smack in some test results for now
     document.querySelector(".searchoverlay .results").innerHTML += `
-        <div class="profile-box ui-box shadow" onclick="result_click('/img/tmp_profile.jpg', 'Good Team');">
+        <div class="profile-box ui-box shadow" onclick="onClick('/img/tmp_profile.jpg', 'Good Team');">
             <div class="profile">
                 <div class="profilepic">
                     <img src="/img/tmp_profile.jpg">
