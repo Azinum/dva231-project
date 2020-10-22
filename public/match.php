@@ -1,6 +1,6 @@
 <?php require_once("header.php"); ?>
 <?php page_begin("Match Results"); ?>
-	<?php include("navbarexample.php"); ?>
+	<?php include("navbar_final.php"); ?>
 	<div class="match-search-overlay">
 		<div class="match-search-overlay-content">
 			<div class="closebox shadow" onclick="toggleOverlay()">x</div>
@@ -11,21 +11,13 @@
 
 			<div class="match-search">
 				<form class="match-shadow-box">
-					<input class="text-input-field" type="text" oninput="searchOverlayUpdate();" placeholder="Search...">
+					<input class="text-input-field" type="text" oninput="onSearchEvent();" placeholder="Search...">
 				</form>
 				<br>
 				<div class="match-search-results">
-					<div class="match-search-item shadow" onclick="onClick('img/tmp_team.jpeg', 'Team One')">
+					<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team.jpeg', name: 'Team One'})">
 						<img src="img/tmp_team.jpeg">
 						<p>Team One</p>
-					</div>
-					<div class="match-search-item shadow" onclick="onClick('img/tmp_profile.jpg', 'Team Too')">
-						<img src="img/tmp_profile.jpg">
-						<p>Team Too</p>
-					</div>
-					<div class="match-search-item shadow" onclick="onClick('img/tmp_team2.jpeg', 'Team Tree')">
-						<img src="img/tmp_team2.jpeg">
-						<p>Team Tree</p>
 					</div>
 				</div>
 			</div>
@@ -48,7 +40,7 @@
 			<div class="match-content-box shadow">
 				<h2>Team 1 (you)</h2>
 				<div class="match-team-content">
-					<img class="match-team-img match-box basic-interactive" src="img/tmp_team.jpeg" onclick="selectTeam(this, Teams.TEAM1);">
+					<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, Teams.TEAM1);">
 				</div>
 			</div>
 			<div class="match-content-box shadow">
@@ -66,7 +58,7 @@
 			<div class="match-content-box shadow">
 				<h2>Team 2 (opponent)</h2>
 				<div class="match-team-content">
-					<img class="match-team-img match-box basic-interactive" src="img/tmp_team2.jpeg" onclick="selectTeam(this, Teams.TEAM2);">
+					<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, Teams.TEAM2);">
 				</div>
 			</div>
 
