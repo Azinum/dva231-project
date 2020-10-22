@@ -1,6 +1,7 @@
 <?php
 require_once("../layout/profileboxes.php");
 require_once("../dbfunctions/get_specteaminfo.php");
+require_once("../dbfunctions/get_specuserinfo.php");
 require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
 ?>
 
@@ -107,6 +108,8 @@ require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
         </tr>
     </table>
     <!-- <div class="bg"></div> -->
+
+    <?php get_specuserinfo(1) ?>
 </body>
 
 </html>
