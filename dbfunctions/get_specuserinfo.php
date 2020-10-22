@@ -14,6 +14,7 @@
 
             return[ //Hur hanterar vi ELO i db?
                "name"=>$resArray['UserName'],
+               "user_id"=>$resArray['Id']
                "img_url"=>$resArray['ProfileImageUrl'],
                "bio"=> $resArray['Bio'],
                "is_admin" =>$resArray['IsAdmin'],
