@@ -41,15 +41,16 @@ require_once("../layout/dbfunctions.php");
                             profile_box_member([
                                 "name" => "Teamname",
                                 "img_url" => "/img/teamico.png",
-                                "img_small" => true,
-
-                                "show_stats" => true,
-                                "stats_short" => true,
                                 "stats" => ["won" => 13, "lost" => 3, "part" => 7],
-                                "show_rank" => true,
                                 "rank" => 1,
+                                "score" => 9001
+                            ],
+                            [
+                                "show_stats" => true,
+                                "img_small" => true,
+                                "stats_short" => true,
+                                "show_rank" => true,
                                 "show_score" => true,
-                                "score" => 9001,
                                 "buttons" => [
                                     "kick" => false
                                 ]
@@ -63,15 +64,16 @@ require_once("../layout/dbfunctions.php");
                             profile_box_member([
                                 "name" => "2nrdXuWOMHcFqMYzVDAFmZeQWeagZYugEuEA8cPN1G19q4TTXq",
                                 "img_url" => "/img/teamico.png",
-                                "img_small" => true,
-
-                                "show_stats" => true,
-                                "stats_short" => true,
                                 "stats" => ["won" => 9999, "lost" => 9999, "part" => 19998],
-                                "show_rank" => true,
-                                "rank" => 9999,
-                                "show_score" => true,
                                 "score" => 400,
+                                "rank" => 9999,
+                            ],
+                            [
+                                "show_stats" => true,
+                                "img_small" => true,
+                                "stats_short" => true,
+                                "show_rank" => true,
+                                "show_score" => true,
                                 "buttons" => [
                                     "kick" => false
                                 ]
@@ -81,7 +83,7 @@ require_once("../layout/dbfunctions.php");
                         <div  class="flex-row">
                             <!--Har max-värden i namn, overflow startar för ranknummer vid 10 000. -->
                             <?php
-                            $info = get_specteaminfo("TeamName");
+                            //$info = get_specteaminfo("TeamName");
                             $info["img_small"] = true;
                             $info["show_stats"] = true;
                             $info["show_score"] = false; //Ändra när ELO i DB är fixat
@@ -94,7 +96,7 @@ require_once("../layout/dbfunctions.php");
                             $info["buttons"] = [
                                 "kick"=> false
                             ];
-                            profile_box_member ($info);
+                            profile_box_member (get_specteaminfo("TeamName"),$info);
                             ?>
                         </div>
 
