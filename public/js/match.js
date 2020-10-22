@@ -79,6 +79,7 @@ function selectPlayer(elem, team) {
 			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
 			let results = document.querySelector(".match-search-overlay-content .match-search-results");
 			results.innerHTML = "";
+
 			fetch("/ajax/search_user.php?" + new URLSearchParams({"q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
@@ -106,6 +107,21 @@ function selectTeam(elem, team) {
 		},
 		() => {
 			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
+			let results = document.querySelector(".match-search-overlay-content .match-search-results");
+			results.innerHTML = "";
+
+			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
+				.then((res) => res.json())
+				.then((json) => {
+					json.forEach((item) => {
+						results.innerHTML += `
+							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
+								<img src="` + item.img_url + `">
+								<p>` + item.name + `</p>
+							</div>
+						`;
+					});
+				});
 			/*
 			document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
 				<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team2.jpeg', name: 'Good Team'})">
