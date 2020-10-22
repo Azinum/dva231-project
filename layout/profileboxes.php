@@ -129,7 +129,7 @@
             <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo $data["name"]; ?>');">
                 <div class="profile">
                     <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
-                        <img src="<?php echo $data["img_url"]; ?>">
+                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : $data["img_url"]; ?>">
                     </div>
                 </div>
                 <span class="label"><?php echo $data["name"]; ?></span>
@@ -194,7 +194,7 @@
                         </div>
                     <?php } ?>
                     <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
-                        <img src="<?php echo $data["img_url"]; ?>">
+                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : $data["img_url"]; ?>">
                     </div>
                 </div>
                 <span class="label"><?php echo $data["name"]; ?></span>
