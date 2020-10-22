@@ -1,6 +1,7 @@
 <?php
 require_once("../layout/profileboxes.php");
-require_once("../layout/dbfunctions.php");
+require_once("../dbfunctions/get_specteaminfo.php");
+require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <?php
      //Get specified team's info
      function get_specteaminfo ($name) {
-        require_once("dbconnection.php");
+        include("dbconnection.php"); //Går sönder om den sitter utanför, varför???
         require_once("../layout/profileboxes.php");
 
         $Teamquery = "SELECT * FROM Team WHERE TeamName = '$name'";

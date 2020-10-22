@@ -2,6 +2,13 @@
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
+    require_once("../dbfunctions/dbconnection.php");
+
+	if (!isset($_GET["team"])) {
+		header("Location: /home.php");
+		die();
+	}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,20 +66,23 @@
                         
                     ?>
                     <div class="member-list">
-                    <?php
+                        <?php
 
-                    profile_box_member([
-                            "name" => "this is a member",
-                            "img_url" => "/img/tmp_profile.jpg",
-                        ],[
-                            "img_small" => false,
-                            "show_stats" => false,
-                            "show_rank" => false,
-                            "show_score" => false,
-                            "buttons" => [ "kick" => true ]
-                    ]);
+                        require_once("../dbfunctions/get_team_members.php");
+						$members = get_team_members($link, $_GET["team"]);
 
-                    ?>
+						forEach($members as $member) {
+							profile_box_member($member, [
+									"img_small" => false,
+									"show_stats" => false,
+									"stats_short" => false,
+									"show_rank" => false,
+									"show_score" => false,
+									"buttons" => [ "kick" => true ]
+							]);
+						}
+
+                        ?>
                     </div>
 
                     <div class="add-member">
