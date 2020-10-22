@@ -1,27 +1,32 @@
 <?php
-  //Get specified teams the speicifed user is a member of
-  function get_userteams ($id) { 
-    require_once("dbconnection.php");
-    require_once("../layout/profileboxes.php");
 
-    $Userquery = " SELECT TeamName FROM TeamMemberships join User on TeamMemberships.Member = User.UserName WHERE User.Id = '$id'";
-    $Countquery = " SELECT Count(TeamName) as amount FROM TeamMemberships join User on TeamMemberships.Member = User.UserName WHERE User.Id = '$id'";
+  //Get specified teams the speicifed user is a member of
+  function get_userteams ($id) {  //Passera link funktionen in?
+    include("dbconnection.php");
+
+    $Userquery = "SELECT TeamName FROM TeamMemberships join User on TeamMemberships.Member = User.Id WHERE User.Id = '$id'";
+    $Countquery = "SELECT COUNT(TeamName) as amount FROM TeamMemberships join User on TeamMemberships.Member = User.Id WHERE User.ID = '$id'";
 
     if ($result = mysqli_query($link, $Userquery)){
 
          //Team 
 
-        
-        for ($i = 0; $i < (mysqli_query($link, $Countquery)['amount'] - 1); $i++) {
-            $resArray[$i] = mysqli_fetch_assoc($result);
-            echo $resArray[$i];
-        }  
 
-        return[ //Hur hanterar vi ELO i db?
-           "name"=>$resArray['UserName'],
-           "img_url"=>$resArray['ProfileImageUrl'],
-           "bio"=> $resArray['Bio']
-        ];
+
+
+        if ($counter = (int)(mysqli_fetch_array(mysqli_query($link, $Countquery))[0])) { //
+
+            echo "Counter : $counter";
+            for ($i = 0; $i <= $counter-1; $i++) {
+                $resArray = mysqli_fetch_array($result); //Måste finnas ett snyggare sätt att lösa detta
+                $teamsArray[$i] = $resArray[0];
+                echo $teamsArray[$i];
+
+            }  
+        }
+
+        return $teamsArray; //Array som innehåller alla teams spelaren är med i
+        
     }
 }
 
