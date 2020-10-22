@@ -1,39 +1,28 @@
-<?php session_start();
+<?php //session_start();
+//Ta in information med get. Sätt in dessa värden in i query. Kör query, kolla om lyckades. Bam
+//Kolla om användarnamnet är taget, isåfall be om ett nytt 
 
 
-function register_user ($name) { 
-    require_once("dbconnection.php");
-    require_once("../layout/profileboxes.php");
+function register_user () { 
+    include("dbconnection.php");
 
-    $Userquery = "SELECT * FROM User WHERE UserName = '$name'";
-    $Partquery = "SELECT COUNT(Matches) as Amount FROM MatchParticipation WHERE User = '$name'";
-    $Winsquery = 'select count(distinct Matches.Id) as NumMatches from User join TeamMemberships on Member = Id join MatchParticipation on MatchParticipation.User = User.Id join Matches on MatchParticipation.Matches = Matches.Id where User.Id = " '.$name.' " and ( (MatchParticipation.Team = Matches.Team1 and Matches.Result = "Team1Win") or (MatchParticipation.Team = Matches.Team2 and Matches.Result = "Team2Win"));';
-    $Lossesquery = 'select count(distinct Matches.Id) as NumMatches from User join TeamMemberships on Member = Id join MatchParticipation on MatchParticipation.User = User.Id join Matches on MatchParticipation.Matches = Matches.Id where User.Id = " '.$name.' " and ( (MatchParticipation.Team = Matches.Team1 and Matches.Result = "Team2Win") or (MatchParticipation.Team = Matches.Team2 and Matches.Result = "Team1Win"));';
-    $Partquery = 'select count(distinct Matches.Id) as NumMatches from User join TeamMemberships on Member = Id join MatchParticipation on MatchParticipation.User = User.Id join Matches on MatchParticipation.Matches = Matches.Id where User.Id = " '.$name.' ";';
-    if ($result = mysqli_query($link, $Userquery)){
+    $userInput = $_POST; //Username, Email, Password måste in (hashning av password)
+    //ProfileImageURL, Bio, IsAdmin, IsBanned, ID sets default
+    $unamecheckquery = 'SELECT Username from User WHERE Username ="'.$userInput['username'].'" '; 
 
-        $resArray = mysqli_fetch_assoc($result); //username/email/ProfileImageUrl/Bio/IsAdmin/IsBanned
-
-        $t1 = mysqli_fetch_assoc(mysqli_query($link, $Winsquery))['Number'];
-        $t2 = mysqli_fetch_assoc(mysqli_query($link, $Lossesquery))['Number']; 
-        $t3 = mysqli_fetch_assoc(mysqli_query($link, $Partquery))['Amount'];
-
-        echo "Wins :  $t1| Losses : $t2 | Part: $t3 ";
-
-        return[ //Hur hanterar vi ELO i db?
-           "name"=>$resArray['UserName'],
-           "user_id"=>$resArray['Id'],
-           "img_url"=>$resArray['ProfileImageUrl'],
-           "bio"=> $resArray['Bio'],
-           "is_admin" =>$resArray['IsAdmin'],
-           "is_banned"=>$resArray['IsBanned'],
-           "stats" => [
-                "won"=>mysqli_fetch_assoc(mysqli_query($link, $Winsquery))['Number'],
-                "lost"=>mysqli_fetch_assoc(mysqli_query($link, $Lossesquery))['Number'],
-                "part"=>mysqli_fetch_assoc(mysqli_query($link, $Partquery))['Amount']
-            ]
-        ];
+    if ( !mysqli_num_rows (mysqli_query($link, $unamecheckquery)) > 0)  {//Kollar om det finns någon krock med användarnamnet
+        if ($password = password_hash($userInput['password'],PASSWORD_DEFAULT)) {
+        
+            $Userquery = 'INSERT INTO User (Username, Email, Bio, IsAdmin, IsBanned, PasswordHash) VALUES ("'.$userInput['username'].'", "'.$userInput['email'].'", "This is my bio", false, false, "'.$password.'")';
+            if ($result = mysqli_query($link, $Userquery)){
+                echo "User created successfully!";
+            }
+        }
     }
+    else {
+        echo "Username is already taken";
+    }
+
 }
 
 
