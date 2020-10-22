@@ -9,19 +9,10 @@
 
     if ($result = mysqli_query($link, $Userquery)){
 
-         //Team 
-
-
-
-
         if ($counter = (int)(mysqli_fetch_array(mysqli_query($link, $Countquery))[0])) { //
-
-            echo "Counter : $counter";
             for ($i = 0; $i <= $counter-1; $i++) {
                 $resArray = mysqli_fetch_array($result); //Måste finnas ett snyggare sätt att lösa detta
                 $teamsArray[$i] = $resArray[0];
-                echo $teamsArray[$i];
-
             }  
         }
 

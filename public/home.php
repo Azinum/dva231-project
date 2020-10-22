@@ -107,8 +107,6 @@ require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
         </tr>
     </table>
     <!-- <div class="bg"></div> -->
-
-    <?php get_userteams(1) ?>
 </body>
 
 </html>
