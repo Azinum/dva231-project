@@ -13,7 +13,9 @@
 		<div class="dropdown">
 			<a href= "login.php"> My Profile <img src="img/profileicon.png" class="nav-image" > </a>
 				<div class="dropdown-content">
-					<a href="logout.php">Log out</a>
+					<span>
+						<a href="logout.php">Log out</a>
+					</span>
 				</div>
 		</div> 
 	</div>
