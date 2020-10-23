@@ -56,6 +56,8 @@
         [
             "name" => <team name>,
             "img_url" => <url to prof. image>,
+            "rank" => <number>,
+            "score" => <number>,
             "stats" => [
                 "part" => <num. participated matches>,
                 "won" => <num. won matches>,
@@ -67,6 +69,9 @@
         [
             "img_small" => <boolean>,
             "show_stats" => <boolean>,
+            "stats_short" => <boolean>,
+            "show_rank" => <boolean>,
+            "show_score" => <boolean>,
             "buttons" => [
                 "leave" => <boolean>,
                 "invite_controls" => <boolean>
@@ -76,70 +81,6 @@
     function profile_box_team($data, $layout) {
         ?>
             <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo htmlspecialchars($data["name"]); ?>');">
-                <div class="profile">
-                    <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
-                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
-                    </div>
-                </div>
-                <span class="label"><?php echo htmlspecialchars($data["name"]); ?></span>
-                <?php if ($layout["show_stats"]) { ?>
-                    <div class="stats">
-                        <span>Partaken: <?php echo htmlspecialchars($data["stats"]["part"]); ?></span>
-                        <span>Won: <?php echo htmlspecialchars($data["stats"]["won"]); ?></span>
-                        <span>Lost: <?php echo htmlspecialchars($data["stats"]["lost"]); ?></span>
-                    </div>
-                <?php } ?>
-                <?php if ($layout["buttons"]["leave"]) { ?>
-                    <div class="button button-deny">
-                        Leave
-                    </div>
-                <?php } ?>
-                <?php if ($layout["buttons"]["invite_controls"]) { ?>
-                    <div class="button button-accept">
-                        Accept
-                    </div>
-                    <div class="button button-deny">
-                        Reject
-                    </div>
-                <?php } ?>
-            </div>
-        <?php
-    }
-
-    /*  Data format:
-        [
-            "name" => <member name>,
-            "img_url" => <url to prof. image>,
-            "stats" => [
-                "part" => <num. participated matches>,
-                "won" => <num. won matches>,
-                "lost" => <num. lost matches>
-            ],
-            "rank" => <number>,
-            "score" => <number>,
-        ]
-    */
-    
-    /*
-        Layout: [
-            "img_small" => <boolean>,
-            "show_stats" => <boolean>,
-            "stats_short" => <boolean>,
-            "show_rank" => <boolean>,
-            "show_score" => <boolean>,
-            "on_click" => <string w/ js onclick function>,
-            "buttons" => [
-                "kick" => <boolean>
-            ],
-            "button_clicks" => [
-                "kick" => <string w/ js function to be run on click>
-            ]
-        ]
-    */
-
-    function profile_box_member($data, $layout) {
-        ?>
-            <div class="profile-box ui-box shadow" <?php echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?>>
                 <div class="profile">
                     <?php if ($layout["show_rank"]) { ?>
                         <div class="rank">
@@ -176,6 +117,89 @@
                 <?php if ($layout["show_score"]) { ?>
                     <div class="score">
                         E: <?php echo htmlspecialchars($data["score"]); ?>
+                    </div>
+                <?php } ?>
+                <?php if ($layout["buttons"]["leave"]) { ?>
+                    <div class="button button-deny">
+                        Leave
+                    </div>
+                <?php } ?>
+                <?php if ($layout["buttons"]["invite_controls"]) { ?>
+                    <div class="button button-accept">
+                        Accept
+                    </div>
+                    <div class="button button-deny">
+                        Reject
+                    </div>
+                <?php } ?>
+            </div>
+        <?php
+    }
+
+    /*  Data format:
+        [
+            "name" => <member name>,
+            "img_url" => <url to prof. image>,
+            "stats" => [
+                "part" => <num. participated matches>,
+                "won" => <num. won matches>,
+                "lost" => <num. lost matches>
+            ],
+        ]
+    */
+    
+    /*
+        Layout: [
+            "img_small" => <boolean>,
+            "show_stats" => <boolean>,
+            "stats_short" => <boolean>,
+            "on_click" => <string w/ js onclick function>,
+            "buttons" => [
+                "kick" => <boolean>,
+                "make_leader" => <boolean>
+            ],
+            "button_clicks" => [
+                "kick" => <string w/ js function to be run on click>,
+                "make_leader" => <string w/ js function to be run on click>
+            ]
+        ]
+    */
+
+    function profile_box_member($data, $layout) {
+        ?>
+            <div class="profile-box ui-box shadow" <?php echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?>>
+                <div class="profile">
+                    <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
+                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
+                    </div>
+                </div>
+                <span class="label"><?php echo htmlspecialchars($data["name"]); ?></span>
+                <?php if ($layout["show_stats"]) { ?>
+                    <div class="stats <?php echo $layout["stats_short"] ? "stats-short" : ""; ?>">
+                        <span>
+                            <?php
+                                echo $layout["stats_short"] ? "P:" : "Partaken: ";
+                                echo htmlspecialchars($data["stats"]["part"]);
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                                echo $layout["stats_short"] ? "W:" : "Won: ";
+                                echo htmlspecialchars($data["stats"]["won"]);
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                                echo $layout["stats_short"] ? "L:" : "Lost: ";
+                                echo htmlspecialchars($data["stats"]["lost"]);
+                            ?>
+                        </span>
+                    </div>
+                <?php } ?>
+                <?php if ($layout["buttons"]["make_leader"]) { ?>
+                    <div class="button button-accept" <?php 
+                        echo isset($layout["button_clicks"]) ? "onclick=\"". htmlspecialchars($layout["button_clicks"]["make_leader"]) ."\"" : "";?>>
+                        Make Leader
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["kick"]) { ?>
