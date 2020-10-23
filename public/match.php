@@ -46,11 +46,11 @@
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
 				<div class="match-participants">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="selectPlayer(this, Teams.TEAM1);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="selectPlayer(this, Teams.TEAM1);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="selectPlayer(this, Teams.TEAM1);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="selectPlayer(this, Teams.TEAM1);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team.jpeg" onclick="selectPlayer(this, Teams.TEAM1);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 0);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 1);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 2);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 3);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 4);">
 				</div>
 			</div>
 			<div class="line-wide"></div>
@@ -65,11 +65,11 @@
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
 				<div class="match-participants">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectPlayer(this, Teams.TEAM2);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectPlayer(this, Teams.TEAM2);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectPlayer(this, Teams.TEAM2);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectPlayer(this, Teams.TEAM2);">
-					<img class="match-player-img basic-interactive match-box" src="img/tmp_team2.jpeg" onclick="selectPlayer(this, Teams.TEAM2);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 0);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 1);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 2);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 3);">
+					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 4);">
 				</div>
 			</div>
 			<div class="line-wide"></div>

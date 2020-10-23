@@ -66,7 +66,7 @@ function searchOverlayUpdate() {
 	`;
 }
 
-function selectPlayer(elem, team) {
+function selectPlayer(elem, team, index) {
 	if (!teams[team]) {
 		errorMessage("You must first select a team!");
 		return;
@@ -74,6 +74,9 @@ function selectPlayer(elem, team) {
 	doSearch(
 		(e) => {
 			elem.src = e.img;
+			teams[team].participants[index] = {
+				name: e.name
+			}
 		},
 		() => {
 			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
@@ -83,7 +86,6 @@ function selectPlayer(elem, team) {
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
-					console.log(json);
 					json.forEach((item) => {
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
