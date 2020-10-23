@@ -31,12 +31,33 @@
     }
 
     function kick_team_member($link, $team_name, $user_id) {
-        $query =    'delete from TeamMemberships where TeamName="'. mysqli_real_escape_string($link, $team_name).
-                    '" and Member="'. mysqli_real_escape_string($link, $user_id) .'";';
+        require_once("get_specteaminfo.php");
+        $team_data = get_specteaminfo($link, $team_name);
 
-        if ($result = mysqli_query($link, $query)) {
-            return true;
+        if ($team_data["leader"] != $user_id) {
+            $query =    'delete from TeamMemberships where TeamName="'. mysqli_real_escape_string($link, $team_name).
+                        '" and Member="'. mysqli_real_escape_string($link, $user_id) .'";';
+
+            if ($result = mysqli_query($link, $query)) {
+                return true;
+            }
         }
+        
+        return false;
+    }
+
+    function set_team_leader($link, $team_name, $user_id) {
+        $query =    "select * from TeamMemberships where TeamName='". mysqli_real_escape_string($link, $team_name).
+                    "' and Member='". mysqli_real_escape_string($link, $user_id) ."';";
+        if ($result = mysqli_query($link, $query)) {
+            if ($result->num_rows != 0) {
+                $query = "update Team set TeamLeader=". mysqli_real_escape_string($link, $user_id) ." where TeamName='". mysqli_real_escape_string($link, $team_name) ."';";
+                if ($result = mysqli_query($link, $query)) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 

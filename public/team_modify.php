@@ -70,7 +70,9 @@
                         <?php
 
                         require_once("../dbfunctions/team_members.php");
+                        require_once("../dbfunctions/get_specteaminfo.php");
 						$members = get_team_members($link, $_GET["team"]);
+                        $teamdata = get_specteaminfo($link, $_GET["team"]);
 
 						forEach($members as $member) {
 							profile_box_member($member, [
@@ -79,7 +81,7 @@
                                 "stats_short" => false,
                                 "show_rank" => false,
                                 "show_score" => false,
-                                "buttons" => [ "kick" => true ],
+                                "buttons" => [ "kick" => $member["user_id"] != $teamdata["leader"] ],
                                 "button_clicks" => [
                                     "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")'
                                 ]
