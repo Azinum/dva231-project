@@ -118,7 +118,7 @@ function selectTeam(elem, team) {
 			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
 			let results = document.querySelector(".match-search-overlay-content .match-search-results");
 			results.innerHTML = "";
-
+			// .includes
 			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
@@ -148,25 +148,53 @@ function onClick(data) {
 	onClickEvent(data);
 }
 
+function evaluateErrors(conditions) {
+	let message = "";
+	let error = false;
+	conditions.forEach((cond) => {
+		if (!cond[1]()) {
+			message += cond[0] + '\n';
+			error = true;
+		}
+	});
+	if (error) {
+		errorMessage(message);
+	}
+}
+
 function submitMatch() {
-	if (!teams[Teams.TEAM1]) {
-		errorMessage("Please select team 1");
-	}
-	else if (!teams[Teams.TEAM2]) {
-		errorMessage("Please select team 2");
-	}
-	for (let i in teams[Teams.TEAM1].participants) {
-		if (!teams[Teams.TEAM1].participants[i]) {
-			errorMessage("Missing participants in team 1");
-			return;
-		}
-	}
-	for (let i in teams[Teams.TEAM2].participants) {
-		if (!teams[Teams.TEAM2].participants[i]) {
-			errorMessage("Missing participants in team 2");
-			return;
-		}
-	}
+	evaluateErrors([
+		["Please select team 1", () => { return teams[Teams.TEAM1]; }],
+		["Please select team 2", () => { return teams[Teams.TEAM2]; }],
+		["Missing participants in team 1", () => {
+			let team = teams[Teams.TEAM1];
+			if (!team)
+				return false;
+			let participants = teams[Teams.TEAM1].participants;
+			if (!participants)
+				return false;
+			participants.forEach((participant) => {
+				if (!participants) {
+					return false;
+				}
+			});
+			return true;
+		}],
+		["Missing participants in team 2", () => {
+			let team = teams[Teams.TEAM1];
+			if (!team)
+				return false;
+			let participants = teams[Teams.TEAM1].participants;
+			if (!participants)
+				return false;
+			participants.forEach((participant) => {
+				if (!participants) {
+					return false;
+				}
+			});
+			return true;
+		}]
+	]);
 }
 
 ((func) => {
