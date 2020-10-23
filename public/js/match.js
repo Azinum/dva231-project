@@ -80,7 +80,7 @@ function selectPlayer(elem, team) {
 			let results = document.querySelector(".match-search-overlay-content .match-search-results");
 			results.innerHTML = "";
 
-			fetch("/ajax/search_user.php?" + new URLSearchParams({"q": inputText}))
+			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"q": "TeamName"}))
 				.then((res) => res.json())
 				.then((json) => {
 					json.forEach((item) => {
@@ -122,14 +122,6 @@ function selectTeam(elem, team) {
 						`;
 					});
 				});
-			/*
-			document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
-				<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team2.jpeg', name: 'Good Team'})">
-					<img src="img/tmp_team2.jpeg">
-					<p>Good Team</p>
-				</div>
-			`;
-			*/
 		}
 	);
 }
