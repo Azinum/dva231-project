@@ -79,10 +79,11 @@ function selectPlayer(elem, team) {
 			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
 			let results = document.querySelector(".match-search-overlay-content .match-search-results");
 			results.innerHTML = "";
-
-			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"q": "TeamName"}))
+			let teamName = teams[team].name;
+			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
+					console.log(json);
 					json.forEach((item) => {
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
@@ -130,6 +131,7 @@ function doSearch(clickCallback, searchCallback) {
 	toggleOverlay();
 	onClickEvent = clickCallback;
 	onSearchEvent = searchCallback;
+	onSearchEvent();
 }
 
 function onClick(data) {

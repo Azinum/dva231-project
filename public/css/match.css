@@ -175,6 +175,7 @@ html, body {
 
 .match-search {
 	display: block;
+	height: 100%;
 }
 
 .hidden {
