@@ -160,10 +160,11 @@ function evaluateErrors(conditions) {
 	if (error) {
 		errorMessage(message);
 	}
+	return error;
 }
 
 function submitMatch() {
-	evaluateErrors([
+	let error = evaluateErrors([
 		["Please select team 1", () => { return teams[Teams.TEAM1]; }],
 		["Please select team 2", () => { return teams[Teams.TEAM2]; }],
 		["Missing participants in team 1", () => {
@@ -174,23 +175,21 @@ function submitMatch() {
 			if (!participants)
 				return false;
 			participants.forEach((participant) => {
-				if (!participants) {
+				if (!participants)
 					return false;
-				}
 			});
 			return true;
 		}],
 		["Missing participants in team 2", () => {
-			let team = teams[Teams.TEAM1];
+			let team = teams[Teams.TEAM2];
 			if (!team)
 				return false;
-			let participants = teams[Teams.TEAM1].participants;
+			let participants = teams[Teams.TEAM2].participants;
 			if (!participants)
 				return false;
 			participants.forEach((participant) => {
-				if (!participants) {
+				if (!participants)
 					return false;
-				}
 			});
 			return true;
 		}]
