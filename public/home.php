@@ -8,6 +8,7 @@ require_once("../dbfunctions/get_usermatches.php"); //Ta bort denna efter testin
 require_once("../dbfunctions/get_teamsbyrank.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/get_matchuteam.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/get_membermatches.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/register_team.php"); //Ta bort denna efter testing
 
 ?>
 
@@ -49,7 +50,10 @@ require_once("../dbfunctions/get_membermatches.php"); //Ta bort denna efter test
         </tr>
     </table>
     <!-- <div class="bg"></div> -->
-    <?php $test = get_membermatches($link,'Super Mega Awesome Team!!');?>
+    <?php $test = get_membermatches($link,'Super Mega Awesome Team!!');
+    
+    register_team($link);
+    ?>
 
 </body>
 
