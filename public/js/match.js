@@ -92,9 +92,10 @@ function selectPlayer(elem, team, index) {
 				.then((json) => {
 					results.innerHTML = "";
 					json.forEach((item) => {
+						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
-								<img src="` + item.img_url + `">
+							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `'})">
+								<img src="` + img + `">
 								<p>` + item.name + `</p>
 							</div>
 						`;
@@ -124,9 +125,10 @@ function selectTeam(elem, team) {
 				.then((json) => {
 					results.innerHTML = "";
 					json.forEach((item) => {
+						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
-								<img src="` + item.img_url + `">
+							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `'})">
+								<img src="` + img + `">
 								<p>` + item.name + `</p>
 							</div>
 						`;
@@ -176,12 +178,6 @@ function submitMatch() {
 			if (!participants) {
 				return false;
 			}
-			/* participants.forEach((participant) => {
-				if (!participant) {
-					console.log("C");
-					return false;
-				}
-			}); */
 			for (let i in participants) {
 				let participant = participants[i];
 				if (!participant) {
@@ -197,11 +193,6 @@ function submitMatch() {
 			let participants = teams[Teams.TEAM2].participants;
 			if (!participants)
 				return false;
-			// participants.forEach((participant) => {
-			// 	if (!participant) {
-			// 		return false;
-			// 	}
-			// });
 			for (let i in participants) {
 				let participant = participants[i];
 				if (!participant) {
