@@ -15,12 +15,28 @@
         //     (Team1='TeamName' AND Result=\"Team1Win\" AND IsVerified = true) OR (Team2='TeamName' AND Result=\"Team2Win\" AND IsVerified = true)
         // ) as windata;\"");
 
+        $info["img_small"] = true;
+                            $info["show_stats"] = true;
+                            $info["show_score"] = false; //Ändra när ELO i DB är fixat
+                            $info["stats_short"] = true;
+                            $info["show_rank"] = true;
+                            $info["img_small"] = [
+                                    "leave" => false,
+                                    "invite_controls" => false
+                            ];
+                            $info["buttons"] = [
+                                "kick"=> false
+                            ];
+
         if ($result = mysqli_query($link, $Orderbyquery)){
 
-            while ($resArray = mysqli_fetch_assoc($result)) {
+            while ($resArray = mysqli_fetch_assoc($result)) { //Ändra antalet som läses in?
                 $name = $resArray["TeamName"];
-                $info = get_specteaminfo($link, $name);
-                echo $info['img_url'];
+                //$info = get_specteaminfo($link, $name);
+                //echo $info['img_url']; //Ropa på profile box member här?
+                echo '<div  class="flex-row">';
+                profile_box_member (get_specteaminfo($link, $name),$info);
+                echo '</div>';
             }
 
         }
