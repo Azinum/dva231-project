@@ -86,6 +86,7 @@ function selectPlayer(elem, team, index) {
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
+					results.innerHTML = "";
 					json.forEach((item) => {
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
@@ -97,6 +98,7 @@ function selectPlayer(elem, team, index) {
 				});
 		}
 	);
+	onSearchEvent();
 }
 
 function selectTeam(elem, team) {
@@ -116,6 +118,7 @@ function selectTeam(elem, team) {
 			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
+					results.innerHTML = "";
 					json.forEach((item) => {
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + item.img_url + `', name: '` + item.name + `'})">
@@ -127,13 +130,13 @@ function selectTeam(elem, team) {
 				});
 		}
 	);
+	onSearchEvent();
 }
 
 function doSearch(clickCallback, searchCallback) {
 	toggleOverlay();
 	onClickEvent = clickCallback;
 	onSearchEvent = searchCallback;
-	onSearchEvent();
 }
 
 function onClick(data) {
