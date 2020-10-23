@@ -151,6 +151,7 @@
     /*
         Layout: [
             "img_small" => <boolean>,
+            "is_leader" => <boolean>,
             "show_stats" => <boolean>,
             "stats_short" => <boolean>,
             "on_click" => <string w/ js onclick function>,
@@ -167,7 +168,8 @@
 
     function profile_box_member($data, $layout) {
         ?>
-            <div class="profile-box ui-box shadow" <?php echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?>>
+            <div class="profile-box ui-box shadow <?php echo $layout["is_leader"] ? "leader" : ""; ?>" <?php
+                echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?> data-user-id="<?php echo $data["user_id"]; ?>">
                 <div class="profile">
                     <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
                         <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
