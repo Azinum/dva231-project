@@ -3,7 +3,7 @@
     require_once("../../dbfunctions/search.php");
 
     header("Content-type: application/json;");
-    if (isset($_GET["q"]) && strlen($_GET["q"]) >= 1) {
+    if (isset($_GET["q"])) {
         echo json_encode(search_teams($link, $_GET["q"]));
 	}
 	else {
