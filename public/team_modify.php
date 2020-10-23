@@ -77,13 +77,18 @@
 						forEach($members as $member) {
 							profile_box_member($member, [
                                 "img_small" => false,
+                                "is_leader" => $member["user_id"] == $teamdata["leader"],
                                 "show_stats" => false,
                                 "stats_short" => false,
                                 "show_rank" => false,
                                 "show_score" => false,
-                                "buttons" => [ "kick" => $member["user_id"] != $teamdata["leader"] ],
+                                "buttons" => [
+                                    "kick" => $member["user_id"] != $teamdata["leader"],
+                                    "make_leader" => $member["user_id"] != $teamdata["leader"]
+                                ],
                                 "button_clicks" => [
-                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")'
+                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")',
+                                    "make_leader" => 'makeLeader(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")',
                                 ]
 							]);
 						}
