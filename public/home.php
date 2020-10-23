@@ -3,6 +3,9 @@ require_once("../layout/profileboxes.php");
 require_once("../dbfunctions/get_specteaminfo.php");
 require_once("../dbfunctions/get_specuserinfo.php");
 require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/dbconnection.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/get_teamsbyrank.php"); //Ta bort denna efter testing
+
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +112,8 @@ require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
     </table>
     <!-- <div class="bg"></div> -->
 
-    <?php get_specuserinfo(1) ?>
+    <?php get_teamsbyrank($link) ?>
+
 </body>
 
 </html>
