@@ -169,15 +169,25 @@ function submitMatch() {
 		["Please select team 2", () => { return teams[Teams.TEAM2]; }],
 		["Missing participants in team 1", () => {
 			let team = teams[Teams.TEAM1];
-			if (!team)
+			if (!team) {
 				return false;
+			}
 			let participants = teams[Teams.TEAM1].participants;
-			if (!participants)
+			if (!participants) {
 				return false;
-			participants.forEach((participant) => {
-				if (!participants)
+			}
+			/* participants.forEach((participant) => {
+				if (!participant) {
+					console.log("C");
 					return false;
-			});
+				}
+			}); */
+			for (let i in participants) {
+				let participant = participants[i];
+				if (!participant) {
+					return false;
+				}
+			}
 			return true;
 		}],
 		["Missing participants in team 2", () => {
@@ -187,10 +197,17 @@ function submitMatch() {
 			let participants = teams[Teams.TEAM2].participants;
 			if (!participants)
 				return false;
-			participants.forEach((participant) => {
-				if (!participants)
+			// participants.forEach((participant) => {
+			// 	if (!participant) {
+			// 		return false;
+			// 	}
+			// });
+			for (let i in participants) {
+				let participant = participants[i];
+				if (!participant) {
 					return false;
-			});
+				}
+			}
 			return true;
 		}]
 	]);
