@@ -25,7 +25,8 @@
                                     "invite_controls" => false
                             ];
                             $info["buttons"] = [
-                                "kick"=> false
+                                "leave"=> false,
+                                "invite_controls"=>false
                             ];
 
         if ($result = mysqli_query($link, $Orderbyquery)){
@@ -35,7 +36,7 @@
                 //$info = get_specteaminfo($link, $name);
                 //echo $info['img_url']; //Ropa på profile box member här?
                 echo '<div  class="flex-row">';
-                profile_box_member (get_specteaminfo($link, $name),$info);
+                profile_box_team (get_specteaminfo($link, $name),$info);
                 echo '</div>';
             }
 
