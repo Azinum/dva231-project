@@ -19,17 +19,14 @@
 
             while ($resArray = mysqli_fetch_assoc($result)) {
                 $name = $resArray["TeamName"];
-                echo $name;
                 $info = get_specteaminfo($link, $name);
-
-                
                 echo $info['img_url'];
             }
 
-            }
+        }
 
             
-        }
+    }
     
 
 

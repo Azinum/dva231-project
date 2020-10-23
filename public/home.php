@@ -101,7 +101,7 @@ require_once("../dbfunctions/get_teamsbyrank.php"); //Ta bort denna efter testin
                             $info["buttons"] = [
                                 "kick"=> false
                             ];
-                            profile_box_member (get_specteaminfo("TeamName"),$info);
+                            profile_box_member (get_specteaminfo($link, "TeamName"),$info);
                             ?>
                         </div>
 
