@@ -1,22 +1,22 @@
 <?php
-     //Get specified team's info
-     function get_specteaminfo ($link, $name) {
+    //Get specified team's info
+	function get_specteaminfo ($link, $name) {
         $escName = mysqli_real_escape_string($link, $name);
 
         $Teamquery = "SELECT * FROM Team WHERE TeamName = '". $escName ."'";
 
-        $Winsquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.
-            $escName .' where (Team1='.
-            $escName .' AND Result="Team1Win" AND IsVerified = true) OR (Team2='.
-            $escName .' AND Result="Team2Win" AND IsVerified = true);';
+        $Winsquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
+            $escName .'" where (Team1="'.
+            $escName .'" AND Result="Team1Win" AND IsVerified = true) OR (Team2="'.
+            $escName .'" AND Result="Team2Win" AND IsVerified = true);';
 
-        $Lossesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.
-            $escName .' where (Team2='.
-            $escName .' AND Result="Team1Win" AND IsVerified = true) OR (Team1='.
-            $escName. ' AND Result="Team2Win" AND IsVerified = true);';
+        $Lossesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
+            $escName .'" where (Team2="'.
+            $escName .'" AND Result="Team1Win" AND IsVerified = true) OR (Team1="'.
+            $escName. '" AND Result="Team2Win" AND IsVerified = true);';
 
-        $Matchesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName='.
-            $escName.' WHERE IsVerified = true;';
+        $Matchesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
+            $escName.'" WHERE IsVerified = true;';
 
         if ($result = mysqli_query($link, $Teamquery)){
 
