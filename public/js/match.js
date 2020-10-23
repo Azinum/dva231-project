@@ -15,12 +15,16 @@ const Teams = {
 
 var Team = function() {
 	this.name = "";
-	this.participants = [];
+	this.participants = [
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		undefined
+	];
 }
 
-var teams = [
-
-];
+var teams = [];
 
 function toggleOverlay() {
 	searchOverlay = !searchOverlay;
@@ -142,6 +146,27 @@ function doSearch(clickCallback, searchCallback) {
 function onClick(data) {
 	toggleOverlay();
 	onClickEvent(data);
+}
+
+function submitMatch() {
+	if (!teams[Teams.TEAM1]) {
+		errorMessage("Please select team 1");
+	}
+	else if (!teams[Teams.TEAM2]) {
+		errorMessage("Please select team 2");
+	}
+	for (let i in teams[Teams.TEAM1].participants) {
+		if (!teams[Teams.TEAM1].participants[i]) {
+			errorMessage("Missing participants in team 1");
+			return;
+		}
+	}
+	for (let i in teams[Teams.TEAM2].participants) {
+		if (!teams[Teams.TEAM2].participants[i]) {
+			errorMessage("Missing participants in team 2");
+			return;
+		}
+	}
 }
 
 ((func) => {

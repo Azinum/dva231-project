@@ -53,7 +53,8 @@
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 4);">
 				</div>
 			</div>
-			<div class="line-wide"></div>
+
+			<br><div class="line-wide"></div>
 
 			<div class="match-content-box shadow">
 				<h2>Team 2 (opponent)</h2>
@@ -72,7 +73,8 @@
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 4);">
 				</div>
 			</div>
-			<div class="line-wide"></div>
+
+			<br><div class="line-wide"></div>
 
 			<h2>Result</h2>
 
@@ -101,7 +103,8 @@
 
 			<br>
 
-			<input value="SUBMIT" type="submit" class="button button-submit"></input>
+			<!-- <input value="SUBMIT" type="submit" class="button button-submit" onclick="submitMatch();"></input> -->
+			<div class="button button-submit" onclick="submitMatch();">SUBMIT</div>
 		</form>
 	</div>
 <?php page_end(); ?>
