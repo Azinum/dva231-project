@@ -22,6 +22,7 @@
         <link rel="stylesheet" type="text/css" href="/css/common.css">
         <link rel="stylesheet" type="text/css" href="/css/profile_box.css">
         <?php searchoverlay_headtags(); ?>
+        <script src="/js/team_modify.js"></script>
     </head>
     <body>
         <?php include("navbarexample.php"); ?>
@@ -73,12 +74,15 @@
 
 						forEach($members as $member) {
 							profile_box_member($member, [
-									"img_small" => false,
-									"show_stats" => false,
-									"stats_short" => false,
-									"show_rank" => false,
-									"show_score" => false,
-									"buttons" => [ "kick" => true ]
+                                "img_small" => false,
+                                "show_stats" => false,
+                                "stats_short" => false,
+                                "show_rank" => false,
+                                "show_score" => false,
+                                "buttons" => [ "kick" => true ],
+                                "button_clicks" => [
+                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")'
+                                ]
 							]);
 						}
 
@@ -86,7 +90,8 @@
                     </div>
 
                     <div class="add-member">
-                        <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'), '<?php echo $_GET["team"]; ?>');">
+                        <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'), '<?php
+                        echo htmlspecialchars($_GET["team"]); ?>');">
                             <img src="/img/plus.svg">
                         </div>
                     </div>

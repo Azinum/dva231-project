@@ -30,4 +30,14 @@
         return $return;
     }
 
+    function kick_team_member($link, $team_name, $user_id) {
+        $query =    'delete from TeamMemberships where TeamName="'. mysqli_real_escape_string($link, $team_name).
+                    '" and Member="'. mysqli_real_escape_string($link, $user_id) .'";';
+
+        if ($result = mysqli_query($link, $query)) {
+            return true;
+        }
+        return false;
+    }
+
 ?>

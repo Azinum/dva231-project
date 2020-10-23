@@ -127,15 +127,19 @@
             "stats_short" => <boolean>,
             "show_rank" => <boolean>,
             "show_score" => <boolean>,
+            "on_click" => <string w/ js onclick function>,
             "buttons" => [
                 "kick" => <boolean>
+            ],
+            "button_clicks" => [
+                "kick" => <string w/ js function to be run on click>
             ]
         ]
     */
 
     function profile_box_member($data, $layout) {
         ?>
-            <div class="profile-box ui-box shadow" onclick="teambox_selected(this, '<?php echo htmlspecialchars($data["name"]); ?>');">
+            <div class="profile-box ui-box shadow" <?php echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?>>
                 <div class="profile">
                     <?php if ($layout["show_rank"]) { ?>
                         <div class="rank">
@@ -175,7 +179,8 @@
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["kick"]) { ?>
-                    <div class="button button-deny">
+                    <div class="button button-deny" <?php 
+                        echo isset($layout["button_clicks"]) ? "onclick=\"". htmlspecialchars($layout["button_clicks"]["kick"]) ."\"" : "";?>>
                         Kick
                     </div>
                 <?php } ?>
