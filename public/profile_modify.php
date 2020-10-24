@@ -61,8 +61,10 @@
                                             "name" => "Good Team3",
                                             "img_url" => "/img/tmp_profile.jpg",
                                         ],[
-                                            "img_smal" => false,
+                                            "img_small" => false,
                                             "show_stats" => false,
+                                            "show_rank" => false,
+                                            "show_score" => false,
                                             "buttons" => [ "leave" => false, "invite_controls" => true ]
                                     ]);
                                 ?>
@@ -75,8 +77,10 @@
                                             "name" => "Good Team3",
                                             "img_url" => "/img/tmp_profile.jpg",
                                         ],[
-                                            "img_smal" => false,
+                                            "img_small" => false,
                                             "show_stats" => false,
+                                            "show_rank" => false,
+                                            "show_score" => false,
                                             "buttons" => [ "leave" => true, "invite_controls" => false ]
                                     ]);
                                 ?>
