@@ -1,6 +1,6 @@
 <?php
 
-  //Get specified teams the speicifed user is a member of
+  //Get teams the speicifed user is a member of
   function get_userteams ($id) {  //Passera link funktionen in?
     include("dbconnection.php");
 

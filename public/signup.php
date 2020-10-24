@@ -28,7 +28,7 @@ require_once("../dbfunctions/register_user.php");
                 </tr>
                 <tr>
                     <td> </td>
-                    <td><input class="button button-submit" name="signup" type="submit" value="Sign Up"></td> <!-- Javascript? -->
+                    <td><input class="button button-submit" name="signup" type="submit" value="Sign Up"></td>
                     <td> </td>
                 </tr>
             </form>

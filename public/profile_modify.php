@@ -1,4 +1,4 @@
-<?php
+<?php session_start(); //Temp?
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
@@ -61,8 +61,10 @@
                                             "name" => "Good Team3",
                                             "img_url" => "/img/tmp_profile.jpg",
                                         ],[
-                                            "img_smal" => false,
+                                            "img_small" => false,
                                             "show_stats" => false,
+                                            "show_rank" => false,
+                                            "show_score" => false,
                                             "buttons" => [ "leave" => false, "invite_controls" => true ]
                                     ]);
                                 ?>
@@ -75,8 +77,10 @@
                                             "name" => "Good Team3",
                                             "img_url" => "/img/tmp_profile.jpg",
                                         ],[
-                                            "img_smal" => false,
+                                            "img_small" => false,
                                             "show_stats" => false,
+                                            "show_rank" => false,
+                                            "show_score" => false,
                                             "buttons" => [ "leave" => true, "invite_controls" => false ]
                                     ]);
                                 ?>
@@ -84,16 +88,17 @@
                             <div class="flex-layout-section flex-layout-section-wide">
                                 <h3>Create new team:</h3>
                                     <div class="team-bio">
-                                        <form>
+                                        <form method="post" action="post_regteam.php">
                                             <div class="img-controls ui-box shadow">
                                                 <div class="profilepic">
                                                     <img src="/img/tmp_profile.jpg">
                                                 </div>
-                                                <input type="file" placeholder="Profile picture">
+                                                <input type="file" placeholder="Profile picture" name="img">
                                             </div>
                                             <div class="other-controls">
-                                                <input class="text-input-field shadow" type="text" placeholder="Name">
-                                                <textarea class="text-input-field shadow">Bio</textarea>
+                                                <input class="text-input-field shadow" type="text" placeholder="Name" name="teamname">
+                                                <textarea class="text-input-field shadow" name="bio">Bio</textarea>
+                                                <input type="submit" class="button button-submit">
                                             </div>
                                         </form>
                                     </div>
