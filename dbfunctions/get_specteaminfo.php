@@ -28,10 +28,11 @@
 
             return[ //Hur hanterar vi ELO i db?
                "name"=>$resArray['TeamName'],
+               "disp_name"=>$resArray['DisplayName'];
                "img_url"=>$resArray['TeamImage'],
-               "rank"=> $resArray['TeamRanking'],
-               "bio"=> $resArray['Bio'],
-               "leader" =>$resArray['TeamLeader'],
+               "rank"=>$resArray['TeamRanking'],
+               "bio"=>$resArray['Bio'],
+               "leader"=>$resArray['TeamLeader'],
                "is_banned"=>$resArray['IsBanned'],
                "stats" => [
                     "won"=>mysqli_fetch_assoc(mysqli_query($link, $Winsquery))['Number'],
