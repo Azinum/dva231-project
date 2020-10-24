@@ -36,6 +36,10 @@ body, html {
     border: 0.1em solid var(--blue1);
 }
 
+.text-input-field.error {
+    border: 0.1em solid var(--red1);
+}
+
 a {
     text-decoration: underline;
     color: white;
