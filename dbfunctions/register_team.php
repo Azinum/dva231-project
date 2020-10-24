@@ -9,12 +9,9 @@ function register_team ($link) {
     $escName = mysqli_real_escape_string($link, $userInput['teamname']);//Hämta värden från POST
     $escBio = mysqli_real_escape_string($link, $userInput['bio']);
     $escImg = mysqli_real_escape_string($link, $userInput['img']); //Denna kan vara lite tokig
-    $escLeader = mysqli_real_escape_string($link, "1");//Hämta skaparens id, med hjälp av authentication? Just nu default till 1
+    $escLeader = mysqli_real_escape_string($link, $_SESSION['uid']);//Hämta skaparens id, med hjälp av authentication? Just nu default till 1
     $createteamquery = 'INSERT INTO Team (TeamName, TeamRanking, TeamImage, Bio, TeamLeader,isBanned, DisplayName) VALUES ("'.$escName.'",1200,"'.$escImg.'","'.$escBio.'","'.$escLeader.'",false,"'.$escName.'")';
     $namecheckquery = 'SELECT TeamName FROM Team WHERE TeamName = "'.$escName.'"';
-    
-    
-    echo mysqli_num_rows (mysqli_query($link, $namecheckquery));
 
     if (strlen($escName) >= 3) {
         if ( !mysqli_num_rows (mysqli_query($link, $namecheckquery)) > 0)  {//Kollar om det finns någon krock med lagnamnet

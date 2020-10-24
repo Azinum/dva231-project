@@ -8,7 +8,7 @@ require_once("../dbfunctions/dbconnection.php"); //Ta bort denna efter testing
 
 <head>
   <meta charset="utf-8">
-  <title>Scoreboard: Sign up</title>
+  <title>Scoreboard: Create Team</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/signup.css">
   <link rel="stylesheet" href="css/common.css">
@@ -17,7 +17,7 @@ require_once("../dbfunctions/dbconnection.php"); //Ta bort denna efter testing
 <body>
     <?php include("navbar_final.php"); ?>
     <div class="ui-box shadow" id="back-box">
-        <h2>Sign up</h2>
+        <h2>Create Team</h2>
         <?php register_team($link) ?>
 
         <!-- Back to sign up page button? -->
