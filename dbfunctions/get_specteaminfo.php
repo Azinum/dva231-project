@@ -28,7 +28,7 @@
 
             return[ //Hur hanterar vi ELO i db?
                "name"=>$resArray['TeamName'],
-               "disp_name"=>$resArray['DisplayName'];
+               "disp_name"=>$resArray['DisplayName'],
                "img_url"=>$resArray['TeamImage'],
                "rank"=>$resArray['TeamRanking'],
                "bio"=>$resArray['Bio'],
