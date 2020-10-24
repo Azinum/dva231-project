@@ -1,8 +1,33 @@
 <?php
+    require_once("../dbfunctions/search_mail.php");
 
-function set_loggedin($id) {
-    $_SESSION["uid"] = $id;
-    $_SESSION["isLoggedin"] = true;
+function set_loggedin($link) {
+    $mail = mysqli_real_escape_string($link ,$_POST["email"]);
+    $pass = mysqli_real_escape_string($link ,$_POST["password"]);
+    if (empty($pass) || empty($mail)) {
+        echo"Fields cannot be empty!";
+        die();
+    } 
+    $query = "SELECT PasswordHash, Id FROM User WHERE Email = '$mail'";
+    if($result = mysqli_query($link, $query)) {
+        $resArray = mysqli_fetch_assoc($result);
+        if (search_mail($link,$mail)) {
+            if (password_verify($pass, $resArray['PasswordHash'])){
+                $_SESSION["uid"] = $resArray['Id'];
+                $_SESSION["isLoggedin"] = true;
+                header('location:home.php');
+            }
+            else {
+                echo "Incorrect password!";
+            }
+        }
+        else {
+            echo "EMAIL Address does not exist in database.";
+        }
+
+
+        
+    }
 }
 
 function set_loggedout() {

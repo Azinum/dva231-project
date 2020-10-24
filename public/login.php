@@ -35,7 +35,6 @@ require_once("../dbfunctions/dbconnection.php"); ?>
     <?php 
 if (isset($_POST['login'])) {   
         set_loggedin($link);
-        echo"Oh yes";
     }
 ?>
 </body>
