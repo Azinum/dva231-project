@@ -1,14 +1,16 @@
 <?php
 require_once("../layout/profileboxes.php");
-require_once("../dbfunctions/get_specteaminfo.php");
-require_once("../dbfunctions/get_specuserinfo.php");
+require_once("../layout/leaderboard.php");
+require_once("../dbfunctions/get_specteaminfo.php");//Ta bort denna efter testing
+require_once("../dbfunctions/get_specuserinfo.php");//Ta bort denna efter testing
 require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
-require_once("../dbfunctions/dbconnection.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/dbconnection.php");
 require_once("../dbfunctions/get_usermatches.php"); //Ta bort denna efter testing
-require_once("../dbfunctions/get_teamsbyrank.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/get_teamsbyrank.php"); 
 require_once("../dbfunctions/get_matchuteam.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/get_membermatches.php"); //Ta bort denna efter testing
-require_once("../dbfunctions/register_team.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/set_teamstatus.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/set_userstatus.php"); //Ta bort denna efter testing
 
 ?>
 
@@ -42,7 +44,7 @@ require_once("../dbfunctions/register_team.php"); //Ta bort denna efter testing
                     <div class="flextable">
                         <!-- Table begin -->
 
-                        <?php get_teamsbyrank($link) ?>
+                        <?php build_leaderboard($link,get_teamsbyrank($link)) ?>
 
                     </div> <!-- Table end -->
                 </div>
@@ -50,9 +52,7 @@ require_once("../dbfunctions/register_team.php"); //Ta bort denna efter testing
         </tr>
     </table>
     <!-- <div class="bg"></div> -->
-    <?php $test = get_membermatches($link,'Super Mega Awesome Team!!');
-    
-    register_team($link);
+    <?php //Ta bort detta efter testing
     ?>
 
 </body>
