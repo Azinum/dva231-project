@@ -1,4 +1,4 @@
-<?php
+<?php session_start(); //Temp?
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
@@ -88,16 +88,17 @@
                             <div class="flex-layout-section flex-layout-section-wide">
                                 <h3>Create new team:</h3>
                                     <div class="team-bio">
-                                        <form>
+                                        <form method="post" action="post_regteam.php">
                                             <div class="img-controls ui-box shadow">
                                                 <div class="profilepic">
                                                     <img src="/img/tmp_profile.jpg">
                                                 </div>
-                                                <input type="file" placeholder="Profile picture">
+                                                <input type="file" placeholder="Profile picture" name="img">
                                             </div>
                                             <div class="other-controls">
-                                                <input class="text-input-field shadow" type="text" placeholder="Name">
-                                                <textarea class="text-input-field shadow">Bio</textarea>
+                                                <input class="text-input-field shadow" type="text" placeholder="Name" name="teamname">
+                                                <textarea class="text-input-field shadow" name="bio">Bio</textarea>
+                                                <input type="submit" class="button button-submit">
                                             </div>
                                         </form>
                                     </div>
