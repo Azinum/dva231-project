@@ -35,9 +35,6 @@
             while ($resArray = mysqli_fetch_assoc($result)) { //Ändra antalet som läses in?
                 $name[$var] = $resArray["TeamName"];
                 $var++;
-                    //echo '<div  class="flex-row">';
-                    //profile_box_team (get_specteaminfo($link, $name),$info);
-                    //echo '</div>';
             }
             return $name;
 

@@ -3,7 +3,7 @@
 	<?php include("navbar_final.php"); ?>
 	<div class="match-search-overlay">
 		<div class="match-search-overlay-content">
-			<div class="closebox shadow" onclick="toggleOverlay()">x</div>
+			<div class="closebox shadow" onclick="toggleOverlay();">x</div>
 
 			<div class="overlay-popup match-content-box shadow">
 				Error: This is a very big error message!

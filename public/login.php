@@ -1,3 +1,6 @@
+<?php session_start();
+require_once("../dbfunctions/dbconnection.php"); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,23 +13,31 @@
 </head>
 
 <body>
+    
     <?php include("navbar_final.php"); ?>
     <div id="back-box" class=" ui-box shadow">
         <h2>Sign in</h2>
         <table>
             <form method="post">
                 <tr>
-                    <td><input class="text-input-field" type="text" name="username" placeholder="E-Mail"> </td>
+                    <td><input class="text-input-field" type="text" name="email" placeholder="E-Mail"> </td>
                 </tr>
                 <tr>
                     <td><input class="text-input-field" type="password" name="password" placeholder="Password"></td>
                 </tr>
                 <tr>
-                    <td><input class="button button-submit" type="submit" value="Sign in"></td>
+                    <td><input class="button button-submit" type="submit" name="login" value="Sign in"></td>
                 </tr>
             </form>
             </table>
     </div>
+
+    <?php 
+if (isset($_POST['login'])) {   
+        set_loggedin($link);
+        echo"Oh yes";
+    }
+?>
 </body>
 
 </html>
