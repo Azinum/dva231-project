@@ -132,39 +132,46 @@ function submitTeamImage(input, team) {
             let data = new FormData();
             data.append('image', input.files[0]);
             data.append('team', team);
-            fetch("/ajax/team_set_img.php", {
+            return fetch("/ajax/team_set_img.php", {
                 method: "POST",
                 body: data
             }).then((response) => {
-                console.log(response);
+                return (response.status == 200);
             });
         } else {
             alert("Image size is too large! (Max. 3MB)");
+            return false;
         }
+    } else {
+        return true;    // No failiure, since we didn't even have to upload.
     }
 }
 
-function submitTeamInfo(form, team) {
-    if (form.querySelector("#display-name").value.length < 3) {
-        form.querySelector("#display-name").classList.add("error");
+async function submitTeamInfo(form, team) {
+    if (await submitTeamImage(form.querySelector("#profile-pic"), team)) {
+        if (form.querySelector("#display-name").value.length < 3) {
+            form.querySelector("#display-name").classList.add("error");
+        } else {
+            form.querySelector("#display-name").classList.remove("error");
+            fetch("/ajax/modify_team_profile.php?" + new URLSearchParams({
+                "team": team,
+                "name": form.querySelector("#display-name").value,
+                "bio": form.querySelector("#bio").value
+            })).then((response) => {
+                if (response.status == 200) {
+                    alert("Updated team info");
+                } else {
+                    response.json().then((json) => {
+                        if (json.status == "name in use") {
+                            alert("The name \""+form.querySelector("#display-name").value+"\" is already in use!");
+                        } else {
+                            alert("An unexpected error occured! Please try again later.");
+                        }
+                    });
+                }
+            });
+        }
     } else {
-        form.querySelector("#display-name").classList.remove("error");
-        fetch("/ajax/modify_team_profile.php?" + new URLSearchParams({
-            "team": team,
-            "name": form.querySelector("#display-name").value,
-            "bio": form.querySelector("#bio").value
-        })).then((response) => {
-            if (response.status == 200) {
-                alert("Updated team info");
-            } else {
-                response.json().then((json) => {
-                    if (json.status == "name in use") {
-                        alert("The name \""+form.querySelector("#display-name").value+"\" is already in use!");
-                    } else {
-                        alert("An unexpected error occured! Please try again later.");
-                    }
-                });
-            }
-        });
+        console.log("Nuh");
     }
 }
