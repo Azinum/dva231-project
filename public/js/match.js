@@ -95,7 +95,21 @@ function selectPlayer(elem, team, index) {
 				.then((res) => res.json())
 				.then((json) => {
 					results.innerHTML = "";
-					json.forEach((item) => {
+					json.filter((item) => {
+						let currentTeam = teams[team];
+						if (!currentTeam) {
+							return true;
+						}
+						for (let i in currentTeam.participants) {
+							let participant = currentTeam.participants[i];
+							if (!participant)
+								continue;
+							if (participant.name == item.name) {
+								return false;
+							}
+						}
+						return true;
+					}).forEach((item) => {
 						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `', user_id: ` + item.user_id + `})">
@@ -134,13 +148,16 @@ function selectTeam(elem, team) {
 		() => {
 			let inputText = inputField.value;
 			results.innerHTML = "";
-			// .includes
 			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
 					results.innerHTML = "";
-					json.forEach((item) => {
-						// TODO(lucas): Fix invalid image urls
+					json.filter((item) => {
+						if (!teams[team]) {
+							return true;
+						}
+						return item.display_name !== teams[team].display_name;
+					}).forEach((item) => {
 						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `', display_name: '` + item.display_name + `'})">
