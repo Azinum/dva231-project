@@ -4,7 +4,7 @@ require_once("../dbfunctions/register_user.php");
 ?>
 <!DOCTYPE html>
 <html>
-
+<!-- Lägg till checks -->
 <head>
   <meta charset="utf-8">
   <title>Scoreboard: Sign up</title>
