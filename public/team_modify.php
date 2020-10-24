@@ -25,8 +25,9 @@
         <script src="/js/team_modify.js"></script>
     </head>
     <body>
-        <?php include("navbarexample.php"); ?>
         <?php searchoverlay(); ?>
+        <?php require_once("../dbfunctions/get_specteaminfo.php"); ?>
+        <?php $teamdata = get_specteaminfo($link, $_GET["team"]); ?>
         <div class="content-column">
             <div class="shadow tab-container">
                 <?php
@@ -39,19 +40,21 @@
                     ?>
                         <div class="team-bio flex-layout-section-wide flex-layout-section">
                             <h3>Team Profile:</h3>
-                            <form>
+                            <form id="team-profile" onsubmit="event.preventDefault();">
                                 <div class="img-controls shadow ui-box">
                                     <div class="profilepic">
-                                        <img src="/img/tmp_profile.jpg">
+                                        <img src="<?php echo $teamdata["img_url"] ? htmlspecialchars($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                                     </div>
-                                    <input type="file" placeholder="Profile picture">
+                                    <input type="file" placeholder="Profile picture" id="profile-pic">
                                 </div>
                                 <div class="other-controls">
-                                    <input class="text-input-field shadow" type="text" placeholder="Name">
-                                    <textarea class="text-input-field shadow" >Bio</textarea>
+                                    <input  class="text-input-field shadow" type="text" placeholder="Name" id="display-name" minlength="3"
+                                            value="<?php echo htmlspecialchars($teamdata["disp_name"]); ?>">
+                                    <textarea class="text-input-field shadow" id="bio"><?php echo htmlspecialchars($teamdata["bio"]); ?></textarea>
                                 </div>
                                 <div class="button-container">
-                                    <input type="submit" class="button button-submit" value="Apply">
+                                    <input type="submit" class="button button-submit" value="Apply"
+                                            onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo htmlspecialchars($_GET["team"]); ?>')">
                                 </div>
                             </form>
                             <div class="button-container">
@@ -70,9 +73,7 @@
                         <?php
 
                         require_once("../dbfunctions/team_members.php");
-                        require_once("../dbfunctions/get_specteaminfo.php");
 						$members = get_team_members($link, $_GET["team"]);
-                        $teamdata = get_specteaminfo($link, $_GET["team"]);
 
 						forEach($members as $member) {
 							profile_box_member($member, [

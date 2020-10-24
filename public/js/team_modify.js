@@ -110,3 +110,28 @@ function makeLeader(elem, id, team) {
             });
     }
 }
+
+function submitTeamInfo(form, team) {
+    if (form.querySelector("#display-name").value.length < 3) {
+        form.querySelector("#display-name").classList.add("error");
+    } else {
+        form.querySelector("#display-name").classList.remove("error");
+        fetch("/ajax/modify_team_profile.php?" + new URLSearchParams({
+            "team": team,
+            "name": form.querySelector("#display-name").value,
+            "bio": form.querySelector("#bio").value
+        })).then((response) => {
+            if (response.status == 200) {
+                alert("Updated team info");
+            } else {
+                response.json().then((json) => {
+                    if (json.status == "name in use") {
+                        alert("The name \""+form.querySelector("#display-name").value+"\" is already in use!");
+                    } else {
+                        alert("An unexpected error occured! Please try again later.");
+                    }
+                });
+            }
+        });
+    }
+}
