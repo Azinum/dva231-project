@@ -1,10 +1,9 @@
-<?php //session_start();
+<?php
 //Ta in information med get. Sätt in dessa värden in i query. Kör query, kolla om lyckades. Bam
 //Kolla om användarnamnet är taget, isåfall be om ett nytt 
 
 
-function register_user () { 
-    include("dbconnection.php");
+function register_user ($link) { 
 
     $userInput = $_POST; //Username, Email, Password måste in (hashning av password)
     //ProfileImageURL, Bio, IsAdmin, IsBanned, ID sets default

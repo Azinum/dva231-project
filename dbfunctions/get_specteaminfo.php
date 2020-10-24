@@ -3,7 +3,7 @@
 	function get_specteaminfo ($link, $name) {
         $escName = mysqli_real_escape_string($link, $name);
 
-        $Teamquery = "SELECT * FROM Team WHERE TeamName = '". $escName ."'";
+        $Teamquery = "SELECT * FROM Team WHERE TeamName = '". $escName ."' AND IsDisabled = 0;";
 
         $Winsquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
             $escName .'" where (Team1="'.

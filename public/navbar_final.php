@@ -6,8 +6,8 @@
 <body>
 
 	<div class= "navbar">
-		<a href= "home.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>
-		<a href= "home.php" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>
+		<a href= "match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>
+		<a href= "team_modify.php" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>
 		<a href="home.php"> Search <img src="img/searchicon.webp" class="nav-image" > </a>
 
 		<div class="dropdown">
