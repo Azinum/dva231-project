@@ -31,14 +31,15 @@
 
         if ($result = mysqli_query($link, $Orderbyquery)){
 
+            $var = 0;
             while ($resArray = mysqli_fetch_assoc($result)) { //Ändra antalet som läses in?
-                $name = $resArray["TeamName"];
-                //$info = get_specteaminfo($link, $name);
-                //echo $info['img_url']; //Ropa på profile box member här?
-                echo '<div  class="flex-row">';
-                profile_box_team (get_specteaminfo($link, $name),$info);
-                echo '</div>';
+                $name[$var] = $resArray["TeamName"];
+                $var++;
+                    //echo '<div  class="flex-row">';
+                    //profile_box_team (get_specteaminfo($link, $name),$info);
+                    //echo '</div>';
             }
+            return $name;
 
         }
 
