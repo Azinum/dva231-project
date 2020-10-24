@@ -1,4 +1,5 @@
 <?php session_start();
+require_once("../dbfunctions/dbconnection.php");
 require_once("../dbfunctions/register_user.php");
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ require_once("../dbfunctions/register_user.php");
     <?php include("navbar_final.php"); ?>
     <div class="ui-box shadow" id="back-box">
         <h2>Sign up</h2>
-        <?php register_user() ?>
+        <?php register_user($link) ?>
 
         <!-- Back to sign up page button? -->
     </div>

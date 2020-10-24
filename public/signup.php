@@ -1,5 +1,6 @@
 <?php session_start();
 require_once("../dbfunctions/register_user.php");
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php session_start();
+require_once("../dbfunctions/dbconnection.php"); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +20,7 @@
         <table>
             <form method="post">
                 <tr>
-                    <td><input class="text-input-field" type="text" name="username" placeholder="E-Mail"> </td>
+                    <td><input class="text-input-field" type="text" name="email" placeholder="E-Mail"> </td>
                 </tr>
                 <tr>
                     <td><input class="text-input-field" type="password" name="password" placeholder="Password"></td>
@@ -32,7 +34,7 @@
 
     <?php 
 if (isset($_POST['login'])) {   
-        set_loggedin('1');
+        set_loggedin($link);
         echo"Oh yes";
     }
 ?>
