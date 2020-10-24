@@ -24,8 +24,7 @@
             $resArray = mysqli_fetch_assoc($result);
             
             if (empty($resArray['TeamName'])) {
-                echo "No such team";
-                exit();
+                return false;
             }
 
             return[ //Hur hanterar vi ELO i db?
@@ -42,6 +41,18 @@
                     "part"=>mysqli_fetch_assoc(mysqli_query($link, $Matchesquery))['Number']
                 ]
             ];
+        }
+    }
+
+    function get_teamname($link, $dispName) {
+        $query = "select TeamName from Team where DisplayName='". mysqli_real_escape_string($link, $dispName) ."';";
+        if ($result = mysqli_query($link, $query)) {
+            $resArray = mysqli_fetch_assoc($result);
+            if (empty($resArray['TeamName'])) {
+                return false;
+            } else {
+                return $resArray['TeamName'];
+            }
         }
     }
 

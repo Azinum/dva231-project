@@ -3,11 +3,19 @@
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
     require_once("../dbfunctions/dbconnection.php");
+    require_once("../dbfunctions/get_specteaminfo.php");
 
-	if (!isset($_GET["team"])) { //TODO: does team exist?
+	if (!isset($_GET["team"])) {
 		header("Location: /home.php");
 		die();
 	}
+
+    $teamname = get_teamname($link, $_GET["team"]);
+    if (!$teamname) {
+        header("Location: /home.php");
+        die();
+    }
+    $teamdata = get_specteaminfo($link, $teamname);
 
 ?>
 <!DOCTYPE html>
@@ -25,9 +33,8 @@
         <script src="/js/team_modify.js"></script>
     </head>
     <body>
+        <?php include("navbar_final.php"); ?>
         <?php searchoverlay(); ?>
-        <?php require_once("../dbfunctions/get_specteaminfo.php"); ?>
-        <?php $teamdata = get_specteaminfo($link, $_GET["team"]); ?>
         <div class="content-column">
             <div class="shadow tab-container">
                 <?php
@@ -60,7 +67,7 @@
                                     <textarea class="text-input-field shadow" id="bio"><?php echo htmlspecialchars($teamdata["bio"]); ?></textarea>
                                     <div class="button-container">
                                         <input type="submit" class="button button-submit" value="Apply"
-                                                onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo htmlspecialchars($_GET["team"]); ?>')">
+                                                onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo htmlspecialchars($teamname); ?>')">
                                     </div>
                                     <div class="button-container">
                                         <div class="button button-deny">
@@ -80,7 +87,7 @@
                         <?php
 
                         require_once("../dbfunctions/team_members.php");
-						$members = get_team_members($link, $_GET["team"]);
+						$members = get_team_members($link, $teamname);
 
 						forEach($members as $member) {
 							profile_box_member($member, [
@@ -95,8 +102,8 @@
                                     "make_leader" => $member["user_id"] != $teamdata["leader"]
                                 ],
                                 "button_clicks" => [
-                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")',
-                                    "make_leader" => 'makeLeader(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($_GET["team"]) .'")',
+                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($teamname) .'")',
+                                    "make_leader" => 'makeLeader(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($teamname) .'")',
                                 ]
 							]);
 						}
@@ -106,7 +113,7 @@
 
                     <div class="add-member">
                         <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'), '<?php
-                        echo htmlspecialchars($_GET["team"]); ?>');">
+                        echo htmlspecialchars($teamname); ?>');">
                             <img src="/img/plus.svg">
                         </div>
                     </div>

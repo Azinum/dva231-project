@@ -5,43 +5,79 @@
         <?php
     }
 
-    /*  Matchbox format:
+    /*  Match format:
         [
-            "lteam" => [
-                "name" => <name of left team>,
-                "imgurl" => <url to team image>
-            ],
-            "rteam" => [
-                "name" => <name of right team>,
-                "imgurl" => <url to tight image>
-            ],
-            "won" => <true or false dep. on who won>
+            "team1" => <name of team1>,
+            "team2" => <name of team2>,
+            "id" => <int>,
+            "result" => <string>
         ]
+
+        Layout format:
+        [
+            "verified" => <bool to show/hide edit button>,
+            "lteam" => <string, either "team1" or "team2". W/L will be displayed from the perspective of lteam>
+        ]
+
+        Teams format:
+        [
+            "team1" => [
+                "disp_name" => <string>,
+                "img_url"   => <string>
+            ],
+            "team2" => [
+                <same thing>
+            ]
+        ]
+
+
     */
-    function matchbox($box, $editbutton = false) {
+    function matchbox($match, $teams, $layout) {
         ?>
             <div class="matchbox shadow ui-box">
                 <div class="team team1">
                     <div class="profilepic">
-                        <img src="<?php echo htmlspecialchars($box["lteam"]["imgurl"]); ?>">
+                        <img src="<?php echo htmlspecialchars($teams[$layout["lteam"]]["img_url"]); ?>">
                     </div>
-                    <span class="label"><?php echo htmlspecialchars($box["lteam"]["name"]); ?></span>
+                    <span class="label"><?php echo htmlspecialchars($teams[$layout["lteam"]]["disp_name"]); ?></span>
                 </div>
                 <div class="versus">
                     <span class="matchresult">
-                        <?php echo $box["won"] ? "W" : "L" ?>
+                        <?php
+                            if ($match["result"] == "Tie") {
+                                echo "T";
+                            } else if ($layout["lteam"] == "team1") {
+                                echo $match["result"] == "Team1Win" ? "W" : "L";
+                            } else {
+                                echo $match["result"] == "Team2Win" ? "W" : "L";
+                            }
+                        ?>
                     </span>
                     <span class="marker">
                         VS
                     </span>
                 </div>
                 <div class="team team2">
-                    <span class="label"><?php echo htmlspecialchars($box["rteam"]["name"]); ?></span>
+                    <span class="label">
+                        <?php
+                            echo htmlspecialchars(
+                                $teams[
+                                    $layout["lteam"] == "team1" ? "team2" : "team1"
+                                ]["disp_name"]
+                            );
+                        ?>
+                    </span>
                     <div class="profilepic">
-                        <img src="<?php echo htmlspecialchars($box["rteam"]["imgurl"]); ?>">
+                        <img src="<?php
+                            echo htmlspecialchars(
+                                $teams[
+                                    $layout["lteam"] == "team1" ?  "team2" : "team1"
+                                ]["img_url"]
+                            );
+                        ?>">
                     </div>
                 </div>
-                <?php if ($editbutton) { ?>
+                <?php if (!$layout["verified"]) { ?>
                     <div class="editbutton">
                         <a class="button button-image button-accept" href="/match.php">
                             <img src="/img/arrow.svg">
@@ -88,10 +124,10 @@
                         </div>
                     <?php } ?>
                     <div class="profilepic <?php echo $layout["img_small"] ? "profilepic-small" : ""; ?>">
-                        <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
+                        <img src="<?php echo $data["img_url"] === NULL || $data["img_url"] === "" ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">
                     </div>
                 </div>
-                <span class="label"><?php echo htmlspecialchars($data["name"]); ?></span>
+                <span class="label"><?php echo htmlspecialchars($data["disp_name"]); ?></span>
                 <?php if ($layout["show_stats"]) { ?>
                     <div class="stats <?php echo $layout["stats_short"] ? "stats-short" : ""; ?>">
                         <span>
