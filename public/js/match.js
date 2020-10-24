@@ -128,6 +128,8 @@ function selectTeam(elem, team) {
 			}
 			teams[team].name = e.name;
 			teams[team].display_name = e.display_name;
+			let displayNameElement = document.querySelector("h2" + (team == Teams.TEAM1 ? ".team1" : ".team2"));
+			displayNameElement.innerText = e.display_name;
 		},
 		() => {
 			let inputText = inputField.value;

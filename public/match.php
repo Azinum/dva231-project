@@ -34,7 +34,7 @@
 		-->
 		<form>
 			<div class="match-content-box shadow">
-				<h2>Team 1 (you)</h2>
+				<h2 class="team1">Team 1 (you)</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, Teams.TEAM1);">
 				</div>
@@ -53,7 +53,7 @@
 			<br><div class="line-wide"></div>
 
 			<div class="match-content-box shadow">
-				<h2>Team 2 (opponent)</h2>
+				<h2 class="team2">Team 2 (opponent)</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, Teams.TEAM2);">
 				</div>
