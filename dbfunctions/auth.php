@@ -24,9 +24,6 @@ function set_loggedin($link) {
         else {
             echo "EMAIL Address does not exist in database.";
         }
-
-
-        
     }
 }
 

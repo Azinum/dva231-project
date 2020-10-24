@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 require_once("../layout/profileboxes.php");
 require_once("../layout/leaderboard.php");
 require_once("../dbfunctions/get_specteaminfo.php");//Ta bort denna efter testing

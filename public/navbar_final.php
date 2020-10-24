@@ -1,5 +1,6 @@
 <?php
 require_once("../dbfunctions/auth.php");
+require_once("../layout/navbar_dropdown.php");
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +18,7 @@ require_once("../dbfunctions/auth.php");
 		<div class="dropdown">
 			<a href= "profile_modify.php"> My Profile <img src="img/profileicon.png" class="nav-image" > </a>
 				<div class="dropdown-content">
-					<span>
-						<a href="<?php set_loggedout() ?>">Log out</a>
-					</span>
+					 <?php build_dropdown(); ?>
 				</div>
 		</div> 
 	</div>
