@@ -42,26 +42,33 @@
                             <h3>Team Profile:</h3>
                             <form id="team-profile" onsubmit="event.preventDefault();">
                                 <div class="img-controls shadow ui-box">
+                                    <label>Current image:</label>
                                     <div class="profilepic">
                                         <img src="<?php echo $teamdata["img_url"] ? htmlspecialchars($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                                     </div>
-                                    <input type="file" placeholder="Profile picture" id="profile-pic">
+                                    <label>New image:</label>
+                                    <div class="profilepic">
+                                        <img src="" alt="(select image)" id="profile-pic-preview">
+                                    </div>
+                                    <input  type="file" placeholder="Profile picture" id="profile-pic" accept="image/*"
+                                            onchange="previewImage(this, document.getElementById('profile-pic-preview'));">
+                                    <label><i>Your image will be cropped as shown</i></label>
                                 </div>
                                 <div class="other-controls">
                                     <input  class="text-input-field shadow" type="text" placeholder="Name" id="display-name" minlength="3"
                                             value="<?php echo htmlspecialchars($teamdata["disp_name"]); ?>">
                                     <textarea class="text-input-field shadow" id="bio"><?php echo htmlspecialchars($teamdata["bio"]); ?></textarea>
-                                </div>
-                                <div class="button-container">
-                                    <input type="submit" class="button button-submit" value="Apply"
-                                            onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo htmlspecialchars($_GET["team"]); ?>')">
+                                    <div class="button-container">
+                                        <input type="submit" class="button button-submit" value="Apply"
+                                                onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo htmlspecialchars($_GET["team"]); ?>')">
+                                    </div>
+                                    <div class="button-container">
+                                        <div class="button button-deny">
+                                            Delete Team
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
-                            <div class="button-container">
-                                <div class="button button-deny">
-                                    Delete Team
-                                </div>
-                            </div>
                         </div>
                     <?php
                     tabcontent_end();

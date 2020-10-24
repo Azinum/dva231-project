@@ -111,6 +111,39 @@ function makeLeader(elem, id, team) {
     }
 }
 
+function previewImage(input, img) {
+    if (input.files && input.files[0]) {
+        if (input.files[0].size/1024/1024 > 3) {
+            img.src="";
+            img.alt="Selected image exceeds max size (3MB)";
+        } else {
+            let reader = new FileReader();
+            reader.addEventListener("load", (e) => {
+                img.src = e.target.result;
+            });
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+}
+
+function submitTeamImage(input, team) {
+    if (input.files && input.files[0]) {
+        if (input.files[0].size/1024/1024 < 3) {
+            let data = new FormData();
+            data.append('image', input.files[0]);
+            data.append('team', team);
+            fetch("/ajax/team_set_img.php", {
+                method: "POST",
+                body: data
+            }).then((response) => {
+                console.log(response);
+            });
+        } else {
+            alert("Image size is too large! (Max. 3MB)");
+        }
+    }
+}
+
 function submitTeamInfo(form, team) {
     if (form.querySelector("#display-name").value.length < 3) {
         form.querySelector("#display-name").classList.add("error");

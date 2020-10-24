@@ -18,4 +18,12 @@
         return false;
     }
 
+    function set_team_img($link, $team, $url) {
+        $query = 'update Team set TeamImage="'. mysqli_real_escape_string($link, $url) .'" where TeamName="'. mysqli_real_escape_string($link, $team) .'";';
+        if ($result = mysqli_query($link, $query)) {
+            return true;
+        }
+        return false;
+    }
+
 ?>

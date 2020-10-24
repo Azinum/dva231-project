@@ -41,7 +41,7 @@
 .team-bio form .other-controls {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: calc(100% - 12vw);
     box-sizing: border-box;
     padding: 0 1vw;
 }
@@ -49,14 +49,12 @@
 .team-bio form .img-controls {
     display: flex;
     flex-direction: column;
-    width: 25%;
-    height: 100%;
+    width: 12vw;
     box-sizing: border-box;
 }
 
-.team-bio form .img-controls .profilepic {
-    width: 100%;
-    height: 100%;
+.team-bio form .img-controls label i {
+    font-size: 0.75rem;
 }
 
 .button-container {
