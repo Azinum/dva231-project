@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 
@@ -10,6 +11,7 @@
 </head>
 
 <body>
+    
     <?php include("navbar_final.php"); ?>
     <div id="back-box" class=" ui-box shadow">
         <h2>Sign in</h2>
@@ -22,11 +24,18 @@
                     <td><input class="text-input-field" type="password" name="password" placeholder="Password"></td>
                 </tr>
                 <tr>
-                    <td><input class="button button-submit" type="submit" value="Sign in"></td>
+                    <td><input class="button button-submit" type="submit" name="login" value="Sign in"></td>
                 </tr>
             </form>
             </table>
     </div>
+
+    <?php 
+if (isset($_POST['login'])) {   
+        set_loggedin('1');
+        echo"Oh yes";
+    }
+?>
 </body>
 
 </html>

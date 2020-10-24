@@ -1,7 +1,10 @@
 <?php session_start(); //Temp?
+
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
+    require_once("../dbfunctions/auth.php");//Temp 
+    check_loginstatus();
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +20,7 @@
         <?php searchoverlay_headtags(); ?>
     </head>
     <body>
-        <?php include("navbarexample.php"); ?>
+        <?php include("navbar_final.php"); ?>
         <?php searchoverlay(); ?>
         <div class="content-column">
             <div class="shadow tab-container">

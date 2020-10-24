@@ -1,3 +1,7 @@
+<?php
+require_once("../dbfunctions/auth.php");
+?>
+
 <!DOCTYPE html>
 <head>
 	<link href= "css/common.css" rel="stylesheet">
@@ -11,10 +15,10 @@
 		<a href="home.php"> Search <img src="img/searchicon.webp" class="nav-image" > </a>
 
 		<div class="dropdown">
-			<a href= "login.php"> My Profile <img src="img/profileicon.png" class="nav-image" > </a>
+			<a href= "profile_modify.php"> My Profile <img src="img/profileicon.png" class="nav-image" > </a>
 				<div class="dropdown-content">
 					<span>
-						<a href="logout.php">Log out</a>
+						<a href="<?php set_loggedout() ?>">Log out</a>
 					</span>
 				</div>
 		</div> 
