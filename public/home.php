@@ -1,5 +1,6 @@
 <?php
 require_once("../layout/profileboxes.php");
+require_once("../layout/leaderboard.php");
 require_once("../dbfunctions/get_specteaminfo.php");//Ta bort denna efter testing
 require_once("../dbfunctions/get_specuserinfo.php");//Ta bort denna efter testing
 require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
@@ -43,7 +44,7 @@ require_once("../dbfunctions/set_userstatus.php"); //Ta bort denna efter testing
                     <div class="flextable">
                         <!-- Table begin -->
 
-                        <?php get_teamsbyrank($link) ?>
+                        <?php build_leaderboard($link,get_teamsbyrank($link)) ?>
 
                     </div> <!-- Table end -->
                 </div>

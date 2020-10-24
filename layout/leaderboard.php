@@ -1,6 +1,6 @@
 <?php
     //Hämta information om användaren.
-    function build_leaderboard ($link) { //Invärde för hur många som ska läsas in?
+    function build_leaderboard ($link,$name) { //Invärde för hur många som ska läsas in?
        // include("dbconnection.php"); //Går sönder om den sitter utanför, varför???
 
         $Orderbyquery = "SELECT TeamName FROM Team ORDER BY TeamRanking ASC;";
@@ -19,18 +19,14 @@
                                 "invite_controls"=>false
                             ];
 
-        if ($result = mysqli_query($link, $Orderbyquery)){
-
-            $var = 0;
-            while ($resArray = mysqli_fetch_assoc($result)) { //Ändra antalet som läses in?
-                $var++;
+            foreach ($name as $value) { //Ändra antalet som läses in?
                     echo '<div  class="flex-row">';
-                    profile_box_team (get_specteaminfo($link, $name[$var]),$info);
+                    profile_box_team (get_specteaminfo($link, $value),$info);
                     echo '</div>';
             }
             
 
-        }
+       
 
             
     }
