@@ -15,6 +15,7 @@ const Teams = {
 
 var Team = function() {
 	this.name = "";
+	this.displayName = "";
 	this.participants = [
 		undefined,
 		undefined,
@@ -25,6 +26,12 @@ var Team = function() {
 }
 
 var teams = [];
+
+function imageExists(url) {
+	let image = new Image();
+	image.src = url;
+	return image.height != 0;
+}
 
 function toggleOverlay() {
 	searchOverlay = !searchOverlay;
@@ -59,17 +66,6 @@ function errorMessage(message) {
 	elem.innerText = message;
 }
 
-function searchOverlayUpdate() {
-	let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
-
-	document.querySelector(".match-search-overlay-content .match-search-results").innerHTML += `
-		<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team.jpeg', name: 'Team Onozze'})">
-			<img src="img/tmp_team.jpeg">
-			<p>Team Onozze</p>
-		</div>
-	`;
-}
-
 function selectPlayer(elem, team, index) {
 	if (!teams[team]) {
 		errorMessage("You must first select a team!");
@@ -86,13 +82,14 @@ function selectPlayer(elem, team, index) {
 			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
 			let results = document.querySelector(".match-search-overlay-content .match-search-results");
 			results.innerHTML = "";
-			let teamName = teams[team].name;
+			let t = teams[team];
+			let teamName = t.name;
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
 					results.innerHTML = "";
 					json.forEach((item) => {
-						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
+						let img = imageExists(item.img_url) ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
 							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `'})">
 								<img src="` + img + `">
@@ -125,11 +122,11 @@ function selectTeam(elem, team) {
 				.then((json) => {
 					results.innerHTML = "";
 					json.forEach((item) => {
-						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
+						let img = imageExists(item.img_url) ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `'})">
+							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.display_name + `'})">
 								<img src="` + img + `">
-								<p>` + item.name + `</p>
+								<p>` + item.display_name + `</p>
 							</div>
 						`;
 					});
@@ -213,4 +210,4 @@ function submitMatch() {
 	}
 })(() => {
 
-});
+})
