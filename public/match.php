@@ -15,10 +15,6 @@
 				</form>
 				<br>
 				<div class="match-search-results">
-					<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team.jpeg', name: 'Team One'})">
-						<img src="img/tmp_team.jpeg">
-						<p>Team One</p>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -45,7 +41,7 @@
 			</div>
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
-				<div class="match-participants">
+				<div class="match-participants team1">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 0);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 1);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 2);">
@@ -65,7 +61,7 @@
 
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
-				<div class="match-participants">
+				<div class="match-participants team2">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 0);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 1);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 2);">

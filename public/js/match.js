@@ -13,10 +13,8 @@ const Teams = {
 	TEAM2 : 1
 };
 
-var Team = function() {
-	this.name = "";
-	this.displayName = "";
-	this.participants = [
+var Users = () => {
+	return [
 		undefined,
 		undefined,
 		undefined,
@@ -25,11 +23,17 @@ var Team = function() {
 	];
 }
 
+var Team = function() {
+	this.name = "";
+	this.display_name = "";
+	this.participants = Users();
+}
+
 var teams = [];
 
-function imageExists(url) {
+function imageExists(src) {
 	let image = new Image();
-	image.src = url;
+	image.src = src;
 	return image.height != 0;
 }
 
@@ -71,27 +75,30 @@ function selectPlayer(elem, team, index) {
 		errorMessage("You must first select a team!");
 		return;
 	}
+	let inputField = document.querySelector(".match-search-overlay-content .text-input-field");
+	let results = document.querySelector(".match-search-overlay .match-search-results");
+
 	doSearch(
 		(e) => {
 			elem.src = e.img;
 			teams[team].participants[index] = {
-				name: e.name
+				name: e.name,
+				id: e.user_id
 			}
 		},
 		() => {
-			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
-			let results = document.querySelector(".match-search-overlay-content .match-search-results");
+			let inputText = inputField.value;
 			results.innerHTML = "";
 			let t = teams[team];
-			let teamName = t.name;
+			let teamName = t.display_name;
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
 					results.innerHTML = "";
 					json.forEach((item) => {
-						let img = imageExists(item.img_url) ? item.img_url : 'img/default_profile_image.svg';
+						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `'})">
+							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `', user_id: ` + item.user_id + `})">
 								<img src="` + img + `">
 								<p>` + item.name + `</p>
 							</div>
@@ -104,17 +111,26 @@ function selectPlayer(elem, team, index) {
 }
 
 function selectTeam(elem, team) {
+	let inputField = document.querySelector(".match-search-overlay-content .text-input-field");
+	let results = document.querySelector(".match-search-overlay .match-search-results");
 	doSearch(
 		(e) => {
 			elem.src = e.img;
 			if (!teams[team]) {
 				teams[team] = new Team();
 			}
+			if (e.name != teams[team].name) {
+				let el = document.querySelector(".match-participants" + (team == Teams.TEAM1 ? ".team1" : ".team2"));
+				el.childNodes.forEach((item) => {
+					item.src = "img/default_profile_image.svg";
+				});
+				teams[team].participants = Users();
+			}
 			teams[team].name = e.name;
+			teams[team].display_name = e.display_name;
 		},
 		() => {
-			let inputText = document.querySelector(".match-search-overlay-content .text-input-field").value;
-			let results = document.querySelector(".match-search-overlay-content .match-search-results");
+			let inputText = inputField.value;
 			results.innerHTML = "";
 			// .includes
 			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
@@ -122,9 +138,10 @@ function selectTeam(elem, team) {
 				.then((json) => {
 					results.innerHTML = "";
 					json.forEach((item) => {
-						let img = imageExists(item.img_url) ? item.img_url : 'img/default_profile_image.svg';
+						// TODO(lucas): Fix invalid image urls
+						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.display_name + `'})">
+							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `', display_name: '` + item.display_name + `'})">
 								<img src="` + img + `">
 								<p>` + item.display_name + `</p>
 							</div>

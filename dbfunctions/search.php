@@ -63,13 +63,14 @@
 
 	function search_teams($link, $query_string) {
 		$teamName = mysqli_real_escape_string($link, $query_string);
-		$query = 'SELECT * FROM Team WHERE TeamName LIKE "%' . $teamName . '%";';
+		$query = 'SELECT * FROM Team WHERE DisplayName LIKE "%' . $teamName . '%";';
 		$final_result = [];
 		if ($result = mysqli_query($link, $query)) {
 			while ($res_array = mysqli_fetch_assoc($result)) {
 				if (!$res_array['IsBanned']) {
 					array_push($final_result, [
 						"name" => $res_array['TeamName'],
+						"display_name" => $res_array['DisplayName'],
 						"img_url" => $res_array['TeamImage'],
 						"bio" => $res_array['Bio'],
 						"team_ranking" => $res_array['TeamRanking']
