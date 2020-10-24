@@ -15,10 +15,6 @@
 				</form>
 				<br>
 				<div class="match-search-results">
-					<div class="match-search-item shadow" onclick="onClick({img: 'img/tmp_team.jpeg', name: 'Team One'})">
-						<img src="img/tmp_team.jpeg">
-						<p>Team One</p>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -38,14 +34,14 @@
 		-->
 		<form>
 			<div class="match-content-box shadow">
-				<h2>Team 1 (you)</h2>
+				<h2 class="team1">Team 1 (you)</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, Teams.TEAM1);">
 				</div>
 			</div>
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
-				<div class="match-participants">
+				<div class="match-participants team1">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 0);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 1);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM1, 2);">
@@ -57,7 +53,7 @@
 			<br><div class="line-wide"></div>
 
 			<div class="match-content-box shadow">
-				<h2>Team 2 (opponent)</h2>
+				<h2 class="team2">Team 2 (opponent)</h2>
 				<div class="match-team-content">
 					<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, Teams.TEAM2);">
 				</div>
@@ -65,7 +61,7 @@
 
 			<div class="match-content-box shadow">
 				<h4>Participants:</h4>
-				<div class="match-participants">
+				<div class="match-participants team2">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 0);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 1);">
 					<img class="match-player-img basic-interactive match-box" src="img/default_profile_image.svg" onclick="selectPlayer(this, Teams.TEAM2, 2);">
