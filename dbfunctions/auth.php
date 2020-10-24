@@ -8,12 +8,13 @@ function set_loggedin($link) {
         echo"Fields cannot be empty!";
         die();
     } 
-    $query = "SELECT PasswordHash, Id FROM User WHERE Email = '$mail'";
+    $query = "SELECT PasswordHash, Id, IsAdmin FROM User WHERE Email = '$mail'";
     if($result = mysqli_query($link, $query)) {
         $resArray = mysqli_fetch_assoc($result);
         if (search_mail($link,$mail)) {
             if (password_verify($pass, $resArray['PasswordHash'])){
                 $_SESSION["uid"] = $resArray['Id'];
+                $_SESSION["admin"] = $resArray['IsAdmin'];
                 $_SESSION["isLoggedin"] = true;
                 header('location:home.php');
             }
@@ -29,6 +30,7 @@ function set_loggedin($link) {
 
 function set_loggedout() {
     $_SESSION["uid"] = null;
+    $_SESSION["admin"] = false;
     $_SESSION["isLoggedin"] = false;
 }
 
@@ -39,6 +41,8 @@ function check_loginstatus() { //Skickar tillbaka användaren till login om isLo
     }
     else {
         echo "hell yeah";
+        $test = $_SESSION["admin"];
+        echo "IsAdmin: $test";
     }
 }
 
