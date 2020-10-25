@@ -11,17 +11,19 @@ require_once("../dbfunctions/register_user.php");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/signup.css">
   <link rel="stylesheet" href="css/common.css">
+
 </head>
 
 <body>
+<script src="js/passwordcheck.js"> </script>
     <?php include("navbar_final.php"); ?>
     <div class="ui-box shadow" id="back-box">
         <h2>Sign up</h2>
         <table>
-            <form method="post" action="post_signup.php"> <!-- Kolla på en TILL signup där den tar emot en get? -->
+            <form method="post" name="myForm" action="post_signup.php" onsubmit="return Compare()">
                 <tr>
                     <td><input class="text-input-field" type="text" name="username" placeholder="Username"></td>
-                    <td><input class="text-input-field" type="password" name="password" placeholder="Password"></td>
+                    <td><input class="text-input-field" type="password" name="pword" placeholder="Password"></td>
                 </tr>
                 <tr>
                     <td><input class="text-input-field" type="text" name="email" placeholder="Email"></td>

@@ -13,6 +13,8 @@ function build_dropdown() {
     }
 }
 
+//Kolla om användaren är en ledare i ett lag, annars visa inte?
+
 
 
 ?>

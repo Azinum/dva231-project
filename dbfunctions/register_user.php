@@ -11,7 +11,7 @@ function register_user ($link) {
     //Real escape string
     if (strlen($userInput['username']) >= 3) {
         if ( !mysqli_num_rows (mysqli_query($link, $unamecheckquery)) > 0)  {//Kollar om det finns någon krock med användarnamnet
-            if ($password = password_hash($userInput['password'],PASSWORD_DEFAULT)) {
+            if ($password = password_hash($userInput['pword'],PASSWORD_DEFAULT)) {
             
                 $Userquery = 'INSERT INTO User (Username, Email, Bio, IsAdmin, IsBanned, PasswordHash) VALUES ("'.
                     mysqli_real_escape_string($link, $userInput['username']).'", "'.mysqli_real_escape_string($link, $userInput['email']).

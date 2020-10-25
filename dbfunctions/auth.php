@@ -39,7 +39,7 @@ function check_loginstatus() { //Skickar tillbaka användaren till login om isLo
         header('location:login.php');
         die();
     }
-    else {
+    else { //Temp for testing
         echo "hell yeah";
         $test = $_SESSION["admin"];
         echo "IsAdmin: $test";
