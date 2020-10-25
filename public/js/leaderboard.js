@@ -2,8 +2,15 @@
 
 
 function test() {
+    let start = 0;
+    let end = 5;
+    fetch('/ajax/get_leaderboard.php/?s='+start+'&e='+end).then((res) => res.json()) 
+    .then(json => {
+        console.log(json);
+        json.forEach((item) => {
+            document.getElementById("back-box").innerHTML += item;
+        });
+    });
 
-    fetch ('/ajax/get_leaderboard.php/?s=0&e=5').then((res)=> res.json()) 
-    .then(json => console.log(json)).then('/ajax/build_leaderboard.php')
+    //.then('/ajax/build_leaderboard.php')
 }
-
