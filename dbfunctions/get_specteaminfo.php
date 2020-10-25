@@ -10,7 +10,7 @@
 			'select COUNT(Result) as NumWins from Matches join Team on (Team1 = TeamName or Team2 = TeamName) where '.
 			'TeamName = "'.$ename.'" AND ((Team1=TeamName AND Result="Team1Win" AND IsVerified = true) OR (Team2=TeamName AND Result="Team2Win" AND IsVerified = true))'.
 			') as Wins join ('.
-			'select COUNT(Result) as NumMatches from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="TeamName" WHERE IsVerified = true'.
+			'select COUNT(Result) as NumMatches from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.$ename.'" WHERE IsVerified = true'.
 			') as Matches WHERE TeamName = "'.$ename.'" AND IsDisabled IS NOT TRUE';
 
         if ($result = mysqli_query($link, $query)){
