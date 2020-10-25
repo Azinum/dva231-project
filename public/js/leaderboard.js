@@ -12,7 +12,6 @@ function test() {
         json.forEach((item) => { //item ska bli skapelsen av ett item.... Gör en array av json värden, sedan skicka in dem i build leaderboard?
              arr[it] = item;
              it++;
-             alert(item);
         });
         JSON.stringify(arr);
         document.getElementById("back-box").innerHTML += '<?php $array=json_decode($_POST["jsondata"]);  build_leaderboard($link,$array); ?>';
