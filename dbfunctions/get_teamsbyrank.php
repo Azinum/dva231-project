@@ -1,7 +1,6 @@
 <?php
     //Hämta information om användaren.
     function get_teamsbyrank ($link) { //Invärde för hur många som ska läsas in?
-       // include("dbconnection.php"); //Går sönder om den sitter utanför, varför???
 
         $Orderbyquery = "SELECT TeamName FROM Team ORDER BY TeamRanking ASC;";
         
