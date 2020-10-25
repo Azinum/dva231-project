@@ -7,9 +7,15 @@ function test() {
     fetch('/ajax/get_leaderboard.php/?s='+start+'&e='+end).then((res) => res.json()) 
     .then(json => {
         console.log(json);
-        json.forEach((item) => {
-            document.getElementById("back-box").innerHTML += item;
+        var arr = [];
+        var it = 0;
+        json.forEach((item) => { //item ska bli skapelsen av ett item.... Gör en array av json värden, sedan skicka in dem i build leaderboard?
+             arr[it] = item;
+             it++;
+             alert(item);
         });
+        JSON.stringify(arr);
+        document.getElementById("back-box").innerHTML += '<?php $array=json_decode($_POST["jsondata"]);  build_leaderboard($link,$array); ?>';
     });
 
     //.then('/ajax/build_leaderboard.php')
