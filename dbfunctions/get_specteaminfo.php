@@ -1,28 +1,21 @@
 <?php
     //Get specified team's info
 	function get_specteaminfo ($link, $name) {
-        $escName = mysqli_real_escape_string($link, $name);
+		$ename = mysqli_real_escape_string($link, $name);
+        $query = ''.
+			'SELECT Matches.NumMatches, Wins.NumWins, Losses.NumLosses, Team.* FROM Team join ('.
+			'select COUNT(Result) as NumLosses from Matches join Team on (Team1 = TeamName or Team2 = TeamName) where '.
+			'TeamName = "'.$ename.'" AND ((Team2=TeamName AND Result="Team1Win" AND IsVerified = true) OR (Team1=TeamName AND Result="Team2Win" AND IsVerified = true))'.
+			') as Losses join ('.
+			'select COUNT(Result) as NumWins from Matches join Team on (Team1 = TeamName or Team2 = TeamName) where '.
+			'TeamName = "'.$ename.'" AND ((Team1=TeamName AND Result="Team1Win" AND IsVerified = true) OR (Team2=TeamName AND Result="Team2Win" AND IsVerified = true))'.
+			') as Wins join ('.
+			'select COUNT(Result) as NumMatches from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="TeamName" WHERE IsVerified = true'.
+			') as Matches WHERE TeamName = "'.$ename.'" AND IsDisabled IS NOT TRUE';
 
-        $Teamquery = "SELECT * FROM Team WHERE TeamName = '". $escName ."' AND IsDisabled IS NOT TRUE;";
-
-        $Winsquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
-            $escName .'" where (Team1="'.
-            $escName .'" AND Result="Team1Win" AND IsVerified = true) OR (Team2="'.
-            $escName .'" AND Result="Team2Win" AND IsVerified = true);';
-
-        $Lossesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
-            $escName .'" where (Team2="'.
-            $escName .'" AND Result="Team1Win" AND IsVerified = true) OR (Team1="'.
-            $escName. '" AND Result="Team2Win" AND IsVerified = true);';
-
-        $Matchesquery = 'select COUNT(Result) as Number from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.
-            $escName.'" WHERE IsVerified = true;';
-
-        if ($result = mysqli_query($link, $Teamquery)){
-
-
+        if ($result = mysqli_query($link, $query)){
             $resArray = mysqli_fetch_assoc($result);
-            
+
             if (empty($resArray['TeamName'])) {
                 return false;
             }
@@ -36,12 +29,12 @@
                "leader"=>$resArray['TeamLeader'],
                "is_banned"=>$resArray['IsBanned'],
                "stats" => [
-                    "won"=>mysqli_fetch_assoc(mysqli_query($link, $Winsquery))['Number'],
-                    "lost"=>mysqli_fetch_assoc(mysqli_query($link, $Lossesquery))['Number'],
-                    "part"=>mysqli_fetch_assoc(mysqli_query($link, $Matchesquery))['Number']
+                    "won"=>$resArray["NumWins"],
+                    "lost"=>$resArray["NumLosses"],
+                    "part"=>$resArray["NumMatches"]
                 ]
             ];
-        }
+		}
     }
 
     function get_teamname($link, $dispName) {
