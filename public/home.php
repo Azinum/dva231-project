@@ -1,12 +1,12 @@
 <?php session_start();
 require_once("../layout/profileboxes.php");
 require_once("../layout/leaderboard.php");
-require_once("../dbfunctions/get_specteaminfo.php");//Ta bort denna efter testing
-require_once("../dbfunctions/get_specuserinfo.php");//Ta bort denna efter testing
+require_once("../dbfunctions/get_specteaminfo.php"); //Ta bort denna efter testing
+require_once("../dbfunctions/get_specuserinfo.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/get_userteams.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/dbconnection.php");
 require_once("../dbfunctions/get_usermatches.php"); //Ta bort denna efter testing
-require_once("../dbfunctions/get_teamsbyrank.php"); 
+require_once("../dbfunctions/get_teamsbyrank.php");
 require_once("../dbfunctions/get_matchuteam.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/get_membermatches.php"); //Ta bort denna efter testing
 require_once("../dbfunctions/set_teamstatus.php"); //Ta bort denna efter testing
@@ -28,29 +28,20 @@ require_once("../dbfunctions/set_userstatus.php"); //Ta bort denna efter testing
 
 <body>
     <?php include("navbar_final.php"); ?>
-    <table id="layout">
-        <!-- Ändra när header finns -->
-        <tr>
-            <td>
-                <form method="get">
-                    <input id="searchbar" class="text-input-field" type="text" name="search" placeholder="Search here...">
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="back-box" class="ui-box shadow">
-                    <h2>Ranks</h2>
-                    <div class="flextable">
-                        <!-- Table begin -->
 
-                        <?php build_leaderboard($link,get_teamsbyrank($link)) ?>
+    <div id="back-box" class="ui-box shadow">
+        <h2>Ranks</h2>
+        <form method="get">
+            <input id="searchbar" class="text-input-field" type="text" name="search" placeholder="Search here...">
+        </form>
+        <div class="flextable">
+            <!-- Table begin -->
 
-                    </div> <!-- Table end -->
-                </div>
-            </td>
-        </tr>
-    </table>
+            <?php build_leaderboard($link, get_teamsbyrank($link)) ?>
+
+        </div> <!-- Table end -->
+    </div>
+
     <!-- <div class="bg"></div> -->
     <?php //Ta bort detta efter testing
     ?>
