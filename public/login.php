@@ -1,5 +1,6 @@
 <?php session_start();
-require_once("../dbfunctions/dbconnection.php"); ?>
+require_once("../dbfunctions/dbconnection.php");
+require_once("../dbfunctions/auth.php"); ?>
 
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,11 @@ require_once("../dbfunctions/dbconnection.php"); ?>
 </head>
 
 <body>
-    
+<?php if (isset($_GET['logout'])  && $_GET['logout'] == true) {
+        set_loggedout();
+    } ?>
     <?php include("navbar_final.php"); ?>
+    
     <div id="back-box" class=" ui-box shadow">
         <h2>Sign in</h2>
         <table>
@@ -30,13 +34,14 @@ require_once("../dbfunctions/dbconnection.php"); ?>
                 </tr>
             </form>
             </table>
-    </div>
-
-    <?php 
+            <?php 
 if (isset($_POST['login'])) {   
         set_loggedin($link);
     }
 ?>
+    </div>
+
+
 </body>
 
 </html>

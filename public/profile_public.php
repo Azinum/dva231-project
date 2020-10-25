@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    require_once("../dbfunctions/auth.php");//Temp 
+    check_loginstatus();
     require_once("../layout/profileboxes.php");
 ?>
 <!DOCTYPE html>
@@ -15,7 +18,7 @@
         <script src="/js/profile_public.js"></script>
     </head>
     <body>
-        <?php include("navbarexample.php"); ?>
+        <?php include("navbar_final.php"); ?>
         <div class="content-column">
             <div class="flex-container">
                 <div class="bioboxes shadow">
