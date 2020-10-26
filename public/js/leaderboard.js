@@ -6,15 +6,25 @@ function test() {
     let end = 5;
     fetch('/ajax/get_leaderboard.php/?s='+start+'&e='+end).then((res) => res.json()) 
     .then(json => {
-        console.log(json);
-        var arr = [];
-        var it = 0;
+        //console.log(json);
         json.forEach((item) => { //item ska bli skapelsen av ett item.... Gör en array av json värden, sedan skicka in dem i build leaderboard?
-             arr[it] = item;
-             it++;
+            console.log(item);
+            document.getElementById("back-box").innerHTML += `
+            <div class="profile-box ui-box shadow">
+                <div class="profile">
+                    <div class="rank"> `+item.rank+`. </div>
+                    <div class="profilepic profilepic-small"> <img src="/img/teamimg/TeamName.png"> </div>
+                </div>
+                <span class="label">Tories</span>
+                <div class="stats stats-short">
+                    <span> P:4 </span>
+                    <span> W:2 </span>
+                    <span> L:1 </span>
+                </div>
+            </div>
+            `;
         });
-        JSON.stringify(arr);
-        document.getElementById("back-box").innerHTML += '<?php $array=json_decode($_POST["jsondata"]);  build_leaderboard($link,$array); ?>';
+        
     });
 
     //.then('/ajax/build_leaderboard.php')

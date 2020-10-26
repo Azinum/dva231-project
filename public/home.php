@@ -39,6 +39,7 @@ require_once("../dbfunctions/set_userstatus.php"); //Ta bort denna efter testing
         <div class="flextable">
             <!-- Table begin -->
 
+            
                 <script> test() </script>
             <!-- <?php // build_leaderboard($link, get_teamsbyrank_limit($link,0,5)) ?> -->
 
