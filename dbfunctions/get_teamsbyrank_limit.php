@@ -7,7 +7,7 @@
 
         $escStart = mysqli_real_escape_string($link, $start);
         $escEnd = mysqli_real_escape_string($link, $end);
-        $Orderbyquery = "SELECT TeamName FROM Team ORDER BY TeamRanking ASC LIMIT $escStart, 5;";
+        $Orderbyquery = "SELECT TeamName FROM Team ORDER BY TeamRanking, TeamName LIMIT $escStart, 5;";
         error_log($Orderbyquery);
         
 
