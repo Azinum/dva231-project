@@ -1,7 +1,7 @@
 //fetch som hämtar json med lista av allting som ska visas i home, end ska kunna inkrementeras
 const defaultProfile = "/img/default_profile_image.svg";
 let start = 0;
-let end = 5;
+let length = 5;
 
 //https://stackoverflow.com/a/4835406
 function escapeHtml(text) {
@@ -17,7 +17,7 @@ function escapeHtml(text) {
 
 function test() {
 
-    fetch('/ajax/get_leaderboard.php/?s='+start+'&e='+end).then((res) => res.json()) 
+    fetch('/ajax/get_leaderboard.php/?s='+start).then((res) => res.json()) 
     .then(json => {
         //console.log(json);
         json.forEach((item) => { //item ska bli skapelsen av ett item.... Gör en array av json värden, sedan skicka in dem i build leaderboard?
@@ -41,8 +41,7 @@ function test() {
         });
         
     });
-    start = end+1;
-    end += 6;
+    start += length+1;
 
     //.then('/ajax/build_leaderboard.php')
 }
