@@ -16,8 +16,8 @@
             $var = 0;
             while ($resArray = mysqli_fetch_assoc($result)) { //Ändra antalet som läses in?
                 $name = $resArray["TeamName"];
-                error_log(gettype($resArray["TeamName"]));
-                $teaminfo[$var] = get_specteaminfo($link,'TeamName');
+               
+                $teaminfo[$var] = get_specteaminfo($link,$name);
                
                 $var++;
             }
