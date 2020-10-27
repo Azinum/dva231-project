@@ -12,6 +12,14 @@ body, html {
     color: white;
 }
 
+.basic-interactive {
+    border: 1px solid transparent;
+}
+
+.basic-interactive:hover {
+	border: 1px solid white;
+}
+
 .ui-box {
     background: var(--grey1);
     border-radius: 0.5vw;

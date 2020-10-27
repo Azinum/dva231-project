@@ -16,6 +16,7 @@ require_once("../dbfunctions/auth.php"); ?>
 <body>
 <?php if (isset($_GET['logout'])  && $_GET['logout'] == true) {
         set_loggedout();
+        error_log("LOGGING OUT");
     } ?>
     <?php include("navbar_final.php"); ?>
     

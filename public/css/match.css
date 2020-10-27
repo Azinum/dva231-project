@@ -76,10 +76,6 @@ html, body {
 	background-color: #383838;
 }
 
-.basic-interactive:hover {
-	border: 1px solid white;
-}
-
 /* Search overlay */
 
 .match-search-overlay {

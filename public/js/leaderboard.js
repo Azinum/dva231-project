@@ -44,7 +44,7 @@ function test() {
 }
 
 var isInLoadZone = false;
-window.addEventListener("scroll", (e) => {
+function scrollHandler(e) {
 	let bottom = document.getElementById("back-box").getBoundingClientRect().bottom;
 	let height = document.documentElement.clientHeight;
 
@@ -56,4 +56,7 @@ window.addEventListener("scroll", (e) => {
 	} else {
 		isInLoadZone = false;
 	}
-});
+}
+
+window.addEventListener("scroll", scrollHandler);
+document.addEventListener("touchmove", scrollHandler);

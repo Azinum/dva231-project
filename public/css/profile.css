@@ -40,8 +40,11 @@ html, body {
     margin-bottom: 1vw;
 }
 
-.shadowbox {
-    margin-bottom: 1vw;
+.flex-layout-section-wide #modify-button {
+    margin: 0 auto;
+    display: block;
+    width: 10rem;
+    text-decoration: none;
 }
 
 .profilebox {
@@ -152,6 +155,18 @@ html, body {
     flex-grow: 1;
 }
 
+.matchbox .team:hover {
+    cursor: pointer;
+}
+
+.matchbox .team:hover .label {
+    text-decoration: underline;
+}
+
+.matchbox .team:hover .basic-interactive {
+	border: 1px solid white;
+}
+
 .matchbox .team.team2 {
     justify-content: right;
 }
@@ -164,15 +179,20 @@ html, body {
 .matchbox .team .label {
     font-size: 1.2rem;
     display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: calc(100% - 5vw);
+    box-sizing: border-box;
 }
 
 .matchbox .team .label:first-child {
-    margin-right: 1vw;
+    padding-right: 1vw;
     text-align: right;
 }
 
 .matchbox .team .label:last-child {
-    margin-left: 1vw;
+    padding-left: 1vw;
 }
 
 .teambox {
