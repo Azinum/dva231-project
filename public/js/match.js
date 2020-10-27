@@ -31,6 +31,8 @@ var Team = function() {
 
 var teams = [];
 
+var matchState = {};
+
 function imageExists(src) {
 	let image = new Image();
 	image.src = src;
@@ -90,7 +92,7 @@ function selectPlayer(elem, team, index) {
 			let inputText = inputField.value;
 			results.innerHTML = "";
 			let t = teams[team];
-			let teamName = t.display_name;
+			let teamName = t.name;
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
@@ -142,7 +144,7 @@ function selectTeam(elem, team) {
 			}
 			teams[team].name = e.name;
 			teams[team].display_name = e.display_name;
-			let displayNameElement = document.querySelector("h2" + (team == Teams.TEAM1 ? ".team1" : ".team2"));
+			let displayNameElement = document.querySelector((team == Teams.TEAM1 ? ".team1" : ".team2") + " h2");
 			displayNameElement.innerText = e.display_name;
 		},
 		() => {
@@ -235,6 +237,14 @@ function submitMatch() {
 			return true;
 		}]
 	]);
+	if (error) {
+		return;
+	}
+	let match_state = {
+		result: "Team1Win",
+		teams: teams
+	};
+	console.log(match_state);
 }
 
 ((func) => {
@@ -245,5 +255,9 @@ function submitMatch() {
 		document.addEventListener("DOMContentLoaded", func);
 	}
 })(() => {
-
+	// NOTE(lucas): This is from layout/match.php:match_get_info()
+	if (matchData) {
+		matchState.result = matchData.match.result;
+		matchState.teams = matchData.match.teams;
+	}
 })

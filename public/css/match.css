@@ -69,6 +69,10 @@ html, body {
 	filter: brightness(110%);
 }
 
+.match-button {
+	margin: 0.5em;
+}
+
 .line-wide {
 	margin: 0 auto;
 	width: 98%;
