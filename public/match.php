@@ -51,11 +51,11 @@ page_begin("Match Results");
 				<h4>Participants:</h4>
 				<div class="match-participants team1">
 					<?php
-						match_participant_box(["index" => 0, "team" => "Teams.TEAM1"]);
-						match_participant_box(["index" => 1, "team" => "Teams.TEAM1"]);
-						match_participant_box(["index" => 2, "team" => "Teams.TEAM1"]);
-						match_participant_box(["index" => 3, "team" => "Teams.TEAM1"]);
-						match_participant_box(["index" => 4, "team" => "Teams.TEAM1"]);
+						match_participant_box(["index" => 0, "team" => "Teams.TEAM1"], 0);
+						match_participant_box(["index" => 1, "team" => "Teams.TEAM1"], 0);
+						match_participant_box(["index" => 2, "team" => "Teams.TEAM1"], 0);
+						match_participant_box(["index" => 3, "team" => "Teams.TEAM1"], 0);
+						match_participant_box(["index" => 4, "team" => "Teams.TEAM1"], 0);
 					?>
 				</div>
 			</div>
@@ -70,11 +70,11 @@ page_begin("Match Results");
 				<h4>Participants:</h4>
 				<div class="match-participants team2">
 					<?php
-						match_participant_box(["index" => 0, "team" => "Teams.TEAM2"]);
-						match_participant_box(["index" => 1, "team" => "Teams.TEAM2"]);
-						match_participant_box(["index" => 2, "team" => "Teams.TEAM2"]);
-						match_participant_box(["index" => 3, "team" => "Teams.TEAM2"]);
-						match_participant_box(["index" => 4, "team" => "Teams.TEAM2"]);
+						match_participant_box(["index" => 0, "team" => "Teams.TEAM2"], 1);
+						match_participant_box(["index" => 1, "team" => "Teams.TEAM2"], 1);
+						match_participant_box(["index" => 2, "team" => "Teams.TEAM2"], 1);
+						match_participant_box(["index" => 3, "team" => "Teams.TEAM2"], 1);
+						match_participant_box(["index" => 4, "team" => "Teams.TEAM2"], 1);
 					?>
 				</div>
 			</div>
@@ -109,3 +109,6 @@ page_begin("Match Results");
 			<br>
 
 			<?php match_submit_box([]); ?>
+		</form>
+	</div>
+<?php page_end(); ?>

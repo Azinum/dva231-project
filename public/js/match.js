@@ -23,6 +23,20 @@ var Users = () => {
 	];
 }
 
+var MatchData = function() {
+	this.id = 0;
+	this.match = {
+		id : 0,
+		is_verified : false,
+		team2_should_verify : false,
+		teams : [undefined, undefined]
+	};
+	this.team_participants = [
+		[],
+		[]
+	];
+}
+
 var Team = function() {
 	this.name = "";
 	this.display_name = "";
@@ -216,7 +230,6 @@ function submitMatch() {
 			for (let i in participants) {
 				let participant = participants[i];
 				if (!participant) {
-					return false;
 				}
 			}
 			return true;
@@ -240,11 +253,6 @@ function submitMatch() {
 	if (error) {
 		return;
 	}
-	let match_state = {
-		result: "Team1Win",
-		teams: teams
-	};
-	console.log(match_state);
 }
 
 ((func) => {
@@ -256,8 +264,7 @@ function submitMatch() {
 	}
 })(() => {
 	// NOTE(lucas): This is from layout/match.php:match_get_info()
-	if (matchData) {
-		matchState.result = matchData.match.result;
-		matchState.teams = matchData.match.teams;
+	if (!matchData) {
+		matchData = new MatchData();
 	}
 })

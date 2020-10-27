@@ -21,6 +21,12 @@ function match_get_info($link) {
 		$info["id"] = $modify;
 	}
 	$info["match"] = get_match_info($link, $info["id"]);
+	$teams = $info["match"]["teams"];
+	$info["team_participants"] = [
+		get_match_participants($link, $info["id"], $teams[0]["name"]),
+		get_match_participants($link, $info["id"], $teams[1]["name"])
+	];
+
 	$GLOBALS["match_info"] = $info;
 	echo '<script>var matchData = ' . json_encode($info) . ';</script>';
 }
@@ -70,12 +76,16 @@ function match_get_status() {
 // Create match: You have the ability to select teams, team participants and match results.
 // Modify match: You only have the ability to edit team members and match results.
 // TODO(lucas): Add match not found page (when trying to access a match page that doesn't exist, both for viewing and modifying)
-function match_participant_box($state) {
+function match_participant_box($state, $team_index) {
 	$info = match_get_info_state();
+	$team_participants = $info["team_participants"][$team_index];
+	$user = $team_participants[$state["index"]];
 
 	if ($info["view"]) {
+		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
-			<img class="match-player-img match-box" src="img/default_profile_image.svg">
+			<img class="match-player-img match-box" src="' . $img . '">
+			<small>' . $user["name"]. '</small>
 		';
 	}
 	else if ($info["modify"]) {

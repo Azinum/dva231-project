@@ -42,8 +42,40 @@ function get_match_info($link, $id) {
 	return $final_result;
 }
 
+
+// TODO(lucas): Banned/disabled users
 function get_match_participants($link, $id, $team) {
-	$teamName = mysqli_real_escape_string();
+	$teamName = mysqli_real_escape_string($link, $team);
+	$query = 'SELECT * FROM User JOIN MatchParticipation WHERE User.Id = MatchParticipation.User ' .
+		'AND Team = "' . $teamName . '" AND Matches = ' . $id . ';';
+
+	$final_result = [];
+	if ($result = mysqli_query($link, $query)) {
+		while ($res_array = mysqli_fetch_assoc($result)) {
+			array_push($final_result, [
+				"name" => $res_array["Username"],
+				"mail" => $res_array["Email"],
+				"image" => $res_array["ProfileImageUrl"],
+				"bio" => $res_array["Bio"],
+				"is_admin" => $res_array["IsAdmin"],
+				"is_banned" => $res_array["IsBanned"],
+				"id" => $res_array["Id"],
+				"is_disabled" => $res_array["IsDisabled"]
+			]);
+		}
+	}
+	return $final_result;
+}
+
+// TODO(lucas): Maybe move this function to another file
+// match_data: participants, result, which team is team1
+function match_modify($link, $id, $match_data) {
+
+}
+
+// TODO(lucas): Maybe move this function to another file
+function match_create($link, $match_data) {
+
 }
 
 ?>
