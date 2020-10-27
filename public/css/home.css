@@ -116,5 +116,24 @@ table {
         height: 2em;
     }
 
+    @media screen and (max-width:600px) {
+
+        #layout {
+           border-spacing: 2em;
+           width: 2em;
+       }
+   
+       #back-box {
+           width: 25em;
+   
+       }
+   
+   
+   
+       #searchbar {
+           width: 24em;
+           height: 2em;
+       }
+
 }
 
