@@ -83,30 +83,7 @@ page_begin("Match Results");
 
 			<h2>Result</h2>
 
-			<!-- TODO(lucas): Create fancy custom radio buttons -->
-			<div class="match-result">
-				<label>
-					<input type="radio" checked="checked" name="match_result">
-					<span class="checkmark"></span>
-					You won
-				</label>
-				<br>
-
-				<label>
-					<input type="radio" name="match_result">
-					<span class="checkmark"></span>
-					Tied
-				</label>
-				<br>
-
-				<label>
-					<input type="radio" name="match_result">
-					<span class="checkmark"></span>
-					Opponent won
-				</label>
-			</div>
-
-			<br>
+			<?php match_result_box([]); ?>
 
 			<?php match_submit_box([]); ?>
 		</form>

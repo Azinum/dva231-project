@@ -45,8 +45,6 @@ var Team = function() {
 
 var teams = [];
 
-var matchState = {};
-
 function imageExists(src) {
 	let image = new Image();
 	image.src = src;
@@ -230,6 +228,7 @@ function submitMatch() {
 			for (let i in participants) {
 				let participant = participants[i];
 				if (!participant) {
+					return false;
 				}
 			}
 			return true;

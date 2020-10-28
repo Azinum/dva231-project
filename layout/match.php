@@ -4,6 +4,7 @@ require_once("../dbfunctions/get_match.php");
 
 $match_info = [];
 
+// TODO(lucas): Do more checks to see if the user can access the page, check to see if the match exists e.t.c. Redirect when nessesary.
 function match_get_info($link) {
 	$info = $GLOBALS["match_info"];
 	if ($info) {
@@ -33,6 +34,7 @@ function match_get_info($link) {
 	if ($info["match"]["is_verified"] && $modify) {
 		header("Location: /match.php?view=" . $info["id"]);
 		exit();
+		return;
 	}
 }
 
@@ -50,7 +52,7 @@ function match_team_box($state, $default_name, $team_index) {
 		$img = $team_info["image"] ? $team_info["image"] : "img/default_profile_image.svg";
 		echo '
 			<div class="match-team-content">
-				<img class="match-team-img match-box" src="' . $img . '">
+				<img class="match-team-img" src="' . $img . '">
 			</div>
 		';
 	}
@@ -58,7 +60,7 @@ function match_team_box($state, $default_name, $team_index) {
 		echo '
 			<h2>' . $default_name . '</h2>
 			<div class="match-team-content">
-				<img class="match-team-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, ' . $state["team"] . ');">
+				<img class="match-team-img basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, ' . $state["team"] . ');">
 			</div>
 		';
 	}
@@ -90,22 +92,63 @@ function match_participant_box($state, $team_index) {
 	if ($info["view"]) {
 		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
-			<img class="match-player-img match-box" src="' . $img . '">
+			<img class="match-player-img" src="' . $img . '">
 			<small>' . $user["name"]. '</small>
 		';
 	}
 	else if ($info["modify"]) {
 		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
-			<img class="match-player-img match-box basic-interactive" src="' . $img . '" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+			<img class="match-player-img basic-interactive" src="' . $img . '" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
 			<small>' . $user["name"]. '</small>
 		';
 	
 	}
 	else {
 		echo '
-			<img class="match-player-img match-box basic-interactive" src="img/default_profile_image.svg" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+			<img class="match-player-img basic-interactive" src="img/default_profile_image.svg" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
 		';
+	}
+}
+
+function match_result_label_checked($statement, $text, $is_disabled) {
+	echo '
+		<label>
+			<input type="radio" ' . ($statement ? "checked" : "") . ' name="match_result" ' . ($is_disabled ? "disabled" : "") .'>
+			' . $text . '
+		</label>
+		<br>
+	';
+}
+
+// TODO(lucas): Display which team you are (in case one would forget who they are lol)
+function match_result_box($state) {
+	$info = match_get_info_state();
+	$match = $info["match"];
+	$teams = $match["teams"];
+
+	if ($info["view"] || $info["is_verified"]) {
+		$result = $match["result"];
+		echo '<div id="match-result">';
+			match_result_label_checked($result == "Team1Win", $teams[0]["display_name"] . " Won", true);
+			match_result_label_checked($result == "Tie", "Game Was Tied", true);
+			match_result_label_checked($result == "Team2Win", $teams[1]["display_name"] . " Won", true);
+		echo '</div>';
+	}
+	else if ($info["modify"]) {
+		$result = $match["result"];
+		echo '<div id="match-result">';
+			match_result_label_checked($result == "Team1Win", $teams[0]["display_name"] . " Won", false);
+			match_result_label_checked($result == "Tie", "Game Was Tied", false);
+			match_result_label_checked($result == "Team2Win", $teams[1]["display_name"] . " Won", false);
+		echo '</div>';
+	}
+	else {
+		echo '<div id="match-result">';
+			match_result_label_checked(true, "You Won", false);
+			match_result_label_checked(false, "Game Was Tied", false);
+			match_result_label_checked(false, "Opponent Won", false);
+		echo '</div>';
 	}
 }
 
@@ -113,7 +156,6 @@ function match_submit_box($state) {
 	$info = match_get_info_state();
 
 	if ($info["view"]) {
-
 	}
 	else if ($info["modify"]) {
 		echo '<div class="match-button button button-accept" onclick="alert();">Verify Results</div>';
