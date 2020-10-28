@@ -29,6 +29,11 @@ function match_get_info($link) {
 
 	$GLOBALS["match_info"] = $info;
 	echo '<script>var matchData = ' . json_encode($info) . ';</script>';
+
+	if ($info["match"]["is_verified"] && $modify) {
+		header("Location: /match.php?view=" . $info["id"]);
+		exit();
+	}
 }
 
 
