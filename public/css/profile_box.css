@@ -28,6 +28,19 @@
     object-fit: cover;
 }
 
+.profile-box img#leader-crown {
+    display: none;
+}
+
+.profile-box.leader img#leader-crown {
+    display: block;
+    width: 40%;
+    height: 40%;
+    position: relative;
+    top: -120%;
+    left: -15%;
+}
+
 .profile-box .profilepic {
     width: 5vw;
     height: 5vw;
@@ -50,6 +63,18 @@
     max-width: 6rem;
 }
 
+.profile-box:hover .basic-interactive {
+    border: 1px solid white;
+}
+
+.profile-box:hover .label span {
+    text-decoration: underline;
+}
+
+.profile-box:hover {
+    cursor: pointer;
+}
+
 .profile-box .label {
     font-size: 1.2rem;
     margin-left: 1vw;
@@ -57,6 +82,8 @@
     overflow: hidden;
     white-space: nowrap;
     flex-grow: 1;
+    text-decoration: none;
+    color: white;
 }
 
 .profile-box .stats {

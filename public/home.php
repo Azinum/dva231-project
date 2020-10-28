@@ -25,6 +25,7 @@ require_once("../dbfunctions/set_userstatus.php"); //Ta bort denna efter testing
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/profile_box.css">
+    <script src="/js/profile_box.js"></script>
 </head>
 
 <body>

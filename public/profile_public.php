@@ -1,7 +1,9 @@
 <?php
     session_start();
+    /*  TODO: UNCOMMENT WHEN WITHOUT USER TO SHOW
     require_once("../dbfunctions/auth.php");//Temp 
     check_loginstatus();
+    */
     require_once("../layout/profileboxes.php");
 ?>
 <!DOCTYPE html>

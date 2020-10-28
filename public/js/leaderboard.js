@@ -22,8 +22,8 @@ function test() {
 		if (json) {
 			json.forEach((item) => { //item ska bli skapelsen av ett item.... Gör en array av json värden, sedan skicka in dem i build leaderboard?
 				document.getElementById("back-box").innerHTML += `
-					<div  class="flex-row">
-						<div class="profile-box ui-box shadow">
+					<div class="flex-row"> 
+						<div class="profile-box ui-box shadow" onclick="click_team('`+escapeHtml(item.disp_name)+`');">
 							<div class="profile">
 								<div class="rank"> `+item.rank+`. </div>
 								<div class="profilepic profilepic-small"> <img src="`+ escapeHtml(!item.img_url ? defaultProfile : item.img_url) +`"> </div>
@@ -44,7 +44,7 @@ function test() {
 }
 
 var isInLoadZone = false;
-window.addEventListener("scroll", (e) => {
+function scrollHandler(e) {
 	let bottom = document.getElementById("back-box").getBoundingClientRect().bottom;
 	let height = document.documentElement.clientHeight;
 
@@ -56,4 +56,7 @@ window.addEventListener("scroll", (e) => {
 	} else {
 		isInLoadZone = false;
 	}
-});
+}
+
+window.addEventListener("scroll", scrollHandler);
+document.addEventListener("touchmove", scrollHandler);

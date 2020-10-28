@@ -17,6 +17,11 @@
     }
     $teamdata = get_specteaminfo($link, $teamname);
 
+    session_start();
+    if (!$_SESSION["isLoggedin"] || (!$_SESSION["admin"] && $_SESSION["uid"] != $teamdata["leader"])) {
+        header("Location: /team_public.php?team=".$_GET["team"]);
+        die();
+    }
 ?>
 <!DOCTYPE html>
 <html>

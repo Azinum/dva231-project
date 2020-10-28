@@ -2,10 +2,20 @@
 
     //TODO: check filesize
     require_once("../../dbfunctions/dbconnection.php");
+    require_once("../../dbfunctions/get_specteaminfo.php");
     require_once("../../dbfunctions/modify_team.php");
 
     header("Content-type: application/json;");
     if (isset($_POST["team"]) && isset($_FILES["image"])) {
+
+        session_start();
+        $teamdata = get_specteaminfo($link, $_POST["team"]);
+        if (!$_SESSION["isLoggedin"] || (!$_SESSION["admin"] && $_SESSION["uid"] != $teamdata["leader"])) {
+            http_response_code(403);
+            echo json_encode(["status" => "not authorized"]);
+            die();
+        }
+
         if (exif_imagetype($_FILES["image"]["tmp_name"])) {
             $size = getimagesize($_FILES["image"]["tmp_name"]);
             if ($size[0] != 0 && $size[1] != 0) {

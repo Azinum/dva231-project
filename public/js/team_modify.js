@@ -103,6 +103,12 @@ function makeLeader(elem, id, team) {
                     leaderElem.classList.remove("leader");
                     elem.classList.add("leader");
                     elem.querySelectorAll(".button").forEach((elem) => {elem.remove()});
+                    window.location.replace("/team_public.php?team="+team);
+                    // NOTE (linus): Will redirect you, even if you are admin... This redirect should prob. be to a second page where we, on the server-side
+                    // can check if you are Admin, and in that case redirect you back, and otherwise to team_public. OR, better yet, an ajax req. w/ the session
+                    // cookie that returns whether we can stay or not. Not a prio. atm.
+                    // Also, even if this redirect is ignored, none of the ajax req. on the page will go thru since we are not leader, so no harm done, you will
+                    // just have a broken page
                 } else {
                     // Again, shouldn't be possible to get here unless an error occured somewhere else
                     alert("Couldn't set user as leader!");
@@ -149,6 +155,8 @@ function submitTeamImage(input, team) {
 
 async function submitTeamInfo(form, team) {
     if (await submitTeamImage(form.querySelector("#profile-pic"), team)) {
+        form.querySelector(".profilepic img").src = form.querySelector("#profile-pic-preview").src;
+        form.querySelector("#profile-pic-preview").src = "";
         if (form.querySelector("#display-name").value.length < 3) {
             form.querySelector("#display-name").classList.add("error");
         } else {
@@ -159,12 +167,14 @@ async function submitTeamInfo(form, team) {
                 "bio": form.querySelector("#bio").value
             })).then((response) => {
                 if (response.status == 200) {
+                    window.history.pushState("","","/team_modify.php?team="+form.querySelector("#display-name").value);
                     alert("Updated team info");
                 } else {
                     response.json().then((json) => {
                         if (json.status == "name in use") {
                             alert("The name \""+form.querySelector("#display-name").value+"\" is already in use!");
                         } else {
+                            /*Shouldn't happen unless you have lost the leadership role (which could only happen thru admin intervention) while still on the page*/
                             alert("An unexpected error occured! Please try again later.");
                         }
                     });
@@ -172,6 +182,7 @@ async function submitTeamInfo(form, team) {
             });
         }
     } else {
-        console.log("Nuh");
+        //TODO: ret. error messages from team_set_image and parse them here. not a prio atm
+        alert("An unexpected error occured when uploading the image!\nDid you upload a corrupted image?");
     }
 }
