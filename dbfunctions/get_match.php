@@ -78,4 +78,9 @@ function match_create($link, $match_data) {
 
 }
 
+// TODO(lucas): Calculate that ELO thingy here!
+function match_verify($link, $id) {
+
+}
+
 ?>

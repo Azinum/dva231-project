@@ -35,13 +35,10 @@ page_begin("Match Results");
 		<div class="line-wide"></div>
 
 		<!-- 
-			There will be four possible states that the match result page can be in:
-			1) Initial (create state)
-				* This state is not to be stored on the database.
-				* All other states will be stored.
-			2) Under revision: Either this could be directly after one team created and sent the match results to the other team, or it could be when the other team sent it back.
-			3) Uncomplete: The other team saw an error in the match results, so they sent it back with edited results. The state will then go back to #2.
-			4) Complete
+			Match states:
+			1) Initial create state. Won't be stored on the database until it's sent.
+			2) Under revision (a team should verify): Either this could be directly after one team created and sent the match results to the other team, or it could be when the other team sent it back. The other team saw an error in the match results, so they sent it back with edited results.
+			3) Complete (verified)
 		-->
 		<form>
 			<div class="match-content-box shadow team1">

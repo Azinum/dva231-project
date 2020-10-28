@@ -13,14 +13,10 @@ const Teams = {
 	TEAM2 : 1
 };
 
+const participantCount = 5;
+
 var Users = () => {
-	return [
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined
-	];
+	return [];
 }
 
 var MatchData = function() {
@@ -225,7 +221,7 @@ function submitMatch() {
 			if (!participants) {
 				return false;
 			}
-			for (let i in participants) {
+			for (let i = 0; i < participantCount; ++i) {
 				let participant = participants[i];
 				if (!participant) {
 					return false;
@@ -240,7 +236,7 @@ function submitMatch() {
 			let participants = teams[Teams.TEAM2].participants;
 			if (!participants)
 				return false;
-			for (let i in participants) {
+			for (let i = 0; i < participantCount; ++i) {
 				let participant = participants[i];
 				if (!participant) {
 					return false;
