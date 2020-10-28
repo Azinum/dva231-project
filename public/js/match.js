@@ -158,7 +158,16 @@ function selectTeam(elem, team) {
 		() => {
 			let inputText = inputField.value;
 			results.innerHTML = "";
-			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
+			let params = {
+				"q": inputText
+			};
+			// NOTE(lucas): Are you selecting your own team?
+			// Team 1 is always the team that is currenly modifying/creating the match results
+			if (team == Teams.TEAM1) {
+				params["user_id"] = 19;
+			}
+			// TODO(lucas): Auth check to access these ajax request sql query calls
+			fetch("/ajax/search_teams.php?" + new URLSearchParams(params))
 				.then((res) => res.json())
 				.then((json) => {
 					results.innerHTML = "";

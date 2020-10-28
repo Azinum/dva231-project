@@ -67,6 +67,25 @@
 		$final_result = [];
 		if ($result = mysqli_query($link, $query)) {
 			while ($res_array = mysqli_fetch_assoc($result)) {
+				array_push($final_result, [
+					"name" => $res_array['TeamName'],
+					"display_name" => $res_array['DisplayName'],
+					"img_url" => $res_array['TeamImage'],
+					"bio" => $res_array['Bio'],
+					"team_ranking" => $res_array['TeamRanking']
+				]);
+			}
+		}
+		return $final_result;
+	}
+
+	function search_teamleader_teams($link, $teamleader_id, $query_string) {
+		$teamName = mysqli_real_escape_string($link, $query_string);
+		$teamleader = mysqli_real_escape_string($link, $teamleader_id);
+		$query = 'SELECT * FROM Team WHERE DisplayName LIKE "%' . $teamName . '%" AND TeamLeader = "' . $teamleader . '" AND IsDisabled IS NOT TRUE AND IsBanned IS NOT TRUE;';
+		$final_result = [];
+		if ($result = mysqli_query($link, $query)) {
+			while ($res_array = mysqli_fetch_assoc($result)) {
 				if (!$res_array['IsBanned']) {
 					array_push($final_result, [
 						"name" => $res_array['TeamName'],
