@@ -63,7 +63,7 @@ function match_get_status() {
 	$info = match_get_info_state();
 	$match_state = $info["match"];
 	if (!isset($match_state["is_verified"])) {
-		echo '<p>Status: Create</p>';
+		echo '<p>Status: Creating match</p>';
 	}
 	else if ($match_state["is_verified"]) {
 		echo '<p>Status: Verified</p>';
@@ -76,6 +76,7 @@ function match_get_status() {
 // Create match: You have the ability to select teams, team participants and match results.
 // Modify match: You only have the ability to edit team members and match results.
 // TODO(lucas): Add match not found page (when trying to access a match page that doesn't exist, both for viewing and modifying)
+// TODO(lucas): Redirect to page not found (of maybe to match view) when trying to modify a match that has already been verified
 function match_participant_box($state, $team_index) {
 	$info = match_get_info_state();
 	$team_participants = $info["team_participants"][$team_index];
@@ -89,6 +90,11 @@ function match_participant_box($state, $team_index) {
 		';
 	}
 	else if ($info["modify"]) {
+		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
+		echo '
+			<img class="match-player-img match-box basic-interactive" src="' . $img . '" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+			<small>' . $user["name"]. '</small>
+		';
 	
 	}
 	else {
