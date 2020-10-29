@@ -151,11 +151,11 @@ function selectTeam(elem, team) {
 				teams[team] = new Team();
 			}
 			if (e.name != teams[team].name) {
-				let el = document.querySelector(".match-participants" + (team == Teams.TEAM1 ? ".team1" : ".team2"));
-				el.childNodes.forEach((item) => {
-					item.src = "img/default_profile_image.svg";
-				});
-				teams[team].participants = Users();
+				let el = document.querySelector(".match-participants" + (team == Teams.TEAM1 ? ".team1" : ".team2")).querySelectorAll(".match-player-img");
+				for (let i = 0; i < el.length; ++i) {
+					el[i].querySelector("img").src = "img/default_profile_image.svg";
+					el[i].querySelector("p").innerText = "";
+				}
 			}
 			teams[team].name = e.name;
 			teams[team].display_name = e.display_name;
