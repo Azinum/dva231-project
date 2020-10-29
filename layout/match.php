@@ -22,11 +22,11 @@ function match_get_info($link) {
 		$info["modify"] = true;
 		$info["id"] = $modify;
 	}
+	$info["uid"] = $_SESSION["uid"];
 	$info["match"] = get_match_info($link, $info["id"]);
 	if (!$info["match"] && ($info["view"] || $info["modify"])) {
 		header("Location: /match.php");
 		exit();
-		return;
 	}
 	$teams = $info["match"]["teams"];
 	$info["team_participants"] = [
@@ -34,14 +34,13 @@ function match_get_info($link) {
 		get_match_participants($link, $info["id"], $teams[1]["name"])
 	];
 
-	$GLOBALS["match_info"] = $info;
-	echo '<script>var matchData = ' . json_encode($info) . ';</script>';
-
 	if ($info["match"]["is_verified"] && $modify) {
 		header("Location: /match.php?view=" . $info["id"]);
 		exit();
-		return;
 	}
+
+	$GLOBALS["match_info"] = $info;
+	echo '<script>var matchData = ' . json_encode($info) . ';</script>';
 }
 
 
@@ -89,7 +88,6 @@ function match_get_status() {
 // Create match: You have the ability to select teams, team participants and match results.
 // Modify match: You only have the ability to edit team members and match results.
 // TODO(lucas): Add match not found page (when trying to access a match page that doesn't exist, both for viewing and modifying)
-// TODO(lucas): Redirect to page not found (of maybe to match view) when trying to modify a match that has already been verified
 function match_participant_box($state, $team_index) {
 	$info = match_get_info_state();
 	$team_participants = $info["team_participants"][$team_index];
@@ -98,21 +96,28 @@ function match_participant_box($state, $team_index) {
 	if ($info["view"]) {
 		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
-			<img class="match-player-img" src="' . $img . '">
-			<small>' . $user["name"]. '</small>
+			<div class="match-player-img">
+				<img src="' . $img . '">
+				<p>' . $user["name"]. '</p>
+			</div>
 		';
 	}
 	else if ($info["modify"]) {
 		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
-			<img class="match-player-img basic-interactive" src="' . $img . '" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
-			<small>' . $user["name"]. '</small>
+			<div class="match-player-img basic-interactive" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+				<img src="' . $img . '">
+				<p>' . $user["name"]. '</p>
+			</div>
 		';
 	
 	}
 	else {
 		echo '
-			<img class="match-player-img basic-interactive" src="img/default_profile_image.svg" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+			<div class="match-player-img basic-interactive" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+				<img src="img/default_profile_image.svg">
+				<p></p>
+			</div>
 		';
 	}
 }

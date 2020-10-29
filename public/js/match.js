@@ -94,7 +94,8 @@ function selectPlayer(elem, team, index) {
 
 	doSearch(
 		(e) => {
-			elem.src = e.img;
+			elem.querySelector("img").src = e.img;
+			elem.querySelector("p").innerText = e.name;
 			teams[team].participants[index] = {
 				name: e.name,
 				id: e.user_id
@@ -106,6 +107,7 @@ function selectPlayer(elem, team, index) {
 			results.innerHTML = "";
 			let t = teams[team];
 			let teamName = t.name;
+			// Figure out which team you are a leader of to do a correct filtering action
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
@@ -169,7 +171,7 @@ function selectTeam(elem, team) {
 			};
 			// Team 1 is the creator of the match
 			if (team == Teams.TEAM1) {
-				params["user_id"] = 19;
+				params["user_id"] = matchData["uid"];
 			}
 			// TODO(lucas): Auth check to access these ajax request sql query calls
 			fetch("/ajax/search_teams.php?" + new URLSearchParams(params))
