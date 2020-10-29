@@ -39,7 +39,10 @@ var Team = function() {
 	this.participants = Users();
 }
 
-var teams = [];
+var teams = [
+	new Team(),
+	new Team()
+];
 
 function imageExists(src) {
 	let image = new Image();
@@ -51,6 +54,7 @@ function toggleOverlay() {
 	searchOverlay = !searchOverlay;
 
 	let elem = document.querySelector(".match-search-overlay");
+	document.querySelector(".match-search-overlay-content .text-input-field").value = "";
 
 	if (searchOverlay) {
 		elem.classList.add("active");
@@ -95,6 +99,7 @@ function selectPlayer(elem, team, index) {
 				name: e.name,
 				id: e.user_id
 			}
+			inputField.value = "";
 		},
 		() => {
 			let inputText = inputField.value;
@@ -154,6 +159,7 @@ function selectTeam(elem, team) {
 			teams[team].display_name = e.display_name;
 			let displayNameElement = document.querySelector((team == Teams.TEAM1 ? ".team1" : ".team2") + " h2");
 			displayNameElement.innerText = e.display_name;
+			inputField.value = "";
 		},
 		() => {
 			let inputText = inputField.value;
@@ -161,8 +167,7 @@ function selectTeam(elem, team) {
 			let params = {
 				"q": inputText
 			};
-			// NOTE(lucas): Are you selecting your own team?
-			// Team 1 is always the team that is currenly modifying/creating the match results
+			// Team 1 is the creator of the match
 			if (team == Teams.TEAM1) {
 				params["user_id"] = 19;
 			}
@@ -175,7 +180,7 @@ function selectTeam(elem, team) {
 						if (!teams[team]) {
 							return true;
 						}
-						return item.display_name !== teams[team].display_name;
+						return (item.display_name != teams[Teams.TEAM1].display_name) && (item.display_name != teams[Teams.TEAM2].display_name);
 					}).forEach((item) => {
 						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
