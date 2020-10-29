@@ -23,6 +23,20 @@ var Users = () => {
 	];
 }
 
+var MatchData = function() {
+	this.id = 0;
+	this.match = {
+		id : 0,
+		is_verified : false,
+		team2_should_verify : false,
+		teams : [undefined, undefined]
+	};
+	this.team_participants = [
+		[],
+		[]
+	];
+}
+
 var Team = function() {
 	this.name = "";
 	this.display_name = "";
@@ -30,6 +44,8 @@ var Team = function() {
 }
 
 var teams = [];
+
+var matchState = {};
 
 function imageExists(src) {
 	let image = new Image();
@@ -90,7 +106,7 @@ function selectPlayer(elem, team, index) {
 			let inputText = inputField.value;
 			results.innerHTML = "";
 			let t = teams[team];
-			let teamName = t.display_name;
+			let teamName = t.name;
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
@@ -142,7 +158,7 @@ function selectTeam(elem, team) {
 			}
 			teams[team].name = e.name;
 			teams[team].display_name = e.display_name;
-			let displayNameElement = document.querySelector("h2" + (team == Teams.TEAM1 ? ".team1" : ".team2"));
+			let displayNameElement = document.querySelector((team == Teams.TEAM1 ? ".team1" : ".team2") + " h2");
 			displayNameElement.innerText = e.display_name;
 		},
 		() => {
@@ -214,7 +230,6 @@ function submitMatch() {
 			for (let i in participants) {
 				let participant = participants[i];
 				if (!participant) {
-					return false;
 				}
 			}
 			return true;
@@ -235,6 +250,9 @@ function submitMatch() {
 			return true;
 		}]
 	]);
+	if (error) {
+		return;
+	}
 }
 
 ((func) => {
@@ -245,5 +263,8 @@ function submitMatch() {
 		document.addEventListener("DOMContentLoaded", func);
 	}
 })(() => {
-
+	// NOTE(lucas): This is from layout/match.php:match_get_info()
+	if (!matchData) {
+		matchData = new MatchData();
+	}
 })
