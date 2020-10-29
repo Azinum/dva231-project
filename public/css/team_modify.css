@@ -30,6 +30,10 @@
     margin-top: 0.5vw;
 }
 
+.team-bio form textarea {
+    resize: vertical;
+}
+
 .team-bio form input[type=submit] {
     width: initial;
 }

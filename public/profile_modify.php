@@ -1,10 +1,28 @@
-<?php session_start(); //Temp?
+<?php 
 
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
-    require_once("../dbfunctions/auth.php");//Temp 
-    check_loginstatus();
+    require_once("../dbfunctions/dbconnection.php");
+    require_once("../dbfunctions/get_specuserinfo.php");
+    require_once("../dbfunctions/get_userteams.php");
+
+	if (!isset($_GET["id"])) {
+		header("Location: /home.php");
+		die();
+	}
+
+    $userdata = get_specuserinfo($link, $_GET["id"]);
+    if ($userdata["user_id"] == NULL) {
+		header("Location: /home.php");
+		die();
+    }
+
+    session_start();
+    if (!$_SESSION["isLoggedin"] || (!$_SESSION["admin"] && $_SESSION["uid"] != $_GET["id"])) {
+        header("Location: /profile_public.php?id=".$_GET["id"]);
+        die();
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,6 +36,8 @@
         <link rel="stylesheet" type="text/css" href="/css/common.css">
         <link rel="stylesheet" type="text/css" href="/css/profile_box.css">
         <?php searchoverlay_headtags(); ?>
+        <script src="/js/user_modify.js"></script>
+        <script src="/js/profile_box.js"></script>
     </head>
     <body>
         <?php include("navbar_final.php"); ?>
@@ -35,19 +55,28 @@
                     ?>
                         <div class="team-bio flex-layout-section flex-layout-section-wide">
                             <h3>User Profile:</h3>
-                            <form>
-                                <div class="img-controls ui-box shadow">
+                            <form id="user-profile" onsubmit="event.preventDefault();">
+                                <div class="img-controls shadow ui-box">
+                                    <label>Current image:</label>
                                     <div class="profilepic">
-                                        <img src="/img/tmp_profile.jpg">
+                                        <img src="<?php echo $userdata["img_url"] ? htmlspecialchars($userdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                                     </div>
-                                    <input type="file" placeholder="Profile picture">
+                                    <label>New image:</label>
+                                    <div class="profilepic">
+                                        <img src="" alt="(select image)" id="profile-pic-preview">
+                                    </div>
+                                    <input  type="file" placeholder="Profile picture" id="profile-pic" accept="image/*" autocomplete="off"
+                                            onchange="previewImage(this, document.getElementById('profile-pic-preview'));">
+                                    <label><i>Your image will be cropped as shown</i></label>
                                 </div>
                                 <div class="other-controls">
-                                    <input class="text-input-field shadow" type="text" placeholder="Name">
-                                    <textarea class="text-input-field shadow" >Bio</textarea>
-                                </div>
-                                <div class="button-container">
-                                    <input class="button button-submit" type="submit" value="Apply">
+                                    <input  class="text-input-field shadow" type="text" placeholder="Name" id="display-name" minlength="3"
+                                            value="<?php echo htmlspecialchars($userdata["name"]); ?>">
+                                    <textarea class="text-input-field shadow" id="bio"><?php echo htmlspecialchars($userdata["bio"]); ?></textarea>
+                                    <div class="button-container">
+                                        <input type="submit" class="button button-submit" value="Apply"
+                                                onclick="submitUserInfo(document.getElementById('user-profile'), '<?php echo htmlspecialchars($_GET['id']); ?>')">
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -62,6 +91,7 @@
                                 <?php
                                     profile_box_team([
                                             "name" => "Good Team3",
+                                            "disp_name" => "Good Team3",
                                             "img_url" => "/img/tmp_profile.jpg",
                                         ],[
                                             "img_small" => false,
@@ -76,39 +106,46 @@
                             <div class="flex-layout-section flex-layout-section-wide">
                                 <h3>Current Teams:</h3>
                                 <?php
-                                    profile_box_team([
-                                            "name" => "Good Team3",
-                                            "img_url" => "/img/tmp_profile.jpg",
-                                        ],[
+                                    $teams = get_userteams($link, $_GET['id']);
+                                    foreach($teams as $team) {
+                                        profile_box_team($team, [
                                             "img_small" => false,
                                             "show_stats" => false,
                                             "show_rank" => false,
                                             "show_score" => false,
-                                            "buttons" => [ "leave" => true, "invite_controls" => false ]
-                                    ]);
+                                            //"on_click" => "click_team('".htmlspecialchars($team["disp_name"])."');",
+                                            "buttons" => [
+                                                "leave" => $_GET["id"] != $team["leader"],
+                                                "visit" => true,
+                                                "invite_controls" => false
+                                            ],
+                                            "button_clicks" => [
+                                                "leave" => "kickUser(this.parentElement, '". htmlspecialchars($_GET["id"]) ."', '". htmlspecialchars($team["name"]) ."');",
+                                                "visit" => "click_team('".htmlspecialchars($team["disp_name"])."');"
+                                            ]
+                                        ]);
+                                    }
                                 ?>
                             </div>
                             <div class="flex-layout-section flex-layout-section-wide">
                                 <h3>Create new team:</h3>
-                                    <div class="team-bio">
-                                        <form method="post" action="post_regteam.php">
-                                            <div class="img-controls ui-box shadow">
-                                                <div class="profilepic">
-                                                    <img src="/img/tmp_profile.jpg">
-                                                </div>
-                                                <input type="file" placeholder="Profile picture" name="img">
+                                <div class="team-bio">
+                                    <form onsubmit="event.preventDefault();" id="addteam-form">
+                                        <div class="img-controls ui-box shadow">
+                                            <div class="profilepic">
+                                                <img src="/img/default_profile_image.svg" id="newteam-pic-preview">
                                             </div>
-                                            <div class="other-controls">
-                                                <input class="text-input-field shadow" type="text" placeholder="Name" name="teamname">
-                                                <textarea class="text-input-field shadow" name="bio">Bio</textarea>
-                                                <input type="submit" class="button button-submit">
+                                            <input  type="file" placeholder="Profile picture" id="newteam-img" accept="image/*" autocomplete="off"
+                                                    onchange="previewImage(this, document.getElementById('newteam-pic-preview'));">
+                                        </div>
+                                        <div class="other-controls">
+                                            <input class="text-input-field shadow" type="text" placeholder="Name" id="newteam-name" minlength="3">
+                                            <textarea class="text-input-field shadow" id="newteam-bio">Bio</textarea>
+                                            <div class="add-member">
+                                                <input type="submit" class="button button-accept" onclick="addTeam(document.getElementById('addteam-form'));" value="Add">
                                             </div>
-                                        </form>
-                                    </div>
-                                <div class="add-member">
-                                    <div class="button button-image button-accept">
-                                        <img src="/img/plus.svg">
-                                    </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

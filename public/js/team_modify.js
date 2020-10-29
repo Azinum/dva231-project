@@ -132,6 +132,8 @@ function previewImage(input, img) {
     }
 }
 
+// TODO: kinda ugly
+// Returns: [ <bool: if img was uploaded>, <bool: if the function exited without error> ]
 function submitTeamImage(input, team) {
     if (input.files && input.files[0]) {
         if (input.files[0].size/1024/1024 < 3) {
@@ -142,21 +144,24 @@ function submitTeamImage(input, team) {
                 method: "POST",
                 body: data
             }).then((response) => {
-                return (response.status == 200);
+                return [true, (response.status == 200)];
             });
         } else {
             alert("Image size is too large! (Max. 3MB)");
-            return false;
+            return [false, false];
         }
     } else {
-        return true;    // No failiure, since we didn't even have to upload.
+        return [false, true];    // No failure, since we didn't even have to upload.
     }
 }
 
 async function submitTeamInfo(form, team) {
-    if (await submitTeamImage(form.querySelector("#profile-pic"), team)) {
-        form.querySelector(".profilepic img").src = form.querySelector("#profile-pic-preview").src;
-        form.querySelector("#profile-pic-preview").src = "";
+    let result = await submitTeamImage(form.querySelector("#profile-pic"), team);
+    if (result[1]) {
+        if (result[0]) {
+            form.querySelector(".profilepic img").src = form.querySelector("#profile-pic-preview").src;
+            form.querySelector("#profile-pic-preview").src = "#";
+        }
         if (form.querySelector("#display-name").value.length < 3) {
             form.querySelector("#display-name").classList.add("error");
         } else {

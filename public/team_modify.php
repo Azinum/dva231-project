@@ -62,7 +62,7 @@
                                     <div class="profilepic">
                                         <img src="" alt="(select image)" id="profile-pic-preview">
                                     </div>
-                                    <input  type="file" placeholder="Profile picture" id="profile-pic" accept="image/*"
+                                    <input  type="file" placeholder="Profile picture" id="profile-pic" accept="image/*" autocomplete="off"
                                             onchange="previewImage(this, document.getElementById('profile-pic-preview'));">
                                     <label><i>Your image will be cropped as shown</i></label>
                                 </div>
