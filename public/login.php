@@ -33,7 +33,7 @@ require_once("../dbfunctions/auth.php"); ?>
                 <tr>
                     <td><input class="button button-submit" type="submit" name="login" value="Sign in"></td>
                 </tr>
-                <tr>                     <td><a href="login.php"> Don't have an account? </a></td> </tr>
+                <tr>                     <td><a href="signup.php"> Don't have an account? </a></td> </tr>
             </form>
             </table>
             <?php 

@@ -42,9 +42,9 @@ function check_loginstatus() { //Skickar tillbaka användaren till login om isLo
         die();
     }
     else { //Temp for testing
-        echo "hell yeah";
-        $test = $_SESSION["admin"];
-        echo "IsAdmin: $test";
+        // echo "hell yeah";
+        // $test = $_SESSION["admin"];
+        // echo "IsAdmin: $test";
     }
 }
 
