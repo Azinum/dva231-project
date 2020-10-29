@@ -18,6 +18,9 @@ function get_match_info($link, $id) {
 
 	if ($result = mysqli_query($link, $query)) {
 		$res_array = mysqli_fetch_assoc($result);
+		if (!$res_array) {
+			return null;
+		}
 		$final_result = [
 			"id" => $res_array["Id"],
 			"result" => $res_array["Result"],
@@ -38,7 +41,6 @@ function get_match_info($link, $id) {
 			]
 		];
 	}
-	// echo var_dump($final_result);
 	return $final_result;
 }
 

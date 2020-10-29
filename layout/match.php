@@ -8,6 +8,7 @@ $match_info = [];
 function match_get_info($link) {
 	$info = $GLOBALS["match_info"];
 	if ($info) {
+		// We shouldn't really get to this place because this function should only be called once
 		return;
 	}
 	$info = [];
@@ -22,6 +23,11 @@ function match_get_info($link) {
 		$info["id"] = $modify;
 	}
 	$info["match"] = get_match_info($link, $info["id"]);
+	if (!$info["match"] && ($info["view"] || $info["modify"])) {
+		header("Location: /match.php");
+		exit();
+		return;
+	}
 	$teams = $info["match"]["teams"];
 	$info["team_participants"] = [
 		get_match_participants($link, $info["id"], $teams[0]["name"]),
