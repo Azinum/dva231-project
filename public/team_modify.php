@@ -4,6 +4,7 @@
     require_once("../layout/searchoverlay.php");
     require_once("../dbfunctions/dbconnection.php");
     require_once("../dbfunctions/get_specteaminfo.php");
+    require_once("../dbfunctions/escapes.php");
 
 	if (!isset($_GET["team"])) {
 		header("Location: /home.php");
@@ -56,7 +57,7 @@
                                 <div class="img-controls shadow ui-box">
                                     <label>Current image:</label>
                                     <div class="profilepic">
-                                        <img src="<?php echo $teamdata["img_url"] ? htmlspecialchars($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
+                                        <img src="<?php echo $teamdata["img_url"] ? equot($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                                     </div>
                                     <label>New image:</label>
                                     <div class="profilepic">
@@ -68,11 +69,11 @@
                                 </div>
                                 <div class="other-controls">
                                     <input  class="text-input-field shadow" type="text" placeholder="Name" id="display-name" minlength="3"
-                                            value="<?php echo htmlspecialchars($teamdata["disp_name"]); ?>">
+                                            value="<?php echo equot($teamdata["disp_name"]); ?>">
                                     <textarea class="text-input-field shadow" id="bio"><?php echo htmlspecialchars($teamdata["bio"]); ?></textarea>
                                     <div class="button-container">
                                         <input type="submit" class="button button-submit" value="Apply"
-                                                onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo htmlspecialchars($teamname); ?>')">
+                                                onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo esquot($teamname); ?>')">
                                     </div>
                                     <div class="button-container">
                                         <div class="button button-deny">
@@ -107,8 +108,8 @@
                                     "make_leader" => $member["user_id"] != $teamdata["leader"]
                                 ],
                                 "button_clicks" => [
-                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($teamname) .'")',
-                                    "make_leader" => 'makeLeader(this.parentElement, '. $member["user_id"] .', "'. htmlspecialchars($teamname) .'")',
+                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. equot($teamname) .'")',
+                                    "make_leader" => 'makeLeader(this.parentElement, '. $member["user_id"] .', "'. equot($teamname) .'")',
                                 ]
 							]);
 						}
@@ -118,7 +119,7 @@
 
                     <div class="add-member">
                         <div class="button button-image button-accept" onclick="selectPlayer(document.querySelector('.member-list'), '<?php
-                        echo htmlspecialchars($teamname); ?>');">
+                        echo esquot($teamname); ?>');">
                             <img src="/img/plus.svg">
                         </div>
                     </div>
