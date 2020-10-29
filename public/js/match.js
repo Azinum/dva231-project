@@ -13,13 +13,23 @@ const Teams = {
 	TEAM2 : 1
 };
 
+const participantCount = 5;
+
 var Users = () => {
-	return [
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined
+	return [];
+}
+
+var MatchData = function() {
+	this.id = 0;
+	this.match = {
+		id : 0,
+		is_verified : false,
+		team2_should_verify : false,
+		teams : [undefined, undefined]
+	};
+	this.team_participants = [
+		[],
+		[]
 	];
 }
 
@@ -90,7 +100,7 @@ function selectPlayer(elem, team, index) {
 			let inputText = inputField.value;
 			results.innerHTML = "";
 			let t = teams[team];
-			let teamName = t.display_name;
+			let teamName = t.name;
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
 				.then((res) => res.json())
 				.then((json) => {
@@ -142,13 +152,22 @@ function selectTeam(elem, team) {
 			}
 			teams[team].name = e.name;
 			teams[team].display_name = e.display_name;
-			let displayNameElement = document.querySelector("h2" + (team == Teams.TEAM1 ? ".team1" : ".team2"));
+			let displayNameElement = document.querySelector((team == Teams.TEAM1 ? ".team1" : ".team2") + " h2");
 			displayNameElement.innerText = e.display_name;
 		},
 		() => {
 			let inputText = inputField.value;
 			results.innerHTML = "";
-			fetch("/ajax/search_team.php?" + new URLSearchParams({"q": inputText}))
+			let params = {
+				"q": inputText
+			};
+			// NOTE(lucas): Are you selecting your own team?
+			// Team 1 is always the team that is currenly modifying/creating the match results
+			if (team == Teams.TEAM1) {
+				params["user_id"] = 19;
+			}
+			// TODO(lucas): Auth check to access these ajax request sql query calls
+			fetch("/ajax/search_teams.php?" + new URLSearchParams(params))
 				.then((res) => res.json())
 				.then((json) => {
 					results.innerHTML = "";
@@ -211,7 +230,7 @@ function submitMatch() {
 			if (!participants) {
 				return false;
 			}
-			for (let i in participants) {
+			for (let i = 0; i < participantCount; ++i) {
 				let participant = participants[i];
 				if (!participant) {
 					return false;
@@ -226,7 +245,7 @@ function submitMatch() {
 			let participants = teams[Teams.TEAM2].participants;
 			if (!participants)
 				return false;
-			for (let i in participants) {
+			for (let i = 0; i < participantCount; ++i) {
 				let participant = participants[i];
 				if (!participant) {
 					return false;
@@ -235,6 +254,9 @@ function submitMatch() {
 			return true;
 		}]
 	]);
+	if (error) {
+		return;
+	}
 }
 
 ((func) => {
@@ -245,5 +267,8 @@ function submitMatch() {
 		document.addEventListener("DOMContentLoaded", func);
 	}
 })(() => {
-
+	// NOTE(lucas): This is from layout/match.php:match_get_info()
+	if (!matchData) {
+		matchData = new MatchData();
+	}
 })
