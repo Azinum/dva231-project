@@ -38,6 +38,7 @@ body, html {
     background: var(--grey1);
     transition: border 0.25s;
     color: white;
+    outline:none;
 }
 
 .text-input-field:hover, .text-input-field:focus {
@@ -66,6 +67,11 @@ a {
     transition: filter 0.1s;
     margin-bottom: 0.7em;
     color: white;
+    outline:none;
+}
+
+.button:focus {
+    filter: brightness(115%)
 }
 
 .button:hover {
