@@ -15,6 +15,9 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+equot  = (str) => str.replace(/"/g, '\\"');
+esquot = (str) => str.replace(/'/g, "\\'");
+
 function test() {
     fetch('/ajax/get_leaderboard.php/?s='+start).then((res) => res.json()) 
     .then(json => {
@@ -23,10 +26,10 @@ function test() {
 			json.forEach((item) => { //item ska bli skapelsen av ett item.... Gör en array av json värden, sedan skicka in dem i build leaderboard?
 				document.getElementById("back-box").innerHTML += `
 					<div class="flex-row"> 
-						<div class="profile-box ui-box shadow" onclick="click_team('`+escapeHtml(item.disp_name)+`');">
+						<div class="profile-box ui-box shadow" onclick="click_team('`+esquot(item.disp_name)+`');">
 							<div class="profile">
 								<div class="rank"> `+item.rank+`. </div>
-								<div class="profilepic profilepic-small"> <img src="`+ escapeHtml(!item.img_url ? defaultProfile : item.img_url) +`"> </div>
+								<div class="profilepic profilepic-small"> <img src="`+ equot(!item.img_url ? defaultProfile : item.img_url) +`"> </div>
 							</div>
 							<span class="label">`+escapeHtml(item.disp_name)+`</span>
 							<div class="stats stats-short">

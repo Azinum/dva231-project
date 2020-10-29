@@ -38,7 +38,7 @@
                 <div class="bioboxes shadow">
                     <div class="flex-layout-section">
                         <div class="profilepic">
-                            <img src="<?php echo $teamdata["img_url"] ? htmlspecialchars($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
+                            <img src="<?php echo $teamdata["img_url"] ? equot($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                         </div>
                         <span class="username"><?php echo htmlspecialchars($teamdata["disp_name"]); ?></span>
                         <span class="bio">
