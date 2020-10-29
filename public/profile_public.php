@@ -1,10 +1,24 @@
 <?php
     session_start();
-    /*  TODO: UNCOMMENT WHEN WITHOUT USER TO SHOW
-    require_once("../dbfunctions/auth.php");//Temp 
-    check_loginstatus();
-    */
     require_once("../layout/profileboxes.php");
+    require_once("../dbfunctions/dbconnection.php");
+    require_once("../dbfunctions/get_specuserinfo.php");
+    require_once("../dbfunctions/get_userteams.php");
+
+    $userdata = NULL;
+	if (isset($_GET["id"])) {
+        $userdata = get_specuserinfo($link, $_GET["id"]);
+    }
+        
+    if($userdata == NULL || empty($userdata["user_id"])) {
+        if ($_SESSION["isLoggedin"]) {
+            header("Location: /profile_public.php?id=".$_SESSION["uid"]);
+            die();
+        } else {
+            header("Location: /home.php");
+            die();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,6 +32,7 @@
             profileboxes_headtags();
         ?>
         <script src="/js/profile_public.js"></script>
+        <script src="/js/profile_box.js"></script>
     </head>
     <body>
         <?php include("navbar_final.php"); ?>
@@ -26,77 +41,78 @@
                 <div class="bioboxes shadow">
                     <div class="flex-layout-section">
                         <div class="profilepic">
-                            <img src="/img/tmp_profile.jpg">
+                            <img src="<?php echo $userdata["img_url"] ? htmlspecialchars($userdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                         </div>
-                        <span class="username">Namn</span>
-                        <span class="bio">Here is the text that is about me and where I am from but not you because this is my page and so on</span>
+                        <span class="username"><?php echo htmlspecialchars($userdata["name"]); ?></span>
+                        <span class="bio"><?php echo htmlspecialchars($userdata["bio"]); ?></span>
                     </div>
                     <div class="flex-layout-section">
                         <div class="statbox">
                             <span class="label">Wins</span>
-                            <span class="val">8</span>
+                            <span class="val"><?php echo htmlspecialchars($userdata["stats"]["won"]); ?></span>
                         </div>
                         <div class="statbox">
                             <span class="label">Ties</span>
-                            <span class="val">2</span>
+                            <span class="val"><?php echo htmlspecialchars($userdata["stats"]["part"] - $userdata["stats"]["won"] - $userdata["stats"]["lost"]); ?></span>
                         </div>
                         <div class="statbox">
                             <span class="label">Losses</span>
-                            <span class="val">12</span>
+                            <span class="val"><?php echo htmlspecialchars($userdata["stats"]["lost"]); ?></span>
                         </div>
                     </div>
                 </div>
+                <?php
+                    if ($_SESSION["isLoggedin"] && ($_SESSION["admin"] || $_SESSION["uid"] == $_GET['id'])) {
+                ?>
+                    <div class="flex-layout-section flex-layout-section-wide">
+                        <a href="/profile_modify.php?id=<?php echo $_GET["id"]; ?>" class="button button-submit" id="modify-button">Modify Profile</a>
+                    </diV>
+                <?php
+                    }
+                ?>
                 <div class="flex-layout-section profilebox-separator">
                     <h3>Teams:</h3>
-                    <h4>Member of x teams</h4>
                     <?php
-                        profile_box_team([
-                                "name" => "Good Team",
-                                "img_url" => "/img/tmp_profile.jpg",
-                                "stats" => [
-                                    "part" => 21,
-                                    "won" => 21,
-                                    "lost" => 0
+                        $teams = get_userteams($link, $_GET['id']);
+                    ?>
+                    <h4>Member of <?php echo count($teams); ?> teams</h4>
+                    <?php
+                        foreach($teams as $team) {
+                            profile_box_team($team, [
+                                "img_small" => false,
+                                "show_stats" => false,
+                                "show_rank" => false,
+                                "show_score" => false,
+                                "on_click" => "click_team('".htmlspecialchars($team["disp_name"])."');",
+                                "buttons" => [
+                                    "leave" => false,
+                                    "invite_controls" => false
                                 ]
-                            ],[
-                                "show_stats" => true,
-                                "buttons" => [ "leave" => false, "invite_controls" => false ]
-                        ]);
+                            ]);
+                        }
                     ?>
                 </div>
                 <div class="flex-layout-section">
                     <h3>Matches:</h3>
                     <h4 id="matches_showing">
-                        Showing:
-                        <select onchange="team_dropdown(this);">
-                            <option selected>All</option>
-                            <option>Other team</option>
-                            <option>Other team</option>
-                            <option>Other team</option>
-                            <option>Other team</option>
-                        </select>
                     </h4>
                     <?php
-                        matchbox([
-                            "lteam" => [ "name" => "Fools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "rteam" => [ "name" => "Tools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "won" => false
-                        ]);
-                        matchbox([
-                            "lteam" => [ "name" => "Fools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "rteam" => [ "name" => "Tools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "won" => false
-                        ]);
-                        matchbox([
-                            "lteam" => [ "name" => "Fools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "rteam" => [ "name" => "Tools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "won" => false
-                        ]);
-                        matchbox([
-                            "lteam" => [ "name" => "Fools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "rteam" => [ "name" => "Tools", "imgurl" => "/img/tmp_profile.jpg" ],
-                            "won" => false
-                        ]);
+                        require_once("../dbfunctions/get_usermatches.php");
+                        $matches = get_usermatches($link, $_GET["id"]);
+                        foreach($matches as $match) {
+                            //$lteam = $match["team1"]["name"] == $userdata["name"] ? "team1" : "team2";
+                            $lteam = "team1";
+                            //$other_team = $match["team1"] == $teamdata["name"] ? $match["team2"] : $match["team1"];
+                            //$other_teamdata = get_specteaminfo($link, $other_team);
+
+                            matchbox(
+                                $match,
+                                [
+                                    "verified" => true,
+                                    "lteam" => $lteam
+                                ]
+                            );
+                        }
                     ?>
                 </div>
             </div>

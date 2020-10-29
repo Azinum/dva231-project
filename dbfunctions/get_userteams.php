@@ -1,23 +1,27 @@
 <?php
 
   //Get teams the speicifed user is a member of
-  function get_userteams ($id) {  //Passera link funktionen in?
-    include("dbconnection.php");
+  function get_userteams ($link, $id) {
+    $query = "select * from Team join TeamMemberships on TeamMemberships.TeamName = Team.TeamName and TeamMemberships.Member = ".intval($id).";";
 
-    $Userquery = "SELECT TeamName FROM TeamMemberships join User on TeamMemberships.Member = User.Id WHERE User.Id = '$id'";
-    $Countquery = "SELECT COUNT(TeamName) as amount FROM TeamMemberships join User on TeamMemberships.Member = User.Id WHERE User.ID = '$id'";
+    if ($result = mysqli_query($link, $query)){
+        $teamsArray = [];
 
-    if ($result = mysqli_query($link, $Userquery)){
-
-        if ($counter = (int)(mysqli_fetch_array(mysqli_query($link, $Countquery))[0])) { //
-            for ($i = 0; $i <= $counter-1; $i++) {
-                $resArray = mysqli_fetch_array($result); //Måste finnas ett snyggare sätt att lösa detta
-                $teamsArray[$i] = $resArray[0];
-            }  
+        while ($resArray = mysqli_fetch_assoc($result)) {
+            array_push($teamsArray,
+                [
+                   "name"=>$resArray['TeamName'],
+                   "disp_name"=>$resArray['DisplayName'],
+                   "img_url"=>$resArray['TeamImage'],
+                   "rank"=>$resArray['TeamRanking'],
+                   "bio"=>$resArray['Bio'],
+                   "leader"=>$resArray['TeamLeader'],
+                   "is_banned"=>$resArray['IsBanned'],
+                ]
+            );
         }
 
-        return $teamsArray; //Array som innehåller alla teams spelaren är med i
-        
+        return $teamsArray; 
     }
 }
 

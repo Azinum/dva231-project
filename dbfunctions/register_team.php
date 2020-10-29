@@ -3,35 +3,37 @@
 //Kolla om användarnamnet är taget, isåfall be om ett nytt 
 
 
-function register_team ($link) { 
+abstract class register_team_errcodes {
+    const success       = 0;
+    const name_taken    = 1;
+    const name_short    = 2;
+    const dunno         = 3;
+}
 
-    $userInput = $_POST;
-    $escName = mysqli_real_escape_string($link, $userInput['teamname']);//Hämta värden från POST
-    $escBio = mysqli_real_escape_string($link, $userInput['bio']);
-    $escImg = mysqli_real_escape_string($link, $userInput['img']); //Denna kan vara lite tokig
-    $escLeader = mysqli_real_escape_string($link, $_SESSION['uid']);//Hämta skaparens id, med hjälp av authentication? Just nu default till 1
+function register_team($link, $name, $bio, $leader, $img) { 
+
+    //session_start();
+    //$userInput = $_POST;
+    $escName = mysqli_real_escape_string($link, $name);
+    $escBio = mysqli_real_escape_string($link, $bio);
+    $escImg = mysqli_real_escape_string($link, $img);
+    $escLeader = mysqli_real_escape_string($link, $leader);
     $createteamquery = 'INSERT INTO Team (TeamName, TeamRanking, TeamImage, Bio, TeamLeader,isBanned, DisplayName) VALUES ("'.$escName.'",1200,"'.$escImg.'","'.$escBio.'","'.$escLeader.'",false,"'.$escName.'")';
     $namecheckquery = 'SELECT TeamName FROM Team WHERE TeamName = "'.$escName.'"';
 
-    if (strlen($escName) >= 3) {
+    if (strlen($name) >= 3) {
         if ( !mysqli_num_rows (mysqli_query($link, $namecheckquery)) > 0)  {//Kollar om det finns någon krock med lagnamnet
-                if ($result = mysqli_query($link, $createteamquery)){
-                    echo "Team created succesfully!";
-                }else {
-                    echo "This was not supposed to happen";
-                }
-               
+            if ($result = mysqli_query($link, $createteamquery)){
+                return register_team_errcodes::success;
+            }
+        } else {
+            return register_team_errcodes::name_taken;
         }
-        else {
-            echo "Teamname is already taken"; //Redirect to site if fail
-        }
-    }
-    else
-    {
-        echo "Teamname too short!";
+    } else {
+        return register_team_errcodes::name_short;
     }
 
+    return register_team_errcodes::dunno;
 }
-
 
 ?>

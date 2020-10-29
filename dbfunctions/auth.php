@@ -9,10 +9,12 @@ function set_loggedin($link) {
         die();
     } 
     $query = "SELECT PasswordHash, Id, IsAdmin FROM User WHERE Email = '$mail'";
-    if($result = mysqli_query($link, $query)) {
+    if ($result = mysqli_query($link, $query)) {
         $resArray = mysqli_fetch_assoc($result);
         if (search_mail($link,$mail)) {
             if (password_verify($pass, $resArray['PasswordHash'])){
+                error_log("resArray['Id']");
+                error_log($resArray['Id']);
                 $_SESSION["uid"] = $resArray['Id'];
                 $_SESSION["admin"] = $resArray['IsAdmin'];
                 $_SESSION["isLoggedin"] = true;

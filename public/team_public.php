@@ -122,14 +122,12 @@
                         }
                     ?>
                     <h3>Matches:</h3>
-                    <h4>
-                    </h4>
+                    <h4></h4>
                     <?php
                         require_once("../dbfunctions/get_verified_matches.php");
                         $matches = get_verified_matches($link, $teamname);
                         foreach($matches as $match) {
-                            $lteam  = $match["team1"] == $teamdata["name"] ? "team1" : "team2";
-
+                            $lteam = $match["team1"]["name"] == $teamdata["name"] ? "team1" : "team2";
                             //$other_team = $match["team1"] == $teamdata["name"] ? $match["team2"] : $match["team1"];
                             //$other_teamdata = get_specteaminfo($link, $other_team);
 
