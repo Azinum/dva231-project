@@ -13,6 +13,9 @@ function escapeHtml(text) {
 	return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+equot  = (str) => str.replace(/"/g, '\\"');
+esquot = (str) => str.replace(/'/g, "\\'");
+
 function selectPlayer(elem, team) {
     fetch("/ajax/get_team_members.php?" + new URLSearchParams({"team": team}))
         .then((response) => response.json())
@@ -33,14 +36,14 @@ function selectPlayer(elem, team) {
                             <div class="profile-box ui-box shadow" data-user-id="`+ selection.user_id +`">
                                 <div class="profile">
                                     <div class="profilepic">
-                                        <img src="`+ escapeHtml(selection.img) +`">
+                                        <img src="`+ equot(selection.img) +`">
                                     </div>
                                 </div>
                                 <span class="label">`+ escapeHtml(selection.name) +`</span>
-                                <div class="button button-accept" onclick="makeLeader(this.parentElement, `+ selection.user_id +`, '`+ escapeHtml(team) +`');">
+                                <div class="button button-accept" onclick="makeLeader(this.parentElement, `+ selection.user_id +`, '`+ esquot(team) +`');">
                                     Make Leader
                                 </div>
-                                <div class="button button-deny" onclick="kickUser(this.parentElement, `+ selection.user_id +`, '`+ escapeHtml(team) +`');">
+                                <div class="button button-deny" onclick="kickUser(this.parentElement, `+ selection.user_id +`, '`+ esquot(team) +`');">
                                     Kick
                                 </div>
                             </div>
@@ -59,11 +62,11 @@ function selectPlayer(elem, team) {
                     json.forEach((item) => {
                         if (!teamMembers.includes(item.user_id)) {
                             document.querySelector(".searchoverlay .results").innerHTML += `
-                                <div class="profile-box ui-box shadow" onclick="onClick({name: '`+ escapeHtml(item.name) +`', user_id: '`+ escapeHtml(item.user_id) +`', img: '` +
-                                    escapeHtml(!item.img_url ? defaultProfile : item.img_url)+`'});">
+                                <div class="profile-box ui-box shadow" onclick="onClick({name: '`+ esquot(item.name) +`', user_id: '`+ escapeHtml(item.user_id) +`', img: '` +
+                                    esquot(!item.img_url ? defaultProfile : item.img_url)+`'});">
                                     <div class="profile">
                                         <div class="profilepic">
-                                            <img src="`+ escapeHtml(!item.img_url ? defaultProfile : item.img_url) +`">
+                                            <img src="`+ equot(!item.img_url ? defaultProfile : item.img_url) +`">
                                         </div>
                                     </div>
                                     <span class="label">`+ escapeHtml(item.name) +`</span>
@@ -97,8 +100,8 @@ function makeLeader(elem, id, team) {
                 if (response.status == 200) {
                     let leaderElem = document.querySelector(".leader");
                     leaderElem.innerHTML += `
-                        <div class="button button-accept" onclick="makeLeader(this.parentElement, `+ leaderElem.dataset.userId +`, '`+ team +`');">Make Leader</div>
-                        <div class="button button-deny" onclick="kickUser(this.parentElement, `+ leaderElem.dataset.userId + `, '`+ team +`');">Kick</div>
+                        <div class="button button-accept" onclick="makeLeader(this.parentElement, `+ leaderElem.dataset.userId +`, '`+ esquot(team) +`');">Make Leader</div>
+                        <div class="button button-deny" onclick="kickUser(this.parentElement, `+ leaderElem.dataset.userId + `, '`+ esquot(team) +`');">Kick</div>
                     `;
                     leaderElem.classList.remove("leader");
                     elem.classList.add("leader");

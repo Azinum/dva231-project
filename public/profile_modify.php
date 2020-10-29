@@ -6,6 +6,7 @@
     require_once("../dbfunctions/dbconnection.php");
     require_once("../dbfunctions/get_specuserinfo.php");
     require_once("../dbfunctions/get_userteams.php");
+    require_once("../dbfunctions/escapes.php");
 
 	if (!isset($_GET["id"])) {
 		header("Location: /home.php");
@@ -59,7 +60,7 @@
                                 <div class="img-controls shadow ui-box">
                                     <label>Current image:</label>
                                     <div class="profilepic">
-                                        <img src="<?php echo $userdata["img_url"] ? htmlspecialchars($userdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
+                                        <img src="<?php echo $userdata["img_url"] ? equot($userdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                                     </div>
                                     <label>New image:</label>
                                     <div class="profilepic">
@@ -71,11 +72,11 @@
                                 </div>
                                 <div class="other-controls">
                                     <input  class="text-input-field shadow" type="text" placeholder="Name" id="display-name" minlength="3"
-                                            value="<?php echo htmlspecialchars($userdata["name"]); ?>">
+                                            value="<?php echo equot($userdata["name"]); ?>">
                                     <textarea class="text-input-field shadow" id="bio"><?php echo htmlspecialchars($userdata["bio"]); ?></textarea>
                                     <div class="button-container">
                                         <input type="submit" class="button button-submit" value="Apply"
-                                                onclick="submitUserInfo(document.getElementById('user-profile'), '<?php echo htmlspecialchars($_GET['id']); ?>')">
+                                                onclick="submitUserInfo(document.getElementById('user-profile'), '<?php echo esquot($_GET['id']); ?>')">
                                     </div>
                                 </div>
                             </form>
@@ -120,8 +121,8 @@
                                                 "invite_controls" => false
                                             ],
                                             "button_clicks" => [
-                                                "leave" => "kickUser(this.parentElement, '". htmlspecialchars($_GET["id"]) ."', '". htmlspecialchars($team["name"]) ."');",
-                                                "visit" => "click_team('".htmlspecialchars($team["disp_name"])."');"
+                                                "leave" => "kickUser(this.parentElement, '". esquot($_GET["id"]) ."', '". esquot($team["name"]) ."');",
+                                                "visit" => "click_team('".esquot($team["disp_name"])."');"
                                             ]
                                         ]);
                                     }

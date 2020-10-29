@@ -4,6 +4,7 @@
     require_once("../dbfunctions/dbconnection.php");
     require_once("../dbfunctions/get_specuserinfo.php");
     require_once("../dbfunctions/get_userteams.php");
+    require_once("../dbfunctions/escapes.php");
 
     $userdata = NULL;
 	if (isset($_GET["id"])) {
@@ -41,7 +42,7 @@
                 <div class="bioboxes shadow">
                     <div class="flex-layout-section">
                         <div class="profilepic">
-                            <img src="<?php echo $userdata["img_url"] ? htmlspecialchars($userdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
+                            <img src="<?php echo $userdata["img_url"] ? equot($userdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
                         </div>
                         <span class="username"><?php echo htmlspecialchars($userdata["name"]); ?></span>
                         <span class="bio"><?php echo htmlspecialchars($userdata["bio"]); ?></span>
@@ -83,7 +84,7 @@
                                 "show_stats" => false,
                                 "show_rank" => false,
                                 "show_score" => false,
-                                "on_click" => "click_team('".htmlspecialchars($team["disp_name"])."');",
+                                "on_click" => "click_team('".esquot($team["disp_name"])."');",
                                 "buttons" => [
                                     "leave" => false,
                                     "invite_controls" => false
