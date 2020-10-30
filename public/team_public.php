@@ -2,6 +2,7 @@
     require_once("../layout/profileboxes.php");
     require_once("../dbfunctions/dbconnection.php");
     require_once("../dbfunctions/get_specteaminfo.php");
+    require_once("../dbfunctions/escapes.php");
 
 	if (!isset($_GET["team"])) {
 		header("Location: /home.php");
