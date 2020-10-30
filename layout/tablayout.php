@@ -6,12 +6,15 @@
     }
 
     //$tabnames: array with names of tabs
-    function tablayout_begin($tabs) {
+    $starttab = 0;
+    function tablayout_begin($tabs, $specstarttab = 0) {
+        global $starttab;
         ?><div class="tablayout"><div class="tabs"><?php
-
+        
+        $starttab = $specstarttab;
         foreach($tabs as $i => $tab) {
             $tabname = "tab_" . $i;
-            ?><div class="tab<?php echo ($i==0) ? " active" : ""; ?>" onclick="trigger_tab(this, '<?php echo $tabname; ?>');">
+            ?><div class="tab<?php echo ($i==$starttab) ? " active" : ""; ?>" onclick="trigger_tab(this, '<?php echo $tabname; ?>');">
                 <?php echo $tab; ?>
             </div><?php
         }
@@ -20,8 +23,9 @@
     }
 
     function tabcontent_begin($tabnumber) {
+        global $starttab;
         ?>
-            <div class="tabcontent<?php echo ($tabnumber==0) ? " active" : ""; ?>" id="tab_<?php echo $tabnumber; ?>">
+            <div class="tabcontent<?php echo ($tabnumber==$starttab) ? " active" : ""; ?>" id="tab_<?php echo $tabnumber; ?>">
         <?php
     }
 

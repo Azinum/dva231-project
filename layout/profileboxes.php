@@ -1,4 +1,7 @@
 <?php
+    
+    require_once("../dbfunctions/escapes.php");
+
     function profileboxes_headtags() {
         ?>
             <!--TODO: PUT COMMON CSS HERE-->
@@ -20,14 +23,15 @@
         Layout format:
         [
             "verified" => <bool to show/hide edit button>,
-            "lteam" => <string, either "team1" or "team2". W/L will be displayed from the perspective of lteam>
+            "lteam" => <string, either "team1" or "team2". W/L will be displayed from the perspective of lteam>,
+            "on_click" => <js onclick>
         ]
     */
     function matchbox($match, $layout) {
         $rteam = $layout["lteam"] == "team1" ? "team2" : "team1";
         ?>
-            <div class="matchbox shadow ui-box">
-                <div class="team team1" onclick="click_team('<?php echo $match[$layout["lteam"]]["disp_name"]; ?>');">
+            <div class="matchbox shadow ui-box <?php echo !$layout["verified"] ? "initiated" : ""; ?>" <?php echo isset($layout["on_click"]) ? 'onclick="'. equot($layout["on_click"]) .'"' : "";?>>
+                <div class="team team1" onclick="click_team('<?php echo esquot($match[$layout["lteam"]]["disp_name"]); ?>');">
                     <div class="profilepic basic-interactive">
                         <img src="<?php
                             echo htmlspecialchars(
@@ -56,7 +60,7 @@
                         VS
                     </span>
                 </div>
-                <div class="team team2" onclick="click_team('<?php echo $match[$rteam]["disp_name"]; ?>');">
+                <div class="team team2" onclick="click_team('<?php echo esquot($match[$rteam]["disp_name"]); ?>');">
                     <span class="label">
                         <?php
                             echo htmlspecialchars(
@@ -75,7 +79,7 @@
                 </div>
                 <?php if (!$layout["verified"]) { ?>
                     <div class="editbutton">
-                        <a class="button button-image button-accept" href="/match.php">
+                        <a class="button button-image button-accept" href="/match.php?modify=<?php echo $match["id"]; ?>">
                             <img src="/img/arrow.svg">
                         </a>
                     </div>

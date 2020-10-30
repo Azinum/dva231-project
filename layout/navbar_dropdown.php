@@ -5,8 +5,8 @@
 
     function build_buttons() {
         if ($_SESSION["isLoggedin"] == true) {
-            echo '<a href= "match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>';
-            echo '<a href= "profile_modify.php" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>';
+            echo '<a href="match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>';
+            echo '<a href="profile_modify.php?teams" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>';
             echo '<a href="home.php"> Leaderboard <img src="img/trophy.svg" class="nav-image" > </a>';
 
             echo '<div class="dropdown">';
@@ -21,8 +21,8 @@
             echo '</div>';
         }
         else { //Utloggad
-            echo '<a href= "match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>';
-            echo '<a href= "profile_modify.php" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>';
+            echo '<a href="match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>';
+            echo '<a href="login.php" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>';
             echo '<a href="home.php"> Leaderboard <img src="img/trophy.svg" class="nav-image" > </a>';
 
             echo '<div class="dropdown">';
