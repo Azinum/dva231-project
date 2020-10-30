@@ -149,3 +149,79 @@ function addTeam(form) {
         });
     }
 }
+
+function changePass(form, id) {
+    let pwdCurrent = form.querySelector("#pwd-current");
+    let pwdNew = form.querySelector("#pwd-new");
+    let pwdNewRepeat = form.querySelector("#pwd-new-repeat");
+
+    if (pwdCurrent.value != "") {
+        pwdCurrent.classList.remove("error");
+
+        if (pwdNew.value != "") {
+            pwdNew.classList.remove("error");
+
+            if (pwdNew.value == pwdNewRepeat.value) {
+                pwdNewRepeat.classList.remove("error");
+                form.querySelector("#pwd-err").innerHTML = "";
+
+                fetch("/ajax/set_user_pass.php?"+ new URLSearchParams({
+                    "id": id,
+                    "pwd": pwdCurrent.value,
+                    "newpwd": pwdNew.value
+                })).then((response) => {
+                    if (response.status == 200) {
+                        alert("Password changed!");
+                    } else if (response.status == 403){
+                        alert("Couldn't update password!\nDid you enter your current password incorrectly?");
+                    } else {
+                        alert("Something went wrong!\nCouldn't update password!");
+                    }
+                });
+
+            } else {
+                pwdNew.classList.add("error");
+                pwdNewRepeat.classList.add("error");
+                form.querySelector("#pwd-err").innerHTML = "New password fields must match!";
+            }
+        } else {
+            pwdNew.classList.add("error");
+        }
+    } else {
+        pwdCurrent.classList.add("error");
+    }
+}
+
+function changeEmail(form, id) {
+    let emailNew = form.querySelector("#email-new");
+    let emailNewRepeat = form.querySelector("#email-new-repeat");
+
+    if (emailNew.value != "") {
+        emailNew.classList.remove("error");
+
+        if (emailNewRepeat.value == emailNew.value) {
+            emailNew.classList.remove("error");
+            emailNewRepeat.classList.remove("error");
+            form.querySelector("#email-err").innerHTML = "";
+
+            fetch("/ajax/set_user_email.php?" + new URLSearchParams({
+                "id": id,
+                "email": emailNew.value
+            })).then((response) => {
+                if (response.status == 200) {
+                    document.getElementById("current-email").innerHTML = escapeHtml(emailNew.value);
+                    alert("Email changed!");
+                } else {
+                    alert("Something went wrong!\nCouldn't update email!");
+                }
+            });
+
+        } else {
+            emailNew.classList.add("error");
+            emailNewRepeat.classList.add("error");
+            form.querySelector("#email-err").innerHTML = "Email fields must match!";
+        }
+    } else {
+        emailNew.classList.add("error");
+    }
+}
