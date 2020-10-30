@@ -1,29 +1,53 @@
 <?php
 
-  //Get teams the speicifed user is a member of
-  function get_userteams ($link, $id) {
-    $query = "select * from Team join TeamMemberships on TeamMemberships.TeamName = Team.TeamName and TeamMemberships.Member = ".intval($id).";";
+    //Get teams the speicifed user is a member of
+    function get_userteams ($link, $id) {
+    $query = "select * from Team join TeamMemberships on TeamMemberships.TeamName = Team.TeamName and TeamMemberships.Invitation is not true and TeamMemberships.Member = ".intval($id).";";
 
-    if ($result = mysqli_query($link, $query)){
-        $teamsArray = [];
+        if ($result = mysqli_query($link, $query)){
+            $teamsArray = [];
 
-        while ($resArray = mysqli_fetch_assoc($result)) {
-            array_push($teamsArray,
-                [
-                   "name"=>$resArray['TeamName'],
-                   "disp_name"=>$resArray['DisplayName'],
-                   "img_url"=>$resArray['TeamImage'],
-                   "rank"=>$resArray['TeamRanking'],
-                   "bio"=>$resArray['Bio'],
-                   "leader"=>$resArray['TeamLeader'],
-                   "is_banned"=>$resArray['IsBanned'],
-                ]
-            );
+            while ($resArray = mysqli_fetch_assoc($result)) {
+                array_push($teamsArray,
+                    [
+                       "name"=>$resArray['TeamName'],
+                       "disp_name"=>$resArray['DisplayName'],
+                       "img_url"=>$resArray['TeamImage'],
+                       "rank"=>$resArray['TeamRanking'],
+                       "bio"=>$resArray['Bio'],
+                       "leader"=>$resArray['TeamLeader'],
+                       "is_banned"=>$resArray['IsBanned'],
+                    ]
+                );
+            }
+
+            return $teamsArray; 
         }
-
-        return $teamsArray; 
     }
-}
+
+    function get_user_invitations ($link, $id) {
+        $query = "select * from Team join TeamMemberships on TeamMemberships.TeamName = Team.TeamName and TeamMemberships.Invitation is true and TeamMemberships.Member = ".intval($id).";";
+
+        if ($result = mysqli_query($link, $query)){
+            $teamsArray = [];
+
+            while ($resArray = mysqli_fetch_assoc($result)) {
+                array_push($teamsArray,
+                    [
+                       "name"=>$resArray['TeamName'],
+                       "disp_name"=>$resArray['DisplayName'],
+                       "img_url"=>$resArray['TeamImage'],
+                       "rank"=>$resArray['TeamRanking'],
+                       "bio"=>$resArray['Bio'],
+                       "leader"=>$resArray['TeamLeader'],
+                       "is_banned"=>$resArray['IsBanned'],
+                    ]
+                );
+            }
+
+            return $teamsArray; 
+        }
+    }
 
 
 

@@ -91,24 +91,40 @@
                     tabcontent_begin(1);
                     ?>
                         <div class="flex-container">
-                            <div class="flex-layout-section flex-layout-section-wide">
+                            <div class="flex-layout-section flex-layout-section-wide" id="team-invites">
                                 <h3>Team invites:</h3>
                                 <?php
-                                    profile_box_team([
-                                            "name" => "Good Team3",
-                                            "disp_name" => "Good Team3",
-                                            "img_url" => "/img/tmp_profile.jpg",
-                                        ],[
-                                            "img_small" => false,
-                                            "show_stats" => false,
-                                            "show_rank" => false,
-                                            "show_score" => false,
-                                            "buttons" => [ "leave" => false, "invite_controls" => true ]
-                                    ]);
+                                    $teams = get_user_invitations($link, $_GET['id']);
+                                    if (count($teams) == 0) {
                                 ?>
-                                <!--<h4>No invites at this time</h4>-->
+                                    <h4>No invites at this time</h4>
+                                <?php
+                                    } else {
+                                        foreach($teams as $team) {
+                                            profile_box_team($team, [
+                                                "img_small" => false,
+                                                "show_stats" => false,
+                                                "show_rank" => false,
+                                                "show_score" => false,
+                                                //"on_click" => "click_team('".htmlspecialchars($team["disp_name"])."');",
+                                                "buttons" => [
+                                                    "leave" => false,
+                                                    "visit" => true,
+                                                    "invite_controls" => true
+                                                ],
+                                                "button_clicks" => [
+                                                    "visit" => "click_team('".esquot($team["disp_name"])."');",
+                                                    "invite_controls" => [
+                                                        "accept" => "acceptInvite(this, '". esquot($team["name"]) ."', ". intval($_GET["id"]) .");",
+                                                        "reject" => "kickUser(this.parentElement, ". intval($_GET["id"]) .", '". esquot($team["name"]) ."');",
+                                                    ]
+                                                ]
+                                            ]);
+                                        }
+                                    }
+                                ?>
                             </div>
-                            <div class="flex-layout-section flex-layout-section-wide">
+                            <div class="flex-layout-section flex-layout-section-wide" id="current-teams">
                                 <h3>Current Teams:</h3>
                                 <?php
                                     $teams = get_userteams($link, $_GET['id']);

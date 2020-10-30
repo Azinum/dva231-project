@@ -225,3 +225,19 @@ function changeEmail(form, id) {
         emailNew.classList.add("error");
     }
 }
+
+function acceptInvite(elem, team, id) {
+    fetch("/ajax/accept_invitation.php?" + new URLSearchParams({
+        "id": id,
+        "team": team
+    })).then((response) => {
+        if (response.status == 200) {
+            alert("Yay!");
+            document.getElementById("current-teams").appendChild(elem.parentElement);
+            elem.parentElement.querySelector(".button-deny").innerHTML = "Leave";
+            elem.remove();
+        } else {
+            alert("Something went wrong!\nCouldn't accept invite!");
+        }
+    });
+}

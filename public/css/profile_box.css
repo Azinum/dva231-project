@@ -22,6 +22,12 @@
     background: #668cff;
 }
 
+.profile-box.invite {
+    background: var(--grey2);
+    box-shadow: none;
+    border: var(--grey1) dashed 0.5rem;
+}
+
 .profile-box .profilepic img {
     width: 100%;
     height: 100%;
@@ -84,6 +90,12 @@
     flex-grow: 1;
     text-decoration: none;
     color: white;
+}
+
+.profile-box.invite .label span::after {
+    content: "(invited)";
+    font-size: 0.8em;
+    font-style: italic;
 }
 
 .profile-box .stats {

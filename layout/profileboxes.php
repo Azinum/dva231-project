@@ -179,10 +179,12 @@
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["invite_controls"]) { ?>
-                    <div class="button button-accept">
+                    <div class="button button-accept" <?php
+                        echo isset($layout["button_clicks"]) ? "onclick=\"". htmlspecialchars($layout["button_clicks"]["invite_controls"]["accept"]) ."\"" : ""; ?>>
                         Accept
                     </div>
-                    <div class="button button-deny">
+                    <div class="button button-deny" <?php
+                        echo isset($layout["button_clicks"]) ? "onclick=\"". htmlspecialchars($layout["button_clicks"]["invite_controls"]["reject"]) ."\"" : ""; ?>>
                         Reject
                     </div>
                 <?php } ?>
@@ -209,6 +211,7 @@
             "show_stats" => <boolean>,
             "stats_short" => <boolean>,
             "on_click" => <string w/ js onclick function>,
+            "invite" => <boolean>,
             "buttons" => [
                 "kick" => <boolean>,
                 "make_leader" => <boolean>
@@ -222,8 +225,11 @@
 
     function profile_box_member($data, $layout) {
         ?>
-            <div class="profile-box ui-box shadow <?php echo $layout["is_leader"] ? "leader" : ""; ?>" <?php
-                echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?> data-user-id="<?php echo $data["user_id"]; ?>">
+            <div class="profile-box ui-box shadow<?php
+                echo $layout["is_leader"] ? " leader" : "";
+                echo $layout["invite"] ? " invite" : ""; ?>" <?php
+                echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : "";
+                ?> data-user-id="<?php echo $data["user_id"]; ?>">
                 <div class="profile">
                     <div class="profilepic basic-interactive <?php echo $layout["img_small"] ? "profilepic-small" : "";?>">
                         <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">

@@ -68,6 +68,7 @@ a {
     margin-bottom: 0.7em;
     color: white;
     outline:none;
+    margin-left: 0.2rem;
 }
 
 .button:focus {
