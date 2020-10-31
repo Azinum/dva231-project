@@ -115,7 +115,8 @@
                                 $match,
                                 [
                                     "verified" => true,
-                                    "lteam" => $lteam
+                                    "lteam" => $lteam,
+                                    "on_click" => "click_match(". intval($match["id"]) .")"
                                 ]
                             );
                         }
