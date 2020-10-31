@@ -5,6 +5,7 @@ require_once("header.php");
 require_once("../dbfunctions/dbconnection.php");
 require_once("../dbfunctions/auth.php");
 require_once("../layout/match.php");
+require_once("../layout/navbar_dropdown.php");
 
 match_get_info($link);
 
@@ -12,7 +13,9 @@ check_loginstatus();
 
 page_begin("Match Results");
 ?>
-	<?php include("navbar_final.php"); ?>
+	<div class="navbar">
+        <?php build_buttons(); ?>
+    </div>
 	<div class="match-search-overlay">
 		<div class="match-search-overlay-content">
 			<div class="closebox shadow" onclick="toggleOverlay();">x</div>

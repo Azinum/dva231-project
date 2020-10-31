@@ -11,6 +11,7 @@ function page_begin($title) {
 
 		<link href= "css/common.css" rel="stylesheet">
 		<link href= "css/match.css" rel="stylesheet">
+		<link href= "css/navbar.css" rel="stylesheet">
 
 		<script src="js/match.js"></script>
 	</head>
