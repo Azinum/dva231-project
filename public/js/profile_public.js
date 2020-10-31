@@ -12,3 +12,16 @@ function smite_victim_team(victim) {
         });
     }
 }
+
+function smite_victim_user(victim) {
+    fetch("/ajax/set_ban_user.php?" + new URLSearchParams({
+        "id": victim
+    })).then((response) => {
+        if (response.status == 200) {
+            alert("User smacked with heavy banhammer");
+            window.location.replace("/home.php");
+        } else {
+            alert("User evades nimbly!");
+        }
+    });
+}
