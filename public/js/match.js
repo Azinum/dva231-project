@@ -15,34 +15,32 @@ const Teams = {
 
 const participantCount = 5;
 
-var Users = () => {
+var Participants = () => {
 	return [];
-}
-
-var MatchData = function() {
-	this.id = 0;
-	this.match = {
-		id : 0,
-		is_verified : false,
-		team2_should_verify : false,
-		teams : [undefined, undefined]
-	};
-	this.team_participants = [
-		[],
-		[]
-	];
 }
 
 var Team = function() {
 	this.name = "";
 	this.display_name = "";
-	this.participants = Users();
+	this.image = "img/default_profile_image.svg";
 }
 
-var teams = [
-	new Team(),
-	new Team()
-];
+var Match = function() {
+	this.id = -1;
+	this.is_verified = 0;
+	this.result = "Team1Win";
+	this.team2_should_verify = true;
+	this.teams = [new Team(), new Team()]
+}
+
+var MatchData = function() {
+	this.id = 0;
+	this.match = new Match();
+	this.team_participants = [
+		new Participants(),
+		new Participants()
+	];
+}
 
 function imageExists(src) {
 	let image = new Image();
@@ -85,7 +83,7 @@ function errorMessage(message) {
 }
 
 function selectPlayer(elem, team, index) {
-	if (!teams[team]) {
+	if (!matchData.match.teams[team].name) {
 		errorMessage("You must first select a team!");
 		return;
 	}
@@ -96,7 +94,7 @@ function selectPlayer(elem, team, index) {
 		(e) => {
 			elem.querySelector("img").src = e.img;
 			elem.querySelector("p").innerText = e.name;
-			teams[team].participants[index] = {
+			matchData.team_participants[team][index] = {
 				name: e.name,
 				id: e.user_id
 			}
@@ -105,7 +103,7 @@ function selectPlayer(elem, team, index) {
 		() => {
 			let inputText = inputField.value;
 			results.innerHTML = "";
-			let t = teams[team];
+			let t = matchData.match.teams[team];
 			let teamName = t.name;
 			// Figure out which team you are a leader of to do a correct filtering action
 			fetch("/ajax/search_users_in_team.php?" + new URLSearchParams({"team": teamName, "q": inputText}))
@@ -113,12 +111,12 @@ function selectPlayer(elem, team, index) {
 				.then((json) => {
 					results.innerHTML = "";
 					json.filter((item) => {
-						let currentTeam = teams[team];
-						if (!currentTeam) {
+						let participants = matchData.team_participants[team];
+						if (!participants) {
 							return true;
 						}
-						for (let i in currentTeam.participants) {
-							let participant = currentTeam.participants[i];
+						for (let i in participants) {
+							let participant = participants[i];
 							if (!participant)
 								continue;
 							if (participant.name == item.name) {
@@ -147,19 +145,19 @@ function selectTeam(elem, team) {
 	doSearch(
 		(e) => {
 			elem.src = e.img;
-			if (!teams[team]) {
-				teams[team] = new Team();
+			if (!matchData.match.teams) {
+				matchData.match.teams = [new Team(), new Team()];
 			}
-			if (e.name != teams[team].name) {
+			if (e.name != matchData.match.teams[team].name) {
 				let el = document.querySelector(".match-participants" + (team == Teams.TEAM1 ? ".team1" : ".team2")).querySelectorAll(".match-player-img");
 				for (let i = 0; i < el.length; ++i) {
 					el[i].querySelector("img").src = "img/default_profile_image.svg";
 					el[i].querySelector("p").innerText = "";
 				}
-				teams[team].participants = [];
+				matchData.team_participants[team] = [];
 			}
-			teams[team].name = e.name;
-			teams[team].display_name = e.display_name;
+			matchData.match.teams[team].name = e.name;
+			matchData.match.teams[team].display_name = e.display_name;
 			let displayNameElement = document.querySelector((team == Teams.TEAM1 ? ".team1" : ".team2") + " h2");
 			displayNameElement.innerText = e.display_name;
 			inputField.value = "";
@@ -180,10 +178,11 @@ function selectTeam(elem, team) {
 				.then((json) => {
 					results.innerHTML = "";
 					json.filter((item) => {
-						if (!teams[team]) {
+						let matchTeams = matchData.match.teams;
+						if (!matchTeams) {
 							return true;
 						}
-						return (item.display_name != teams[Teams.TEAM1].display_name) && (item.display_name != teams[Teams.TEAM2].display_name);
+						return (item.display_name != matchTeams[Teams.TEAM1].display_name) && (item.display_name != matchTeams[Teams.TEAM2].display_name);
 					}).forEach((item) => {
 						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
@@ -227,14 +226,23 @@ function evaluateErrors(conditions) {
 
 function checkForErrors() {
 	return evaluateErrors([
-		["Please select team 1", () => { return teams[Teams.TEAM1].name; }],
-		["Please select team 2", () => { return teams[Teams.TEAM2].name; }],
-		["Missing participants in team 1", () => {
-			let team = teams[Teams.TEAM1];
-			if (!team) {
+		["Please select team 1", () => {
+			if (!matchData.match.teams)
 				return false;
-			}
-			let participants = teams[Teams.TEAM1].participants;
+			return matchData.match.teams[Teams.TEAM1].name;
+		}],
+		["Please select team 2", () => {
+			if (!matchData.match.teams)
+				return false;
+			return matchData.match.teams[Teams.TEAM2].name;
+		}],
+		["Missing participants in team 1", () => {
+			if (!matchData.match.teams)
+				return false;
+			let team = matchData.match.teams[Teams.TEAM1];
+			if (!team)
+				return false;
+			let participants = matchData.team_participants[Teams.TEAM1];
 			if (!participants) {
 				return false;
 			}
@@ -247,10 +255,12 @@ function checkForErrors() {
 			return true;
 		}],
 		["Missing participants in team 2", () => {
-			let team = teams[Teams.TEAM2];
+			if (!matchData.match.teams)
+				return false;
+			let team = matchData.match.teams[Teams.TEAM2];
 			if (!team)
 				return false;
-			let participants = teams[Teams.TEAM2].participants;
+			let participants = matchData.team_participants[Teams.TEAM2];
 			if (!participants)
 				return false;
 			for (let i = 0; i < participantCount; ++i) {
@@ -290,6 +300,7 @@ function declineMatch() {
 })(() => {
 	// NOTE(lucas): This is from layout/match.php:match_get_info()
 	if (!matchData) {
+		console.log("We shouldn't get here, right? riiiight?");
 		matchData = new MatchData();
 	}
 })
