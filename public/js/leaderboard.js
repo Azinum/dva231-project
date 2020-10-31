@@ -17,6 +17,8 @@ function escapeHtml(text) {
 
 equot  = (str) => str.replace(/"/g, '\\"');
 esquot = (str) => str.replace(/'/g, "\\'");
+var i = start +1;
+
 
 function test() {
     fetch('/ajax/get_leaderboard.php/?s='+start).then((res) => res.json()) 
@@ -28,7 +30,7 @@ function test() {
 					<div class="flex-row"> 
 						<div class="profile-box ui-box shadow" onclick="click_team('`+esquot(item.disp_name)+`');">
 							<div class="profile">
-								<div class="rank"> `+item.rank+`. </div>
+								<div class="rank"> `+i+`. </div>
 								<div class="profilepic profilepic-small"> <img src="`+ equot(!item.img_url ? defaultProfile : item.img_url) +`"> </div>
 							</div>
 							<span class="label">`+escapeHtml(item.disp_name)+`</span>
@@ -37,9 +39,13 @@ function test() {
 								<span> W:`+item.stats.won+` </span>
 								<span> L:`+item.stats.lost+` </span>
 							</div>
+							<div class="score">
+                        		E: `+ item.rank +`
+                    		</div>
 						</div>
 					</div>
 				`;
+				i++;
 			});
 		}
     });
