@@ -18,7 +18,8 @@ function match_create($link, $match_data) {
 	return false;
 }
 
-function match_add_participants($link, $participants, $team) {
+function match_add_participants($link, $id, $participants, $team) {
+	$id = mysqli_real_escape_string($id);
 	$team = mysqli_real_escape_string($team);
 	$query = '';
 }
