@@ -14,11 +14,10 @@ function match_create($link, $match_data) {
 	$query = 'INSERT INTO Matches (Matches.IsVerified, Matches.Result, Matches.Team1, Matches.Team2, Matches.Team2ShouldVerify) ' .
 		' VALUES(0, "' . $result . '", "' . $team1 . '", "' . $team2 . '", TRUE);';
 	if ($result = mysqli_query($link, $query)) {
-		return true;
+		return $link->insert_id;
 	}
 	return false;
 }
-
 
 // Exclude participants in a team that haven't accepted their invite yet, just in case.
 function match_add_participants($link, $id, $participants, $team) {
@@ -41,12 +40,10 @@ function match_verify($link, $id, $team) {
 	return false;
 }
 
+// TODO(lucas): Unlink match participants!
 function match_delete($link, $id, $team) {
 	$id = mysqli_real_escape_string($link, $id);
 	$team = mysqli_real_escape_string($link, $team);
 	$query = 'DELETE FROM Matches WHERE Id = ' . $id . ';';
-
-	return false;
+	return true;
 }
-
-?>
