@@ -96,7 +96,7 @@ body {
 
 @media screen and (max-width:350px) {
   .navbar {
-    line-height: 4vw;
+    line-height: 8vw;
   }
 
   .navbar a, .navbar dropdown{
