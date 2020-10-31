@@ -69,20 +69,4 @@ function get_match_participants($link, $id, $team) {
 	return $final_result;
 }
 
-// TODO(lucas): Maybe move this function to another file
-// match_data: participants, result, which team is team1
-function match_modify($link, $id, $match_data) {
-
-}
-
-// TODO(lucas): Maybe move this function to another file
-function match_create($link, $match_data) {
-
-}
-
-// TODO(lucas): Calculate that ELO thingy here!
-function match_verify($link, $id) {
-
-}
-
 ?>

@@ -225,10 +225,10 @@ function evaluateErrors(conditions) {
 	return error;
 }
 
-function submitMatch() {
-	let error = evaluateErrors([
-		["Please select team 1", () => { return teams[Teams.TEAM1]; }],
-		["Please select team 2", () => { return teams[Teams.TEAM2]; }],
+function checkForErrors() {
+	return evaluateErrors([
+		["Please select team 1", () => { return teams[Teams.TEAM1].name; }],
+		["Please select team 2", () => { return teams[Teams.TEAM2].name; }],
 		["Missing participants in team 1", () => {
 			let team = teams[Teams.TEAM1];
 			if (!team) {
@@ -262,9 +262,22 @@ function submitMatch() {
 			return true;
 		}]
 	]);
-	if (error) {
+}
+
+function submitMatch() {
+	if (checkForErrors()) {
 		return;
 	}
+}
+
+function submitMatchChanges() {
+	if (checkForErrors()) {
+		return;
+	}
+}
+
+function declineMatch() {
+
 }
 
 ((func) => {
