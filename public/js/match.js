@@ -156,6 +156,7 @@ function selectTeam(elem, team) {
 					el[i].querySelector("img").src = "img/default_profile_image.svg";
 					el[i].querySelector("p").innerText = "";
 				}
+				teams[team].participants = [];
 			}
 			teams[team].name = e.name;
 			teams[team].display_name = e.display_name;

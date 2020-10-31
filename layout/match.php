@@ -171,6 +171,9 @@ function match_submit_box($state) {
 	else if ($info["modify"]) {
 		echo '<div class="match-button button button-accept" onclick="alert();">Verify Results</div>';
 		echo '<div class="match-button button button-submit" onclick="submitMatch();">Submit Changes</div>';
+		// TODO(lucas): We really should have an error prevention mechanism here; a popup window or the like.
+		// Maybe even having an error prevention mechanisms on all of these buttons would be advantageous!
+		echo '<div class="match-button button button-deny" onclick="alert();">Decline</div>';
 	}
 	else {
 		echo '<div class="match-button button button-submit" onclick="submitMatch();">Submit</div>';
