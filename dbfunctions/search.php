@@ -23,7 +23,7 @@
 	function search_users_in_team($link, $team, $query_string) {
 		$teamName = mysqli_real_escape_string($link, $team);
 		$userName = mysqli_real_escape_string($link, $query_string);
-		$query = 'SELECT * FROM User, TeamMemberships WHERE User.Id = TeamMemberships.Member AND User.IsDisabled IS NOT TRUE AND User.IsBanned IS NOT TRUE AND TeamMemberships.TeamName = "' . $teamName .'" AND User.Username LIKE "%' . $userName . '%";';
+		$query = 'SELECT * FROM User, TeamMemberships WHERE (TeamMemberships.Invitation IS NULL OR TeamMemberships.Invitation != 1) AND User.Id = TeamMemberships.Member AND User.IsDisabled IS NOT TRUE AND User.IsBanned IS NOT TRUE AND TeamMemberships.TeamName = "' . $teamName .'" AND User.Username LIKE "%' . $userName . '%";';
 		$final_result = [];
 		if ($result = mysqli_query($link, $query)) {
 			while ($res_array = mysqli_fetch_assoc($result)) {
@@ -41,9 +41,10 @@
 		return $final_result;
 	}
 
+	// NOTE(lucas): Unused!
 	function get_users_in_team($link, $team) {
 		$teamName = mysqli_real_escape_string($link, $team);
-		$query = 'SELECT * FROM User, TeamMemberships WHERE User.Id = TeamMemberships.Member AND User.IsDisabled IS NOT TRUE AND  TeamMemberships.TeamName = "' . $teamName .'";';
+		$query = 'SELECT * FROM User, TeamMemberships WHERE (TeamMemberships.Invitation IS NULL OR TeamMemberships.Invitation != 1) AND User.Id = TeamMemberships.Member AND TeamMemberships.TeamName = "' . $teamName .'";';
 		$final_result = [];
 		if ($result = mysqli_query($link, $query)) {
 			while ($res_array = mysqli_fetch_assoc($result)) {

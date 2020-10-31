@@ -74,7 +74,7 @@ function match_team_box($state, $default_name, $team_index) {
 function match_get_status() {
 	$info = match_get_info_state();
 	$match_state = $info["match"];
-	if (!isset($match_state["is_verified"])) {
+	if (!$match_state) {
 		echo '<p>Status: Creating match</p>';
 	}
 	else if ($match_state["is_verified"]) {
@@ -110,7 +110,6 @@ function match_participant_box($state, $team_index) {
 				<p>' . $user["name"]. '</p>
 			</div>
 		';
-	
 	}
 	else {
 		echo '
@@ -169,8 +168,11 @@ function match_submit_box($state) {
 	if ($info["view"]) {
 	}
 	else if ($info["modify"]) {
-		echo '<div class="match-button button button-accept" onclick="alert();">Verify Results</div>';
-		echo '<div class="match-button button button-submit" onclick="submitMatch();">Submit Changes</div>';
+		echo '<div class="match-button button button-accept" onclick="verifyMatchResults();">Verify Results</div>';
+		echo '<div class="match-button button button-submit" onclick="submitMatchChanges();">Submit Changes</div>';
+		// TODO(lucas): We really should have an error prevention mechanism here; a popup window or the like.
+		// Maybe even having an error prevention mechanisms on all of these buttons would be advantageous!
+		echo '<div class="match-button button button-deny" onclick="declineMatch();">Decline</div>';
 	}
 	else {
 		echo '<div class="match-button button button-submit" onclick="submitMatch();">Submit</div>';
