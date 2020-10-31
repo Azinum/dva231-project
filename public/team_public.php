@@ -50,7 +50,6 @@
                         <span class="bio">
                             <?php echo htmlspecialchars($teamdata["bio"]); ?>
                         </span>
-                        <a href="/team_modify.php?team=<?php echo $_GET["team"]; ?>" class="button button-deny" id="modify-button">Smite</a>
                     </div>
                     <div class="flex-layout-section">
                         <div class="statbox">
@@ -71,6 +70,10 @@
                     if ($_SESSION["isLoggedin"] && ($_SESSION["admin"] || $_SESSION["uid"] == $teamdata["leader"])) {
                 ?>
                     <div class="flex-layout-section flex-layout-section-wide">
+                        <div class="button button-deny" id="modify-button" onclick="smite_victim_team('<?php echo esquot($teamdata["name"]); ?>');">
+                            Smite
+                        </div>
+                        <br>
                         <a href="/team_modify.php?team=<?php echo $_GET["team"]; ?>" class="button button-submit" id="modify-button">Modify Team</a>
                     </diV>
                 <?php

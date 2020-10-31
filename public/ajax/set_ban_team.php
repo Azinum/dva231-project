@@ -4,7 +4,7 @@
     require_once("../../dbfunctions/set_teamban.php");
 
     header("Content-type: application/json;");
-    if (isset($_GET["team"]) && isset($_GET["user_id"])) {
+    if (isset($_GET["team"])) {
 
         session_start();
         $teamdata = get_specteaminfo($link, $_GET["team"]);
@@ -14,7 +14,7 @@
             die();
         }
 
-        $status = set_teamban($teamdata['TeamName']);
+        $status = set_teamban($link, $_GET["team"]);
         if ($status) {
             echo json_encode(["status" => "success"]);
             die();
