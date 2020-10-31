@@ -109,7 +109,9 @@
 
 .profile-box .stats.stats-short {
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 50%;
 }
 
 .profile-box .stats.stats-short span {
