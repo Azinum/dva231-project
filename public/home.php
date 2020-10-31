@@ -36,7 +36,6 @@ require_once("../dbfunctions/get_teamsbyrank_limit.php");
             
                 <script> test() </script>
            
-
         </div>
     </div>
 
