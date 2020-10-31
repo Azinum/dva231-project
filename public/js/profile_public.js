@@ -1,14 +1,12 @@
-function teambox_selected(element, teamname) {
-    document.querySelectorAll(".profile-box.active").forEach(function(teambox) {
-        teambox.classList.remove("active");
+function smite_victim_team(victim) {
+    fetch("/ajax/set_ban_team.php?" + new URLSearchParams({
+        "team": victim
+    })).then((response) => {
+        if (response.status == 200) {
+            alert("Team smacked with heavy banhammer");
+            window.location.replace("/home.php");
+        } else {
+            alert("Evaded!");
+        }
     });
-    if (element !== null) {
-        element.classList.add("active");
-    }
-}
-
-function team_dropdown(elem) {
-    if (elem.selectedOptions[0].innerHTML == "All") {
-        teambox_selected(null, "");
-    }
 }
