@@ -59,13 +59,17 @@
                             <h3>Team Profile:</h3>
                             <form id="team-profile" onsubmit="event.preventDefault();">
                                 <div class="img-controls shadow ui-box">
-                                    <label>Current image:</label>
-                                    <div class="profilepic">
-                                        <img src="<?php echo $teamdata["img_url"] ? equot($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
+                                    <div class="img-controls-box">
+                                        <label>Current image:</label>
+                                        <div class="profilepic">
+                                            <img src="<?php echo $teamdata["img_url"] ? equot($teamdata["img_url"]) : "/img/default_profile_image.svg";  ?>">
+                                        </div>
                                     </div>
-                                    <label>New image:</label>
-                                    <div class="profilepic">
-                                        <img src="" alt="(select image)" id="profile-pic-preview">
+                                    <div class="img-controls-box">
+                                        <label>New image:</label>
+                                        <div class="profilepic">
+                                            <img src="" alt="(select image)" id="profile-pic-preview">
+                                        </div>
                                     </div>
                                     <input  type="file" placeholder="Profile picture" id="profile-pic" accept="image/*" autocomplete="off"
                                             onchange="previewImage(this, document.getElementById('profile-pic-preview'));">
