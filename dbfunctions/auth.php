@@ -1,6 +1,6 @@
 <?php
     require_once("../dbfunctions/search_mail.php");
-
+    //Kolla om isLoggedin inte är set, isåfall sätt det till null. Detta är ett problem i navbar
 function set_loggedin($link) {
     $mail = mysqli_real_escape_string($link ,$_POST["email"]);
     $pass = mysqli_real_escape_string($link ,$_POST["password"]);
