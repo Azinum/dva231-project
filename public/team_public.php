@@ -95,6 +95,7 @@
                                 "stats_short" => false,
                                 "show_rank" => false,
                                 "show_score" => false,
+                                "invite" => false,
                                 "on_click" => "click_member(".$member["user_id"].");",
                                 // NOTE (linus):    this should prob. just be an a-tag instead but ffs there aint no time for such fuckery in the
                                 //                  unkempt spaghetti-jungle of a garden that is profileboxes.php. god i hate php.
