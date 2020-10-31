@@ -7,7 +7,6 @@
     if (isset($_GET["id"])) {
 
         session_start();
-        //$teamdata = get_specteaminfo($link, $_GET["team"]);
         if (!$_SESSION["isLoggedin"] || (!$_SESSION["admin"] )) {
             http_response_code(403);
             echo json_encode(["status" => "not authorized"]);

@@ -73,7 +73,7 @@
                     <div class="flex-layout-section flex-layout-section-wide">
                         <a href="/profile_modify.php?id=<?php echo $_GET["id"]; ?>" class="button button-submit" id="modify-button">Modify Profile</a>
                         <br>
-                    <div class="button button-deny" id="modify-button" onclick="smite_victim_user('<?php echo esquot($teamdata["id"]); ?>');">
+                    <div class="button button-deny" id="modify-button" onclick="smite_victim_user(<?php echo $userdata['user_id'] ?>)">
                             Smite
                         </div>
                     </diV>
