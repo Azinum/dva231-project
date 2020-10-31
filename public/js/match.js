@@ -286,7 +286,6 @@ function submitMatch() {
 	fetch("/ajax/create_match.php?" + new URLSearchParams(params))
 		.then((response) => {
 			if (response.status == 200) {
-				console.log(response);
 				alertMessage("Successfully submitted match results!");
 			}
 			else {

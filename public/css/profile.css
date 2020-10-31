@@ -125,6 +125,11 @@ html, body {
 
 .matchbox:hover {
     background: #454545;
+    cursor: pointer;
+}
+
+.matchbox.initiated {
+    cursor: auto;
 }
 
 .matchbox .versus {

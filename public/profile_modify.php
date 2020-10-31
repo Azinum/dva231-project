@@ -8,7 +8,12 @@
     require_once("../dbfunctions/get_userteams.php");
     require_once("../dbfunctions/escapes.php");
 
+    session_start();
 	if (!isset($_GET["id"])) {
+        if ($_SESSION["isLoggedin"]) {
+            header("Location: /profile_modify.php?id=". $_SESSION["uid"] . (isset($_GET["teams"]) ? "&teams" : "") );
+            die();
+        }
 		header("Location: /home.php");
 		die();
 	}
@@ -19,7 +24,6 @@
 		die();
     }
 
-    session_start();
     if (!$_SESSION["isLoggedin"] || (!$_SESSION["admin"] && $_SESSION["uid"] != $_GET["id"])) {
         header("Location: /profile_public.php?id=".$_GET["id"]);
         die();
@@ -50,7 +54,7 @@
                         0 => "Profile",
                         1 => "Manage teams",
                         2 => "Password/email"
-                    ]);
+                    ], isset($_GET["teams"]) ? 1 : 0);
 
                     tabcontent_begin(0);
                     ?>
@@ -87,24 +91,40 @@
                     tabcontent_begin(1);
                     ?>
                         <div class="flex-container">
-                            <div class="flex-layout-section flex-layout-section-wide">
+                            <div class="flex-layout-section flex-layout-section-wide" id="team-invites">
                                 <h3>Team invites:</h3>
                                 <?php
-                                    profile_box_team([
-                                            "name" => "Good Team3",
-                                            "disp_name" => "Good Team3",
-                                            "img_url" => "/img/tmp_profile.jpg",
-                                        ],[
-                                            "img_small" => false,
-                                            "show_stats" => false,
-                                            "show_rank" => false,
-                                            "show_score" => false,
-                                            "buttons" => [ "leave" => false, "invite_controls" => true ]
-                                    ]);
+                                    $teams = get_user_invitations($link, $_GET['id']);
+                                    if (count($teams) == 0) {
                                 ?>
-                                <!--<h4>No invites at this time</h4>-->
+                                    <h4>No invites at this time</h4>
+                                <?php
+                                    } else {
+                                        foreach($teams as $team) {
+                                            profile_box_team($team, [
+                                                "img_small" => false,
+                                                "show_stats" => false,
+                                                "show_rank" => false,
+                                                "show_score" => false,
+                                                //"on_click" => "click_team('".htmlspecialchars($team["disp_name"])."');",
+                                                "buttons" => [
+                                                    "leave" => false,
+                                                    "visit" => true,
+                                                    "invite_controls" => true
+                                                ],
+                                                "button_clicks" => [
+                                                    "visit" => "click_team('".esquot($team["disp_name"])."');",
+                                                    "invite_controls" => [
+                                                        "accept" => "acceptInvite(this, '". esquot($team["name"]) ."', ". intval($_GET["id"]) .");",
+                                                        "reject" => "kickUser(this.parentElement, ". intval($_GET["id"]) .", '". esquot($team["name"]) ."');",
+                                                    ]
+                                                ]
+                                            ]);
+                                        }
+                                    }
+                                ?>
                             </div>
-                            <div class="flex-layout-section flex-layout-section-wide">
+                            <div class="flex-layout-section flex-layout-section-wide" id="current-teams">
                                 <h3>Current Teams:</h3>
                                 <?php
                                     $teams = get_userteams($link, $_GET['id']);
@@ -157,25 +177,29 @@
                     ?>
                         <div class="team-bio flex-layout-section flex-layout-section-wide">
                             <h3>Email:</h3>
-                            <h4>Current: anders@andersson.com</h4>
-                            <form>
-                                <input class="text-input-field shadow" type="text" placeholder="New">
-                                <input class="text-input-field shadow" type="text" placeholder="New again">
+                            <h4 id="current-email">Current: <?php echo htmlspecialchars($userdata["email"]); ?></h4>
+                            <form onsubmit="event.preventDefault();" id="email-form">
+                                <input class="text-input-field shadow" type="text" placeholder="New" id="email-new" required>
+                                <input class="text-input-field shadow" type="text" placeholder="New again" id="email-new-repeat" required>
+                                <label id="email-err"></label>
                                 <div class="button-container">
-                                    <input class="button button-submit" type="submit" value="Change">
+                                    <input class="button button-submit" type="submit" value="Change" onclick="changeEmail(document.getElementById('email-form'), <?php
+                                        echo intval($_GET["id"]); ?>);">
                                 </div>
                             </form>
                             <h3>Password:</h3>
-                            <form>
-                                <input class="text-input-field shadow" type="password" placeholder="Current">
-                                <input class="text-input-field shadow" type="password" placeholder="New">
-                                <input class="text-input-field shadow" type="password" placeholder="New again">
+                            <form onsubmit="event.preventDefault();" id="password-form">
+                                <input class="text-input-field shadow" type="password" placeholder="Current" id="pwd-current" required>
+                                <input class="text-input-field shadow" type="password" placeholder="New" id="pwd-new" required>
+                                <input class="text-input-field shadow" type="password" placeholder="New again" id="pwd-new-repeat" required>
+                                <label id="pwd-err"></label>
                                 <div class="button-container">
-                                    <input class="button button-submit" type="submit" value="Change">
+                                    <input class="button button-submit" type="submit" value="Change" onclick="changePass(document.getElementById('password-form'), <?php
+                                        echo intval($_GET["id"]); ?>);">
                                 </div>
                             </form>
                             <div class="button-container">
-                                <div class="button button-deny">
+                                <div class="button button-deny" onclick="deleteUser(<?php echo intval($_GET["id"]); ?>);">
                                     Delete Account
                                 </div>
                             </div>

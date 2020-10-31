@@ -20,7 +20,7 @@ function match_create($link, $match_data) {
 }
 
 
-// Exclude participants in a team that haven't accepted their invite yet
+// Exclude participants in a team that haven't accepted their invite yet, just in case.
 function match_add_participants($link, $id, $participants, $team) {
 	$id = mysqli_real_escape_string($link, $id);
 	$team = mysqli_real_escape_string($link, $team);

@@ -26,4 +26,21 @@
         return false;
     }
 
+    function set_user_email($link, $id, $email) {
+        $query = 'update User set Email="'. mysqli_real_escape_string($link, $email) .'" where Id="'. intval($id) .'";';
+        if ($result = mysqli_query($link, $query)) {
+            return true;
+        }
+        return false;
+    }
+        
+    function set_user_password($link, $id, $password) {
+        $pwd_hash = password_hash($password, PASSWORD_DEFAULT);
+        $query = 'update User set PasswordHash="'. mysqli_real_escape_string($link, $pwd_hash) .'" where Id="'. intval($id) .'";';
+        if ($result = mysqli_query($link, $query)) {
+            return true;
+        }
+        return false;
+    }
+
 ?>

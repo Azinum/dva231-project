@@ -1,4 +1,7 @@
 <?php
+    
+    require_once("../dbfunctions/escapes.php");
+
     function profileboxes_headtags() {
         ?>
             <!--TODO: PUT COMMON CSS HERE-->
@@ -20,14 +23,15 @@
         Layout format:
         [
             "verified" => <bool to show/hide edit button>,
-            "lteam" => <string, either "team1" or "team2". W/L will be displayed from the perspective of lteam>
+            "lteam" => <string, either "team1" or "team2". W/L will be displayed from the perspective of lteam>,
+            "on_click" => <js onclick>
         ]
     */
     function matchbox($match, $layout) {
         $rteam = $layout["lteam"] == "team1" ? "team2" : "team1";
         ?>
-            <div class="matchbox shadow ui-box">
-                <div class="team team1" onclick="click_team('<?php echo $match[$layout["lteam"]]["disp_name"]; ?>');">
+            <div class="matchbox shadow ui-box <?php echo !$layout["verified"] ? "initiated" : ""; ?>" <?php echo isset($layout["on_click"]) ? 'onclick="'. equot($layout["on_click"]) .'"' : "";?>>
+                <div class="team team1" onclick="click_team('<?php echo esquot($match[$layout["lteam"]]["disp_name"]); ?>');">
                     <div class="profilepic basic-interactive">
                         <img src="<?php
                             echo htmlspecialchars(
@@ -56,7 +60,7 @@
                         VS
                     </span>
                 </div>
-                <div class="team team2" onclick="click_team('<?php echo $match[$rteam]["disp_name"]; ?>');">
+                <div class="team team2" onclick="click_team('<?php echo esquot($match[$rteam]["disp_name"]); ?>');">
                     <span class="label">
                         <?php
                             echo htmlspecialchars(
@@ -75,7 +79,7 @@
                 </div>
                 <?php if (!$layout["verified"]) { ?>
                     <div class="editbutton">
-                        <a class="button button-image button-accept" href="/match.php">
+                        <a class="button button-image button-accept" href="/match.php?modify=<?php echo $match["id"]; ?>">
                             <img src="/img/arrow.svg">
                         </a>
                     </div>
@@ -175,10 +179,12 @@
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["invite_controls"]) { ?>
-                    <div class="button button-accept">
+                    <div class="button button-accept" <?php
+                        echo isset($layout["button_clicks"]) ? "onclick=\"". htmlspecialchars($layout["button_clicks"]["invite_controls"]["accept"]) ."\"" : ""; ?>>
                         Accept
                     </div>
-                    <div class="button button-deny">
+                    <div class="button button-deny" <?php
+                        echo isset($layout["button_clicks"]) ? "onclick=\"". htmlspecialchars($layout["button_clicks"]["invite_controls"]["reject"]) ."\"" : ""; ?>>
                         Reject
                     </div>
                 <?php } ?>
@@ -205,6 +211,7 @@
             "show_stats" => <boolean>,
             "stats_short" => <boolean>,
             "on_click" => <string w/ js onclick function>,
+            "invite" => <boolean>,
             "buttons" => [
                 "kick" => <boolean>,
                 "make_leader" => <boolean>
@@ -218,8 +225,11 @@
 
     function profile_box_member($data, $layout) {
         ?>
-            <div class="profile-box ui-box shadow <?php echo $layout["is_leader"] ? "leader" : ""; ?>" <?php
-                echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : ""; ?> data-user-id="<?php echo $data["user_id"]; ?>">
+            <div class="profile-box ui-box shadow<?php
+                echo $layout["is_leader"] ? " leader" : "";
+                echo $layout["invite"] ? " invite" : ""; ?>" <?php
+                echo isset($layout["on_click"]) ? "onclick=\"". htmlspecialchars($layout["on_click"]). "\"" : "";
+                ?> data-user-id="<?php echo $data["user_id"]; ?>">
                 <div class="profile">
                     <div class="profilepic basic-interactive <?php echo $layout["img_small"] ? "profilepic-small" : "";?>">
                         <img src="<?php echo $data["img_url"] === NULL ? "/img/default_profile_image.svg" : htmlspecialchars($data["img_url"]); ?>">

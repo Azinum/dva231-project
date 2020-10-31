@@ -1,6 +1,6 @@
 <?php
     require_once("../dbfunctions/search_mail.php");
-
+    //Kolla om isLoggedin inte är set, isåfall sätt det till null. Detta är ett problem i navbar
 function set_loggedin($link) {
     $mail = mysqli_real_escape_string($link ,$_POST["email"]);
     $pass = mysqli_real_escape_string($link ,$_POST["password"]);
@@ -8,24 +8,26 @@ function set_loggedin($link) {
         echo"Fields cannot be empty!";
         die();
     } 
-    $query = "SELECT PasswordHash, Id, IsAdmin FROM User WHERE Email = '$mail'";
+    $query = "SELECT PasswordHash, Id, IsAdmin, IsDisabled FROM User WHERE Email = '$mail'";
     if ($result = mysqli_query($link, $query)) {
         $resArray = mysqli_fetch_assoc($result);
-        if (search_mail($link,$mail)) {
-            if (password_verify($pass, $resArray['PasswordHash'])){
-                error_log("resArray['Id']");
-                error_log($resArray['Id']);
-                $_SESSION["uid"] = $resArray['Id'];
-                $_SESSION["admin"] = $resArray['IsAdmin'];
-                $_SESSION["isLoggedin"] = true;
-                header('location:home.php');
+        if (!$resArray["IsDisabled"]) {
+            if (search_mail($link,$mail)) {
+                if (password_verify($pass, $resArray['PasswordHash'])){
+                    error_log("resArray['Id']");
+                    error_log($resArray['Id']);
+                    $_SESSION["uid"] = $resArray['Id'];
+                    $_SESSION["admin"] = $resArray['IsAdmin'];
+                    $_SESSION["isLoggedin"] = true;
+                    header('location:home.php');
+                } else {
+                    echo "Incorrect password!";
+                }
+            } else {
+                echo "Email Address does not exist in database.";
             }
-            else {
-                echo "Incorrect password!";
-            }
-        }
-        else {
-            echo "EMAIL Address does not exist in database.";
+        } else {
+            echo "This user is disabled!";
         }
     }
 }

@@ -34,11 +34,6 @@ body {
 
 }
 
-#searchbar {
-    width: 42em;
-    height: 2em;
-}
-
 .flex-row {
     margin: 2em;
 }
@@ -63,15 +58,8 @@ table {
 
     #back-box {
         width: 92em;
-
     }
 
-
-
-    #searchbar {
-        width: 92em;
-        height: 2em;
-    }
 
 }
 
@@ -89,12 +77,6 @@ table {
     }
 
 
-
-    #searchbar {
-        width: 24em;
-        height: 2em;
-    }
-
 }
 
 @media screen and (max-width:825px) {
@@ -110,12 +92,6 @@ table {
     }
 
 
-
-    #searchbar {
-        width: 24em;
-        height: 2em;
-    }
-
     @media screen and (max-width:600px) {
 
         #layout {
@@ -127,13 +103,22 @@ table {
            width: 25em;
    
        }
-   
-   
-   
-       #searchbar {
-           width: 24em;
-           height: 2em;
-       }
+
+
+}
+
+@media screen and (max-width:320px) {
+
+    #layout {
+       border-spacing: 2em;
+       width: 2em;
+   }
+
+   #back-box {
+       width: 18em;
+
+   }
+
 
 }
 

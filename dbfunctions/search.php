@@ -1,7 +1,7 @@
 <?php
 
     function search_users($link, $query_string) {
-        $query = 'SELECT * FROM User WHERE Username LIKE "%' . mysqli_real_escape_string($link, $query_string) . '%";';
+        $query = 'SELECT * FROM User WHERE IsDisabled IS NOT TRUE AND Username LIKE "%' . mysqli_real_escape_string($link, $query_string) . '%";';
         $return = [];
         if ($result = mysqli_query($link, $query)) {
             while ($res_array = mysqli_fetch_assoc($result)) {

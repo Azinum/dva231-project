@@ -62,7 +62,6 @@
                     </div>
                 </div>
                 <?php
-                    session_start();
                     if ($_SESSION["isLoggedin"] && ($_SESSION["admin"] || $_SESSION["uid"] == $teamdata["leader"])) {
                 ?>
                     <div class="flex-layout-section flex-layout-section-wide">
@@ -114,7 +113,7 @@
                                     $match,
                                     [
                                         "verified" => false,
-                                        "lteam" => $lteam
+                                        "lteam" => $lteam,
                                     ]
                                 );
                             }
@@ -136,7 +135,8 @@
                                 $match,
                                 [
                                     "verified" => true,
-                                    "lteam" => $lteam
+                                    "lteam" => $lteam,
+                                    "on_click" => "click_match(". intval($match["id"]) .")"
                                 ]
                             );
                         }

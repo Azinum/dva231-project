@@ -103,6 +103,7 @@
                                 "stats_short" => false,
                                 "show_rank" => false,
                                 "show_score" => false,
+                                "invite" => false,
                                 "buttons" => [
                                     "kick" => $member["user_id"] != $teamdata["leader"],
                                     "make_leader" => $member["user_id"] != $teamdata["leader"]
@@ -110,6 +111,27 @@
                                 "button_clicks" => [
                                     "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. equot($teamname) .'")',
                                     "make_leader" => 'makeLeader(this.parentElement, '. $member["user_id"] .', "'. equot($teamname) .'")',
+                                ]
+							]);
+						}
+
+						$members = get_team_invites($link, $teamname);
+
+						forEach($members as $member) {
+							profile_box_member($member, [
+                                "img_small" => false,
+                                "is_leader" => $member["user_id"] == $teamdata["leader"],
+                                "show_stats" => false,
+                                "stats_short" => false,
+                                "show_rank" => false,
+                                "show_score" => false,
+                                "invite" => true,
+                                "buttons" => [
+                                    "kick" => $member["user_id"] != $teamdata["leader"],
+                                    "make_leader" => false
+                                ],
+                                "button_clicks" => [
+                                    "kick" => 'kickUser(this.parentElement, '. $member["user_id"] .', "'. equot($teamname) .'")'
                                 ]
 							]);
 						}

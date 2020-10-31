@@ -33,16 +33,13 @@ function selectPlayer(elem, team) {
                 .then((response) => {
                     if (response.status == 200) {
                         elem.innerHTML += `
-                            <div class="profile-box ui-box shadow" data-user-id="`+ selection.user_id +`">
+                            <div class="profile-box ui-box shadow invite" data-user-id="`+ selection.user_id +`">
                                 <div class="profile">
                                     <div class="profilepic">
                                         <img src="`+ equot(selection.img) +`">
                                     </div>
                                 </div>
                                 <span class="label">`+ escapeHtml(selection.name) +`</span>
-                                <div class="button button-accept" onclick="makeLeader(this.parentElement, `+ selection.user_id +`, '`+ esquot(team) +`');">
-                                    Make Leader
-                                </div>
                                 <div class="button button-deny" onclick="kickUser(this.parentElement, `+ selection.user_id +`, '`+ esquot(team) +`');">
                                     Kick
                                 </div>

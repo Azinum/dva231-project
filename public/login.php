@@ -1,6 +1,8 @@
 <?php session_start();
 require_once("../dbfunctions/dbconnection.php");
-require_once("../dbfunctions/auth.php"); ?>
+require_once("../dbfunctions/auth.php");
+require_once("../layout/navbar_dropdown.php");
+ ?>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +13,7 @@ require_once("../dbfunctions/auth.php"); ?>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/common.css">
+  <link href= "css/navbar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,7 +21,9 @@ require_once("../dbfunctions/auth.php"); ?>
         set_loggedout();
         error_log("LOGGING OUT");
     } ?>
-    <?php include("navbar_final.php"); ?>
+    <div class= "navbar">
+        <?php build_buttons(); ?>
+    </div>
     
     <div id="back-box" class=" ui-box shadow">
         <h2>Sign in</h2>
