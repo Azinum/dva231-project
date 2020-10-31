@@ -45,6 +45,7 @@
                         <span class="bio">
                             <?php echo htmlspecialchars($teamdata["bio"]); ?>
                         </span>
+                        <a href="/team_modify.php?team=<?php echo $_GET["team"]; ?>" class="button button-deny" id="modify-button">Smite</a>
                     </div>
                     <div class="flex-layout-section">
                         <div class="statbox">
