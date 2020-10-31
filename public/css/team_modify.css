@@ -21,7 +21,7 @@
 
 .team-bio form {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .team-bio form input, .team-bio form textarea {
@@ -39,26 +39,39 @@
 }
 
 .team-bio form label {
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .team-bio form .other-controls {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 12vw);
     box-sizing: border-box;
     padding: 0 1vw;
 }
 
+.team-bio form .img-controls input {
+    width: 100%;
+    text-align: center;
+}
+
 .team-bio form .img-controls {
     display: flex;
-    flex-direction: column;
-    width: 12vw;
+    flex-direction: row;
+    flex-wrap: wrap;
     box-sizing: border-box;
+    justify-content: center;
 }
 
 .team-bio form .img-controls label i {
     font-size: 0.75rem;
+}
+
+.team-bio .img-controls .img-controls-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    text-align: center;
 }
 
 .button-container {
