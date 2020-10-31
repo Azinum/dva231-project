@@ -10,6 +10,13 @@
 
         session_start();
         $teamdata = get_specteaminfo($link, $_POST["team"]);
+
+        if ($teamdata["IsDisabled"]) {
+            http_response_code(400);
+            echo json_encode(["status" => "error"]);
+            die();
+        }
+
         if (!$_SESSION["isLoggedin"] || (!$_SESSION["admin"] && $_SESSION["uid"] != $teamdata["leader"])) {
             http_response_code(403);
             echo json_encode(["status" => "not authorized"]);

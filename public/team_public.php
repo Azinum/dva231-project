@@ -16,6 +16,11 @@
     }
 
     $teamdata = get_specteaminfo($link, $teamname);
+    if ($teamdata["is_disabled"]) {
+        header("Location: /home.php");
+        die();
+    }
+
     session_start();
 ?>
 <!DOCTYPE html>

@@ -107,7 +107,7 @@ table {
 
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:410px) {
 
     #layout {
        border-spacing: 2em;
