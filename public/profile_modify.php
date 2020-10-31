@@ -163,7 +163,8 @@
                                             <input class="text-input-field shadow" type="text" placeholder="Name" id="newteam-name" minlength="3">
                                             <textarea class="text-input-field shadow" id="newteam-bio">Bio</textarea>
                                             <div class="add-member">
-                                                <input type="submit" class="button button-accept" onclick="addTeam(document.getElementById('addteam-form'));" value="Add">
+                                                <input type="submit" class="button button-accept" onclick="addTeam(document.getElementById('addteam-form'), <?php
+                                                    echo intval($_GET["id"]); ?>);" value="Add">
                                             </div>
                                         </div>
                                     </form>

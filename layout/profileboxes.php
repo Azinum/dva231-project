@@ -159,11 +159,11 @@
                                 echo htmlspecialchars($data["stats"]["lost"]);
                             ?>
                         </span>
-                    </div>
-                <?php } ?>
-                <?php if ($layout["show_score"]) { ?>
-                    <div class="score">
-                        E: <?php echo htmlspecialchars($data["score"]); ?>
+                        <?php if ($layout["show_score"]) { ?>
+                            <span>
+                                E: <?php echo htmlspecialchars($data["score"]); ?>
+                            </span>
+                        <?php } ?>
                     </div>
                 <?php } ?>
                 <?php if ($layout["buttons"]["visit"]) { ?>

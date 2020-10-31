@@ -26,6 +26,25 @@ function kickUser(elem, id, team) {
     }
 }
 
+function acceptInviteAjax(team, id) {
+    return fetch("/ajax/accept_invitation.php?" + new URLSearchParams({
+        "id": id,
+        "team": team
+    }));
+}
+
+function acceptInvite(elem, team, id) {
+    acceptInviteAjax(team, id).then((response) => {
+        if (response.status == 200) {
+            document.getElementById("current-teams").appendChild(elem.parentElement);
+            elem.parentElement.querySelector(".button-deny").innerHTML = "Leave";
+            elem.remove();
+        } else {
+            alert("Something went wrong!\nCouldn't accept invite!");
+        }
+    });
+}
+
 function previewImage(input, img) {
     if (input.files && input.files[0]) {
         if (input.files[0].size/1024/1024 > 3) {
@@ -121,7 +140,7 @@ function submitTeamImage(input, team) {
     }
 }
 
-function addTeam(form) {
+function addTeam(form, id) {
     if (form.querySelector("#newteam-name").value.length < 3) {
         form.querySelector("#newteam-name").classList.add("error");
     } else {
@@ -132,6 +151,10 @@ function addTeam(form) {
         })).then(async (response) => {
             if (response.status == 200) {
                 let result = await submitTeamImage(form.querySelector("#newteam-img"), form.querySelector("#newteam-name").value);
+                let result2 = await acceptInviteAjax(
+                    form.querySelector("#newteam-name").value, id
+                ).then((r) => {r.status == 200});
+                console.log(result2);
                 if (!result[1]) {
                     alert("Team added, but image upload failed!");
                 } else {
@@ -224,21 +247,6 @@ function changeEmail(form, id) {
     } else {
         emailNew.classList.add("error");
     }
-}
-
-function acceptInvite(elem, team, id) {
-    fetch("/ajax/accept_invitation.php?" + new URLSearchParams({
-        "id": id,
-        "team": team
-    })).then((response) => {
-        if (response.status == 200) {
-            document.getElementById("current-teams").appendChild(elem.parentElement);
-            elem.parentElement.querySelector(".button-deny").innerHTML = "Leave";
-            elem.remove();
-        } else {
-            alert("Something went wrong!\nCouldn't accept invite!");
-        }
-    });
 }
 
 function deleteUser(id) {
