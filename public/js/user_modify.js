@@ -232,7 +232,6 @@ function acceptInvite(elem, team, id) {
         "team": team
     })).then((response) => {
         if (response.status == 200) {
-            alert("Yay!");
             document.getElementById("current-teams").appendChild(elem.parentElement);
             elem.parentElement.querySelector(".button-deny").innerHTML = "Leave";
             elem.remove();
@@ -240,4 +239,19 @@ function acceptInvite(elem, team, id) {
             alert("Something went wrong!\nCouldn't accept invite!");
         }
     });
+}
+
+function deleteUser(id) {
+    if (confirm("Are you sure you want to delete your account?")) {
+        fetch("/ajax/delete_user.php?" + new URLSearchParams({
+            "id": id
+        })).then((response) => {
+            if (response.status == 200) {
+                alert("Account deleted. You will now be redirected to the start page.");
+                window.location.replace("/home.php");
+            } else {
+                alert("Something went wrong!\nCouldn't delete account!");
+            }
+        });
+    }
 }

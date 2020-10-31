@@ -11,7 +11,7 @@
         $userdata = get_specuserinfo($link, $_GET["id"]);
     }
         
-    if($userdata == NULL || empty($userdata["user_id"])) {
+    if ($userdata == NULL || empty($userdata["user_id"])) {
         if ($_SESSION["isLoggedin"]) {
             header("Location: /profile_public.php?id=".$_SESSION["uid"]);
             die();
@@ -19,6 +19,11 @@
             header("Location: /home.php");
             die();
         }
+    }
+
+    if ($userdata["is_disabled"]) {
+        header("Location: /home.php");
+        die();
     }
 ?>
 <!DOCTYPE html>

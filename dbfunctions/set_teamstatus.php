@@ -3,16 +3,12 @@
   function set_teamstatus ($link,$TeamName,$setDisable) { //true om IsDisabled ska sättas till true, id är en string
 
     $team = mysqli_real_escape_string ($link,$TeamName);
-    $setDisablequery = mysqli_real_escape_string($link,"UPDATE Team SET IsDisabled = $setDisable WHERE Id = '$team'");
-    $UserCheckquery = "SELECT TeamName FROM Team WHERE TeamName = '$team';";
-    //echo $UserCheckquery;
-    if (mysqli_num_rows (mysqli_query($link, $UserCheckquery)) > 0){
-        mysqli_query($link, $setDisablequery);
-
+    $setDisablequery = "UPDATE Team SET IsDisabled = ". ($setDisable ? "TRUE" : "FALSE") ." WHERE TeamName = '". $team ."';";
+    error_log($setDisablequery);
+    if ($result = mysqli_query($link, $setDisablequery)){
+        return true;
     }
-    else {
-        echo "No team with specified name exists";
-    }
+    return false;
 }
 
 ?>

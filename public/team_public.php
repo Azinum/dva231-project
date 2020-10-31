@@ -62,7 +62,6 @@
                     </div>
                 </div>
                 <?php
-                    session_start();
                     if ($_SESSION["isLoggedin"] && ($_SESSION["admin"] || $_SESSION["uid"] == $teamdata["leader"])) {
                 ?>
                     <div class="flex-layout-section flex-layout-section-wide">

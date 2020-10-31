@@ -1,7 +1,7 @@
 <?php
 
     function search_users($link, $query_string) {
-        $query = 'SELECT * FROM User WHERE Username LIKE "%' . mysqli_real_escape_string($link, $query_string) . '%";';
+        $query = 'SELECT * FROM User WHERE IsDisabled IS NOT TRUE AND Username LIKE "%' . mysqli_real_escape_string($link, $query_string) . '%";';
         $return = [];
         if ($result = mysqli_query($link, $query)) {
             while ($res_array = mysqli_fetch_assoc($result)) {
@@ -43,7 +43,7 @@
 
 	function get_users_in_team($link, $team) {
 		$teamName = mysqli_real_escape_string($link, $team);
-		$query = 'SELECT * FROM User, TeamMemberships WHERE User.Id = TeamMemberships.Member AND TeamMemberships.TeamName = "' . $teamName .'";';
+		$query = 'SELECT * FROM User, TeamMemberships WHERE User.Id = TeamMemberships.Member AND User.IsDisabled IS NOT TRUE AND  TeamMemberships.TeamName = "' . $teamName .'";';
 		$final_result = [];
 		if ($result = mysqli_query($link, $query)) {
 			while ($res_array = mysqli_fetch_assoc($result)) {

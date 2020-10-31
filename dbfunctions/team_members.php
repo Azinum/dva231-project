@@ -1,5 +1,4 @@
 <?php
-
     function add_team_member($link, $team_name, $user_id) {
         $query = 'insert into TeamMemberships values("' . mysqli_real_escape_string($link, $team_name) . '", "' . mysqli_real_escape_string($link, $user_id) . '", TRUE);';
         if ($result = mysqli_query($link, $query)) {
@@ -17,7 +16,8 @@
     }
 
     function get_team_members($link, $team_name) {
-        $query = 'select User.* from TeamMemberships join User on Member = User.Id where TeamMemberships.Invitation is not true and TeamName="'. mysqli_real_escape_string($link, $team_name) .'";';
+        $query =    'select User.* from TeamMemberships join User on Member = User.Id where TeamMemberships.Invitation is not true '.
+                    'and User.IsDisabled is not true and TeamName="'. mysqli_real_escape_string($link, $team_name) .'";';
         $return = [];
         if ($result = mysqli_query($link, $query)) {
             while ($res_array = mysqli_fetch_assoc($result)) {
@@ -37,7 +37,8 @@
     }
 
     function get_team_invites($link, $team_name) {
-        $query = 'select User.* from TeamMemberships join User on Member = User.Id where TeamMemberships.Invitation is true and TeamName="'. mysqli_real_escape_string($link, $team_name) .'";';
+        $query =    'select User.* from TeamMemberships join User on Member = User.Id where TeamMemberships.Invitation is true '.
+                    'and User.IsDisabled is not true and TeamName="'. mysqli_real_escape_string($link, $team_name) .'";';
         $return = [];
         if ($result = mysqli_query($link, $query)) {
             while ($res_array = mysqli_fetch_assoc($result)) {
