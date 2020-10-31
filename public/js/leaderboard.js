@@ -38,10 +38,8 @@ function test() {
 								<span> P:`+item.stats.part+` </span>
 								<span> W:`+item.stats.won+` </span>
 								<span> L:`+item.stats.lost+` </span>
+                                <span> E: `+ item.rank +`</span>
 							</div>
-							<div class="score">
-                        		E: `+ item.rank +`
-                    		</div>
 						</div>
 					</div>
 				`;
