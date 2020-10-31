@@ -16,6 +16,11 @@
     }
 
     $teamdata = get_specteaminfo($link, $teamname);
+    if ($teamdata["is_disabled"]) {
+        header("Location: /home.php");
+        die();
+    }
+
     session_start();
 ?>
 <!DOCTYPE html>
@@ -63,7 +68,6 @@
                     </div>
                 </div>
                 <?php
-                    session_start();
                     if ($_SESSION["isLoggedin"] && ($_SESSION["admin"] || $_SESSION["uid"] == $teamdata["leader"])) {
                 ?>
                     <div class="flex-layout-section flex-layout-section-wide">

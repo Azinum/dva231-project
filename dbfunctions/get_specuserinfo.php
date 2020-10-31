@@ -14,20 +14,39 @@
 
             $resArray = mysqli_fetch_assoc($result); //username/email/id/ProfileImageUrl/Bio/IsAdmin/IsBanned
 
-            return[ //Hur hanterar vi ELO i db?
-               "name"=>$resArray['Username'],
-               "user_id"=>$resArray['Id'],
-               "email" => $resArray["Email"],
-               "img_url"=>$resArray['ProfileImageUrl'],
-               "bio"=> $resArray['Bio'],
-               "is_admin" =>$resArray['IsAdmin'],
-               "is_banned"=>$resArray['IsBanned'],
-               "stats" => [
-                    "won"=>mysqli_fetch_assoc(mysqli_query($link, $Winsquery))['NumMatches'],
-                    "lost"=>mysqli_fetch_assoc(mysqli_query($link, $Lossesquery))['NumMatches'],
-                    "part"=>mysqli_fetch_assoc(mysqli_query($link, $Partquery))['NumMatches']
-                    ]
-            ];
+            if ($resArray["IsDisabled"]) {
+                return [
+                    "name" => "[Deleted User]",
+                    "user_id" => $resArray["Id"],
+                    "email" => $resArray["Email"],
+                    "img_url" => "/img/default_profile_image.svg",
+                    "bio" => "",
+                    "is_admin" => $resArray["IsAdmin"],
+                    "is_banned" => $resArray["IsBanned"],
+                    "is_disabled" => true,
+                    "stats" => [
+                            "won" => 0,
+                            "lost" => 0,
+                            "part" => 0
+                        ]
+                ];
+            } else {
+                return [ //Hur hanterar vi ELO i db?
+                   "name"=>$resArray['Username'],
+                   "user_id"=>$resArray['Id'],
+                   "email" => $resArray["Email"],
+                   "img_url"=>$resArray['ProfileImageUrl'],
+                   "bio"=> $resArray['Bio'],
+                   "is_admin" =>$resArray['IsAdmin'],
+                   "is_banned"=>$resArray['IsBanned'],
+                   "is_disabled" => false,
+                   "stats" => [
+                        "won"=>mysqli_fetch_assoc(mysqli_query($link, $Winsquery))['NumMatches'],
+                        "lost"=>mysqli_fetch_assoc(mysqli_query($link, $Lossesquery))['NumMatches'],
+                        "part"=>mysqli_fetch_assoc(mysqli_query($link, $Partquery))['NumMatches']
+                        ]
+                ];
+            }
         }
     }
 

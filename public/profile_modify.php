@@ -199,7 +199,7 @@
                                 </div>
                             </form>
                             <div class="button-container">
-                                <div class="button button-deny">
+                                <div class="button button-deny" onclick="deleteUser(<?php echo intval($_GET["id"]); ?>);">
                                     Delete Account
                                 </div>
                             </div>

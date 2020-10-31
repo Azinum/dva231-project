@@ -11,7 +11,7 @@
 			'TeamName = "'.$ename.'" AND ((Team1=TeamName AND Result="Team1Win" AND IsVerified = true) OR (Team2=TeamName AND Result="Team2Win" AND IsVerified = true))'.
 			') as Wins join ('.
 			'select COUNT(Result) as NumMatches from Matches join Team on (Team1 = TeamName or Team2 = TeamName) and TeamName="'.$ename.'" WHERE IsVerified = true'.
-			') as Matches WHERE TeamName = "'.$ename.'" AND IsDisabled IS NOT TRUE';
+			') as Matches WHERE TeamName = "'.$ename.'";';
 
         if ($result = mysqli_query($link, $query)){
             $resArray = mysqli_fetch_assoc($result);
@@ -20,20 +20,39 @@
                 return false;
             }
 
-            return[ //Hur hanterar vi ELO i db?
-               "name"=>$resArray['TeamName'],
-               "disp_name"=>$resArray['DisplayName'],
-               "img_url"=>$resArray['TeamImage'],
-               "rank"=>$resArray['TeamRanking'],
-               "bio"=>$resArray['Bio'],
-               "leader"=>$resArray['TeamLeader'],
-               "is_banned"=>$resArray['IsBanned'],
-               "stats" => [
-                    "won"=>$resArray["NumWins"],
-                    "lost"=>$resArray["NumLosses"],
-                    "part"=>$resArray["NumMatches"]
-                ]
-            ];
+            if ($resArray["IsDisabled"]) {
+                return[ //Hur hanterar vi ELO i db?
+                   "name"=>$resArray['TeamName'],
+                   "disp_name"=>"[Deleted Team]",
+                   "img_url"=>"/img/default_profile_image.svg",
+                   "rank"=>"0",
+                   "bio"=>"",
+                   "leader"=>$resArray['TeamLeader'],
+                   "is_banned"=>$resArray['IsBanned'],
+                   "is_disabled"=>true,
+                   "stats" => [
+                        "won"=>"0",
+                        "lost"=>"0",
+                        "part"=>"0"
+                    ]
+                ];
+            } else {
+                return[ //Hur hanterar vi ELO i db?
+                   "name"=>$resArray['TeamName'],
+                   "disp_name"=>$resArray['DisplayName'],
+                   "img_url"=>$resArray['TeamImage'],
+                   "rank"=>$resArray['TeamRanking'],
+                   "bio"=>$resArray['Bio'],
+                   "leader"=>$resArray['TeamLeader'],
+                   "is_banned"=>$resArray['IsBanned'],
+                   "is_disabled"=>false,
+                   "stats" => [
+                        "won"=>$resArray["NumWins"],
+                        "lost"=>$resArray["NumLosses"],
+                        "part"=>$resArray["NumMatches"]
+                    ]
+                ];
+            }
 		}
     }
 
