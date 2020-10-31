@@ -74,7 +74,7 @@ function toggleOverlay() {
 var onClickEvent = () => {};
 var onSearchEvent = () => {};
 
-function errorMessage(message) {
+function alertMessage(message) {
 	popupOverlay = true;
 	toggleOverlay();
 	popupOverlay = false;
@@ -83,8 +83,8 @@ function errorMessage(message) {
 }
 
 function selectPlayer(elem, team, index) {
-	if (!matchData.match.teams[team].name) {
-		errorMessage("You must first select a team!");
+	if (!matchData.match.teams || !matchData.match.teams[team].name) {
+		alertMessage("You must first select a team!");
 		return;
 	}
 	let inputField = document.querySelector(".match-search-overlay-content .text-input-field");
@@ -219,7 +219,7 @@ function evaluateErrors(conditions) {
 		}
 	});
 	if (error) {
-		errorMessage(message);
+		alertMessage(message);
 	}
 	return error;
 }
@@ -278,9 +278,30 @@ function submitMatch() {
 	if (checkForErrors()) {
 		return;
 	}
+	let params = {
+		"team1" : matchData.match.teams[Teams.TEAM1].name,
+		"team2" : matchData.match.teams[Teams.TEAM2].name,
+		"result" : "Team1Win" // TODO(lucas): TEMP!!!!! Use result from the radiobuttons!!!
+	}
+	fetch("/ajax/create_match.php?" + new URLSearchParams(params))
+		.then((response) => {
+			if (response.status == 200) {
+				console.log(response);
+				alertMessage("Successfully submitted match results!");
+			}
+			else {
+				alertMessage("Failed to create match");
+			}
+		});
 }
 
 function submitMatchChanges() {
+	if (checkForErrors()) {
+		return;
+	}
+}
+
+function verifyMatchResults() {
 	if (checkForErrors()) {
 		return;
 	}

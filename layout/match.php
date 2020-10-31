@@ -168,8 +168,8 @@ function match_submit_box($state) {
 	if ($info["view"]) {
 	}
 	else if ($info["modify"]) {
-		echo '<div class="match-button button button-accept" onclick="submitMatchChanges();">Verify Results</div>';
-		echo '<div class="match-button button button-submit" onclick="submitMatch();">Submit Changes</div>';
+		echo '<div class="match-button button button-accept" onclick="verifyMatchResults();">Verify Results</div>';
+		echo '<div class="match-button button button-submit" onclick="submitMatchChanges();">Submit Changes</div>';
 		// TODO(lucas): We really should have an error prevention mechanism here; a popup window or the like.
 		// Maybe even having an error prevention mechanisms on all of these buttons would be advantageous!
 		echo '<div class="match-button button button-deny" onclick="declineMatch();">Decline</div>';
