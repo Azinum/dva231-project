@@ -11,7 +11,7 @@ require_once("../layout/navbar_dropdown.php");
 require_once("header.php");
 page_begin("Match Verified");
 ?>
-	<div class="navbar">
+	<div class="navbar shadow">
         <?php build_buttons(); ?>
     </div>
 	<div class="content-column">

@@ -14,6 +14,7 @@ function page_begin($title) {
 		<link href= "css/navbar.css" rel="stylesheet">
 
 		<script src="js/match.js"></script>
+        <script src="js/navbardropdown.js"></script>
 	</head>
 	<body>
 <?php
