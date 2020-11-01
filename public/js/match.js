@@ -294,21 +294,27 @@ function submitMatch() {
 	}
 	fetchMatchResult();
 	let params = {
-		"team1" : matchData.match.teams[Teams.TEAM1].name,
-		"team2" : matchData.match.teams[Teams.TEAM2].name,
-		"result" : matchData.match.result
+		team1 : matchData.match.teams[Teams.TEAM1].name,
+		team2 : matchData.match.teams[Teams.TEAM2].name,
+		result : matchData.match.result,
+		participants : matchData.team_participants
 	}
-	fetch("/ajax/create_match.php?" + new URLSearchParams(params))
-		.then((response) => {
-			if (response.status == 200) {
-				response.json().then((json) => {
-					window.location.href = "/match_success.php?id=" + json["id"];
-				});
-			}
-			else {
-				alertMessage("Failed to create match");
-			}
-		});
+	fetch("/ajax/create_match.php", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify(params)
+	}).then((response) => {
+		if (response.status == 200) {
+			response.json().then((json) => {
+				window.location.href = "/match_success.php?id=" + json["id"];
+			});
+		}
+		else {
+			alertMessage("Failed to create match");
+		}
+	});
 }
 
 function submitMatchChanges() {

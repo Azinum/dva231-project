@@ -5,9 +5,11 @@
 
 	header("Content-type: application/json;");
 
-	// TODO(lucas): Authorization checks!!!
-	if (isset($_GET["team1"]) && isset($_GET["team2"]) && isset($_GET["result"])) {
-        $teamdata = get_specteaminfo($link, $_GET["team1"]);
+	$json = file_get_contents("php://input");
+	$data = json_decode($json);
+
+	if (isset($data->team1) && isset($data->team2) && isset($data->result) && isset($data->participants)) {
+		$teamdata = get_specteaminfo($link, $data->team1);
         session_start();
         if (!$_SESSION["isLoggedin"] || ($_SESSION["uid"] != $teamdata["leader"] && !$_SESSION["admin"])) {
 			http_response_code(403);
@@ -16,9 +18,10 @@
         }
 
 		$result = match_create($link, [
-			"team1" => $_GET["team1"],
-			"team2" => $_GET["team2"],
-			"result" => $_GET["result"]
+			"team1" => $data->team1,
+			"team2" => $data->team2,
+			"result" => $data->result,
+			"participants" => $data->participants
 		]);
 		if ($result) {
 			echo json_encode(["status" => "success", "id" => $result]);
