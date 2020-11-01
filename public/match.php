@@ -7,11 +7,8 @@ require_once("../dbfunctions/auth.php");
 require_once("../layout/match.php");
 require_once("../layout/navbar_dropdown.php");
 
-match_get_info($link);
-
-check_loginstatus();
-
 page_begin("Match Results");
+match_get_info_script($link);
 ?>
 	<div class="navbar shadow">
         <?php build_buttons(); ?>

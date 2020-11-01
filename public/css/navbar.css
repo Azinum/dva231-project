@@ -86,7 +86,7 @@ body {
     .navbar {
         flex-direction: column;
         height: initial;
-        top: -11.5rem;
+        top: -12.5rem;
         transition: top 0.1s;
     }
 
@@ -123,6 +123,7 @@ body {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 1rem;
+        margin-top: 1rem;
         padding: 2vw;
     }
 }

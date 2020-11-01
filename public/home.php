@@ -24,7 +24,7 @@ require_once("../dbfunctions/get_teamsbyrank_limit.php");
     <script src="js/navbardropdown.js"></script>
 </head>
 
-<body onload="test()">
+<body onload="test().then(()=>{window.addEventListener('scroll', scrollHandler)});">
 <script src="js/leaderboard.js"> </script>
     <div class= "navbar shadow">
         <?php build_buttons(); ?>

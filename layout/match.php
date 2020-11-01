@@ -1,12 +1,11 @@
 <?php
 
 require_once("../dbfunctions/get_match.php");
+require_once("../dbfunctions/get_specteaminfo.php");
 
 $match_info = [];
 
-// TODO(lucas): Do more checks to see if the user can access the page, check to see if the match exists e.t.c. Redirect when nessesary.
-// TODO(lucas): Fix so that anyone (no login required) can access match view page!
-function match_get_info($link) {
+function match_get_info_script($link) {
 	$info = $GLOBALS["match_info"];
 	if ($info) {
 		// We shouldn't really get to this place because this function should only be called once
@@ -23,22 +22,41 @@ function match_get_info($link) {
 		$info["modify"] = true;
 		$info["id"] = $modify;
 	}
+
 	$info["uid"] = $_SESSION["uid"];
 	$info["match"] = get_match_info($link, $info["id"]);
+
 	if (!$info["match"] && ($info["view"] || $info["modify"])) {
 		header("Location: /match.php");
 		exit();
 	}
-	$teams = $info["match"]["teams"];
-	$info["team_participants"] = [
-		get_match_participants($link, $info["id"], $teams[0]["name"]),
-		get_match_participants($link, $info["id"], $teams[1]["name"])
-	];
 
 	if ($info["match"]["is_verified"] && $modify) {
 		header("Location: /match.php?view=" . $info["id"]);
 		exit();
 	}
+
+	$teams = $info["match"]["teams"];
+    $team1data = get_specteaminfo($link, $teams[0]["name"]);
+    $team2data = get_specteaminfo($link, $teams[1]["name"]);
+    if (!$_SESSION["admin"]) {
+        if ($info["match"]["team2_should_verify"]) {
+            if ($info["modify"] && $_SESSION["uid"] != $team2data["leader"]) {
+                header("Location: /match.php?view=" . $info["id"]);
+                exit();
+            }
+        } else {
+            if ($info["modify"] && $_SESSION["uid"] != $team1data["leader"]) {
+                header("Location: /match.php?view=" . $info["id"]);
+                exit();
+            }
+        }
+    }
+
+	$info["team_participants"] = [
+		get_match_participants($link, $info["id"], $teams[0]["name"]),
+		get_match_participants($link, $info["id"], $teams[1]["name"])
+	];
 
 	$GLOBALS["match_info"] = $info;
 	echo '<script>var matchData = ' . json_encode($info) . ';</script>';
