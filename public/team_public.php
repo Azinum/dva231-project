@@ -105,7 +105,7 @@
                                 "invite" => false,
                                 "on_click" => "click_member(".$member["user_id"].");",
                                 // NOTE (linus):    this should prob. just be an a-tag instead but ffs there aint no time for such fuckery in the
-                                //                  unkempt spaghetti-jungle of a garden that is profileboxes.php. god i hate php.
+                                //                  unkempt inline spaghetti-jungle that is profileboxes.php. god i hate php.
                                 "buttons" => [
                                     "kick" => false,
                                     "make_leader" => false
@@ -120,23 +120,20 @@
                             require_once("../dbfunctions/get_pendingmatches.php");
                             $matches = get_pendingmatches($link, $teamname);
                             if (count($matches) != 0) {
-                    ?>
-                        <h3>Initiated Matches:</h3>
-                        <h4><?php echo count($matches); ?> unconfirmed match<?php echo count($matches) > 1 ? "es" : ""; ?></h4>
-                        <?php
-                            foreach($matches as $match) {
-                                $lteam  = $match["team1"] == $teamdata["name"] ? "team1" : "team2";
-
-                                matchbox(
-                                    $match,
-                                    [
-                                        "verified" => false,
-                                        "lteam" => $lteam,
-                                    ]
-                                );
-                            }
-                        ?>
-                    <?php
+                                ?>
+                                <h3>Initiated Matches:</h3>
+                                <h4><?php echo count($matches); ?> unverified match<?php echo count($matches) > 1 ? "es" : ""; ?></h4>
+                                <?php
+                                foreach($matches as $match) {
+                                    $lteam  = $match["team1"] == $teamdata["name"] ? "team1" : "team2";
+                                    matchbox(
+                                        $match,
+                                        [
+                                            "verified" => false,
+                                            "lteam" => $lteam,
+                                        ]
+                                    );
+                                }
                             }
                         }
                     ?>

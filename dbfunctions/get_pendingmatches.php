@@ -10,8 +10,9 @@
                 'select Matches.*, DisplayName, TeamImage from Matches join Team on TeamName=Team1 where IsVerified is not true and (Team1="'.$ename.'" or Team2="'.$ename.'")'.
             ') as Team1Info join ('.
                 'select Matches.*, DisplayName, TeamImage from Matches join Team on TeamName=Team2 where IsVerified is not true and (Team1="'.$ename.'" or Team2="'.$ename.'")'.
-            ') as Team2Info group by Team1Info.Id;';
+            ') as Team2Info on Team2Info.Id = Team1Info.Id;';
         $return = [];
+        error_log($query);
 
         if ($result = mysqli_query($link, $query)){
             while ($res_array = mysqli_fetch_assoc($result)) {
