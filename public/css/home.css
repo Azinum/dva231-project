@@ -5,6 +5,15 @@ body {
     margin:0;
 }
 
+.load-icon {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 99;
+    display: none;
+}
+
 .bg {
     background: url('/img/bg.jpg');
     background-size:cover;

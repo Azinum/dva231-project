@@ -7,9 +7,9 @@
             'select Team1Info.Result, Team1Info.Id, Team1Info.Team1, Team1Info.Team2, '.
             'Team2Info.DisplayName as Team2DispName, Team2Info.TeamImage as Team2Image, '.
             'Team1Info.DisplayName as Team1DispName, Team1Info.TeamImage as Team1Image from ('.
-                'select Matches.*, DisplayName, TeamImage from Matches join Team on TeamName=Team1 where IsVerified is null and (Team1="'.$ename.'" or Team2="'.$ename.'")'.
+                'select Matches.*, DisplayName, TeamImage from Matches join Team on TeamName=Team1 where IsVerified is not true and (Team1="'.$ename.'" or Team2="'.$ename.'")'.
             ') as Team1Info join ('.
-                'select Matches.*, DisplayName, TeamImage from Matches join Team on TeamName=Team2 where IsVerified is null and (Team1="'.$ename.'" or Team2="'.$ename.'")'.
+                'select Matches.*, DisplayName, TeamImage from Matches join Team on TeamName=Team2 where IsVerified is not true and (Team1="'.$ename.'" or Team2="'.$ename.'")'.
             ') as Team2Info group by Team1Info.Id;';
         $return = [];
 
