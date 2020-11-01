@@ -3,6 +3,7 @@
 require_once("../layout/navbar_dropdown.php");
 require_once("header.php");
 page_begin("Match Declined");
+session_start();
 ?>
 	<div class="navbar shadow">
         <?php build_buttons(); ?>

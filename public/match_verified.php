@@ -10,6 +10,7 @@ $match_id = $_GET["id"];
 require_once("../layout/navbar_dropdown.php");
 require_once("header.php");
 page_begin("Match Verified");
+session_start();
 ?>
 	<div class="navbar shadow">
         <?php build_buttons(); ?>
