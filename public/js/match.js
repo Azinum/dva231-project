@@ -323,20 +323,28 @@ function submitMatchChanges() {
 	}
 	fetchMatchResult();
 	let params = {
-		"id" : matchData.id,
-		"team1" : matchData.match.teams[Teams.TEAM1].name,
-		"team2" : matchData.match.teams[Teams.TEAM2].name,
-		"result" : matchData.match.result
+		id : matchData.id,
+		team1 : matchData.match.teams[Teams.TEAM1].name,
+		team2 : matchData.match.teams[Teams.TEAM2].name,
+		result : matchData.match.result,
+		participants : matchData.team_participants
 	}
-	fetch("/ajax/modify_match.php?" + new URLSearchParams(params))
-		.then((response) => {
-			if (response.status == 200) {
+	fetch("/ajax/modify_match.php", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify(params)
+	}).then((response) => {
+		if (response.status == 200) {
+			response.json().then((json) => {
 				window.location.href = "/match_modify_success.php?id=" + params["id"];
-			}
-			else {
-				alertMessage("Failed to modify match");
-			}
-		});
+			});
+		}
+		else {
+			alertMessage("Failed to modify match");
+		}
+	});
 }
 
 function verifyMatchResults() {

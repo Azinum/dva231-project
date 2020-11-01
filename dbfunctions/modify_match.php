@@ -48,16 +48,22 @@ function match_add_participants($link, $id, $participants, $team) {
 }
 
 // match_data: participants, result
-// TODO(lucas): Put participants in match_data, and call match_add_participants from here!
 // NOTE(lucas): Modify results, team participants and then toggle the value of Team2ShouldVerify to pass on the control to the other team
 function match_modify($link, $id, $match_data) {
 	$id = mysqli_real_escape_string($link, $id);
+	$team1 = mysqli_real_escape_string($link, $match_data["team1"]);
+	$team2 = mysqli_real_escape_string($link, $match_data["team2"]);
 	$result = mysqli_real_escape_string($link, $match_data["result"]);
 	$query = 'UPDATE Matches SET Result = "' . $result . '", Team2ShouldVerify = !Team2ShouldVerify WHERE Id = ' . $id . ';';
 	if (!mysqli_query($link, $query)) {
 		return false;
 	}
-	// TODO(lucas): Participants
+	if (!match_add_participants($link, $id, $match_data["participants"][0], $team1)) {
+		return false;
+	}
+	if (!match_add_participants($link, $id, $match_data["participants"][1], $team2)) {
+		return false;
+	}
 	return true;
 }
 
