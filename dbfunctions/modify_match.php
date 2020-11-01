@@ -46,12 +46,12 @@ function match_add_participants($link, $id, $participants, $team) {
 function match_modify($link, $id, $match_data) {
 	$id = mysqli_real_escape_string($link, $id);
 	$result = mysqli_real_escape_string($link, $match_data["result"]);
-	$query = 'UPDATE Matches SET Result = "' . $result . '" Team2ShouldVerify = !Team2ShouldVerify WHERE Id = ' . $id . ';';
+	$query = 'UPDATE Matches SET Result = "' . $result . '", Team2ShouldVerify = !Team2ShouldVerify WHERE Id = ' . $id . ';';
 	if (!mysqli_query($link, $query)) {
 		return false;
 	}
 	// TODO(lucas): Participants
-	return false;
+	return true;
 }
 
 function match_verify($link, $id) {

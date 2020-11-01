@@ -300,6 +300,21 @@ function submitMatchChanges() {
 	if (checkForErrors()) {
 		return;
 	}
+	let params = {
+		"id" : matchData.id,
+		"team1" : matchData.match.teams[Teams.TEAM1].name,
+		"team2" : matchData.match.teams[Teams.TEAM2].name,
+		"result" : "Team1Win" // TODO(lucas): TEMP!!!!! Use result from the radiobuttons!!!
+	}
+	fetch("/ajax/modify_match.php?" + new URLSearchParams(params))
+		.then((response) => {
+			if (response.status == 200) {
+				window.location.href = "/match_modify_success.php?id=" + params["id"];
+			}
+			else {
+				alertMessage("Failed to modify match");
+			}
+		});
 }
 
 function verifyMatchResults() {
