@@ -274,14 +274,29 @@ function checkForErrors() {
 	]);
 }
 
+function fetchMatchResult() {
+	let result = "";
+	if (document.getElementById("match-result-0").checked) {
+		result = "Team1Win";
+	}
+	else if (document.getElementById("match-result-1").checked) {
+		result = "Tie";
+	}
+	else if (document.getElementById("match-result-2").checked) {
+		result = "Team2Win";
+	}
+	matchData.match.result = result;
+}
+
 function submitMatch() {
 	if (checkForErrors()) {
 		return;
 	}
+	fetchMatchResult();
 	let params = {
 		"team1" : matchData.match.teams[Teams.TEAM1].name,
 		"team2" : matchData.match.teams[Teams.TEAM2].name,
-		"result" : "Team1Win" // TODO(lucas): TEMP!!!!! Use result from the radiobuttons!!!
+		"result" : matchData.match.result
 	}
 	fetch("/ajax/create_match.php?" + new URLSearchParams(params))
 		.then((response) => {
@@ -300,11 +315,12 @@ function submitMatchChanges() {
 	if (checkForErrors()) {
 		return;
 	}
+	fetchMatchResult();
 	let params = {
 		"id" : matchData.id,
 		"team1" : matchData.match.teams[Teams.TEAM1].name,
 		"team2" : matchData.match.teams[Teams.TEAM2].name,
-		"result" : "Team1Win" // TODO(lucas): TEMP!!!!! Use result from the radiobuttons!!!
+		"result" : matchData.match.result
 	}
 	fetch("/ajax/modify_match.php?" + new URLSearchParams(params))
 		.then((response) => {
