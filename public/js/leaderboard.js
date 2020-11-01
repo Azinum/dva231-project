@@ -1,7 +1,7 @@
 //fetch som hämtar json med lista av allting som ska visas i home, end ska kunna inkrementeras
 const defaultProfile = "/img/default_profile_image.svg";
 let start = 0;
-let length = 5;
+let length = 7;
 
 //https://stackoverflow.com/a/4835406
 function escapeHtml(text) {
@@ -20,7 +20,7 @@ esquot = (str) => str.replace(/'/g, "\\'");
 var i = start +1;
 var loading = false;
 
-function test() {
+async function test() {
     if (!loading) {
         document.querySelector(".load-icon").style.display = "block";
         loading = true;
@@ -58,6 +58,8 @@ function test() {
 
 var isInLoadZone = false;
 function scrollHandler(e) {
+    if ((window.innerHeight + window.pageYOffset) >= document.getElementById("back-box").offsetHeight) {
+    }
 	let bottom = document.getElementById("back-box").getBoundingClientRect().bottom;
 	let height = document.documentElement.clientHeight;
     //alert("btm:"+(bottom - height*0.15)+"\nhgt:"+height);
@@ -72,5 +74,5 @@ function scrollHandler(e) {
 	}
 }
 
-window.addEventListener("scroll", scrollHandler);
+//window.addEventListener("scroll", scrollHandler);
 //document.addEventListener("touchend", scrollHandler);
