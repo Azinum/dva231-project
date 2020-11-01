@@ -6,15 +6,17 @@
 
 	header("Content-type: application/json;");
 
-	// TODO(lucas): Authorization checks!!!
-	if (isset($_GET["result"]) && isset($_GET["id"])) {
+	$json = file_get_contents("php://input");
+	$data = json_decode($json);
+
+	if (isset($data->result) && isset($data->id)) {
         session_start();
         if (!$_SESSION["isLoggedin"]) {
 			http_response_code(403);
 			echo json_encode(["status" => "not authorized"]);
 			exit();
         }
-        $match = get_match_info($link, $_GET["id"]);
+        $match = get_match_info($link, $data->id);
         if (!$match["is_verified"]) {
             if (!$_SESSION["admin"]) {
                 if ($match["team2_should_verify"]) {
@@ -36,9 +38,13 @@
 
             $result = match_modify(
                 $link,
-                $_GET["id"],
-                ["result" => $_GET["result"]]
-            );
+                $data->id, [
+					"team1" => $data->team1,
+					"team2" => $data->team2,
+					"result" => $data->result,
+					"participants" => $data->participants
+				]
+			);
             if ($result) {
                 echo json_encode(["status" => "success"]);
                 exit();
