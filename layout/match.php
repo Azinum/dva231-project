@@ -5,6 +5,7 @@ require_once("../dbfunctions/get_match.php");
 $match_info = [];
 
 // TODO(lucas): Do more checks to see if the user can access the page, check to see if the match exists e.t.c. Redirect when nessesary.
+// TODO(lucas): Fix so that anyone (no login required) can access match view page!
 function match_get_info($link) {
 	$info = $GLOBALS["match_info"];
 	if ($info) {
@@ -53,7 +54,7 @@ function match_team_box($state, $default_name, $team_index) {
 	$team_info = $info["match"]["teams"][$team_index];
 
 	if ($info["view"] || $info["modify"]) {
-		echo '<h2>' . $team_info["name"] . '</h2>';
+		echo '<h2>' . $team_info["display_name"] . '</h2>';
 		$img = $team_info["image"] ? $team_info["image"] : "img/default_profile_image.svg";
 		echo '
 			<div class="match-team-content">

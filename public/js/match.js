@@ -37,8 +37,8 @@ var MatchData = function() {
 	this.id = 0;
 	this.match = new Match();
 	this.team_participants = [
-		new Participants(),
-		new Participants()
+		Participants(),
+		Participants()
 	];
 }
 
@@ -286,7 +286,9 @@ function submitMatch() {
 	fetch("/ajax/create_match.php?" + new URLSearchParams(params))
 		.then((response) => {
 			if (response.status == 200) {
-				alertMessage("Successfully submitted match results!");
+				response.json().then((json) => {
+					window.location.href = "/match_success.php?id=" + json["id"];
+				});
 			}
 			else {
 				alertMessage("Failed to create match");
@@ -319,8 +321,7 @@ function declineMatch() {
 	}
 })(() => {
 	// NOTE(lucas): This is from layout/match.php:match_get_info()
-	if (!matchData) {
-		console.log("We shouldn't get here, right? riiiight?");
-		matchData = new MatchData();
-	}
-})
+	// if (!matchData) {
+	// 	matchData = new MatchData();
+	// }
+});

@@ -5,14 +5,10 @@
 	header("Content-type: application/json;");
 
 	// TODO(lucas): Authorization checks!!!
-	if (isset($_GET["team1"]) && isset($_GET["team1"]) && isset($_GET["result"])) {
-		$result = match_create($link, [
-			"team1" => $_GET["team1"],
-			"team2" => $_GET["team2"],
-			"result" => $_GET["result"],
-		]);
-		if ($result) {
-			echo json_encode(["status" => "success", "id" => $result]);
+	// Which team are trying to delete the match?
+	if (isset($_GET["id"]) && isset($_GET["team"])) {
+		if (match_delete($link, $_GET["id"]), $_GET["team"]) {
+			echo json_encode(["status" => "success"]);
 			exit();
 		}
 		else {
