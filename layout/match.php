@@ -2,6 +2,7 @@
 
 require_once("../dbfunctions/get_match.php");
 require_once("../dbfunctions/get_specteaminfo.php");
+require_once("../dbfunctions/escapes.php");
 
 $match_info = [];
 
@@ -72,19 +73,19 @@ function match_team_box($state, $default_name, $team_index) {
 	$team_info = $info["match"]["teams"][$team_index];
 
 	if ($info["view"] || $info["modify"]) {
-		echo '<h2>' . $team_info["display_name"] . '</h2>';
+		echo '<h2>' . htmlspecialchars($team_info["display_name"]) . '</h2>';
 		$img = $team_info["image"] ? $team_info["image"] : "img/default_profile_image.svg";
 		echo '
 			<div class="match-team-content">
-				<img class="match-team-img" src="' . $img . '">
+				<img class="match-team-img" src="' . htmlspecialchars($img) . '">
 			</div>
 		';
 	}
 	else {
 		echo '
-			<h2>' . $default_name . '</h2>
+			<h2>' . htmlspecialchars($default_name) . '</h2>
 			<div class="match-team-content">
-				<img class="match-team-img basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, ' . $state["team"] . ');">
+				<img class="match-team-img basic-interactive" src="img/default_profile_image.svg" onclick="selectTeam(this, ' . equot($state["team"]) . ');">
 			</div>
 		';
 	}
@@ -116,15 +117,15 @@ function match_participant_box($state, $team_index) {
 		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
 			<div class="match-player-img">
-				<img src="' . $img . '">
-				<p>' . $user["name"]. '</p>
+				<img src="' . htmlspecialchars($img) . '">
+				<p>' . htmlspecialchars($user["name"]). '</p>
 			</div>
 		';
 	}
 	else if ($info["modify"]) {
 		$img = $user["image"] ? $user["image"] : "img/default_profile_image.svg";
 		echo '
-			<div class="match-player-img basic-interactive" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+			<div class="match-player-img basic-interactive" onclick="selectPlayer(this, ' . equot($state["team"]). ', ' . equot($state["index"]) . ');">
 				<img src="' . $img . '">
 				<p>' . $user["name"]. '</p>
 			</div>
@@ -132,7 +133,7 @@ function match_participant_box($state, $team_index) {
 	}
 	else {
 		echo '
-			<div class="match-player-img basic-interactive" onclick="selectPlayer(this, ' . $state["team"]. ', ' . $state["index"] . ');">
+			<div class="match-player-img basic-interactive" onclick="selectPlayer(this, ' . equot($state["team"]). ', ' . equot($state["index"]) . ');">
 				<img src="img/default_profile_image.svg">
 				<p></p>
 			</div>
@@ -144,7 +145,7 @@ function match_result_label_checked($statement, $text, $is_disabled, $id) {
 	echo '
 		<label>
 			<input type="radio" ' . ($statement ? "checked" : "") . ' name="match_result" ' . ($is_disabled ? "disabled" : "") .' id="' . "match-result-" . $id . '">
-			' . $text . '
+			' . htmlspecialchars($text) . '
 		</label>
 		<br>
 	';

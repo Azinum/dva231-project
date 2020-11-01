@@ -1,5 +1,21 @@
 /* match.js */
 
+//https://stackoverflow.com/a/4835406
+function escapeHtml(text) {
+ 	var map = {
+    	'&': '&amp;',
+    	'<': '&lt;',
+    	'>': '&gt;',
+    	'"': '&quot;',
+    	"'": '&#039;'
+ 	};
+	return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+equot  = (str) => str.replace(/"/g, '\\"');
+esquot = (str) => str.replace(/'/g, "\\'");
+
+
 var searchOverlay = false;
 var popupOverlay = false;
 
@@ -127,9 +143,10 @@ function selectPlayer(elem, team, index) {
 					}).forEach((item) => {
 						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `', user_id: ` + item.user_id + `})">
-								<img src="` + img + `">
-								<p>` + item.name + `</p>
+							<div class="match-search-item shadow" onclick="onClick({img: '` + escapeHtml(esquot(img)) + `', name: '` + escapeHtml(esquot(item.name)) +
+                                `', user_id: ` + escapeHtml(esquot(item.user_id)) + `})">
+								<img src="` + escapeHtml(img) + `">
+								<p>` + escapeHtml(item.name) + `</p>
 							</div>
 						`;
 					});
@@ -186,9 +203,10 @@ function selectTeam(elem, team) {
 					}).forEach((item) => {
 						let img = item.img_url ? item.img_url : 'img/default_profile_image.svg';
 						results.innerHTML += `
-							<div class="match-search-item shadow" onclick="onClick({img: '` + img + `', name: '` + item.name + `', display_name: '` + item.display_name + `'})">
-								<img src="` + img + `">
-								<p>` + item.display_name + `</p>
+							<div class="match-search-item shadow" onclick="onClick({img: '` + escapeHtml(esquot(img)) + `', name: '` + escapeHtml(esquot(item.name))
+                                + `', display_name: '` + escapeHtml(esquot(item.display_name)) + `'})">
+								<img src="` + escapeHtml(img) + `">
+								<p>` + escapeHtml(item.display_name) + `</p>
 							</div>
 						`;
 					});
