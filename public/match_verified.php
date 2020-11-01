@@ -9,13 +9,13 @@ $match_id = $_GET["id"];
 
 require_once("../layout/navbar_dropdown.php");
 require_once("header.php");
-page_begin("Match Created");
+page_begin("Match Verified");
 ?>
 	<div class="navbar">
         <?php build_buttons(); ?>
     </div>
 	<div class="content-column">
-		<h1>Successfully created match</h1>
-		<p>You can view match status and results <a href="/match.php?view=<?php echo $match_id ?>">here</a>.</p>
+		<h1>Successfully verified match</h1>
+		<p>The match was verified, click <a href="/match.php?view=<?php echo $match_id?>">here</a> to view the match results or go to the <a href="/home.php">leaderboard</a>.</p>
 	</div>
 <?php page_end(); ?>

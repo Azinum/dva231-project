@@ -1,5 +1,8 @@
 <?php
 
+require_once("get_rating_change.php");
+require_once("get_match.php");
+
 // match_data: participants, result, teams
 // TODO(lucas): Put participants in match_data, and call match_add_participants from here!
 // NOTE(lucas): Team 1 is the team that created the match!
@@ -53,8 +56,39 @@ function match_modify($link, $id, $match_data) {
 
 function match_verify($link, $id) {
 	$id = mysqli_real_escape_string($link, $id);
+	$info = get_match_info($link, $id);
+	if (!info) {
+		return false;
+	}
+	$match_result = 0;
+	if ($info["result"] == "Team1Win") {
+		$match_result = 1;
+	}
+	else if ($info["result"] == "Tie") {
+		$match_result = 0.5;
+	}
+	else {
+		$match_result = 0;
+	}
 
-	return false;
+	$rating_change = get_rating_change(
+		$info["teams"][0]["team_ranking"],
+		$info["teams"][1]["team_ranking"],
+		$match_result
+	);
+	$query = 'UPDATE Team SET TeamRanking = (TeamRanking + ' . (float)$rating_change . ') WHERE TeamName = "' . mysqli_real_escape_string($link, $info["teams"][0]["name"]) . '";';
+	if (!mysqli_query($link, $query)) {
+		return false;
+	}
+	$query = 'UPDATE Team SET TeamRanking = (TeamRanking + ' . -(float)$rating_change . ') WHERE TeamName = "' . mysqli_real_escape_string($link, $info["teams"][1]["name"]) . '";';
+	if (!mysqli_query($link, $query)) {
+		return false;
+	}
+	$query = 'UPDATE Matches SET IsVerified = 1 WHERE Id = ' . $id . ';' ;
+	if (!mysqli_query($link, $query)) {
+		return false;
+	}
+	return true;
 }
 
 function match_delete($link, $id) {
