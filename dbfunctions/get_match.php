@@ -5,14 +5,16 @@ function get_match_info($link, $id) {
 		'T1.TeamName AS T1TeamName, ' .
 		'T1.DisplayName AS T1DisplayName, ' .
 		'T1.TeamImage AS T1TeamImage, ' .
+		'T1.TeamRanking AS T1TeamRanking, ' .
 		'T2.TeamName AS T2TeamName, ' .
 		'T2.DisplayName AS T2DisplayName, ' .
-		'T2.TeamImage AS T2TeamImage ' .
+		'T2.TeamImage AS T2TeamImage, ' .
+		'T2.TeamRanking AS T2TeamRanking ' .
 		'FROM ' .
-		'	(SELECT Matches.*, DisplayName, TeamName, TeamImage FROM Matches JOIN Team ON Matches.Id=' . $id .
+		'	(SELECT Matches.*, DisplayName, TeamName, TeamImage, TeamRanking FROM Matches JOIN Team ON Matches.Id=' . $id .
 		'	AND (Team.TeamName = Matches.Team1)) AS T1 ' .
 		'JOIN ' .
-		'	(SELECT Matches.*, DisplayName, TeamName, TeamImage FROM Matches JOIN Team ON Matches.Id=' . $id .
+		'	(SELECT Matches.*, DisplayName, TeamName, TeamImage, TeamRanking FROM Matches JOIN Team ON Matches.Id=' . $id .
 		'	AND (Team.TeamName = Matches.Team2)) AS T2;';
 	$final_result = [];
 
@@ -31,12 +33,14 @@ function get_match_info($link, $id) {
 				[
 					"name" => $res_array["T1TeamName"],
 					"display_name" => $res_array["T1DisplayName"],
-					"image" => $res_array["T1TeamImage"]
+					"image" => $res_array["T1TeamImage"],
+					"team_ranking" => $res_array["T1TeamRanking"]
 				],
 				[
 					"name" => $res_array["T2TeamName"],
 					"display_name" => $res_array["T2DisplayName"],
-					"image" => $res_array["T2TeamImage"]
+					"image" => $res_array["T2TeamImage"],
+					"team_ranking" => $res_array["T2TeamRanking"]
 				]
 			]
 		];

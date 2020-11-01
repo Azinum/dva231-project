@@ -9,6 +9,6 @@ page_begin("Match Results");
     </div>
 	<div class="content-column">
 		<h1>Successfully declined match</h1>
-		<p>The match was declined. Go <a href="/home.php">home</a>.</p>
+		<p>The match was declined. Go <a href="/home.php">home</a> or create a new <a href="/match.php">match</a>.</p>
 	</div>
 <?php page_end(); ?>

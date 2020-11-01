@@ -291,7 +291,6 @@ function submitMatch() {
 				});
 			}
 			else {
-				console.log(response);
 				alertMessage("Failed to create match");
 			}
 		});
@@ -307,6 +306,22 @@ function verifyMatchResults() {
 	if (checkForErrors()) {
 		return;
 	}
+	let params = {
+		"id" : matchData.id
+	}
+	fetch("/ajax/verify_match.php?" + new URLSearchParams(params))
+		.then((response) => {
+			if (response.status == 200) {
+				response.json().then((json) => {
+					console.log(response);
+					console.log(json);
+					// window.location.href = "/match_success.php?id=" + json["id"];
+				});
+			}
+			else {
+				alertMessage("Failed to verify match");
+			}
+		});
 }
 
 function declineMatch() {
