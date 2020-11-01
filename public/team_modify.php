@@ -89,7 +89,7 @@
                                                 onclick="submitTeamInfo(document.getElementById('team-profile'), '<?php echo esquot($teamname); ?>')">
                                     </div>
                                     <div class="button-container">
-                                        <div class="button button-deny">
+                                        <div class="button button-deny" onclick="deleteTeam('<?php echo esquot($teamname); ?>');">
                                             Delete Team
                                         </div>
                                     </div>

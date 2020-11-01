@@ -191,3 +191,18 @@ async function submitTeamInfo(form, team) {
         alert("An unexpected error occured when uploading the image!\nDid you upload a corrupted image?");
     }
 }
+
+function deleteTeam(team) {
+    if (confirm("Are you sure you want to delete the team?")) {
+        fetch("/ajax/delete_team.php?" + new URLSearchParams({
+            "team": team
+        })).then((response) => {
+            if (response.status == 200) {
+                alert("Team deleted. You will now be redirected to the start page.");
+                window.location.replace("/home.php");
+            } else {
+                alert("Something went wrong!\nCouldn't delete team!");
+            }
+        });
+    }
+}
