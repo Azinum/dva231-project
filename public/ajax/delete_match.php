@@ -5,9 +5,8 @@
 	header("Content-type: application/json;");
 
 	// TODO(lucas): Authorization checks!!!
-	// Which team are trying to delete the match?
-	if (isset($_GET["id"]) && isset($_GET["team"])) {
-		if (match_delete($link, $_GET["id"]), $_GET["team"]) {
+	if (isset($_GET["id"])) {
+		if (match_delete($link, $_GET["id"])) {
 			echo json_encode(["status" => "success"]);
 			exit();
 		}
