@@ -24,18 +24,16 @@ require_once("../dbfunctions/get_teamsbyrank_limit.php");
     <script src="js/navbardropdown.js"></script>
 </head>
 
-<body>
+<body onload="test()">
 <script src="js/leaderboard.js"> </script>
     <div class= "navbar shadow">
         <?php build_buttons(); ?>
     </div>
 
+    <div class="load-icon"><img src="/img/loading.svg"></div>
     <div id="back-box" class="ui-box shadow">
         <h2>Ranks</h2>
         <div class="flextable">
-
-            
-                <script> test() </script>
            
         </div>
     </div>
