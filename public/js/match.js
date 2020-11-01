@@ -390,8 +390,5 @@ function declineMatch() {
 		document.addEventListener("DOMContentLoaded", func);
 	}
 })(() => {
-	// NOTE(lucas): This is from layout/match.php:match_get_info()
-	// if (!matchData) {
-	// 	matchData = new MatchData();
-	// }
+
 });
