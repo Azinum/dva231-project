@@ -13,7 +13,7 @@ check_loginstatus();
 
 page_begin("Match Results");
 ?>
-	<div class="navbar">
+	<div class="navbar shadow">
         <?php build_buttons(); ?>
     </div>
 	<div class="match-search-overlay">
