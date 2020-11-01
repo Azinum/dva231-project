@@ -76,8 +76,19 @@ function match_verify($link, $id) {
 		$info["teams"][1]["team_ranking"],
 		$match_result
 	);
+	$query = 'UPDATE Team SET TeamRanking = (TeamRanking + ' . (float)$rating_change . ') WHERE TeamName = "' . mysqli_real_escape_string($link, $info["teams"][0]["name"]) . '";';
+	if (!mysqli_query($link, $query)) {
+		return false;
+	}
+	$query = 'UPDATE Team SET TeamRanking = (TeamRanking + ' . -(float)$rating_change . ') WHERE TeamName = "' . mysqli_real_escape_string($link, $info["teams"][1]["name"]) . '";';
+	if (!mysqli_query($link, $query)) {
+		return false;
+	}
 	$query = 'UPDATE Matches SET IsVerified = 1 WHERE Id = ' . $id . ';' ;
-	return $rating_change;
+	if (!mysqli_query($link, $query)) {
+		return false;
+	}
+	return true;
 }
 
 function match_delete($link, $id) {

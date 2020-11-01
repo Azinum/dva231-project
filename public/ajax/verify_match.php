@@ -13,7 +13,7 @@
 		}
 		else {
 			http_response_code(400);
-			echo json_encode(["status" => "error"]);
+			echo json_encode(["status" => "error", "result" => $result]);
 			exit();
 		}
 	}
