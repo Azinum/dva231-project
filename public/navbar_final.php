@@ -10,7 +10,7 @@ require_once("../layout/navbar_dropdown.php");
 </head>
 <body>
 
-	<div class= "navbar">
+	<div class= "navbar shadow">
 		<?php build_buttons() ?>
 	</div>
 	

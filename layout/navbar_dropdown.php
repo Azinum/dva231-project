@@ -11,7 +11,7 @@
             echo '<a href="profile_modify.php?teams" > My Teams <img src="img/teamicon.png" class="nav-image" > </a>';
             echo '<a href="home.php"> Leaderboard <img src="img/trophy.svg" class="nav-image" > </a>';
 
-            echo '<div class="dropdown" onclick="toggleDropDown()">';
+            echo '<div class="dropdown" onclick="toggleDropDown();">';
                 echo '<a><img src="img/hm.svg" class="nav-image" > </a>';
                     echo '<div class="dropdown-content" id="dropdowncontentid">';
                         echo '<span>';
@@ -21,6 +21,7 @@
 
                     echo '</div>';
             echo '</div>';
+            echo '<div class="button button-submit button-image" onclick="toggleMobileNavbar();"><img src="img/hm.svg"></div>';
         }
         else { //Utloggad
             echo '<a href="match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>';
@@ -36,6 +37,7 @@
                         echo '</span>';
                     echo '</div>';
             echo '</div>';
+            echo '<div class="button button-submit button-image" onclick="toggleMobileNavbar();"><img src="img/hm.svg"></div>';
     }
 }
 ?>

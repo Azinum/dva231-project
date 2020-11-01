@@ -8,7 +8,6 @@ body {
 
 .navbar {
     z-index:99;
-    box-shadow: 0 0.5vw var(--grey0);
     background-color: var(--grey1);
     margin-left: auto;
     margin-right: auto;
@@ -16,22 +15,25 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    line-height: 4vw;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
 }
 
-.navbar a, .navbar dropdown{
+.navbar a, .navbar .dropdown{
     text-align: center;
-    padding: 0.75vw 2vw;
     text-decoration: none;
-		width: 100%;
-		height: 4vw;
-    font-size: 2vw;
-		box-sizing: border-box;
+    height: 3rem;
+    line-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    font-size: 1.2rem;
 }
-
 .nav-image{
-    width:2vw;
-    height:2vw;
+    width:1.2rem;
+    margin-left: 1rem;
 }
 
 .navbar a:hover{
@@ -39,71 +41,74 @@ body {
 }
 
 .dropdown {
-  position: relative;
-  display: inline-block;
+    display: inline-block;
 }
 
 .dropdown-content {
 	display: none;
 	position: absolute;
-	width: 100%;
-	height: 4vw;
+    right: 0;
+    top: 3rem;
 	background-color: var(--grey0);
-  z-index: 999;
+    z-index: 999;
+}
 
+.dropdown-content.active {
+    display: block;
 }
 
 .dropdown-content span{
 	width: 100%;
-	height:100%;
-  line-height: 2vw;
 }
 
 .dropdown-content a {
-  display: block;
-  z-index: 1000;
-  background-color: var(--grey0);
-  white-space:nowrap;
-  width:6em;
+    display: block;
+    z-index: 1000;
+    white-space:nowrap;
+    width:6em;
 }
 
-@media screen and (max-width:825px) {
-  .navbar {
-    line-height: 4vw;
-  }
-
-  .navbar a, .navbar dropdown{
-
-
-    font-size: 1.2rem;
-  }
-
+.navbar .button {
+    display: none;
 }
 
-@media screen and (max-width:625px) {
-  .navbar {
-    line-height: 6vw;
-  }
+@media screen and (max-width:565px) {
+    .navbar {
+        flex-direction: column;
+        height: initial;
+        top: -11.5rem;
+        transition: top 0.1s;
+    }
 
-  .navbar a, .navbar dropdown{
+    .navbar.active {
+        top: 0;
+    }
 
+    .dropdown a {
+        display: none;
+    }
+    
+    .dropdown-content {
+        display: block;
+        position: static;
+        width: 100%;
+	    background-color: var(--grey1);
+    }
 
-    font-size: 1rem;
+    .dropdown-content span {
+        display: flex;
+    }
 
-  }
+    .dropdown-content a {
+        display: block;
+        width: 100%;
+    }
 
-}
-
-@media screen and (max-width:350px) {
-  .navbar {
-    line-height: 8vw;
-  }
-
-  .navbar a, .navbar dropdown{
-
-
-    font-size: 0.8rem;
-
-  }
-
+    .navbar .button {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1rem;
+        padding: 2vw;
+    }
 }

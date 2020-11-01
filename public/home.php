@@ -25,7 +25,7 @@ require_once("../dbfunctions/get_teamsbyrank_limit.php");
 
 <body>
 <script src="js/leaderboard.js"> </script>
-    <div class= "navbar">
+    <div class= "navbar shadow">
         <?php build_buttons(); ?>
     </div>
 
