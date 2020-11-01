@@ -1,5 +1,5 @@
 <?php 
-
+    require_once("../layout/navbar_dropdown.php");
     require_once("../layout/tablayout.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
@@ -43,9 +43,13 @@
         <?php searchoverlay_headtags(); ?>
         <script src="/js/user_modify.js"></script>
         <script src="/js/profile_box.js"></script>
+        <script src="js/navbardropdown.js"></script>
+        <link href= "css/navbar.css" rel="stylesheet">
     </head>
     <body>
-        <?php include("navbar_final.php"); ?>
+        <div class= "navbar shadow">
+            <?php build_buttons(); ?>
+        </div>
         <?php searchoverlay(); ?>
         <div class="content-column">
             <div class="shadow tab-container">

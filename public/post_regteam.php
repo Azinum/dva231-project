@@ -15,7 +15,9 @@ require_once("../dbfunctions/dbconnection.php"); //Ta bort denna efter testing
 </head>
 
 <body>
-    <?php include("navbar_final.php"); ?>
+    <div class= "navbar shadow">
+        <?php build_buttons(); ?>
+    </div>
     <div class="ui-box shadow" id="back-box">
         <h2>Create Team</h2>
         <?php register_team($link) ?>

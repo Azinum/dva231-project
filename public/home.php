@@ -21,6 +21,7 @@ require_once("../dbfunctions/get_teamsbyrank_limit.php");
     <link rel="stylesheet" href="css/profile_box.css">
     <link href= "css/navbar.css" rel="stylesheet">
     <script src="/js/profile_box.js"></script>
+    <script src="js/navbardropdown.js"></script>
 </head>
 
 <body>

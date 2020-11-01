@@ -5,6 +5,7 @@
     require_once("../dbfunctions/get_specuserinfo.php");
     require_once("../dbfunctions/get_userteams.php");
     require_once("../dbfunctions/escapes.php");
+    require_once("../layout/navbar_dropdown.php");
 
     $userdata = NULL;
 	if (isset($_GET["id"])) {
@@ -34,14 +35,15 @@
         <link rel="stylesheet" href="css/profile.css">
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/profile_box.css">
-        <?php
-            profileboxes_headtags();
-        ?>
+        <link href= "css/navbar.css" rel="stylesheet">
         <script src="/js/profile_public.js"></script>
         <script src="/js/profile_box.js"></script>
+        <script src="js/navbardropdown.js"></script>
     </head>
     <body>
-        <?php include("navbar_final.php"); ?>
+        <div class= "navbar shadow">
+            <?php build_buttons(); ?>
+        </div>
         <div class="content-column">
             <div class="flex-container">
                 <div class="bioboxes shadow">

@@ -3,8 +3,6 @@
 //trophy ikon från https://www.flaticon.com/free-icon/trophy_1152912, must attribute author
 //Vill vi att utloggade användare inte ska kunna se My Teams och start match då det inte är relevant för en utloggad användare? Ser väldigt tomt ut.
 
-		echo '<script src="js/navbardropdown.js"></script>';
-
     function build_buttons() {
         if ($_SESSION["isLoggedin"] == true) {
             echo '<a href="match.php" > Start match <img src="img/startmatch.png" class="nav-image" > </a>';

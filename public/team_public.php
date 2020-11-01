@@ -3,6 +3,7 @@
     require_once("../dbfunctions/dbconnection.php");
     require_once("../dbfunctions/get_specteaminfo.php");
     require_once("../dbfunctions/escapes.php");
+    require_once("../layout/navbar_dropdown.php");
 
 	if (!isset($_GET["team"])) {
 		header("Location: /home.php");
@@ -36,9 +37,13 @@
         ?>
         <script src="/js/profile_public.js"></script>
         <script src="/js/profile_box.js"></script>
+        <script src="js/navbardropdown.js"></script>
+        <link href= "css/navbar.css" rel="stylesheet">
     </head>
     <body>
-        <?php include("navbar_final.php"); ?>
+        <div class= "navbar shadow">
+            <?php build_buttons(); ?>
+        </div>
         <div class="content-column">
             <div class="flex-container">
                 <div class="bioboxes shadow">

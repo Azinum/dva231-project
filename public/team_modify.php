@@ -1,5 +1,6 @@
 <?php
     require_once("../layout/tablayout.php");
+    require_once("../layout/navbar_dropdown.php");
     require_once("../layout/profileboxes.php");
     require_once("../layout/searchoverlay.php");
     require_once("../dbfunctions/dbconnection.php");
@@ -39,11 +40,15 @@
         <link rel="stylesheet" type="text/css" href="/css/team_modify.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
         <link rel="stylesheet" type="text/css" href="/css/profile_box.css">
+        <link href= "css/navbar.css" rel="stylesheet">
         <?php searchoverlay_headtags(); ?>
         <script src="/js/team_modify.js"></script>
+        <script src="js/navbardropdown.js"></script>
     </head>
     <body>
-        <?php include("navbar_final.php"); ?>
+        <div class= "navbar shadow">
+            <?php build_buttons(); ?>
+        </div>
         <?php searchoverlay(); ?>
         <div class="content-column">
             <div class="shadow tab-container">

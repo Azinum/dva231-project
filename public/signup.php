@@ -11,12 +11,13 @@ require_once("../layout/navbar_dropdown.php");
   <link rel="stylesheet" href="css/signup.css">
   <link rel="stylesheet" href="css/common.css">
   <link href= "css/navbar.css" rel="stylesheet">
+  <script src="js/navbardropdown.js"></script>
 
 </head>
 
 <body>
 <script src="js/passwordcheck.js"> </script>
-    <div class= "navbar">
+    <div class= "navbar shadows">
         <?php build_buttons(); ?>
     </div>
     <div class="ui-box shadow" id="back-box">

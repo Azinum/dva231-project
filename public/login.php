@@ -14,6 +14,7 @@ require_once("../layout/navbar_dropdown.php");
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/common.css">
   <link href= "css/navbar.css" rel="stylesheet">
+  <script src="js/navbardropdown.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@ require_once("../layout/navbar_dropdown.php");
         set_loggedout();
         error_log("LOGGING OUT");
     } ?>
-    <div class= "navbar">
+    <div class= "navbar shadow">
         <?php build_buttons(); ?>
     </div>
     
