@@ -122,10 +122,10 @@ function match_participant_box($state, $team_index) {
 	}
 }
 
-function match_result_label_checked($statement, $text, $is_disabled) {
+function match_result_label_checked($statement, $text, $is_disabled, $id) {
 	echo '
 		<label>
-			<input type="radio" ' . ($statement ? "checked" : "") . ' name="match_result" ' . ($is_disabled ? "disabled" : "") .'>
+			<input type="radio" ' . ($statement ? "checked" : "") . ' name="match_result" ' . ($is_disabled ? "disabled" : "") .' id="' . "match-result-" . $id . '">
 			' . $text . '
 		</label>
 		<br>
@@ -141,24 +141,24 @@ function match_result_box($state) {
 	if ($info["view"] || $info["is_verified"]) {
 		$result = $match["result"];
 		echo '<div id="match-result">';
-			match_result_label_checked($result == "Team1Win", $teams[0]["display_name"] . " Won", true);
-			match_result_label_checked($result == "Tie", "Game Was Tied", true);
-			match_result_label_checked($result == "Team2Win", $teams[1]["display_name"] . " Won", true);
+			match_result_label_checked($result == "Team1Win", $teams[0]["display_name"] . " Won", true, 0);
+			match_result_label_checked($result == "Tie", "Game Was Tied", true, 1);
+			match_result_label_checked($result == "Team2Win", $teams[1]["display_name"] . " Won", true, 2);
 		echo '</div>';
 	}
 	else if ($info["modify"]) {
 		$result = $match["result"];
 		echo '<div id="match-result">';
-			match_result_label_checked($result == "Team1Win", $teams[0]["display_name"] . " Won", false);
-			match_result_label_checked($result == "Tie", "Game Was Tied", false);
-			match_result_label_checked($result == "Team2Win", $teams[1]["display_name"] . " Won", false);
+			match_result_label_checked($result == "Team1Win", $teams[0]["display_name"] . " Won", false, 0);
+			match_result_label_checked($result == "Tie", "Game Was Tied", false, 1);
+			match_result_label_checked($result == "Team2Win", $teams[1]["display_name"] . " Won", false, 2);
 		echo '</div>';
 	}
 	else {
 		echo '<div id="match-result">';
-			match_result_label_checked(true, "You Won", false);
-			match_result_label_checked(false, "Game Was Tied", false);
-			match_result_label_checked(false, "Opponent Won", false);
+			match_result_label_checked(true, "You Won", false, 0);
+			match_result_label_checked(false, "Game Was Tied", false, 1);
+			match_result_label_checked(false, "Opponent Won", false, 2);
 		echo '</div>';
 	}
 }
