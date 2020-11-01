@@ -2,7 +2,7 @@
 
 require_once("../layout/navbar_dropdown.php");
 require_once("header.php");
-page_begin("Match Results");
+page_begin("Match Declined");
 ?>
 	<div class="navbar">
         <?php build_buttons(); ?>
