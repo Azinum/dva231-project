@@ -65,8 +65,8 @@
 
 .profile-box .profile .rank {
     font-size: 1.25rem;
-    width: 5vw;
     max-width: 6rem;
+    margin: 0 0.4rem;
 }
 
 .profile-box:hover .basic-interactive {
