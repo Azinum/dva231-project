@@ -291,6 +291,7 @@ function submitMatch() {
 				});
 			}
 			else {
+				console.log(response);
 				alertMessage("Failed to create match");
 			}
 		});
@@ -309,7 +310,18 @@ function verifyMatchResults() {
 }
 
 function declineMatch() {
-
+	let params = {
+		"id" : matchData.id
+	}
+	fetch("/ajax/delete_match.php?" + new URLSearchParams(params))
+		.then((response) => {
+			if (response.status == 200) {
+				window.location.href = "/match_delete.php?";
+			}
+			else {
+				alertMessage("Failed to delete match");
+			}
+		});
 }
 
 ((func) => {

@@ -9,7 +9,7 @@
 		$result = match_create($link, [
 			"team1" => $_GET["team1"],
 			"team2" => $_GET["team2"],
-			"result" => $_GET["result"],
+			"result" => $_GET["result"]
 		]);
 		if ($result) {
 			echo json_encode(["status" => "success", "id" => $result]);
