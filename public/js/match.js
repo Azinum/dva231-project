@@ -344,9 +344,7 @@ function verifyMatchResults() {
 		.then((response) => {
 			if (response.status == 200) {
 				response.json().then((json) => {
-					console.log(response);
-					console.log(json);
-					// window.location.href = "/match_success.php?id=" + json["id"];
+					window.location.href = "/match_verified.php?id=" + json["id"];
 				});
 			}
 			else {
