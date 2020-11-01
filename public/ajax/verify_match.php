@@ -14,7 +14,7 @@
 			echo json_encode(["status" => "not authorized"]);
 			exit();
         }
-        $match = get_match($link, $id);
+        $match = get_match_info($link, $_GET["id"]);
         if (!$match["is_verified"]) {
             if (!$_SESSION["admin"]) {
                 if ($match["team2_should_verify"]) {

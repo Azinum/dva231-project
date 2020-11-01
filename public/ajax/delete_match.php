@@ -14,7 +14,7 @@
 			echo json_encode(["status" => "not authorized"]);
 			exit();
         }
-        $match = get_match($link, $id);
+        $match = get_match_info($link, $_GET["id"]);
         if (!$match["is_verified"]) {
             if (!$_SESSION["admin"]) {
                 if ($match["team2_should_verify"]) {
@@ -32,19 +32,19 @@
                         exit();
                     }
                 }
-
-                if (match_delete($link, $_GET["id"])) {
-                    echo json_encode(["status" => "success"]);
-                    exit();
-                }
-                else {
-                    http_response_code(400);
-                    echo json_encode(["status" => "error"]);
-                    exit();
-                }
+            }
+            if (match_delete($link, $_GET["id"])) {
+                echo json_encode(["status" => "success"]);
+                exit();
+            }
+            else {
+                http_response_code(400);
+                echo json_encode(["status" => "error"]);
+                exit();
             }
         }
 	}
+    error_log("Disa wahn");
 	http_response_code(400);
 	echo json_encode(["status" => "error"]);
 ?>

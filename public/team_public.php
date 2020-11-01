@@ -116,9 +116,10 @@
                 </div>
                 <div class="flex-layout-section">
                     <?php
-                        require_once("../dbfunctions/get_pendingmatches.php");
-                        $matches = get_pendingmatches($link, $teamname);
-                        if (count($matches) != 0) {
+                        if ($_SESSION["isLoggedin"] && ($_SESSION["admin"] || $_SESSION["uid"] == $teamdata["leader"])) {
+                            require_once("../dbfunctions/get_pendingmatches.php");
+                            $matches = get_pendingmatches($link, $teamname);
+                            if (count($matches) != 0) {
                     ?>
                         <h3>Initiated Matches:</h3>
                         <h4><?php echo count($matches); ?> unconfirmed match<?php echo count($matches) > 1 ? "es" : ""; ?></h4>
@@ -136,6 +137,7 @@
                             }
                         ?>
                     <?php
+                            }
                         }
                     ?>
                     <h3>Matches:</h3>
