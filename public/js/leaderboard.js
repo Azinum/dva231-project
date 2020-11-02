@@ -52,7 +52,7 @@ async function test() {
             document.querySelector(".load-icon").style.display = "none";
             loading = false;
         });
-        start += length+1;
+        start += length;
     }
 }
 
